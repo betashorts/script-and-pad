@@ -75,5 +75,14 @@ John beams as he aces his presentation.
 
 <p>With <strong>Screenplay Writer</strong>, you get a 7-day free trial to explore its features and a one-time subscription fee of just $9.99 to make formatting hassle-free. Write your next montage with ease and precision!</p>
 
+<a href="https://youtu.be/stbiAJqx62Q" target="_blank" rel="noopener noreferrer">
+    <img 
+        src="https://img.youtube.com/vi/stbiAJqx62Q/hqdefault.jpg" 
+        alt="Watch the Screenplay Writer Demo" 
+        loading="lazy" 
+        width="560" 
+        height="315">
+</a>
+
 <h2>Conclusion</h2>
 <p>Montages are more than just sequences—they’re the heartbeat of visual storytelling. Now that you know how to craft them effectively, start writing your next script and let your creativity shine. And if you’re ready to simplify the formatting process, don’t forget to check out <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Screenplay Writer</a>.</p>
