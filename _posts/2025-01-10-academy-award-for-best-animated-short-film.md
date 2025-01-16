@@ -64,6 +64,15 @@ tags: [Academy Awards, animated short film, Oscars, animation, filmmaking, story
 
 <p>Start your 7-day free trial today and enjoy the full version for a one-time fee of just $9.99. <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Get it here</a>.</p>
 
+<a href="https://youtu.be/stbiAJqx62Q" target="_blank" rel="noopener noreferrer">
+    <img 
+        src="https://img.youtube.com/vi/stbiAJqx62Q/hqdefault.jpg" 
+        alt="Watch the Screenplay Writer Demo" 
+        loading="lazy" 
+        width="560" 
+        height="315">
+</a>
+
 <h2>Conclusion</h2>
 
 <p>The Academy Award for Best Animated Short Film celebrates the boundless creativity and innovation of animators worldwide. From experimental techniques to heartwarming narratives, these films continue to inspire audiences and filmmakers alike. Whether you're watching, creating, or dreaming of making your mark in animation, this category is a testament to the power of storytelling in its purest form.</p>
