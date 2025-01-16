@@ -75,6 +75,15 @@ tags: [Sundance Film Festival, independent cinema, film festivals, Sundance 2025
 
 <p>Try Screenplay Writer free for 7 days, and access it for a one-time fee of just $9.99. <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Learn more here</a>.</p>
 
+<a href="https://youtu.be/stbiAJqx62Q" target="_blank" rel="noopener noreferrer">
+    <img 
+        src="https://img.youtube.com/vi/stbiAJqx62Q/hqdefault.jpg" 
+        alt="Watch the Screenplay Writer Demo" 
+        loading="lazy" 
+        width="560" 
+        height="315">
+</a>
+
 <h2>Conclusion</h2>
 
 <p>The Sundance Film Festival 2025 is a celebration of creativity, innovation, and the power of stories. Whether you’re attending in person or streaming from home, it’s a chance to immerse yourself in the world of independent cinema. Mark your calendars, pack your bags (or grab your popcorn), and get ready for an unforgettable festival experience!</p>
