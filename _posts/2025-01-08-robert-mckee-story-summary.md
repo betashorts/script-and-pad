@@ -49,5 +49,14 @@ tags: [Robert McKee, storytelling, screenwriting, narrative structure, Story boo
 
 <p><a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Try Screenplay Writer Now</a></p>
 
+<a href="https://youtu.be/stbiAJqx62Q" target="_blank" rel="noopener noreferrer">
+    <img 
+        src="https://img.youtube.com/vi/stbiAJqx62Q/hqdefault.jpg" 
+        alt="Watch the Screenplay Writer Demo" 
+        loading="lazy" 
+        width="560" 
+        height="315">
+</a>
+
 <h2>Conclusion</h2>
 <p>Robert McKee’s <em>Story</em> is more than a guide—it’s a framework for understanding the art and science of storytelling. By applying its principles, you can elevate your craft and create narratives that captivate and inspire. Start your journey today and let your creativity shine!</p>
