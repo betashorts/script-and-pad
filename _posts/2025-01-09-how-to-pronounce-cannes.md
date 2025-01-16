@@ -65,6 +65,15 @@ tags: [Cannes pronunciation, how to pronounce Cannes, French pronunciation, Cann
 
 <p><a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Start Writing Your Screenplay Today</a></p>
 
+<a href="https://youtu.be/stbiAJqx62Q" target="_blank" rel="noopener noreferrer">
+    <img 
+        src="https://img.youtube.com/vi/stbiAJqx62Q/hqdefault.jpg" 
+        alt="Watch the Screenplay Writer Demo" 
+        loading="lazy" 
+        width="560" 
+        height="315">
+</a>
+
 <h2>Conclusion</h2>
 
 <p>Now you know how to pronounce “Cannes” like a pro. Whether you’re attending the festival, writing a screenplay, or simply discussing movies with friends, mastering this simple yet elegant word adds a touch of sophistication to your conversations.
