@@ -93,6 +93,16 @@ tags: [feature film, screenplay, writing tips, script formatting, film script ex
     <li><strong>Collaboration:</strong> Work with co-writers in real time, with no worries about formatting mistakes.</li>
 </ul>
 
+<a href="https://youtu.be/stbiAJqx62Q" target="_blank" rel="noopener noreferrer">
+    <img 
+        src="https://img.youtube.com/vi/stbiAJqx62Q/hqdefault.jpg" 
+        alt="Watch the Screenplay Writer Demo" 
+        loading="lazy" 
+        width="560" 
+        height="315">
+</a>
+
 <p>Start your screenplay journey today with a <strong>7-day free trial</strong>. After that, enjoy the full version for a one-time fee of just <strong>$9.99</strong>. Write smarter, not harder!</p>
 
 <p><a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank"><strong>Get Started with Screenplay Writer</strong></a></p>
+
