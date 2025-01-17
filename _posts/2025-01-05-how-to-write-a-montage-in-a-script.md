@@ -3,6 +3,11 @@ layout: post
 title: "How to Write a Montage in a Script"
 date: 2025-01-05
 meta: '<meta name="description" content="Learn how to write a montage in a script. Explore tips for formatting, scene transitions, and storytelling techniques for engaging montages."><meta name="keywords" content="montage in a script, scriptwriting, screenplay montage, how to write a montage, screenplay formatting tips"><meta name="author" content="Screenplay Writer"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/how-to-write-a-montage-in-a-script">'
+images:
+    - url: '/assets/images/montage-definition-800.webp'
+      width: 800
+      height: 400
+      description: 'A training montage scene from Rocky and Forrest Gump.'
 og: >
   title: "How to Write a Montage in a Script"
   description: "Discover how to write a montage in a script with examples, formatting techniques, and tips for enhancing storytelling in your screenplay."
