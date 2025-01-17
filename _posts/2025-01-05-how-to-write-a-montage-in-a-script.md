@@ -17,9 +17,9 @@ tags: [scriptwriting, montage, screenplay, writing tips, formatting]
 <p>A montage is a series of short scenes or images that, when combined, create a cohesive and impactful story element. Think of the training scenes in <em>Rocky</em> or the life journey depicted in <em>Forrest Gump</em>. Montages are powerful tools that help move the story forward while maintaining viewer engagement.</p>
 
 <picture>
-  <source srcset="/assets/images/montage-definition-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/montage-definition-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/montage-definition-1200.webp" media="(max-width: 1200px)">
+  <source srcset="/assets/images/montage-definition-400.webp" type="image/webp" media="(max-width: 480px)">
+  <source srcset="/assets/images/montage-definition-800.webp" type="image/webp" media="(max-width: 768px)">
+  <source srcset="/assets/images/montage-definition-1200.webp" type="image/webp" media="(max-width: 1200px)">
   <img src="/assets/images/montage-definition-1200.webp" 
        alt="Montage examples in Rocky and Forrest Gump" 
        loading="lazy">
@@ -54,9 +54,9 @@ John beams as he aces his presentation.
 </ul>
 
 <picture>
-  <source srcset="/assets/images/montage-formatting-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/montage-formatting-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/montage-formatting-1200.webp" media="(max-width: 1200px)">
+  <source srcset="/assets/images/montage-formatting-400.webp" type="image/webp" media="(max-width: 480px)">
+  <source srcset="/assets/images/montage-formatting-800.webp" type="image/webp" media="(max-width: 768px)">
+  <source srcset="/assets/images/montage-formatting-1200.webp" type="image/webp" media="(max-width: 1200px)">
   <img src="/assets/images/montage-formatting-1200.webp" 
        alt="How to format a montage in a script" 
        loading="lazy">
@@ -79,9 +79,9 @@ John beams as he aces his presentation.
 </ul>
 
 <picture>
-  <source srcset="/assets/images/montage-genres-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/montage-genres-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/montage-genres-1200.webp" media="(max-width: 1200px)">
+  <source srcset="/assets/images/montage-genres-400.webp" type="image/webp" media="(max-width: 480px)">
+  <source srcset="/assets/images/montage-genres-800.webp" type="image/webp" media="(max-width: 768px)">
+  <source srcset="/assets/images/montage-genres-1200.webp" type="image/webp" media="(max-width: 1200px)">
   <img src="/assets/images/montage-genres-1200.webp" 
        alt="Montage scenes across comedy, drama, and action" 
        loading="lazy">
