@@ -2,19 +2,28 @@
 layout: post
 title: "How to Write a Montage in a Script"
 date: 2025-01-05
-meta: '<meta name="description" content="Learn how to write a montage in a script. Explore tips for formatting, scene transitions, and storytelling techniques for engaging montages."><meta name="keywords" content="montage in a script, scriptwriting, screenplay montage, how to write a montage, screenplay formatting tips"><meta name="author" content="Screenplay Writer">  <meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/how-to-write-a-montage-in-a-script">'
+meta: '<meta name="description" content="Learn how to write a montage in a script. Explore tips for formatting, scene transitions, and storytelling techniques for engaging montages."><meta name="keywords" content="montage in a script, scriptwriting, screenplay montage, how to write a montage, screenplay formatting tips"><meta name="author" content="Screenplay Writer"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/how-to-write-a-montage-in-a-script">'
 og: >
   title: "How to Write a Montage in a Script"
   description: "Discover how to write a montage in a script with examples, formatting techniques, and tips for enhancing storytelling in your screenplay."
   url: "https://scriptandpad.com/how-to-write-a-montage-in-a-script"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/assets/images/logo.jpg"
 tags: [scriptwriting, montage, screenplay, writing tips, formatting]
 ---
 <p>Montages are a visual storyteller's best friend, allowing you to condense time and action into a powerful and engaging sequence. They can show character progression, depict the passage of time, or provide exposition in a creative way. In this blog, we’ll explore how to write an effective montage in a script, including examples and formatting tips.</p>
 
 <h2>1. What is a Montage?</h2>
 <p>A montage is a series of short scenes or images that, when combined, create a cohesive and impactful story element. Think of the training scenes in <em>Rocky</em> or the life journey depicted in <em>Forrest Gump</em>. Montages are powerful tools that help move the story forward while maintaining viewer engagement.</p>
+
+<picture>
+  <source srcset="/assets/images/montage-definition-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/images/montage-definition-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/images/montage-definition-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/images/montage-definition-1200.webp" 
+       alt="Montage examples in Rocky and Forrest Gump" 
+       loading="lazy">
+</picture>
 
 <h2>2. Formatting a Montage in Your Script</h2>
 <p>Formatting a montage correctly is essential to ensure clarity for the production team. Here are two common ways to format a montage:</p>
@@ -44,7 +53,14 @@ John beams as he aces his presentation.
   </li>
 </ul>
 
-<p>Both methods are effective, so choose the one that best fits your script’s style and tone.</p>
+<picture>
+  <source srcset="/assets/images/montage-formatting-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/images/montage-formatting-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/images/montage-formatting-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/images/montage-formatting-1200.webp" 
+       alt="How to format a montage in a script" 
+       loading="lazy">
+</picture>
 
 <h2>3. Elements of a Great Montage</h2>
 <ul>
@@ -62,6 +78,15 @@ John beams as he aces his presentation.
   <li><strong>Action:</strong> Intense training or preparation, such as in <em>Mulan</em>.</li>
 </ul>
 
+<picture>
+  <source srcset="/assets/images/montage-genres-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/images/montage-genres-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/images/montage-genres-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/images/montage-genres-1200.webp" 
+       alt="Montage scenes across comedy, drama, and action" 
+       loading="lazy">
+</picture>
+
 <h2>5. Common Mistakes to Avoid</h2>
 <p>To ensure your montage is effective, avoid these common pitfalls:</p>
 <ul>
@@ -76,12 +101,15 @@ John beams as he aces his presentation.
 <p>With <strong>Screenplay Writer</strong>, you get a 7-day free trial to explore its features and a one-time subscription fee of just $9.99 to make formatting hassle-free. Write your next montage with ease and precision!</p>
 
 <a href="https://youtu.be/LH2-UVDpriw" target="_blank" rel="noopener noreferrer">
-    <img 
-        src="https://img.youtube.com/vi/LH2-UVDpriw/hqdefault.jpg" 
-        alt="Watch the Screenplay Writer Demo" 
-        loading="lazy" 
-        width="560" 
-        height="315">
+    <picture>
+      <source srcset="https://img.youtube.com/vi/LH2-UVDpriw/hqdefault.jpg" media="(max-width: 480px)">
+      <img 
+          src="https://img.youtube.com/vi/LH2-UVDpriw/hqdefault.jpg" 
+          alt="Watch the Screenplay Writer Demo" 
+          loading="lazy" 
+          width="100%" 
+          height="auto">
+    </picture>
 </a>
 
 <h2>Conclusion</h2>
