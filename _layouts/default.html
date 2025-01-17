@@ -43,6 +43,25 @@
 }
 </script>
 
+{% if page.images %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {% for image in page.images %}
+    {
+      "@type": "ImageObject",
+      "url": "{{ image.url | absolute_url }}",
+      "width": {{ image.width }},
+      "height": {{ image.height }},
+      "description": "{{ image.description }}"
+    }{% if forloop.last == false %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
+
 </head>
 <body>
 <header>
