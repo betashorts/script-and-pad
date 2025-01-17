@@ -75,9 +75,9 @@ tags: [Sundance Film Festival, independent cinema, film festivals, Sundance 2025
 
 <p>Try Screenplay Writer free for 7 days, and access it for a one-time fee of just $9.99. <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Learn more here</a>.</p>
 
-<a href="https://youtu.be/stbiAJqx62Q" target="_blank" rel="noopener noreferrer">
+<a href="https://youtu.be/LH2-UVDpriw" target="_blank" rel="noopener noreferrer">
     <img 
-        src="https://img.youtube.com/vi/stbiAJqx62Q/hqdefault.jpg" 
+        src="https://img.youtube.com/vi/LH2-UVDpriw/hqdefault.jpg" 
         alt="Watch the Screenplay Writer Demo" 
         loading="lazy" 
         width="560" 
