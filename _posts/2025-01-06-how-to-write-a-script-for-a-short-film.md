@@ -58,9 +58,9 @@ tags: [short film, scriptwriting, screenplay, storytelling, formatting]
 <h2>4. Writing Short Film Scripts with Screenplay Writer</h2>
 <p>If you’re writing your script in Google Docs, the <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Screenplay Writer Google Docs add-on</a> can simplify the entire process. Its powerful features ensure your script is formatted correctly, and you can easily collaborate with others using Google Docs’ real-time editing tools. The best part? You can try it free for 7 days and then subscribe for a one-time fee of just $9.99.</p>
 
-<a href="https://youtu.be/stbiAJqx62Q" target="_blank" rel="noopener noreferrer">
+<a href="https://youtu.be/LH2-UVDpriw" target="_blank" rel="noopener noreferrer">
     <img 
-        src="https://img.youtube.com/vi/stbiAJqx62Q/hqdefault.jpg" 
+        src="https://img.youtube.com/vi/LH2-UVDpriw/hqdefault.jpg" 
         alt="Watch the Screenplay Writer Demo" 
         loading="lazy" 
         width="560" 
