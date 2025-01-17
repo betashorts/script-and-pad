@@ -16,6 +16,7 @@ tags: [scriptwriting, montage, screenplay, writing tips, formatting]
 <h2>1. What is a Montage?</h2>
 <p>A montage is a series of short scenes or images that, when combined, create a cohesive and impactful story element. Think of the training scenes in <em>Rocky</em> or the life journey depicted in <em>Forrest Gump</em>. Montages are powerful tools that help move the story forward while maintaining viewer engagement.</p>
 
+<div class="picture-container">
 <picture>
   <source srcset="/assets/images/montage-definition-400.webp" type="image/webp" media="(max-width: 480px)">
   <source srcset="/assets/images/montage-definition-800.webp" type="image/webp" media="(max-width: 768px)">
@@ -24,6 +25,7 @@ tags: [scriptwriting, montage, screenplay, writing tips, formatting]
        alt="Montage examples in Rocky and Forrest Gump" 
        loading="lazy">
 </picture>
+</div>
 
 <h2>2. Formatting a Montage in Your Script</h2>
 <p>Formatting a montage correctly is essential to ensure clarity for the production team. Here are two common ways to format a montage:</p>
@@ -53,6 +55,7 @@ John beams as he aces his presentation.
   </li>
 </ul>
 
+<div class="picture-container">
 <picture>
   <source srcset="/assets/images/montage-formatting-400.webp" type="image/webp" media="(max-width: 480px)">
   <source srcset="/assets/images/montage-formatting-800.webp" type="image/webp" media="(max-width: 768px)">
@@ -61,7 +64,7 @@ John beams as he aces his presentation.
        alt="How to format a montage in a script" 
        loading="lazy">
 </picture>
-
+</div>
 <h2>3. Elements of a Great Montage</h2>
 <ul>
   <li><strong>Theme:</strong> Ensure all scenes tie into a central idea or purpose.</li>
@@ -78,6 +81,7 @@ John beams as he aces his presentation.
   <li><strong>Action:</strong> Intense training or preparation, such as in <em>Mulan</em>.</li>
 </ul>
 
+<div class="picture-container">
 <picture>
   <source srcset="/assets/images/montage-genres-400.webp" type="image/webp" media="(max-width: 480px)">
   <source srcset="/assets/images/montage-genres-800.webp" type="image/webp" media="(max-width: 768px)">
@@ -86,6 +90,7 @@ John beams as he aces his presentation.
        alt="Montage scenes across comedy, drama, and action" 
        loading="lazy">
 </picture>
+</div>
 
 <h2>5. Common Mistakes to Avoid</h2>
 <p>To ensure your montage is effective, avoid these common pitfalls:</p>
