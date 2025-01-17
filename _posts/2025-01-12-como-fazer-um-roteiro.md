@@ -87,9 +87,9 @@ tags: [roteiro, como fazer um roteiro, cinema, estrutura de roteiro, roteiro par
 
 <p>Experimente grátis por 7 dias e adquira a ferramenta por apenas $9,99. <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Clique aqui para saber mais</a>.</p>
 
-<a href="https://youtu.be/stbiAJqx62Q" target="_blank" rel="noopener noreferrer">
+<a href="https://youtu.be/LH2-UVDpriw" target="_blank" rel="noopener noreferrer">
     <img 
-        src="https://img.youtube.com/vi/stbiAJqx62Q/hqdefault.jpg" 
+        src="https://img.youtube.com/vi/LH2-UVDpriw/hqdefault.jpg" 
         alt="Watch the Screenplay Writer Demo" 
         loading="lazy" 
         width="560" 
