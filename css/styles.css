@@ -204,7 +204,6 @@ body {
 /* Force all images to fit within their containers */
 picture img, img {
   max-width: 100%;
-  width: 100%;
   height: auto; /* Maintain aspect ratio */
   display: block; /* Avoid inline rendering issues */
   margin: 0 auto; /* Center images if needed */
