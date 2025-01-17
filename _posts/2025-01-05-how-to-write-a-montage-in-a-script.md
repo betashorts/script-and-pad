@@ -16,6 +16,7 @@ tags: [scriptwriting, montage, screenplay, writing tips, formatting]
 <h2>1. What is a Montage?</h2>
 <p>A montage is a series of short scenes or images that, when combined, create a cohesive and impactful story element. Think of the training scenes in <em>Rocky</em> or the life journey depicted in <em>Forrest Gump</em>. Montages are powerful tools that help move the story forward while maintaining viewer engagement.</p>
 
+<div class="content">
 <div class="picture-container">
 <picture>
   <source srcset="/assets/images/montage-definition-400.webp" type="image/webp" media="(max-width: 480px)">
@@ -25,6 +26,7 @@ tags: [scriptwriting, montage, screenplay, writing tips, formatting]
        alt="Montage examples in Rocky and Forrest Gump" 
        loading="lazy">
 </picture>
+</div>
 </div>
 
 <h2>2. Formatting a Montage in Your Script</h2>
