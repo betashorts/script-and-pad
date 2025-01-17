@@ -195,23 +195,30 @@ body {
     margin-top: 0.5rem;
 }
 
-/* General image styling */
-img {
+/* Ensure the image container respects the layout */
+.picture-container, picture {
   max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Picture container for better control */
-picture {
-  display: block;
-  width: 100%;
   overflow: hidden;
 }
 
-/* Optional: Add padding or margin if needed */
+/* Force all images to fit within their containers */
+picture img, img {
+  max-width: 100%;
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Avoid inline rendering issues */
+  margin: 0 auto; /* Center images if needed */
+}
+
+/* Ensure content containers handle images properly */
+.content {
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+/* Optional: Add margin for breathing room */
 .picture-container {
-  margin: 1rem 0; /* Add spacing around pictures */
+  margin: 1rem auto; /* Add vertical space around images */
 }
 
 
