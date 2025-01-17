@@ -201,18 +201,6 @@ img {
     height: auto;
 }
 
-.picture-container {
-    display: block;
-    max-width: 100%; /* Ensure it fits the parent width */
-    overflow: hidden; /* Prevent potential overflow */
-}
-.content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
 /* Footer */
 footer {
     background-color: #1e1e2f;
