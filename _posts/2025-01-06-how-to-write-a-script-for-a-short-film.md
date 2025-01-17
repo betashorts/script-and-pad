@@ -1,3 +1,4 @@
+---
 layout: post
 title: "How to Write a Script for a Short Film"
 date: 2025-01-06
@@ -99,10 +100,16 @@ tags: [short film, scriptwriting, screenplay, storytelling, formatting]
 
 <h2>3. Tools to Help You Format and Write</h2>
 <p>Formatting your script to industry standards is critical. Use tools like the <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Screenplay Writer Google Docs add-on</a> to ensure your short film script meets professional expectations.</p>
-
+<a href="https://youtu.be/LH2-UVDpriw" target="_blank" rel="noopener noreferrer">
+    <picture>
+      <source srcset="https://img.youtube.com/vi/LH2-UVDpriw/hqdefault.jpg" media="(max-width: 480px)">
+      <img 
+          src="https://img.youtube.com/vi/LH2-UVDpriw/hqdefault.jpg" 
+          alt="Watch the Screenplay Writer Demo" 
+          loading="lazy" 
+          width="100%" 
+          height="auto">
+    </picture>
+</a>
 <h2>Conclusion</h2>
 <p>Short film scripts are an excellent way to hone your skills and make your mark in storytelling. With the right approach and tools, like <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Screenplay Writer</a>, you can bring your creative visions to life and captivate audiences worldwide.</p>
-
----
-
-This rewrite incorporates the provided keywords while ensuring visual appeal through image placeholders. Let me know if you need further refinement!
