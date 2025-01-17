@@ -195,6 +195,25 @@ body {
     margin-top: 0.5rem;
 }
 
+/* General image styling */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Picture container for better control */
+picture {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Optional: Add padding or margin if needed */
+.picture-container {
+  margin: 1rem 0; /* Add spacing around pictures */
+}
+
 
 /* Footer */
 footer {
