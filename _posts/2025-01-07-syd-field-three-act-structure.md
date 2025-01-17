@@ -51,9 +51,9 @@ tags: [Syd Field, screenwriting, storytelling, three act structure, scriptwritin
 
 <h2>6. Write Your Script with Screenplay Writer</h2>
 <p>If you’re writing your screenplay in Google Docs, the <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Screenplay Writer Google Docs add-on</a> is your perfect companion. Plan your acts, collaborate with others, and format your script seamlessly—all within Google Docs. Start with a 7-day free trial and enjoy a one-time subscription fee of just $9.99.</p>
-<a href="https://youtu.be/stbiAJqx62Q" target="_blank" rel="noopener noreferrer">
+<a href="https://youtu.be/LH2-UVDpriw" target="_blank" rel="noopener noreferrer">
     <img 
-        src="https://img.youtube.com/vi/stbiAJqx62Q/hqdefault.jpg" 
+        src="https://img.youtube.com/vi/LH2-UVDpriw/hqdefault.jpg" 
         alt="Watch the Screenplay Writer Demo" 
         loading="lazy" 
         width="560" 
