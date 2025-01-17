@@ -75,9 +75,9 @@ John beams as he aces his presentation.
 
 <p>With <strong>Screenplay Writer</strong>, you get a 7-day free trial to explore its features and a one-time subscription fee of just $9.99 to make formatting hassle-free. Write your next montage with ease and precision!</p>
 
-<a href="https://youtu.be/stbiAJqx62Q" target="_blank" rel="noopener noreferrer">
+<a href="https://youtu.be/LH2-UVDpriw" target="_blank" rel="noopener noreferrer">
     <img 
-        src="https://img.youtube.com/vi/stbiAJqx62Q/hqdefault.jpg" 
+        src="https://img.youtube.com/vi/LH2-UVDpriw/hqdefault.jpg" 
         alt="Watch the Screenplay Writer Demo" 
         loading="lazy" 
         width="560" 
