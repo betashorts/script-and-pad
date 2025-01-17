@@ -93,9 +93,9 @@ tags: [feature film, screenplay, writing tips, script formatting, film script ex
     <li><strong>Collaboration:</strong> Work with co-writers in real time, with no worries about formatting mistakes.</li>
 </ul>
 
-<a href="https://youtu.be/stbiAJqx62Q" target="_blank" rel="noopener noreferrer">
+<a href="https://youtu.be/LH2-UVDpriw" target="_blank" rel="noopener noreferrer">
     <img 
-        src="https://img.youtube.com/vi/stbiAJqx62Q/hqdefault.jpg" 
+        src="https://img.youtube.com/vi/LH2-UVDpriw/hqdefault.jpg" 
         alt="Watch the Screenplay Writer Demo" 
         loading="lazy" 
         width="560" 
