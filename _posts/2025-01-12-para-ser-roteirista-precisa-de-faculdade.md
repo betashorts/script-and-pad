@@ -71,9 +71,9 @@ tags: [roteirista, faculdade de roteiro, como ser roteirista, carreira no cinema
 <p>Escrever um roteiro pode ser mais simples com ferramentas específicas. O <strong>Screenplay Writer</strong>, um add-on para Google Docs, ajuda a formatar seus roteiros automaticamente, permitindo que você foque na criatividade.</p>
 
 <p>Com um teste gratuito de 7 dias e uma assinatura única de apenas $9,99, essa ferramenta é perfeita para iniciantes e profissionais. <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Experimente agora</a>.</p>
-<a href="https://youtu.be/stbiAJqx62Q" target="_blank" rel="noopener noreferrer">
+<a href="https://youtu.be/LH2-UVDpriw" target="_blank" rel="noopener noreferrer">
     <img 
-        src="https://img.youtube.com/vi/stbiAJqx62Q/hqdefault.jpg" 
+        src="https://img.youtube.com/vi/LH2-UVDpriw/hqdefault.jpg" 
         alt="Watch the Screenplay Writer Demo" 
         loading="lazy" 
         width="560" 
