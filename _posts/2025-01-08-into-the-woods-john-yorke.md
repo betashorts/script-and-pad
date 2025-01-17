@@ -49,9 +49,9 @@ tags: [John Yorke, Into the Woods, storytelling, screenwriting, five-act structu
 <p>If you’re inspired to bring Yorke’s principles to life, the next step is putting pen to paper—or fingers to keyboard. Writing tools like <strong>Screenplay Writer</strong> can simplify this process. Available as a Google Docs add-on, it helps you plan and write with ease, leveraging the collaboration features of Google Docs while handling the nuances of screenplay formatting. Start your storytelling journey today with a 7-day free trial, and enjoy a lifetime of creativity for just $9.99.</p>
 
 <p><a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Try Screenplay Writer Now</a></p>
-<a href="https://youtu.be/stbiAJqx62Q" target="_blank" rel="noopener noreferrer">
+<a href="https://youtu.be/LH2-UVDpriw" target="_blank" rel="noopener noreferrer">
     <img 
-        src="https://img.youtube.com/vi/stbiAJqx62Q/hqdefault.jpg" 
+        src="https://img.youtube.com/vi/LH2-UVDpriw/hqdefault.jpg" 
         alt="Watch the Screenplay Writer Demo" 
         loading="lazy" 
         width="560" 
