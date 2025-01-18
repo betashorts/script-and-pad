@@ -1,0 +1,289 @@
+/* General styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9; /* Light gray background */
+    color: #333; /* Dark text for readability */
+    line-height: 1.8;
+}
+
+/* Header */
+.navbar {
+    background-color: #1e1e2f;
+    padding: 0.75rem 1.5rem;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.navbar-logo {
+    width: 40px;
+    margin-right: 10px;
+}
+ 
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li {
+    display: inline;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+    color: #ff9800;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+    color: #fff;
+    border-bottom: 5px solid #ffd700;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #ffd700; /* Gold button */
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.cta:hover {
+    background-color: #e6be00;
+}
+
+/* Blog Post Styling */
+.blog-post {
+    margin: 2rem auto;
+    max-width: 800px;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.blog-post h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    color: #1e1e2f;
+}
+
+.blog-post p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: #555;
+}
+
+.blog-post .meta {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 1.5rem;
+}
+
+.blog-post a {
+    color: #6a11cb;
+    text-decoration: underline;
+}
+
+.blog-post a:hover {
+    color: #2575fc;
+}
+
+/* Blog Listing Page */
+.blog-listing {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.blog-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #1e1e2f;
+    text-align: center;
+    font-weight: bold;
+}
+
+.blog-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.blog-item {
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.blog-link {
+    text-decoration: none;
+    color: #333;
+}
+
+.blog-post-title {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: bold;
+}
+
+.blog-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+/* Image Styling */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Footer */
+footer {
+    background-color: #1e1e2f;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 0.9rem;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Hero Section */
+    .hero h1 {
+        font-size: 2rem; /* Reduced size for better scaling */
+        text-align: center;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        text-align: center;
+        margin: 0 1rem; /* Add some margin for better readability */
+    }
+
+    /* Navbar */
+    .navbar-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem; /* Adjust spacing for stacked links */
+    }
+
+    .navbar-links li {
+        margin-bottom: 0;
+    }
+
+    /* Blog Post Card */
+    .blog-post {
+        padding: 1.25rem; /* Slightly smaller padding for tighter layout */
+        margin: 1rem 0; /* Add margin for better separation */
+        width: 90%; /* Reduce width for smaller screens */
+    }
+
+    /* Footer */
+    footer {
+        font-size: 0.8rem; /* Reduce font size for smaller screens */
+        padding: 0.75rem; /* Adjust padding for compact layout */
+    }
+
+    .footer-container {
+        padding: 0 1rem; /* Add side padding for better alignment */
+    }
+}
+
+/* Very Small Screens */
+@media (max-width: 480px) {
+    /* Navbar Logo */
+    .navbar-logo {
+        width: 30px; /* Reduce logo size for smaller screens */
+    }
+
+    /* Blog Post Card */
+    .blog-post {
+        font-size: 0.9rem; /* Adjust font size for better readability */
+    }
+
+    /* Hero Section */
+    .hero h1 {
+        font-size: 1.8rem; /* Further reduced size */
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+    }
+}
