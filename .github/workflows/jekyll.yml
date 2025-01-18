@@ -1,33 +1,22 @@
-name: Jekyll Build and Deploy
-
-on:
-  push:
-    branches:
-      - main  # Replace with your branch name if different
-  pull_request:
-    branches:
-      - main
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
+    - name: Checkout the repository
+      uses: actions/checkout@v3
 
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.0'
+        ruby-version: '3.1' # Use your Jekyll-supported Ruby version
 
-    - name: Install Bundler
-      run: gem install bundler
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install
 
-    - name: Install Dependencies
-      run: bundle install
-
-    - name: Build Site
+    - name: Build the Jekyll site
       run: bundle exec jekyll build
 
     - name: Deploy to GitHub Pages
