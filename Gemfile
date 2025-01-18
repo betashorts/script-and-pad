@@ -4,4 +4,4 @@ gem "jekyll", "~> 4.2.0"
 gem "webrick", "~> 1.7" # Required for Jekyll in Ruby >= 3.0
 gem "jekyll-feed", "~> 0.12"
 gem "jekyll-sitemap", "~> 1.4"
-gem "jekyll-related-posts", "~> 0.1.2"
+gem 'jekyll-related-posts'
