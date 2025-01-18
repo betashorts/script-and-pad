@@ -9,5 +9,4 @@ default_image: "https://scriptandpad.com/logo.jpg"
 plugins:
   - jekyll-sitemap
   - jekyll-redirect-from
-  - jekyll-tagging
-
+  - jekyll/tagging
