@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Cannes Pronunciation"
+title: "Cannes Pronunciation – How to Say It Like a Pro"
 date: 2025-01-11
 meta: |
   <meta name="description" content="Learn the correct way to pronounce 'Cannes,' the home of the iconic film festival. Say it like a pro with our quick guide.">
@@ -15,9 +15,6 @@ og: >
   image: "https://scriptandpad.com/logo.jpg"
 tags: [Cannes pronunciation, Cannes Film Festival, French pronunciation, film industry, how to pronounce Cannes]
 ---
-
-<h1>Cannes Pronunciation – How to Say It Like a Pro</h1>
-
 <p>Every year, the Cannes Film Festival draws attention from around the globe, but one question always seems to pop up: <strong>how do you pronounce “Cannes”?</strong> Whether you’re a film buff, a screenwriter, or just someone trying to sound informed in a conversation, knowing the correct pronunciation of this iconic city’s name is a must.</p>
 
 <h2>Common Mispronunciations</h2>
