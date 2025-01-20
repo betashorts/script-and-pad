@@ -15,9 +15,6 @@ og: >
   image: "https://scriptandpad.com/logo.jpg"
 tags: [roteiro, como fazer um roteiro, cinema, estrutura de roteiro, roteiro para iniciantes]
 ---
-
-<h1>Como Fazer um Roteiro – Guia Completo para Iniciantes</h1>
-
 <p>Escrever um roteiro pode parecer desafiador à primeira vista, mas com as ferramentas certas e um pouco de prática, você pode transformar suas ideias em histórias incríveis. Neste guia, vamos explorar como fazer um roteiro desde o início, cobrindo os elementos essenciais e algumas dicas para iniciantes.</p>
 
 <h2>1. Comece com uma Ideia</h2>
