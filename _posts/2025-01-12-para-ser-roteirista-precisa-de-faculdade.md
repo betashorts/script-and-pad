@@ -15,9 +15,6 @@ og: >
   image: "https://scriptandpad.com/logo.jpg"
 tags: [roteirista, faculdade de roteiro, como ser roteirista, carreira no cinema, roteiro]
 ---
-
-<h1>Para ser roteirista precisa de faculdade?</h1>
-
 <p>Muitas pessoas apaixonadas por filmes e séries se perguntam: <strong>"Preciso de um diploma para ser roteirista?"</strong> A resposta curta é não. Mas, como em qualquer profissão criativa, a resposta completa depende de vários fatores. Vamos explorar juntos se vale a pena investir em uma faculdade ou se existem outros caminhos para alcançar o sonho de trabalhar como roteirista.</p>
 
 <h2>O que realmente importa para ser roteirista?</h2>
