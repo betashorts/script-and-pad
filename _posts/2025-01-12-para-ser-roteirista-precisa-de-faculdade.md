@@ -2,6 +2,7 @@
 layout: post
 title: "Para ser roteirista precisa de faculdade?"
 date: 2025-01-12
+lang: "pt"  # Set the language for this blog
 meta: |
   <meta name="description" content="Descubra se é necessário ter um diploma para se tornar roteirista. Saiba mais sobre as habilidades, o mercado e alternativas para começar sua carreira.">
   <meta name="keywords" content="ser roteirista, faculdade de roteiro, carreira de roteirista, como ser roteirista, roteiro sem diploma">
