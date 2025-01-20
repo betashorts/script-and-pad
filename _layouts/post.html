@@ -16,12 +16,14 @@ layout: default
       {% if post != page and post.tags | intersect: page.tags | size > 0 %}
         {% assign related_count = related_count | plus: 1 %}
         <li>
-          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          <a href="{{ post.url | relative_url }}">
+            <span class="related-post-title">{{ post.title }}</span>
+          </a>
         </li>
       {% endif %}
     {% endfor %}
     {% if related_count == 0 %}
-      <li>No related posts available.</li>
+      <li><span class="no-posts">No related posts available.</span></li>
     {% endif %}
   </ul>
 </div>
