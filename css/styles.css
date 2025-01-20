@@ -196,6 +196,44 @@ body {
 .blog-post a:hover {
     color: #2575fc;
 }
+
+/* Related Posts Styling */
+.related-posts {
+    margin-top: 3rem;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.related-posts h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #1e1e2f;
+}
+
+.related-posts ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.related-posts ul li {
+    margin-bottom: 1rem;
+}
+
+.related-posts ul li a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.related-posts ul li a:hover {
+    color: #6a11cb;
+    text-decoration: underline;
+}
+
 /* Image Styling */
 img {
     max-width: 100%;
