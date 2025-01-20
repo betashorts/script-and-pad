@@ -16,8 +16,6 @@ og: >
 tags: [Cannes travel, what to do in Cannes, French Riviera, Cannes attractions, La Croisette, Le Suquet]
 ---
 
-<h1>What to Do in Cannes – Your Guide to the Jewel of the French Riviera</h1>
-
 <p>Cannes is more than just the glitz and glamour of its world-famous film festival. Nestled on the French Riviera, this beautiful city offers a mix of luxury, history, and charm. Whether you’re visiting for business, leisure, or a bit of both, here’s how to make the most of your time in Cannes.</p>
 
 <h2>1. Stroll Along La Croisette</h2>
