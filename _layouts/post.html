@@ -8,3 +8,20 @@ layout: default
         {{ content }}
     </div>
 </article>
+<div class="related-posts">
+  <h3>Related Posts</h3>
+  {% assign related_count = 0 %}
+  <ul>
+    {% for post in site.posts %}
+      {% if post != page and post.tags | intersect: page.tags | size > 0 %}
+        {% assign related_count = related_count | plus: 1 %}
+        <li>
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% if related_count == 0 %}
+      <li>No related posts available.</li>
+    {% endif %}
+  </ul>
+</div>
