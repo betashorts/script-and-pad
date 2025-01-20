@@ -15,9 +15,6 @@ og: >
   image: "https://scriptandpad.com/logo.jpg"
 tags: [Academy Awards, animated short film, Oscars, animation, filmmaking, storytelling]
 ---
-
-<h1>Academy Award for Best Animated Short Film – Celebrating the Art of Animation</h1>
-
 <p>The <strong>Academy Award for Best Animated Short Film</strong> has been honoring the most creative and visually stunning short animations since 1932. While the feature-length animation category often takes the spotlight, animated short films have consistently pushed boundaries, showcasing bold ideas, new techniques, and heartfelt storytelling. Let’s explore the history, significance, and recent winners of this celebrated Oscar category.</p>
 
 <h2>A Brief History of the Category</h2>
