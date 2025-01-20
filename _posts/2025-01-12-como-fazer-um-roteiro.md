@@ -2,6 +2,7 @@
 layout: post
 title: "Como Fazer um Roteiro"
 date: 2025-01-12
+lang: "pt"  # Set the language for this blog
 meta: |
   <meta name="description" content="Descubra como fazer um roteiro com este guia prático. Aprenda a estruturar sua história, criar personagens marcantes e usar ferramentas para formatar seu roteiro.">
   <meta name="keywords" content="como fazer um roteiro, roteiro para cinema, roteiro para iniciantes, estrutura de roteiro, criar roteiro">
