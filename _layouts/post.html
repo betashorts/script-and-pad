@@ -9,6 +9,14 @@ layout: default
     </div>
 </article>
 <div class="related-posts">
+    <p>Total posts: {{ site.posts | size }}</p>
+{% for post in site.posts %}
+  <p>Post: {{ post.title }}</p>
+  <p>Tags: {{ post.tags | inspect }}</p>
+  <p>Current Page Tags: {{ page.tags | inspect }}</p>
+  <p>Intersection Size: {{ post.tags | intersect: page.tags | size }}</p>
+{% endfor %}
+
   <h3>Related Posts</h3>
   <ul>
     {% for post in site.posts %}
