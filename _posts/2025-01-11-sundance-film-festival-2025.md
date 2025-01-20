@@ -16,8 +16,6 @@ og: >
 tags: [Sundance Film Festival, independent cinema, film festivals, Sundance 2025, filmmaking]
 ---
 
-<h1>Sundance Film Festival 2025 – A Celebration of Independent Cinema</h1>
-
 <p>The Sundance Film Festival 2025 is gearing up to showcase the very best in independent filmmaking. Every January, filmmakers, artists, and film enthusiasts gather in Park City, Utah, to celebrate creativity, innovation, and storytelling. If you're planning to attend or simply want to stay updated, here’s your ultimate guide to this year’s Sundance Film Festival.</p>
 
 <h2>What Is the Sundance Film Festival?</h2>
