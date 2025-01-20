@@ -197,41 +197,73 @@ body {
     color: #2575fc;
 }
 
-/* Related Posts Styling */
+/* Updated Related Posts Styling */
 .related-posts {
     margin-top: 3rem;
-    padding: 1rem;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    background: #f7f8fc; /* Slightly lighter background for differentiation */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Stronger shadow for depth */
 }
 
 .related-posts h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
     color: #1e1e2f;
+    text-align: center; /* Center-align the heading for better focus */
+    font-weight: bold;
 }
 
 .related-posts ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 1rem;
 }
 
 .related-posts ul li {
-    margin-bottom: 1rem;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.related-posts ul li:hover {
+    transform: translateY(-5px); /* Subtle lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
 }
 
 .related-posts ul li a {
     text-decoration: none;
     font-size: 1rem;
     color: #333;
+    font-weight: bold;
+    display: block;
+    text-align: center;
     transition: color 0.3s ease;
 }
 
 .related-posts ul li a:hover {
-    color: #6a11cb;
-    text-decoration: underline;
+    color: #6a11cb; /* Interactive hover effect */
+    text-decoration: none;
+}
+
+.related-posts ul li .related-post-title {
+    display: block;
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.no-posts {
+    font-size: 1rem;
+    color: #888;
+    text-align: center;
+    display: block;
+    margin-top: 1rem;
 }
 
 /* Image Styling */
