@@ -1,3 +1,4 @@
+---
 layout: post
 title: "Tips on Getting Into UCLA Film School: Your Guide to Success"
 date: 2025-01-21
@@ -24,7 +25,7 @@ og: >
   description: "Learn how to navigate the UCLA Film School admissions process with these expert tips. Craft a compelling application and stand out in one of the most competitive film programs."
   url: "https://scriptandpad.com/tips-on-getting-into-ucla-film-school"
   type: "article"
-  image: "https://scriptandpad.com/assets/images/logo.jpg"
+  image: "https://scriptandpad.com/logo.jpg"
 tags: [film school, filmmaking, ucla film school, theater film and television, admissions tips]
 ---
 
