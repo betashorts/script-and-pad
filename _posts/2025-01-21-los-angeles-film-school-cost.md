@@ -25,7 +25,7 @@ og: >
   description: "Learn about the costs of attending the Los Angeles Film School and how tuition fees are just one part of the investment. Explore the value of networking, exposure, and creative growth."
   url: "https://scriptandpad.com/los-angeles-film-school-cost"
   type: "article"
-  image: "https://scriptandpad.com/assets/images/logo.jpg"
+  image: "https://scriptandpad.com/logo.jpg"
 tags: [film school, filmmaking, los angeles film school, education costs, filmmaking careers]
 ---
 
