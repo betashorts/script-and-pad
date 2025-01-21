@@ -25,7 +25,7 @@ og: >
   description: "Learn about the competitive USC Film School acceptance rate and discover strategies to craft a standout application. Explore the benefits of joining this prestigious program."
   url: "https://scriptandpad.com/usc-film-school-acceptance-rate"
   type: "article"
-  image: "https://scriptandpad.com/assets/images/logo.jpg"
+  image: "https://scriptandpad.com/logo.jpg"
 tags: [film school, filmmaking, usc film school, cinematic arts, film school admissions]
 ---
 
