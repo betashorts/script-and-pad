@@ -1,3 +1,4 @@
+---
 layout: post
 title: "Oscar de Melhor Roteiro Original: Os Roteiros Que Fizeram História"
 date: 2025-01-21
