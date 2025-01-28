@@ -2,7 +2,7 @@
 layout: post
 title: "How to Write a Montage in a Script"
 date: 2025-01-05
-meta: '<meta name="description" content="Learn how to write a montage in a script. Explore tips for formatting, scene transitions, and storytelling techniques for engaging montages."><meta name="keywords" content="montage in a script, scriptwriting, screenplay montage, how to write a montage, screenplay formatting tips"><meta name="author" content="Screenplay Writer"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/how-to-write-a-montage-in-a-script">'
+meta: '<meta name="description" content="Learn how to write a montage in a script. Explore tips for formatting, scene transitions, and storytelling techniques for engaging montages."><meta name="keywords" content="How to Write a Montage in a Script, montage in a script, screenplay montage, how to write a montage, screenplay formatting tips"><meta name="author" content="Screenplay Writer"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/how-to-write-a-montage-in-a-script">'
 images:
     - url: '/assets/images/montage-definition-800.webp'
       width: 800
