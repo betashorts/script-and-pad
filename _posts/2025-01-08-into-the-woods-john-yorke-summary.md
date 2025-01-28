@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Into the Woods by John Yorke"
+title: "Into the Woods by John Yorke Summary"
 date: 2025-01-08
-meta: '<meta name="description" content="Explore John Yorke''s ''Into the Woods,'' a comprehensive guide to understanding storytelling and the five-act structure. Learn why it’s a must-read for screenwriters."><meta name="keywords" content="John Yorke, Into the Woods, storytelling, five-act structure, screenwriting, narrative theory"><meta name="author" content="Screenplay Writer"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/into-the-woods-john-yorke">'
+meta: '<meta name="description" content="Explore John Yorke''s ''Into the Woods,'' a comprehensive guide to understanding storytelling and the five-act structure. Learn why it’s a must-read for screenwriters."><meta name="keywords" content="John Yorke, Into the Woods, storytelling, five-act structure, screenwriting, narrative theory"><meta name="author" content="Screenplay Writer"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/into-the-woods-john-yorke-summary">'
 og: >
-  title: "Into the Woods by John Yorke"
+  title: "Into the Woods by John Yorke Summary"
   description: "Uncover the secrets of storytelling with John Yorke''s ''Into the Woods.'' Learn how the five-act structure shapes narratives across mediums."
-  url: "https://scriptandpad.com/into-the-woods-john-yorke"
+  url: "https://scriptandpad.com/into-the-woods-john-yorke-summary"
   type: "article"
   image: "https://scriptandpad.com/logo.jpg"
 tags: [John Yorke, Into the Woods, storytelling, screenwriting, five-act structure]
