@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Cannes Pronunciation – How to Say It Like a Pro"
-date: 2025-01-11
+date: 2025-01-25
 meta: >
   <meta name="description" content="Learn the correct way to pronounce 'Cannes,' the home of the iconic film festival. Say it like a pro with our quick guide." />
   <meta name="keywords" content="Cannes pronunciation, how to pronounce Cannes, Cannes Film Festival, French pronunciation, film festival names" />
