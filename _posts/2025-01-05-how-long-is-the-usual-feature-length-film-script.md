@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "How Long Is the Usual Feature-Length Film Script?"
+title: "How Long Is the Usual Feature Length Film Script?"
 date: 2025-01-04
-meta: '<meta name="description" content="Learn the standard length of a feature-length film script, tips on pacing, scene timing, and formatting. Explore examples from different genres and make writing easier with Screenplay Writer."> <meta name="keywords" content="feature film script length, screenplay tips, scene pacing, script formatting, Google Docs screenplay"><meta name="author" content="Screenplay Writer"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/how-long-is-the-usual-feature-length-film-script/">'
+meta: '<meta name="description" content="Learn the standard length of a feature-length film script, tips on pacing, scene timing, and formatting. Explore examples from different genres and make writing easier with Screenplay Writer."> <meta name="keywords" content="How Long Is the Usual Feature Length Film Script, feature film script length, script formatting, Google Docs screenplay"><meta name="author" content="Screenplay Writer"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/how-long-is-the-usual-feature-length-film-script/">'
 og: >
-  title: "How Long Is the Usual Feature-Length Film Script?"
+  title: "How Long Is the Usual Feature Length Film Script?"
   description: "Learn the standard length of a feature-length film script, tips on pacing, scene timing, and formatting. Explore examples from different genres and make writing easier with Screenplay Writer."
   url: "https://scriptandpad.com/how-long-is-the-usual-feature-length-film-script/"
   type: "article"
