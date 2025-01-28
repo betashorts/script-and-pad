@@ -1,3 +1,4 @@
+---
 layout: post
 title: "NYU Film School Acceptance Rate: What You Need to Know"
 date: 2025-01-21
