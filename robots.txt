@@ -1,1 +1,3 @@
 Sitemap: https://scriptandpad.com/sitemap.xml
+User-agent: *
+Disallow: /assets/images/
