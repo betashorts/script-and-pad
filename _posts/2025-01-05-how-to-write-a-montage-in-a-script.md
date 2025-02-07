@@ -13,7 +13,7 @@ og: >
   description: "Discover how to write a montage in a script with examples, formatting techniques, and tips for enhancing storytelling in your screenplay."
   url: "https://scriptandpad.com/how-to-write-a-montage-in-a-script"
   type: "article"
-  image: "https://scriptandpad.com/assets/images/logo.jpg"
+  image: "https://scriptandpad.com/logo.jpg"
 tags: [scriptwriting, montage, screenplay, writing tips, formatting]
 ---
 <p>Montages are a visual storyteller's best friend, allowing you to condense time and action into a powerful and engaging sequence. Did you know that the training montage in <em>Rocky</em> not only became iconic but also redefined how audiences perceive determination and growth in just a few minutes? Montages can show character progression, depict the passage of time, or provide exposition in a creative way. In this blog, we’ll explore how to write an effective montage in a script, including examples, formatting tips, and actionable strategies.</p>
