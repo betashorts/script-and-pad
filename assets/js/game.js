@@ -96,11 +96,13 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     }
     const arrayBuffer = await response.arrayBuffer();
 
-    // Ensure we're using the correct Midi class from @tonejs/midi
-    if (typeof Midi === "undefined") {
-      throw new Error("Midi parser not loaded");
+    // Check if midi library is loaded
+    if (typeof Midi !== "function") {
+      console.error("Midi library not loaded properly");
+      throw new Error("Midi library not loaded");
     }
 
+    // Create a new Midi instance
     const midi = new Midi(arrayBuffer);
     console.log("MIDI file loaded successfully:", midi);
 
@@ -137,8 +139,9 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     console.log("Reference pattern loaded:", referencePattern);
   } catch (error) {
     console.error("Error loading MIDI file:", error);
-    document.getElementById("status").textContent =
-      "Error loading MIDI file. Please try again.";
+    document.getElementById(
+      "status"
+    ).textContent = `Error loading MIDI file: ${error.message}. Please try again.`;
   }
 }
 
