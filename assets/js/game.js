@@ -90,11 +90,9 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
       .fill()
       .map(() => Array(STEPS).fill(false));
 
-    const response = await fetch(`/script-and-pad/assets/midi/${beatFile}`);
+    const response = await fetch(`../assets/midi/${beatFile}`);
     const arrayBuffer = await response.arrayBuffer();
-
-    // Parse MIDI file using the separate MIDI package
-    const midi = new Midi(arrayBuffer);
+    const midi = new Midi(new Uint8Array(arrayBuffer));
 
     // Get BPM from MIDI file
     if (midi.header.tempos && midi.header.tempos.length > 0) {
@@ -235,7 +233,7 @@ async function init() {
     // Load samples
     for (const instrument of INSTRUMENTS) {
       players[instrument.midiNote] = new Tone.Player({
-        url: `/script-and-pad/assets/sounds/${instrument.file}`,
+        url: `../assets/sounds/${instrument.file}`,
         autostart: false,
       }).toDestination();
     }
