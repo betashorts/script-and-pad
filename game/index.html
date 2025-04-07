@@ -1,0 +1,50 @@
+---
+layout: none
+title: Drum Loop Game
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Drum Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/script-and-pad/assets/css/game.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tonejs/midi@2.0.28/build/midi.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+  <script src="/script-and-pad/assets/js/game.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <h2>Drum Beats</h2>
+      <div class="beat-list" id="beat-list">
+        <!-- Beat list will be populated by JavaScript -->
+      </div>
+    </div>
+    
+    <div class="main-content">
+      <h1>Recreate This Drum Beat</h1>
+      <div class="beat-info">
+        <h3 id="current-beat-name">Basic Rock Beat</h3>
+        <span id="current-beat-bpm"></span>
+      </div>
+
+      <div class="controls">
+        <button class="btn primary" onclick="playReferencePattern()">Play Reference Beat</button>
+      </div>
+
+      <div id="piano-roll"></div>
+
+      <div class="controls">
+        <button class="btn" onclick="playUserPattern()">Play Your Version</button>
+        <button class="btn" onclick="checkUserAccuracy()">Check Your Accuracy</button>
+        <button class="btn solution" onclick="showSolution()">Show Solution</button>
+      </div>
+
+      <div id="status" class="status"></div>
+    </div>
+  </div>
+</body>
+</html>
