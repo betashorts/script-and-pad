@@ -91,12 +91,23 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
       .map(() => Array(STEPS).fill(false));
 
     const response = await fetch(`../assets/midi/${beatFile}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     const arrayBuffer = await response.arrayBuffer();
-    const midi = new Midi(new Uint8Array(arrayBuffer));
+
+    // Ensure we're using the correct Midi class from @tonejs/midi
+    if (typeof Midi === "undefined") {
+      throw new Error("Midi parser not loaded");
+    }
+
+    const midi = new Midi(arrayBuffer);
+    console.log("MIDI file loaded successfully:", midi);
 
     // Get BPM from MIDI file
-    if (midi.header.tempos && midi.header.tempos.length > 0) {
+    if (midi.header && midi.header.tempos && midi.header.tempos.length > 0) {
       BPM = midi.header.tempos[0].bpm;
+      Tone.Transport.bpm.value = BPM;
       document.getElementById("current-beat-bpm").textContent = `${Math.round(
         BPM
       )} BPM`;
@@ -114,16 +125,20 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
         if (instrumentIndex !== -1) {
           // Convert time to step index (16th notes)
           const stepIndex = Math.floor((note.time * BPM * 16) / 60) % STEPS;
-          referencePattern[instrumentIndex][stepIndex] = true;
+          if (stepIndex >= 0 && stepIndex < STEPS) {
+            referencePattern[instrumentIndex][stepIndex] = true;
+          }
         }
       });
     }
 
     // Update UI
     updatePianoRollUI();
-    console.log("MIDI file loaded:", referencePattern);
+    console.log("Reference pattern loaded:", referencePattern);
   } catch (error) {
     console.error("Error loading MIDI file:", error);
+    document.getElementById("status").textContent =
+      "Error loading MIDI file. Please try again.";
   }
 }
 
@@ -213,16 +228,28 @@ async function init() {
     // Create beat list
     createBeatList();
 
-    // Request audio context on user gesture
-    document.body.addEventListener(
-      "click",
-      async () => {
-        await Tone.start();
-        document.getElementById("status").textContent =
-          "Audio enabled - Click grid cells to create your beat!";
-      },
-      { once: true }
-    );
+    // Set up initial audio context state
+    if (Tone.context.state !== "running") {
+      document.getElementById("status").textContent =
+        "Click anywhere to enable audio";
+
+      // Request audio context on user gesture
+      document.body.addEventListener(
+        "click",
+        async () => {
+          try {
+            await Tone.start();
+            document.getElementById("status").textContent =
+              "Audio enabled - Click grid cells to create your beat!";
+          } catch (error) {
+            console.error("Error starting audio context:", error);
+            document.getElementById("status").textContent =
+              "Error enabling audio. Please try again.";
+          }
+        },
+        { once: true }
+      );
+    }
 
     // Load initial MIDI file
     await loadMIDIFile();
@@ -231,19 +258,26 @@ async function init() {
     Tone.Transport.bpm.value = BPM;
 
     // Load samples
-    for (const instrument of INSTRUMENTS) {
-      players[instrument.midiNote] = new Tone.Player({
-        url: `../assets/sounds/${instrument.file}`,
-        autostart: false,
-      }).toDestination();
-    }
+    await Promise.all(
+      INSTRUMENTS.map(async (instrument) => {
+        try {
+          players[instrument.midiNote] = new Tone.Player({
+            url: `../assets/sounds/${instrument.file}`,
+            autostart: false,
+          }).toDestination();
+
+          // Wait for the player to load
+          await players[instrument.midiNote].load();
+        } catch (error) {
+          console.error(`Error loading sample for ${instrument.name}:`, error);
+        }
+      })
+    );
 
     // Create piano roll UI
     createPianoRoll();
 
-    // Add status message
-    document.getElementById("status").textContent =
-      "Click anywhere to enable audio";
+    // Update display
     document.getElementById("current-beat-name").textContent = currentBeat.name;
     document.getElementById("current-beat-bpm").textContent = `${Math.round(
       BPM
@@ -251,7 +285,7 @@ async function init() {
   } catch (error) {
     console.error("Error initializing game:", error);
     document.getElementById("status").textContent =
-      "Error loading audio samples";
+      "Error loading game resources. Please refresh the page.";
   }
 }
 
