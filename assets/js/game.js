@@ -38,7 +38,7 @@ const BEAT_CATEGORIES = {
   "Advanced Beats": [
     {
       name: "Groove Beat",
-      file: "groove_beat_1.mid",
+      file: "groove_hihat_1.mid",
       description: "Standard 4/4 hihat beat pattern",
     },
     {
