@@ -112,20 +112,28 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     console.log("MIDI file loaded successfully:", midi);
 
     // Get BPM from MIDI file
+    let fileBPM = 120; // Default BPM
     if (midi.header && midi.header.tempos && midi.header.tempos.length > 0) {
-      BPM = midi.header.tempos[0].bpm;
+      fileBPM = midi.header.tempos[0].bpm;
+      BPM = fileBPM;
       Tone.Transport.bpm.value = BPM;
-      document.getElementById("current-beat-bpm").textContent = `${Math.round(
-        BPM
-      )} BPM`;
     }
+    document.getElementById("current-beat-bpm").textContent = `${Math.round(
+      BPM
+    )} BPM`;
 
     // Get the first track (assuming it's a drum track)
     const track = midi.tracks[0];
 
-    // Convert MIDI notes to our grid pattern
+    // Calculate debug information
+    const uniqueMidiNotes = new Set();
+    let maxTime = 0;
+
     if (track && track.notes) {
       track.notes.forEach((note) => {
+        uniqueMidiNotes.add(note.midi);
+        maxTime = Math.max(maxTime, note.time + note.duration);
+
         const instrumentIndex = INSTRUMENTS.findIndex(
           (instr) => instr.midiNote === note.midi
         );
@@ -139,6 +147,18 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
       });
     }
 
+    // Update debug information
+    document.getElementById("debug-bpm").textContent = Math.round(fileBPM);
+    document.getElementById("debug-bars").textContent = Math.ceil(
+      (maxTime * fileBPM) / 240
+    ); // 4 beats per bar at 60 seconds per minute
+    document.getElementById("debug-midi-notes").textContent = Array.from(
+      uniqueMidiNotes
+    )
+      .sort((a, b) => a - b)
+      .join(", ");
+    document.getElementById("debug-duration").textContent = maxTime.toFixed(2);
+
     // Update UI
     updatePianoRollUI();
     console.log("Reference pattern loaded:", referencePattern);
@@ -147,6 +167,12 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     document.getElementById(
       "status"
     ).textContent = `Error loading MIDI file: ${error.message}. Please try again.`;
+
+    // Clear debug information on error
+    document.getElementById("debug-bpm").textContent = "-";
+    document.getElementById("debug-bars").textContent = "-";
+    document.getElementById("debug-midi-notes").textContent = "-";
+    document.getElementById("debug-duration").textContent = "-";
   }
 }
 
