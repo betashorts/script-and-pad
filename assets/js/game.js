@@ -1,76 +1,30 @@
 // Constants
 const STEPS = 16;
-const INSTRUMENTS = [
-  { name: "Kick", file: "kick.wav", midiNote: 36 },
-  { name: "Snare", file: "snare.wav", midiNote: 38 },
-  { name: "Hi-hat Closed", file: "hihat_closed.wav", midiNote: 42 },
-  { name: "Hi-hat Open", file: "hihat_open.wav", midiNote: 46 },
-];
+let INSTRUMENTS = []; // Will be populated from MIDI file
 
-const BEAT_CATEGORIES = {
-  "Basic Beats": [
-    {
-      name: "Basic Rock Beat",
-      file: "basic_rock_beat.mid",
-      description: "Classic rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 2",
-      file: "basic_rock_beat_2.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 3",
-      file: "basic_rock_beat_3.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 4",
-      file: "basic_rock_beat_4.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 5",
-      file: "basic_rock_beat_5.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-  ],
-  "Advanced Beats": [
-    {
-      name: "Groove Beat",
-      file: "groove_hihat_1.mid",
-      description: "Standard 4/4 hihat beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 6",
-      file: "basic_rock_beat_6.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 7",
-      file: "basic_rock_beat_7.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 8",
-      file: "basic_rock_beat_8.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 9",
-      file: "basic_rock_beat_9.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 10",
-      file: "basic_rock_beat_10.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-  ],
-};
+// Function to format instrument name from filename
+function formatInstrumentName(filename) {
+  // Remove file extension
+  const name = filename.replace(/\.[^/.]+$/, "");
+  // Split by underscore and capitalize each word
+  const words = name
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+  // Join words with space
+  return words.join(" ");
+}
 
-// Get all beats in a flat array when needed
-const AVAILABLE_BEATS = Object.values(BEAT_CATEGORIES).flat();
+// Function to extract instrument name from filename
+function getBaseInstrumentName(filename) {
+  // Remove file extension and any numbers
+  const name = filename.replace(/\.[^/.]+$/, "").replace(/\d+/g, "");
+  // Split by underscore and capitalize each word
+  const words = name
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+  // Join words with space
+  return words.join(" ");
+}
 
 // Global state
 let players = {};
@@ -82,19 +36,11 @@ let referencePattern = Array(INSTRUMENTS.length)
   .map(() => Array(STEPS).fill(false));
 let isPlaying = false;
 let BPM = 120; // Default BPM
-let currentBeat = AVAILABLE_BEATS[0]; // Start with the first beat
+let currentBeat = INSTRUMENTS[0]; // Start with the first beat
 
 // Load and parse MIDI file
 async function loadMIDIFile(beatFile = currentBeat.file) {
   try {
-    // Reset patterns
-    referencePattern = Array(INSTRUMENTS.length)
-      .fill()
-      .map(() => Array(STEPS).fill(false));
-    userPattern = Array(INSTRUMENTS.length)
-      .fill()
-      .map(() => Array(STEPS).fill(false));
-
     const response = await fetch(`../assets/midi/${beatFile}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -125,7 +71,7 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     // Get the first track (assuming it's a drum track)
     const track = midi.tracks[0];
 
-    // Calculate debug information
+    // Extract unique MIDI notes and create instrument mapping
     const uniqueMidiNotes = new Set();
     let maxTime = 0;
 
@@ -133,7 +79,33 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
       track.notes.forEach((note) => {
         uniqueMidiNotes.add(note.midi);
         maxTime = Math.max(maxTime, note.time + note.duration);
+      });
+    }
 
+    // Create instruments array from unique MIDI notes
+    INSTRUMENTS = Array.from(uniqueMidiNotes)
+      .sort((a, b) => a - b)
+      .map((midiNote) => {
+        // Find corresponding sound file
+        const soundFile = findSoundFileForMidiNote(midiNote);
+        return {
+          name: getBaseInstrumentName(soundFile),
+          file: soundFile,
+          midiNote: midiNote,
+        };
+      });
+
+    // Reset patterns with new instrument count
+    referencePattern = Array(INSTRUMENTS.length)
+      .fill()
+      .map(() => Array(STEPS).fill(false));
+    userPattern = Array(INSTRUMENTS.length)
+      .fill()
+      .map(() => Array(STEPS).fill(false));
+
+    // Convert MIDI notes to our grid pattern
+    if (track && track.notes) {
+      track.notes.forEach((note) => {
         const instrumentIndex = INSTRUMENTS.findIndex(
           (instr) => instr.midiNote === note.midi
         );
@@ -151,7 +123,7 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     document.getElementById("debug-bpm").textContent = Math.round(fileBPM);
     document.getElementById("debug-bars").textContent = Math.ceil(
       (maxTime * fileBPM) / 240
-    ); // 4 beats per bar at 60 seconds per minute
+    );
     document.getElementById("debug-midi-notes").textContent = Array.from(
       uniqueMidiNotes
     )
@@ -160,6 +132,7 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     document.getElementById("debug-duration").textContent = maxTime.toFixed(2);
 
     // Update UI
+    createPianoRoll();
     updatePianoRollUI();
     console.log("Reference pattern loaded:", referencePattern);
   } catch (error) {
@@ -174,6 +147,32 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     document.getElementById("debug-midi-notes").textContent = "-";
     document.getElementById("debug-duration").textContent = "-";
   }
+}
+
+// Function to find sound file for MIDI note
+function findSoundFileForMidiNote(midiNote) {
+  // This is a mapping of MIDI note numbers to sound files
+  // You should update this based on your actual sound files
+  const midiToSoundMap = {
+    36: "kick.wav",
+    38: "snare.wav",
+    42: "hihat_closed.wav",
+    46: "hihat_open.wav",
+    49: "crash_cymbal.wav",
+    51: "ride_cymbal.wav",
+    45: "low_tom.wav",
+    47: "mid_tom.wav",
+    48: "hi_tom.wav",
+    50: "hi_tom.wav",
+    41: "low_tom.wav",
+    43: "hi_tom.wav",
+    44: "pedal_hihat.wav",
+    37: "side_stick.wav",
+    39: "clap.wav",
+    40: "electric_snare.wav",
+  };
+
+  return midiToSoundMap[midiNote] || `unknown_${midiNote}.wav`;
 }
 
 // Create the sidebar beat list
@@ -307,9 +306,6 @@ async function init() {
         }
       })
     );
-
-    // Create piano roll UI
-    createPianoRoll();
 
     // Update display
     document.getElementById("current-beat-name").textContent = currentBeat.name;
