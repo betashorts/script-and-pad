@@ -1,6 +1,7 @@
 // Constants
 const STEPS = 16;
 let INSTRUMENTS = []; // Will be populated from MIDI file
+let MIDI_MAPPING = {}; // Will store the MIDI mapping from JSON
 
 // Function to format instrument name from filename
 function formatInstrumentName(filename) {
@@ -37,6 +38,32 @@ let referencePattern = Array(INSTRUMENTS.length)
 let isPlaying = false;
 let BPM = 120; // Default BPM
 let currentBeat = INSTRUMENTS[0]; // Start with the first beat
+
+// Function to find sound file for MIDI note
+async function findSoundFileForMidiNote(midiNote) {
+  // If we haven't loaded the mapping yet, load it
+  if (Object.keys(MIDI_MAPPING).length === 0) {
+    try {
+      const response = await fetch("../assets/json/midi_mapping.json");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      MIDI_MAPPING = await response.json();
+    } catch (error) {
+      console.error("Error loading MIDI mapping:", error);
+      return `unknown_${midiNote}.wav`;
+    }
+  }
+
+  // Find the mapping for this MIDI note
+  const mapping = MIDI_MAPPING[midiNote];
+  if (mapping && mapping.sound) {
+    return mapping.sound;
+  }
+
+  // If no mapping found, return a default name
+  return `unknown_${midiNote}.wav`;
+}
 
 // Load and parse MIDI file
 async function loadMIDIFile(beatFile = currentBeat.file) {
@@ -83,17 +110,19 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     }
 
     // Create instruments array from unique MIDI notes
-    INSTRUMENTS = Array.from(uniqueMidiNotes)
-      .sort((a, b) => a - b)
-      .map((midiNote) => {
-        // Find corresponding sound file
-        const soundFile = findSoundFileForMidiNote(midiNote);
-        return {
-          name: getBaseInstrumentName(soundFile),
-          file: soundFile,
-          midiNote: midiNote,
-        };
-      });
+    INSTRUMENTS = await Promise.all(
+      Array.from(uniqueMidiNotes)
+        .sort((a, b) => a - b)
+        .map(async (midiNote) => {
+          // Find corresponding sound file
+          const soundFile = await findSoundFileForMidiNote(midiNote);
+          return {
+            name: getBaseInstrumentName(soundFile),
+            file: soundFile,
+            midiNote: midiNote,
+          };
+        })
+    );
 
     // Reset patterns with new instrument count
     referencePattern = Array(INSTRUMENTS.length)
@@ -147,32 +176,6 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     document.getElementById("debug-midi-notes").textContent = "-";
     document.getElementById("debug-duration").textContent = "-";
   }
-}
-
-// Function to find sound file for MIDI note
-function findSoundFileForMidiNote(midiNote) {
-  // This is a mapping of MIDI note numbers to sound files
-  // You should update this based on your actual sound files
-  const midiToSoundMap = {
-    36: "kick.wav",
-    38: "snare.wav",
-    42: "hihat_closed.wav",
-    46: "hihat_open.wav",
-    49: "crash_cymbal.wav",
-    51: "ride_cymbal.wav",
-    45: "low_tom.wav",
-    47: "mid_tom.wav",
-    48: "hi_tom.wav",
-    50: "hi_tom.wav",
-    41: "low_tom.wav",
-    43: "hi_tom.wav",
-    44: "pedal_hihat.wav",
-    37: "side_stick.wav",
-    39: "clap.wav",
-    40: "electric_snare.wav",
-  };
-
-  return midiToSoundMap[midiNote] || `unknown_${midiNote}.wav`;
 }
 
 // Create the sidebar beat list
