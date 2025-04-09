@@ -46,7 +46,12 @@ const BEAT_CATEGORIES = {
 };
 
 // Get all beats in a flat array when needed
-const AVAILABLE_BEATS = Object.values(BEAT_CATEGORIES).flat();
+const AVAILABLE_BEATS = Object.values(BEAT_CATEGORIES)
+  .flat()
+  .map((beat) => ({
+    ...beat,
+    name: formatBeatName(beat.file), // Format the beat name from the filename
+  }));
 
 // Global state
 let players = {};
@@ -56,16 +61,31 @@ let isPlaying = false;
 let BPM = 120; // Default BPM
 let currentBeat = AVAILABLE_BEATS[0]; // Start with the first beat
 
+// Function to format beat name from filename (for sidebar)
+function formatBeatName(filename) {
+  // Remove .mid extension
+  const name = filename.replace(".mid", "");
+  // Split by underscore and capitalize each word
+  return name
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 // Function to format instrument name from filename
 function formatInstrumentName(filename) {
   // Remove file extension
-  const name = filename.replace(/\.[^/.]+$/, "");
-  // Split by underscore and capitalize each word
-  const words = name
+  let name = filename.replace(".wav", "");
+
+  // Remove the last number (MIDI note) if it exists
+  name = name.replace(/_\d+$/, "");
+
+  // If there's still a number (like _1_ in crash_cymbal_1_49), keep it
+  // but remove any remaining underscores and capitalize each word
+  return name
     .split("_")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1));
-  // Join words with space
-  return words.join(" ");
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 }
 
 // Function to extract instrument name from filename
@@ -109,6 +129,21 @@ async function findSoundFileForMidiNote(midiNote) {
 // Load and parse MIDI file
 async function loadMIDIFile(beatFile = currentBeat.file) {
   try {
+    // Load MIDI mapping if not already loaded
+    if (Object.keys(MIDI_MAPPING).length === 0) {
+      try {
+        const mappingResponse = await fetch("../assets/json/mapping.json");
+        if (!mappingResponse.ok) {
+          throw new Error(`HTTP error! status: ${mappingResponse.status}`);
+        }
+        MIDI_MAPPING = await mappingResponse.json();
+        console.log("Loaded MIDI mapping:", MIDI_MAPPING);
+      } catch (error) {
+        console.error("Error loading MIDI mapping:", error);
+        throw error;
+      }
+    }
+
     const response = await fetch(`../assets/midi/${beatFile}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -150,30 +185,23 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
       });
     }
 
-    // Load MIDI mapping if not already loaded
-    if (Object.keys(MIDI_MAPPING).length === 0) {
-      try {
-        const mappingResponse = await fetch("../assets/json/midi_mapping.json");
-        if (!mappingResponse.ok) {
-          throw new Error(`HTTP error! status: ${mappingResponse.status}`);
-        }
-        MIDI_MAPPING = await mappingResponse.json();
-      } catch (error) {
-        console.error("Error loading MIDI mapping:", error);
-      }
-    }
-
     // Create instruments array from unique MIDI notes
     INSTRUMENTS = Array.from(uniqueMidiNotes)
       .sort((a, b) => a - b)
       .map((midiNote) => {
-        // Find corresponding sound file and name from mapping
-        const mapping = MIDI_MAPPING[midiNote] || {};
-        const soundFile = mapping.sound || `unknown_${midiNote}.wav`;
-        const displayName = mapping.name || getBaseInstrumentName(soundFile);
+        // Get the sound filename from mapping
+        const soundFile = MIDI_MAPPING[midiNote];
+        if (!soundFile) {
+          console.warn(`No mapping found for MIDI note ${midiNote}`);
+          return {
+            name: `Unknown (${midiNote})`,
+            file: `unknown_${midiNote}.wav`,
+            midiNote: midiNote,
+          };
+        }
 
         return {
-          name: displayName,
+          name: formatInstrumentName(soundFile),
           file: soundFile,
           midiNote: midiNote,
         };
