@@ -174,16 +174,61 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
       BPM
     )} BPM`;
 
-    // Get the first track and extract MIDI notes
+    // Initialize patterns
     const track = midi.tracks[0];
     const uniqueMidiNotes = new Set();
-
-    // Calculate total duration and collect unique MIDI notes
     let maxTime = 0;
+
+    // First pass: collect unique MIDI notes and calculate duration
     if (track && track.notes) {
       track.notes.forEach((note) => {
-        maxTime = Math.max(maxTime, note.time + note.duration);
         uniqueMidiNotes.add(note.midi);
+        maxTime = Math.max(maxTime, note.time + note.duration);
+      });
+    }
+
+    // Create instruments array from unique MIDI notes
+    INSTRUMENTS = Array.from(uniqueMidiNotes)
+      .sort((a, b) => a - b)
+      .map((midiNote) => {
+        const soundFile = MIDI_MAPPING[midiNote];
+        if (!soundFile) {
+          console.warn(`No mapping found for MIDI note ${midiNote}`);
+          return {
+            name: `Unknown (${midiNote})`,
+            file: `unknown_${midiNote}.wav`,
+            midiNote: midiNote,
+          };
+        }
+        return {
+          name: formatInstrumentName(soundFile),
+          file: soundFile,
+          midiNote: midiNote,
+        };
+      });
+
+    console.log("Created instruments:", INSTRUMENTS);
+
+    // Initialize patterns with correct size
+    referencePattern = Array(INSTRUMENTS.length)
+      .fill()
+      .map(() => Array(STEPS).fill(false));
+    userPattern = Array(INSTRUMENTS.length)
+      .fill()
+      .map(() => Array(STEPS).fill(false));
+
+    // Second pass: fill in the reference pattern
+    if (track && track.notes) {
+      track.notes.forEach((note) => {
+        const instrumentIndex = INSTRUMENTS.findIndex(
+          (instr) => instr.midiNote === note.midi
+        );
+        if (instrumentIndex !== -1) {
+          const stepIndex = Math.floor((note.time * BPM * 16) / 60) % STEPS;
+          if (stepIndex >= 0 && stepIndex < STEPS) {
+            referencePattern[instrumentIndex][stepIndex] = true;
+          }
+        }
       });
     }
 
@@ -198,54 +243,11 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     document.getElementById("debug-bpm").textContent = Math.round(fileBPM);
     document.getElementById("debug-bars").textContent = totalBars;
     document.getElementById("debug-duration").textContent = maxTime.toFixed(2);
-
-    // Create instruments array from unique MIDI notes
-    INSTRUMENTS = Array.from(uniqueMidiNotes)
+    document.getElementById("debug-midi-notes").textContent = Array.from(
+      uniqueMidiNotes
+    )
       .sort((a, b) => a - b)
-      .map((midiNote) => {
-        // Get the sound filename from mapping
-        const soundFile = MIDI_MAPPING[midiNote];
-        if (!soundFile) {
-          console.warn(`No mapping found for MIDI note ${midiNote}`);
-          return {
-            name: `Unknown (${midiNote})`,
-            file: `unknown_${midiNote}.wav`,
-            midiNote: midiNote,
-          };
-        }
-
-        return {
-          name: formatInstrumentName(soundFile),
-          file: soundFile,
-          midiNote: midiNote,
-        };
-      });
-
-    console.log("Created instruments:", INSTRUMENTS);
-
-    // Reset patterns with new instrument count
-    referencePattern = Array(INSTRUMENTS.length)
-      .fill()
-      .map(() => Array(STEPS).fill(false));
-    userPattern = Array(INSTRUMENTS.length)
-      .fill()
-      .map(() => Array(STEPS).fill(false));
-
-    // Convert MIDI notes to our grid pattern
-    if (track && track.notes) {
-      track.notes.forEach((note) => {
-        const instrumentIndex = INSTRUMENTS.findIndex(
-          (instr) => instr.midiNote === note.midi
-        );
-        if (instrumentIndex !== -1) {
-          // Convert time to step index (16th notes)
-          const stepIndex = Math.floor((note.time * BPM * 16) / 60) % STEPS;
-          if (stepIndex >= 0 && stepIndex < STEPS) {
-            referencePattern[instrumentIndex][stepIndex] = true;
-          }
-        }
-      });
-    }
+      .join(", ");
 
     // Update UI
     createPianoRoll();
@@ -276,6 +278,7 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     document.getElementById("debug-bpm").textContent = "-";
     document.getElementById("debug-bars").textContent = "-";
     document.getElementById("debug-duration").textContent = "-";
+    document.getElementById("debug-midi-notes").textContent = "-";
   }
 }
 
