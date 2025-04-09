@@ -62,6 +62,7 @@ let BPM = 120; // Default BPM
 let currentBeat = AVAILABLE_BEATS[0]; // Start with the first beat
 let uniqueBarPatterns = [];
 let currentBarIndex = 0;
+let fullReferencePattern = []; // Store the complete pattern
 
 // Function to format beat name from filename (for sidebar)
 function formatBeatName(filename) {
@@ -211,20 +212,10 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
 
     console.log("Created instruments:", INSTRUMENTS);
 
-    // Extract unique bar patterns
-    uniqueBarPatterns = extractUniqueBarPatterns(track, fileBPM);
-    console.log("Found unique bar patterns:", uniqueBarPatterns);
-
-    // Update the UI with bar tabs
-    updateBarTabs();
-
-    // Select the first bar pattern by default
-    if (uniqueBarPatterns.length > 0) {
-      loadBarPattern(uniqueBarPatterns[0]);
-      document.querySelector(".bar-tab").classList.add("active");
-    }
-
     // Initialize patterns with correct size
+    fullReferencePattern = Array(INSTRUMENTS.length)
+      .fill()
+      .map(() => Array(STEPS).fill(false));
     referencePattern = Array(INSTRUMENTS.length)
       .fill()
       .map(() => Array(STEPS).fill(false));
@@ -241,10 +232,23 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
         if (instrumentIndex !== -1) {
           const stepIndex = Math.floor((note.time * BPM * 16) / 60) % STEPS;
           if (stepIndex >= 0 && stepIndex < STEPS) {
-            referencePattern[instrumentIndex][stepIndex] = true;
+            fullReferencePattern[instrumentIndex][stepIndex] = true;
           }
         }
       });
+    }
+
+    // Extract unique bar patterns
+    uniqueBarPatterns = extractUniqueBarPatterns(track, fileBPM);
+    console.log("Found unique bar patterns:", uniqueBarPatterns);
+
+    // Update the UI with bar tabs
+    updateBarTabs();
+
+    // Select the first bar pattern by default
+    if (uniqueBarPatterns.length > 0) {
+      loadBarPattern(uniqueBarPatterns[0]);
+      document.querySelector(".bar-tab").classList.add("active");
     }
 
     const totalBars = Math.ceil((maxTime * fileBPM) / 240);
@@ -494,7 +498,7 @@ function toggleNote(row, step) {
 }
 
 // Update playback functions to handle full duration
-window.playReferencePattern = function (numBars = 1) {
+function playReferencePattern(numBars = 1, patternToPlay = null) {
   if (isPlaying) {
     Tone.Transport.stop();
     Tone.Transport.cancel();
@@ -505,8 +509,11 @@ window.playReferencePattern = function (numBars = 1) {
   // Clear any existing events
   Tone.Transport.cancel();
 
+  // Use the provided pattern or fall back to the current reference pattern
+  const pattern = patternToPlay || referencePattern;
+
   // Create a sequence for each instrument
-  referencePattern.forEach((row, instrumentIndex) => {
+  pattern.forEach((row, instrumentIndex) => {
     const instrument = INSTRUMENTS[instrumentIndex];
     new Tone.Sequence(
       (time, step) => {
@@ -530,7 +537,7 @@ window.playReferencePattern = function (numBars = 1) {
     isPlaying = false;
     document.getElementById("status").textContent = "Playback complete";
   }, `${numBars}m`);
-};
+}
 
 // Update user pattern playback similarly
 window.playUserPattern = function () {
@@ -719,7 +726,7 @@ function loadBarPattern(barPattern) {
   updatePianoRollUI();
 }
 
-// Add event listeners for the play buttons
+// Update the play button event listeners
 document.getElementById("playSelectedBar").addEventListener("click", () => {
   if (isPlaying) {
     Tone.Transport.stop();
@@ -745,10 +752,10 @@ document.getElementById("playAllBars").addEventListener("click", () => {
     return;
   }
 
-  // Play the full loop
+  // Play the full loop using the complete pattern
   const totalBars =
     parseInt(document.getElementById("debug-bars").textContent) || 1;
-  playReferencePattern(totalBars);
+  playReferencePattern(totalBars, fullReferencePattern);
   document.getElementById("status").textContent = "Playing full loop...";
 });
 
