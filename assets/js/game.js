@@ -174,10 +174,11 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
       BPM
     )} BPM`;
 
-    // Get the first track and analyze it
+    // Get the first track and extract MIDI notes
     const track = midi.tracks[0];
+    const uniqueMidiNotes = new Set();
 
-    // Calculate total duration and bars
+    // Calculate total duration and collect unique MIDI notes
     let maxTime = 0;
     if (track && track.notes) {
       track.notes.forEach((note) => {
@@ -190,15 +191,13 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     console.log("=== Duration Analysis ===");
     console.log("Max time in seconds:", maxTime);
     console.log("Calculated bars:", totalBars);
+    console.log("MIDI Notes found:", Array.from(uniqueMidiNotes));
     console.log("=====================");
 
     // Update debug information
     document.getElementById("debug-bpm").textContent = Math.round(fileBPM);
     document.getElementById("debug-bars").textContent = totalBars;
     document.getElementById("debug-duration").textContent = maxTime.toFixed(2);
-
-    // Extract unique MIDI notes and create instrument mapping
-    const uniqueMidiNotes = new Set();
 
     // Create instruments array from unique MIDI notes
     INSTRUMENTS = Array.from(uniqueMidiNotes)
