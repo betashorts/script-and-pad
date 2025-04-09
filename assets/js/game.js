@@ -137,7 +137,6 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
           throw new Error(`HTTP error! status: ${mappingResponse.status}`);
         }
         MIDI_MAPPING = await mappingResponse.json();
-        console.log("Loaded MIDI mapping:", MIDI_MAPPING);
       } catch (error) {
         console.error("Error loading MIDI mapping:", error);
         throw error;
@@ -150,40 +149,56 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     }
     const arrayBuffer = await response.arrayBuffer();
 
-    // Check if midi library is loaded
-    if (typeof Midi !== "function") {
-      console.error("Midi library not loaded properly");
-      throw new Error("Midi library not loaded");
-    }
-
     // Create a new Midi instance
     const midi = new Midi(arrayBuffer);
-    console.log("MIDI file loaded successfully:", midi);
+
+    // Detailed logging for debugging
+    console.log("=== MIDI File Analysis ===");
+    console.log("File name:", beatFile);
+    console.log("Full MIDI header:", midi.header);
+    console.log("Time signature:", midi.header.timeSignatures);
+    console.log("Tempo data:", midi.header.tempos);
 
     // Get BPM from MIDI file
     let fileBPM = 120; // Default BPM
     if (midi.header && midi.header.tempos && midi.header.tempos.length > 0) {
       fileBPM = midi.header.tempos[0].bpm;
-      BPM = fileBPM;
-      Tone.Transport.bpm.value = BPM;
+      console.log("✓ Found BPM in MIDI file:", fileBPM);
+    } else {
+      console.log("⚠ No BPM found in MIDI file, using default:", fileBPM);
+      console.log("MIDI tempo data:", midi.header.tempos);
     }
+    BPM = fileBPM;
+    Tone.Transport.bpm.value = BPM;
     document.getElementById("current-beat-bpm").textContent = `${Math.round(
       BPM
     )} BPM`;
 
-    // Get the first track (assuming it's a drum track)
+    // Get the first track and analyze it
     const track = midi.tracks[0];
+
+    // Calculate total duration and bars
+    let maxTime = 0;
+    if (track && track.notes) {
+      track.notes.forEach((note) => {
+        maxTime = Math.max(maxTime, note.time + note.duration);
+        uniqueMidiNotes.add(note.midi);
+      });
+    }
+
+    const totalBars = Math.ceil((maxTime * fileBPM) / 240);
+    console.log("=== Duration Analysis ===");
+    console.log("Max time in seconds:", maxTime);
+    console.log("Calculated bars:", totalBars);
+    console.log("=====================");
+
+    // Update debug information
+    document.getElementById("debug-bpm").textContent = Math.round(fileBPM);
+    document.getElementById("debug-bars").textContent = totalBars;
+    document.getElementById("debug-duration").textContent = maxTime.toFixed(2);
 
     // Extract unique MIDI notes and create instrument mapping
     const uniqueMidiNotes = new Set();
-    let maxTime = 0;
-
-    if (track && track.notes) {
-      track.notes.forEach((note) => {
-        uniqueMidiNotes.add(note.midi);
-        maxTime = Math.max(maxTime, note.time + note.duration);
-      });
-    }
 
     // Create instruments array from unique MIDI notes
     INSTRUMENTS = Array.from(uniqueMidiNotes)
@@ -233,18 +248,6 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
       });
     }
 
-    // Update debug information
-    document.getElementById("debug-bpm").textContent = Math.round(fileBPM);
-    document.getElementById("debug-bars").textContent = Math.ceil(
-      (maxTime * fileBPM) / 240
-    );
-    document.getElementById("debug-midi-notes").textContent = Array.from(
-      uniqueMidiNotes
-    )
-      .sort((a, b) => a - b)
-      .join(", ");
-    document.getElementById("debug-duration").textContent = maxTime.toFixed(2);
-
     // Update UI
     createPianoRoll();
     updatePianoRollUI();
@@ -273,7 +276,6 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     // Clear debug information on error
     document.getElementById("debug-bpm").textContent = "-";
     document.getElementById("debug-bars").textContent = "-";
-    document.getElementById("debug-midi-notes").textContent = "-";
     document.getElementById("debug-duration").textContent = "-";
   }
 }
@@ -474,7 +476,7 @@ function toggleNote(row, step) {
   }
 }
 
-// Make functions globally available
+// Update playback functions to handle full duration
 window.playReferencePattern = function () {
   if (isPlaying) {
     Tone.Transport.stop();
@@ -487,6 +489,11 @@ window.playReferencePattern = function () {
   // Clear any existing events
   Tone.Transport.cancel();
 
+  // Calculate number of bars based on the debug info
+  const totalBars =
+    parseInt(document.getElementById("debug-bars").textContent) || 1;
+  console.log("Playing for", totalBars, "bars");
+
   // Create a sequence for each instrument
   referencePattern.forEach((row, instrumentIndex) => {
     const instrument = INSTRUMENTS[instrumentIndex];
@@ -496,7 +503,7 @@ window.playReferencePattern = function () {
           players[instrument.midiNote].start(time);
         }
       },
-      [...Array(STEPS).keys()], // Pass step numbers 0-15
+      [...Array(STEPS).keys()],
       "16n"
     ).start(0);
   });
@@ -507,17 +514,17 @@ window.playReferencePattern = function () {
   document.getElementById("status").textContent =
     "Playing reference pattern...";
 
-  // Stop after one bar
+  // Stop after the calculated number of bars
   Tone.Transport.schedule(() => {
     Tone.Transport.stop();
     Tone.Transport.cancel();
     isPlaying = false;
     document.getElementById("status").textContent =
       "Reference playback complete";
-  }, "1m");
+  }, `${totalBars}m`);
 };
 
-// Make functions globally available
+// Update user pattern playback similarly
 window.playUserPattern = function () {
   if (isPlaying) {
     Tone.Transport.stop();
@@ -529,6 +536,11 @@ window.playUserPattern = function () {
 
   // Clear any existing events
   Tone.Transport.cancel();
+
+  // Calculate number of bars based on the debug info
+  const totalBars =
+    parseInt(document.getElementById("debug-bars").textContent) || 1;
+  console.log("Playing for", totalBars, "bars");
 
   // Create a sequence for each instrument
   userPattern.forEach((row, instrumentIndex) => {
@@ -549,14 +561,14 @@ window.playUserPattern = function () {
   isPlaying = true;
   document.getElementById("status").textContent = "Playing your pattern...";
 
-  // Stop after one bar
+  // Stop after the calculated number of bars
   Tone.Transport.schedule(() => {
     Tone.Transport.stop();
     Tone.Transport.cancel();
     isPlaying = false;
     document.getElementById("status").textContent =
       "Your pattern playback complete";
-  }, "1m");
+  }, `${totalBars}m`);
 };
 
 // Make functions globally available
