@@ -3,6 +3,59 @@ const STEPS = 16;
 let INSTRUMENTS = []; // Will be populated from MIDI file
 let MIDI_MAPPING = {}; // Will store the MIDI mapping from JSON
 
+const BEAT_CATEGORIES = {
+  "Basic Beats": [
+    {
+      name: "Basic Rock Beat",
+      file: "basic_rock_beat.mid",
+      description: "Classic rock beat pattern",
+    },
+    {
+      name: "Basic Rock Beat 2",
+      file: "basic_rock_beat_2.mid",
+      description: "Standard 4/4 rock beat pattern",
+    },
+    {
+      name: "Basic Rock Beat 3",
+      file: "basic_rock_beat_3.mid",
+      description: "Standard 4/4 rock beat pattern",
+    },
+    {
+      name: "Basic Rock Beat 4",
+      file: "basic_rock_beat_4.mid",
+      description: "Standard 4/4 rock beat pattern",
+    },
+    {
+      name: "Basic Rock Beat 5",
+      file: "basic_rock_beat_5.mid",
+      description: "Standard 4/4 rock beat pattern",
+    },
+  ],
+  "Advanced Beats": [
+    {
+      name: "Groove Beat",
+      file: "groove_hihat_1.mid",
+      description: "Standard 4/4 hihat beat pattern",
+    },
+    {
+      name: "Basic Rock Beat 6",
+      file: "basic_rock_beat_6.mid",
+      description: "Standard 4/4 rock beat pattern",
+    },
+  ],
+};
+
+// Get all beats in a flat array when needed
+const AVAILABLE_BEATS = Object.values(BEAT_CATEGORIES).flat();
+
+// Global state
+let players = {};
+let userPattern = [];
+let referencePattern = [];
+let isPlaying = false;
+let BPM = 120; // Default BPM
+let currentBeat = AVAILABLE_BEATS[0]; // Start with the first beat
+
 // Function to format instrument name from filename
 function formatInstrumentName(filename) {
   // Remove file extension
@@ -26,18 +79,6 @@ function getBaseInstrumentName(filename) {
   // Join words with space
   return words.join(" ");
 }
-
-// Global state
-let players = {};
-let userPattern = Array(INSTRUMENTS.length)
-  .fill()
-  .map(() => Array(STEPS).fill(false));
-let referencePattern = Array(INSTRUMENTS.length)
-  .fill()
-  .map(() => Array(STEPS).fill(false));
-let isPlaying = false;
-let BPM = 120; // Default BPM
-let currentBeat = INSTRUMENTS[0]; // Start with the first beat
 
 // Function to find sound file for MIDI note
 async function findSoundFileForMidiNote(midiNote) {
@@ -109,20 +150,36 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
       });
     }
 
+    // Load MIDI mapping if not already loaded
+    if (Object.keys(MIDI_MAPPING).length === 0) {
+      try {
+        const mappingResponse = await fetch("../assets/json/midi_mapping.json");
+        if (!mappingResponse.ok) {
+          throw new Error(`HTTP error! status: ${mappingResponse.status}`);
+        }
+        MIDI_MAPPING = await mappingResponse.json();
+      } catch (error) {
+        console.error("Error loading MIDI mapping:", error);
+      }
+    }
+
     // Create instruments array from unique MIDI notes
-    INSTRUMENTS = await Promise.all(
-      Array.from(uniqueMidiNotes)
-        .sort((a, b) => a - b)
-        .map(async (midiNote) => {
-          // Find corresponding sound file
-          const soundFile = await findSoundFileForMidiNote(midiNote);
-          return {
-            name: getBaseInstrumentName(soundFile),
-            file: soundFile,
-            midiNote: midiNote,
-          };
-        })
-    );
+    INSTRUMENTS = Array.from(uniqueMidiNotes)
+      .sort((a, b) => a - b)
+      .map((midiNote) => {
+        // Find corresponding sound file and name from mapping
+        const mapping = MIDI_MAPPING[midiNote] || {};
+        const soundFile = mapping.sound || `unknown_${midiNote}.wav`;
+        const displayName = mapping.name || getBaseInstrumentName(soundFile);
+
+        return {
+          name: displayName,
+          file: soundFile,
+          midiNote: midiNote,
+        };
+      });
+
+    console.log("Created instruments:", INSTRUMENTS);
 
     // Reset patterns with new instrument count
     referencePattern = Array(INSTRUMENTS.length)
@@ -164,6 +221,21 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     createPianoRoll();
     updatePianoRollUI();
     console.log("Reference pattern loaded:", referencePattern);
+
+    // Load samples for all instruments
+    await Promise.all(
+      INSTRUMENTS.map(async (instrument) => {
+        try {
+          players[instrument.midiNote] = new Tone.Player({
+            url: `../assets/sounds/${instrument.file}`,
+            autostart: false,
+          }).toDestination();
+          await players[instrument.midiNote].load();
+        } catch (error) {
+          console.error(`Error loading sample for ${instrument.name}:`, error);
+        }
+      })
+    );
   } catch (error) {
     console.error("Error loading MIDI file:", error);
     document.getElementById(
