@@ -32,13 +32,25 @@
     <div class="main-content">
       <h1>Recreate This Drum Beat</h1>
       <div class="beat-info">
-        <h3 id="current-beat-name">Loading...</h3>
-        <span id="current-beat-bpm"></span>
+        <h2 id="current-beat-name">Basic Rock Beat</h2>
+        <div id="current-beat-bpm">120 BPM</div>
         <div id="debug-info" class="debug-info">
           <div>BPM: <span id="debug-bpm">-</span></div>
           <div>Bars: <span id="debug-bars">-</span></div>
           <div>MIDI Notes: <span id="debug-midi-notes">-</span></div>
           <div>Loop Duration: <span id="debug-duration">-</span> seconds</div>
+        </div>
+      </div>
+
+      <div class="bar-tabs-container">
+        <div class="bar-tabs-header">
+          <h3>Unique Bar Patterns</h3>
+          <div class="bar-tabs-note">Note: These are unique patterns found in the loop, not the exact bar positions.</div>
+        </div>
+        <div id="bar-tabs"></div>
+        <div class="bar-controls">
+          <button id="playSelectedBar" class="btn">Play Selected Bar</button>
+          <button id="playAllBars" class="btn">Play Full Loop</button>
         </div>
       </div>
 

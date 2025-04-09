@@ -277,3 +277,85 @@ h6 {
 .debug-info > div {
   margin: 2px 0;
 }
+
+.bar-tabs-container {
+  margin: 20px 0;
+  padding: 20px;
+  background: var(--surface-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bar-tabs-header {
+  margin-bottom: 15px;
+}
+
+.bar-tabs-header h3 {
+  margin: 0 0 8px 0;
+  color: var(--text-color);
+  font-family: var(--heading-font);
+  font-size: 1.2em;
+}
+
+.bar-tabs-note {
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+}
+
+#bar-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.bar-tab {
+  padding: 8px 16px;
+  background: var(--surface-secondary);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--body-font);
+  color: var(--text-color);
+  transition: all 0.2s ease;
+}
+
+.bar-tab:hover {
+  background: var(--surface-hover);
+}
+
+.bar-tab.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color-dark);
+}
+
+.bar-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.bar-controls .btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--body-font);
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.bar-controls .btn:hover {
+  background: var(--primary-color-dark);
+}
+
+#playAllBars {
+  background: var(--surface-secondary);
+  color: var(--text-color);
+}
+
+#playAllBars:hover {
+  background: var(--surface-hover);
+}

@@ -60,6 +60,8 @@ let referencePattern = [];
 let isPlaying = false;
 let BPM = 120; // Default BPM
 let currentBeat = AVAILABLE_BEATS[0]; // Start with the first beat
+let uniqueBarPatterns = [];
+let currentBarIndex = 0;
 
 // Function to format beat name from filename (for sidebar)
 function formatBeatName(filename) {
@@ -208,6 +210,19 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
       });
 
     console.log("Created instruments:", INSTRUMENTS);
+
+    // Extract unique bar patterns
+    uniqueBarPatterns = extractUniqueBarPatterns(track, fileBPM);
+    console.log("Found unique bar patterns:", uniqueBarPatterns);
+
+    // Update the UI with bar tabs
+    updateBarTabs();
+
+    // Select the first bar pattern by default
+    if (uniqueBarPatterns.length > 0) {
+      loadBarPattern(uniqueBarPatterns[0]);
+      document.querySelector(".bar-tab").classList.add("active");
+    }
 
     // Initialize patterns with correct size
     referencePattern = Array(INSTRUMENTS.length)
@@ -479,22 +494,16 @@ function toggleNote(row, step) {
 }
 
 // Update playback functions to handle full duration
-window.playReferencePattern = function () {
+window.playReferencePattern = function (numBars = 1) {
   if (isPlaying) {
     Tone.Transport.stop();
     Tone.Transport.cancel();
     isPlaying = false;
-    document.getElementById("status").textContent = "Playback stopped";
     return;
   }
 
   // Clear any existing events
   Tone.Transport.cancel();
-
-  // Calculate number of bars based on the debug info
-  const totalBars =
-    parseInt(document.getElementById("debug-bars").textContent) || 1;
-  console.log("Playing for", totalBars, "bars");
 
   // Create a sequence for each instrument
   referencePattern.forEach((row, instrumentIndex) => {
@@ -513,17 +522,14 @@ window.playReferencePattern = function () {
   // Start playback
   Tone.Transport.start();
   isPlaying = true;
-  document.getElementById("status").textContent =
-    "Playing reference pattern...";
 
-  // Stop after the calculated number of bars
+  // Stop after specified number of bars
   Tone.Transport.schedule(() => {
     Tone.Transport.stop();
     Tone.Transport.cancel();
     isPlaying = false;
-    document.getElementById("status").textContent =
-      "Reference playback complete";
-  }, `${totalBars}m`);
+    document.getElementById("status").textContent = "Playback complete";
+  }, `${numBars}m`);
 };
 
 // Update user pattern playback similarly
@@ -627,6 +633,124 @@ window.showSolution = function () {
     document.getElementById("status").textContent = "Showing solution pattern";
   }
 };
+
+// Add this function to extract unique bar patterns
+function extractUniqueBarPatterns(track, bpm) {
+  const patterns = [];
+  const uniquePatterns = [];
+  const uniquePatternStrings = new Set();
+
+  // Calculate how many steps are in one bar (16 steps per bar)
+  const stepsPerBar = 16;
+
+  // Initialize a pattern for one bar
+  const emptyBarPattern = Array(INSTRUMENTS.length)
+    .fill()
+    .map(() => Array(stepsPerBar).fill(false));
+
+  // Group notes by bars
+  track.notes.forEach((note) => {
+    const stepIndex = Math.floor((note.time * bpm * 16) / 60);
+    const barIndex = Math.floor(stepIndex / stepsPerBar);
+
+    // Create new bar pattern if needed
+    while (patterns.length <= barIndex) {
+      patterns.push(JSON.parse(JSON.stringify(emptyBarPattern)));
+    }
+
+    // Find instrument index
+    const instrumentIndex = INSTRUMENTS.findIndex(
+      (instr) => instr.midiNote === note.midi
+    );
+
+    if (instrumentIndex !== -1) {
+      const stepInBar = stepIndex % stepsPerBar;
+      patterns[barIndex][instrumentIndex][stepInBar] = true;
+    }
+  });
+
+  // Find unique patterns
+  patterns.forEach((pattern, index) => {
+    const patternString = JSON.stringify(pattern);
+    if (!uniquePatternStrings.has(patternString)) {
+      uniquePatternStrings.add(patternString);
+      uniquePatterns.push({
+        pattern: pattern,
+        originalBar: index + 1,
+        id: uniquePatterns.length + 1,
+      });
+    }
+  });
+
+  return uniquePatterns;
+}
+
+// Add this function to update the bar tabs UI
+function updateBarTabs() {
+  const barTabsContainer = document.getElementById("bar-tabs");
+  barTabsContainer.innerHTML = "";
+
+  uniqueBarPatterns.forEach((barPattern) => {
+    const tab = document.createElement("div");
+    tab.className = "bar-tab";
+    tab.textContent = `Bar ${barPattern.id}`;
+    tab.dataset.barId = barPattern.id;
+
+    tab.addEventListener("click", () => {
+      // Remove active class from all tabs
+      document
+        .querySelectorAll(".bar-tab")
+        .forEach((t) => t.classList.remove("active"));
+      // Add active class to clicked tab
+      tab.classList.add("active");
+      // Load this bar pattern
+      loadBarPattern(barPattern);
+    });
+
+    barTabsContainer.appendChild(tab);
+  });
+}
+
+// Add this function to load a specific bar pattern
+function loadBarPattern(barPattern) {
+  referencePattern = barPattern.pattern;
+  currentBarIndex = barPattern.id - 1;
+  createPianoRoll();
+  updatePianoRollUI();
+}
+
+// Add event listeners for the play buttons
+document.getElementById("playSelectedBar").addEventListener("click", () => {
+  if (isPlaying) {
+    Tone.Transport.stop();
+    Tone.Transport.cancel();
+    isPlaying = false;
+    document.getElementById("status").textContent = "Playback stopped";
+    return;
+  }
+
+  // Play only the current bar
+  playReferencePattern(1);
+  document.getElementById("status").textContent = `Playing Bar ${
+    currentBarIndex + 1
+  }`;
+});
+
+document.getElementById("playAllBars").addEventListener("click", () => {
+  if (isPlaying) {
+    Tone.Transport.stop();
+    Tone.Transport.cancel();
+    isPlaying = false;
+    document.getElementById("status").textContent = "Playback stopped";
+    return;
+  }
+
+  // Play the full loop
+  const totalBars =
+    parseInt(document.getElementById("debug-bars").textContent) || 1;
+  playReferencePattern(totalBars);
+  document.getElementById("status").textContent = "Playing full loop...";
+});
 
 // Initialize when the page loads
 document.addEventListener("DOMContentLoaded", init);
