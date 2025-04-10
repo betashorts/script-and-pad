@@ -66,10 +66,8 @@ let fullReferencePattern = []; // Store the complete pattern
 
 // Function to format beat name from filename (for sidebar)
 function formatBeatName(filename) {
-  // Remove .mid extension
-  const name = filename.replace(".mid", "");
-  // Split by underscore and capitalize each word
-  return name
+  return filename
+    .replace(".mid", "")
     .split("_")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
@@ -77,15 +75,8 @@ function formatBeatName(filename) {
 
 // Function to format instrument name from filename
 function formatInstrumentName(filename) {
-  // Remove file extension
-  let name = filename.replace(".wav", "");
-
-  // Remove the last number (MIDI note) if it exists
-  name = name.replace(/_\d+$/, "");
-
-  // If there's still a number (like _1_ in crash_cymbal_1_49), keep it
-  // but remove any remaining underscores and capitalize each word
-  return name
+  return filename
+    .replace(".wav", "")
     .split("_")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
@@ -155,21 +146,10 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     // Create a new Midi instance
     const midi = new Midi(arrayBuffer);
 
-    // Detailed logging for debugging
-    console.log("=== MIDI File Analysis ===");
-    console.log("File name:", beatFile);
-    console.log("Full MIDI header:", midi.header);
-    console.log("Time signature:", midi.header.timeSignatures);
-    console.log("Tempo data:", midi.header.tempos);
-
     // Get BPM from MIDI file
     let fileBPM = 120; // Default BPM
     if (midi.header && midi.header.tempos && midi.header.tempos.length > 0) {
       fileBPM = midi.header.tempos[0].bpm;
-      console.log("✓ Found BPM in MIDI file:", fileBPM);
-    } else {
-      console.log("⚠ No BPM found in MIDI file, using default:", fileBPM);
-      console.log("MIDI tempo data:", midi.header.tempos);
     }
     BPM = fileBPM;
     Tone.Transport.bpm.value = BPM;
@@ -177,16 +157,34 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
       BPM
     )} BPM`;
 
-    // Initialize patterns
+    // Get the first track
     const track = midi.tracks[0];
     const uniqueMidiNotes = new Set();
     let maxTime = 0;
 
-    // First pass: collect unique MIDI notes and calculate duration
+    // Initialize patterns
+    referencePattern = Array(INSTRUMENTS.length)
+      .fill()
+      .map(() => Array(STEPS).fill(false));
+    userPattern = Array(INSTRUMENTS.length)
+      .fill()
+      .map(() => Array(STEPS).fill(false));
+
+    // Process notes
     if (track && track.notes) {
       track.notes.forEach((note) => {
         uniqueMidiNotes.add(note.midi);
         maxTime = Math.max(maxTime, note.time + note.duration);
+
+        const instrumentIndex = INSTRUMENTS.findIndex(
+          (instr) => instr.midiNote === note.midi
+        );
+        if (instrumentIndex !== -1) {
+          const stepIndex = Math.floor((note.time * BPM * 16) / 60) % STEPS;
+          if (stepIndex >= 0 && stepIndex < STEPS) {
+            referencePattern[instrumentIndex][stepIndex] = true;
+          }
+        }
       });
     }
 
@@ -210,53 +208,7 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
         };
       });
 
-    console.log("Created instruments:", INSTRUMENTS);
-
-    // Initialize patterns with correct size
-    fullReferencePattern = Array(INSTRUMENTS.length)
-      .fill()
-      .map(() => Array(STEPS).fill(false));
-    referencePattern = Array(INSTRUMENTS.length)
-      .fill()
-      .map(() => Array(STEPS).fill(false));
-    userPattern = Array(INSTRUMENTS.length)
-      .fill()
-      .map(() => Array(STEPS).fill(false));
-
-    // Second pass: fill in the reference pattern
-    if (track && track.notes) {
-      track.notes.forEach((note) => {
-        const instrumentIndex = INSTRUMENTS.findIndex(
-          (instr) => instr.midiNote === note.midi
-        );
-        if (instrumentIndex !== -1) {
-          const stepIndex = Math.floor((note.time * BPM * 16) / 60) % STEPS;
-          if (stepIndex >= 0 && stepIndex < STEPS) {
-            fullReferencePattern[instrumentIndex][stepIndex] = true;
-          }
-        }
-      });
-    }
-
-    // Extract unique bar patterns
-    uniqueBarPatterns = extractUniqueBarPatterns(track, fileBPM);
-    console.log("Found unique bar patterns:", uniqueBarPatterns);
-
-    // Update the UI with bar tabs
-    updateBarTabs();
-
-    // Select the first bar pattern by default
-    if (uniqueBarPatterns.length > 0) {
-      loadBarPattern(uniqueBarPatterns[0]);
-      document.querySelector(".bar-tab").classList.add("active");
-    }
-
     const totalBars = Math.ceil((maxTime * fileBPM) / 240);
-    console.log("=== Duration Analysis ===");
-    console.log("Max time in seconds:", maxTime);
-    console.log("Calculated bars:", totalBars);
-    console.log("MIDI Notes found:", Array.from(uniqueMidiNotes));
-    console.log("=====================");
 
     // Update debug information
     document.getElementById("debug-bpm").textContent = Math.round(fileBPM);
@@ -271,7 +223,6 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
     // Update UI
     createPianoRoll();
     updatePianoRollUI();
-    console.log("Reference pattern loaded:", referencePattern);
 
     // Load samples for all instruments
     await Promise.all(
@@ -301,157 +252,12 @@ async function loadMIDIFile(beatFile = currentBeat.file) {
   }
 }
 
-// Create the sidebar beat list
-function createBeatList() {
-  const beatList = document.getElementById("beat-list");
-  beatList.innerHTML = "";
-
-  // Create category sections
-  Object.entries(BEAT_CATEGORIES).forEach(([category, beats]) => {
-    // Create category header
-    const categoryHeader = document.createElement("div");
-    categoryHeader.className = "category-header";
-    categoryHeader.textContent = category;
-    beatList.appendChild(categoryHeader);
-
-    // Create beats under this category
-    beats.forEach((beat) => {
-      const beatItem = document.createElement("div");
-      beatItem.className = `beat-item ${beat === currentBeat ? "active" : ""}`;
-      beatItem.innerHTML = `
-        <div class="beat-name">${beat.name}</div>
-        <div class="beat-description">${beat.description}</div>
-      `;
-
-      beatItem.addEventListener("click", async () => {
-        // Update current beat
-        currentBeat = beat;
-        document.getElementById("current-beat-name").textContent = beat.name;
-
-        // Update active state
-        document
-          .querySelectorAll(".beat-item")
-          .forEach((item) => item.classList.remove("active"));
-        beatItem.classList.add("active");
-
-        // Hide solution if it was showing
-        const solutionButton = document.querySelector(".btn.solution");
-        if (solutionButton.classList.contains("active")) {
-          // Remove solution highlighting from all cells
-          INSTRUMENTS.forEach((_, row) => {
-            for (let step = 0; step < STEPS; step++) {
-              const cell = document.querySelector(
-                `[data-row="${row}"][data-step="${step}"]`
-              );
-              cell.classList.remove("solution");
-            }
-          });
-          // Reset button state
-          solutionButton.classList.remove("active");
-          solutionButton.textContent = "Show Solution";
-        }
-
-        // Load the new MIDI file
-        await loadMIDIFile(beat.file);
-
-        // Reset user pattern
-        userPattern = Array(INSTRUMENTS.length)
-          .fill()
-          .map(() => Array(STEPS).fill(false));
-        updatePianoRollUI();
-      });
-
-      beatList.appendChild(beatItem);
-    });
-  });
-}
-
-// Update piano roll UI to reflect current patterns
-function updatePianoRollUI() {
-  // Update reference pattern visualization
-  INSTRUMENTS.forEach((_, row) => {
-    for (let step = 0; step < STEPS; step++) {
-      const cell = document.querySelector(
-        `[data-row="${row}"][data-step="${step}"]`
-      );
-      if (cell) {
-        cell.classList.toggle("active", userPattern[row][step]);
-      }
-    }
-  });
-}
-
-// Initialize Tone.js and load samples
-async function init() {
-  try {
-    // Create beat list
-    createBeatList();
-
-    // Set up initial audio context state
-    if (Tone.context.state !== "running") {
-      document.getElementById("status").textContent =
-        "Click anywhere to enable audio";
-
-      // Request audio context on user gesture
-      document.body.addEventListener(
-        "click",
-        async () => {
-          try {
-            await Tone.start();
-            document.getElementById("status").textContent =
-              "Audio enabled - Click grid cells to create your beat!";
-          } catch (error) {
-            console.error("Error starting audio context:", error);
-            document.getElementById("status").textContent =
-              "Error enabling audio. Please try again.";
-          }
-        },
-        { once: true }
-      );
-    }
-
-    // Load initial MIDI file
-    await loadMIDIFile();
-
-    // Set up Tone.js with the correct BPM
-    Tone.Transport.bpm.value = BPM;
-
-    // Load samples
-    await Promise.all(
-      INSTRUMENTS.map(async (instrument) => {
-        try {
-          players[instrument.midiNote] = new Tone.Player({
-            url: `../assets/sounds/${instrument.file}`,
-            autostart: false,
-          }).toDestination();
-
-          // Wait for the player to load
-          await players[instrument.midiNote].load();
-        } catch (error) {
-          console.error(`Error loading sample for ${instrument.name}:`, error);
-        }
-      })
-    );
-
-    // Update display
-    document.getElementById("current-beat-name").textContent = currentBeat.name;
-    document.getElementById("current-beat-bpm").textContent = `${Math.round(
-      BPM
-    )} BPM`;
-  } catch (error) {
-    console.error("Error initializing game:", error);
-    document.getElementById("status").textContent =
-      "Error loading game resources. Please refresh the page.";
-  }
-}
-
-// Create the piano roll grid UI
+// Create the piano roll grid
 function createPianoRoll() {
   const pianoRoll = document.getElementById("piano-roll");
-  pianoRoll.innerHTML = ""; // Clear existing content
+  pianoRoll.innerHTML = "";
 
-  // Create instrument labels and grid cells
-  INSTRUMENTS.forEach((instrument, row) => {
+  INSTRUMENTS.forEach((instrument, instrumentIndex) => {
     // Add instrument label
     const label = document.createElement("div");
     label.className = "instrument-label";
@@ -462,58 +268,60 @@ function createPianoRoll() {
     for (let step = 0; step < STEPS; step++) {
       const cell = document.createElement("div");
       cell.className = "grid-cell";
-      cell.dataset.row = row;
+      cell.dataset.instrumentIndex = instrumentIndex;
       cell.dataset.step = step;
 
-      // Add click handler
-      cell.addEventListener("click", () => toggleNote(row, step));
-
-      // Add visual markers for beats
+      // Add beat markers (every 4th step)
       if (step % 4 === 0) {
-        cell.style.borderLeft = "2px solid #666";
+        cell.classList.add("beat-marker");
       }
+
+      cell.addEventListener("click", () => {
+        userPattern[instrumentIndex][step] =
+          !userPattern[instrumentIndex][step];
+        updatePianoRollUI();
+      });
 
       pianoRoll.appendChild(cell);
     }
   });
 }
 
-// Toggle note on/off and play sound
-function toggleNote(row, step) {
-  userPattern[row][step] = !userPattern[row][step];
+// Update the piano roll UI
+function updatePianoRollUI() {
+  const cells = document.querySelectorAll(".grid-cell");
+  cells.forEach((cell) => {
+    const instrumentIndex = parseInt(cell.dataset.instrumentIndex);
+    const step = parseInt(cell.dataset.step);
 
-  // Update visual state
-  const cell = document.querySelector(
-    `[data-row="${row}"][data-step="${step}"]`
-  );
-  cell.classList.toggle("active", userPattern[row][step]);
+    // Clear previous state
+    cell.classList.remove("active", "reference", "correct", "incorrect");
 
-  // Play sound immediately for feedback
-  if (userPattern[row][step]) {
-    const instrument = INSTRUMENTS[row];
-    if (players[instrument.midiNote].loaded) {
-      players[instrument.midiNote].start();
+    // Add appropriate classes
+    if (userPattern[instrumentIndex][step]) {
+      cell.classList.add("active");
     }
-  }
+    if (referencePattern[instrumentIndex][step]) {
+      cell.classList.add("reference");
+    }
+  });
 }
 
-// Update playback functions to handle full duration
-function playReferencePattern(numBars = 1, patternToPlay = null) {
+// Play the reference pattern
+function playReferencePattern() {
   if (isPlaying) {
     Tone.Transport.stop();
     Tone.Transport.cancel();
     isPlaying = false;
+    document.getElementById("status").textContent = "Playback stopped";
     return;
   }
 
   // Clear any existing events
   Tone.Transport.cancel();
 
-  // Use the provided pattern or fall back to the current reference pattern
-  const pattern = patternToPlay || referencePattern;
-
   // Create a sequence for each instrument
-  pattern.forEach((row, instrumentIndex) => {
+  referencePattern.forEach((row, instrumentIndex) => {
     const instrument = INSTRUMENTS[instrumentIndex];
     new Tone.Sequence(
       (time, step) => {
@@ -529,18 +337,21 @@ function playReferencePattern(numBars = 1, patternToPlay = null) {
   // Start playback
   Tone.Transport.start();
   isPlaying = true;
+  document.getElementById("status").textContent =
+    "Playing reference pattern...";
 
-  // Stop after specified number of bars
+  // Stop after one bar
   Tone.Transport.schedule(() => {
     Tone.Transport.stop();
     Tone.Transport.cancel();
     isPlaying = false;
-    document.getElementById("status").textContent = "Playback complete";
-  }, `${numBars}m`);
+    document.getElementById("status").textContent =
+      "Reference playback complete";
+  }, "1m");
 }
 
-// Update user pattern playback similarly
-window.playUserPattern = function () {
+// Play the user's pattern
+function playUserPattern() {
   if (isPlaying) {
     Tone.Transport.stop();
     Tone.Transport.cancel();
@@ -551,11 +362,6 @@ window.playUserPattern = function () {
 
   // Clear any existing events
   Tone.Transport.cancel();
-
-  // Calculate number of bars based on the debug info
-  const totalBars =
-    parseInt(document.getElementById("debug-bars").textContent) || 1;
-  console.log("Playing for", totalBars, "bars");
 
   // Create a sequence for each instrument
   userPattern.forEach((row, instrumentIndex) => {
@@ -576,188 +382,78 @@ window.playUserPattern = function () {
   isPlaying = true;
   document.getElementById("status").textContent = "Playing your pattern...";
 
-  // Stop after the calculated number of bars
+  // Stop after one bar
   Tone.Transport.schedule(() => {
     Tone.Transport.stop();
     Tone.Transport.cancel();
     isPlaying = false;
     document.getElementById("status").textContent =
       "Your pattern playback complete";
-  }, `${totalBars}m`);
-};
+  }, "1m");
+}
 
-// Make functions globally available
-window.checkUserAccuracy = function () {
-  let totalSteps = STEPS * INSTRUMENTS.length;
-  let correctSteps = 0;
+// Check user's accuracy
+function checkUserAccuracy() {
+  let correct = 0;
+  let total = 0;
 
-  for (let i = 0; i < INSTRUMENTS.length; i++) {
-    for (let step = 0; step < STEPS; step++) {
-      if (userPattern[i][step] === referencePattern[i][step]) {
-        correctSteps++;
-      }
-    }
-  }
-
-  const accuracy = (correctSteps / totalSteps) * 100;
-  document.getElementById("status").textContent = `Accuracy: ${accuracy.toFixed(
-    1
-  )}%`;
-};
-
-// Add show solution functionality
-window.showSolution = function () {
-  const solutionButton = document.querySelector(".btn.solution");
-  const isShowingSolution = solutionButton.classList.contains("active");
-
-  if (isShowingSolution) {
-    // Hide solution
-    INSTRUMENTS.forEach((_, row) => {
-      for (let step = 0; step < STEPS; step++) {
-        const cell = document.querySelector(
-          `[data-row="${row}"][data-step="${step}"]`
-        );
-        cell.classList.remove("solution");
-      }
-    });
-    solutionButton.classList.remove("active");
-    solutionButton.textContent = "Show Solution";
-    document.getElementById("status").textContent = "Solution hidden";
-  } else {
-    // Show solution
-    INSTRUMENTS.forEach((_, row) => {
-      for (let step = 0; step < STEPS; step++) {
-        const cell = document.querySelector(
-          `[data-row="${row}"][data-step="${step}"]`
-        );
-        if (referencePattern[row][step]) {
-          cell.classList.add("solution");
+  referencePattern.forEach((row, instrumentIndex) => {
+    row.forEach((cell, step) => {
+      if (cell) {
+        total++;
+        if (userPattern[instrumentIndex][step]) {
+          correct++;
         }
       }
     });
-    solutionButton.classList.add("active");
-    solutionButton.textContent = "Hide Solution";
-    document.getElementById("status").textContent = "Showing solution pattern";
-  }
-};
-
-// Add this function to extract unique bar patterns
-function extractUniqueBarPatterns(track, bpm) {
-  const patterns = [];
-  const uniquePatterns = [];
-  const uniquePatternStrings = new Set();
-
-  // Calculate how many steps are in one bar (16 steps per bar)
-  const stepsPerBar = 16;
-
-  // Initialize a pattern for one bar
-  const emptyBarPattern = Array(INSTRUMENTS.length)
-    .fill()
-    .map(() => Array(stepsPerBar).fill(false));
-
-  // Group notes by bars
-  track.notes.forEach((note) => {
-    const stepIndex = Math.floor((note.time * bpm * 16) / 60);
-    const barIndex = Math.floor(stepIndex / stepsPerBar);
-
-    // Create new bar pattern if needed
-    while (patterns.length <= barIndex) {
-      patterns.push(JSON.parse(JSON.stringify(emptyBarPattern)));
-    }
-
-    // Find instrument index
-    const instrumentIndex = INSTRUMENTS.findIndex(
-      (instr) => instr.midiNote === note.midi
-    );
-
-    if (instrumentIndex !== -1) {
-      const stepInBar = stepIndex % stepsPerBar;
-      patterns[barIndex][instrumentIndex][stepInBar] = true;
-    }
   });
 
-  // Find unique patterns
-  patterns.forEach((pattern, index) => {
-    const patternString = JSON.stringify(pattern);
-    if (!uniquePatternStrings.has(patternString)) {
-      uniquePatternStrings.add(patternString);
-      uniquePatterns.push({
-        pattern: pattern,
-        originalBar: index + 1,
-        id: uniquePatterns.length + 1,
-      });
-    }
-  });
-
-  return uniquePatterns;
+  const accuracy = total > 0 ? (correct / total) * 100 : 0;
+  document.getElementById("status").textContent = `Accuracy: ${accuracy.toFixed(
+    1
+  )}% (${correct}/${total} correct notes)`;
 }
 
-// Add this function to update the bar tabs UI
-function updateBarTabs() {
-  const barTabsContainer = document.getElementById("bar-tabs");
-  barTabsContainer.innerHTML = "";
+// Toggle solution visibility
+function toggleSolution() {
+  const cells = document.querySelectorAll(".grid-cell");
+  cells.forEach((cell) => {
+    cell.classList.toggle("show-solution");
+  });
+}
 
-  uniqueBarPatterns.forEach((barPattern) => {
-    const tab = document.createElement("div");
-    tab.className = "bar-tab";
-    tab.textContent = `Bar ${barPattern.id}`;
-    tab.dataset.barId = barPattern.id;
+// Create beat list in sidebar
+function createBeatList() {
+  const beatList = document.getElementById("beat-list");
+  beatList.innerHTML = "";
 
-    tab.addEventListener("click", () => {
-      // Remove active class from all tabs
-      document
-        .querySelectorAll(".bar-tab")
-        .forEach((t) => t.classList.remove("active"));
-      // Add active class to clicked tab
-      tab.classList.add("active");
-      // Load this bar pattern
-      loadBarPattern(barPattern);
+  AVAILABLE_BEATS.forEach((beat) => {
+    const beatItem = document.createElement("div");
+    beatItem.className = "beat-item";
+    beatItem.textContent = beat.name;
+    beatItem.addEventListener("click", () => {
+      currentBeat = beat;
+      document.getElementById("current-beat-name").textContent = beat.name;
+      loadMIDIFile(beat.file);
     });
-
-    barTabsContainer.appendChild(tab);
+    beatList.appendChild(beatItem);
   });
 }
 
-// Add this function to load a specific bar pattern
-function loadBarPattern(barPattern) {
-  referencePattern = barPattern.pattern;
-  currentBarIndex = barPattern.id - 1;
-  createPianoRoll();
-  updatePianoRollUI();
-}
-
-// Update the play button event listeners
-document.getElementById("playSelectedBar").addEventListener("click", () => {
-  if (isPlaying) {
-    Tone.Transport.stop();
-    Tone.Transport.cancel();
-    isPlaying = false;
-    document.getElementById("status").textContent = "Playback stopped";
-    return;
-  }
-
-  // Play only the current bar
-  playReferencePattern(1);
-  document.getElementById("status").textContent = `Playing Bar ${
-    currentBarIndex + 1
-  }`;
-});
-
-document.getElementById("playAllBars").addEventListener("click", () => {
-  if (isPlaying) {
-    Tone.Transport.stop();
-    Tone.Transport.cancel();
-    isPlaying = false;
-    document.getElementById("status").textContent = "Playback stopped";
-    return;
-  }
-
-  // Play the full loop using the complete pattern
-  const totalBars =
-    parseInt(document.getElementById("debug-bars").textContent) || 1;
-  playReferencePattern(totalBars, fullReferencePattern);
-  document.getElementById("status").textContent = "Playing full loop...";
-});
+// Add event listeners
+document
+  .getElementById("playReference")
+  .addEventListener("click", playReferencePattern);
+document.getElementById("playUser").addEventListener("click", playUserPattern);
+document
+  .getElementById("checkAccuracy")
+  .addEventListener("click", checkUserAccuracy);
+document
+  .getElementById("toggleSolution")
+  .addEventListener("click", toggleSolution);
 
 // Initialize when the page loads
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", () => {
+  createBeatList();
+  loadMIDIFile();
+});

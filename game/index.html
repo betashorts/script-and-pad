@@ -8,7 +8,7 @@ title: Drum Loop Game
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drum Loop Game</title>
+    <title>Drum Loop Recreation Game</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,8 +19,8 @@ title: Drum Loop Game
     <link rel="stylesheet" href="../assets/css/game.css">
     
     <!-- JavaScript Dependencies -->
-    <script src="https://unpkg.com/@tonejs/midi"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tonejs/midi@2.0.28/build/Midi.min.js"></script>
     
     <!-- Game Logic -->
     <script src="../assets/js/game.js" defer></script>
@@ -29,9 +29,7 @@ title: Drum Loop Game
   <div class="container">
     <div class="sidebar">
       <h2>Drum Beats</h2>
-      <div class="beat-list" id="beat-list">
-        <!-- Beat list will be populated by JavaScript -->
-      </div>
+      <div id="beat-list"></div>
     </div>
     
     <div class="main-content">
@@ -39,39 +37,25 @@ title: Drum Loop Game
       <div class="beat-info">
         <h2 id="current-beat-name">Basic Rock Beat</h2>
         <div id="current-beat-bpm">120 BPM</div>
-        <div id="debug-info" class="debug-info">
-          <div>BPM: <span id="debug-bpm">-</span></div>
-          <div>Bars: <span id="debug-bars">-</span></div>
-          <div>MIDI Notes: <span id="debug-midi-notes">-</span></div>
-          <div>Loop Duration: <span id="debug-duration">-</span> seconds</div>
-        </div>
-      </div>
-
-      <div class="bar-tabs-container">
-        <div class="bar-tabs-header">
-          <h3>Unique Bar Patterns</h3>
-          <div class="bar-tabs-note">Note: These are unique patterns found in the loop, not the exact bar positions.</div>
-        </div>
-        <div id="bar-tabs"></div>
-        <div class="bar-controls">
-          <button id="playSelectedBar" class="btn">Play Selected Bar</button>
-          <button id="playAllBars" class="btn">Play Full Loop</button>
-        </div>
-      </div>
-
-      <div class="controls">
-        <button class="btn primary" onclick="playReferencePattern()">Play Reference Beat</button>
       </div>
 
       <div id="piano-roll"></div>
 
       <div class="controls">
-        <button class="btn" onclick="playUserPattern()">Play Your Version</button>
-        <button class="btn" onclick="checkUserAccuracy()">Check Your Accuracy</button>
-        <button class="btn solution" onclick="showSolution()">Show Solution</button>
+        <button id="playReference" class="btn">Play Reference Beat</button>
+        <button id="playUser" class="btn">Play Your Version</button>
+        <button id="checkAccuracy" class="btn">Check Accuracy</button>
+        <button id="toggleSolution" class="btn">Show/Hide Solution</button>
       </div>
 
-      <div id="status" class="status"></div>
+      <div id="status" class="status">Ready to play!</div>
+
+      <div id="debug-info" class="debug-info">
+        <div>BPM: <span id="debug-bpm">-</span></div>
+        <div>Bars: <span id="debug-bars">-</span></div>
+        <div>Duration: <span id="debug-duration">-</span>s</div>
+        <div>MIDI Notes: <span id="debug-midi-notes">-</span></div>
+      </div>
     </div>
   </div>
 </body>
