@@ -150,3 +150,27 @@
 .bar-pattern .piano-roll-row {
   height: 40px;
 }
+
+.bar-pattern h3 button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s;
+}
+
+.bar-pattern h3 button:hover {
+  opacity: 0.9;
+}
+
+.bar-pattern h3 button:first-of-type {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.bar-pattern h3 .download-btn {
+  background-color: #28a745;
+  color: white;
+}

@@ -112,6 +112,58 @@ async function loadSamples() {
   }
 }
 
+// Function to create and download MIDI file for a single bar
+function downloadBar(barIndex) {
+  try {
+    const pattern = window.barPatterns[barIndex];
+    if (!pattern) {
+      console.error("No pattern found for bar", barIndex);
+      return;
+    }
+
+    // Create a new MIDI file
+    const midi = new Midi();
+
+    // Get BPM from display
+    const bpm =
+      parseInt(document.getElementById("bpm-display").textContent) || 120;
+    midi.header.setTempo(bpm);
+
+    // Create a track
+    const track = midi.addTrack();
+
+    // Add notes for each instrument
+    pattern.forEach((row, instrumentIndex) => {
+      const instrument = INSTRUMENTS[instrumentIndex];
+      if (!instrument) return;
+
+      row.forEach((isActive, step) => {
+        if (isActive) {
+          track.addNote({
+            midi: instrument.midiNote,
+            time: step * 0.25, // Each step is a 16th note (0.25 beats)
+            duration: 0.25, // Duration of one step
+            velocity: 0.8, // Default velocity
+          });
+        }
+      });
+    });
+
+    // Convert to blob and download
+    const blob = new Blob([midi.toArray()], { type: "audio/midi" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `bar_${barIndex + 1}.mid`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error("Error downloading bar:", error);
+  }
+}
+
 // Create piano roll for a specific bar
 function createPianoRoll(barIndex, pattern) {
   const container = document.createElement("div");
@@ -120,7 +172,8 @@ function createPianoRoll(barIndex, pattern) {
   const header = document.createElement("h3");
   header.innerHTML = `Bar ${
     barIndex + 1
-  } <button onclick="playBar(${barIndex})">Play Bar</button>`;
+  } <button onclick="playBar(${barIndex})">Play Bar</button>
+    <button onclick="downloadBar(${barIndex})" class="download-btn">Download Bar</button>`;
   container.appendChild(header);
 
   const pianoRoll = document.createElement("div");
