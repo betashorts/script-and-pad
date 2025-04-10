@@ -129,6 +129,19 @@ function downloadBar(barIndex) {
       parseInt(document.getElementById("bpm-display").textContent) || 120;
     midi.header.setTempo(bpm);
 
+    // Set time signature (4/4)
+    const timeSignature = document
+      .getElementById("time-signature-display")
+      .textContent.split("/");
+    midi.header.timeSignatures.push({
+      ticks: 0,
+      timeSignature: [parseInt(timeSignature[0]), parseInt(timeSignature[1])],
+    });
+
+    // Use the source MIDI file's PPQ value from the original file
+    // This value is stored when processing the original MIDI file
+    midi.header.ppq = window.sourceMidiPPQ || 480; // Fallback to 480 if not set
+
     // Create a track
     const track = midi.addTrack();
 
@@ -139,10 +152,14 @@ function downloadBar(barIndex) {
 
       row.forEach((isActive, step) => {
         if (isActive) {
+          // Calculate precise timing using the source PPQ
+          const startTicks = Math.round((step * midi.header.ppq) / 4);
+          const durationTicks = Math.round(midi.header.ppq / 4); // Duration of one 16th note
+
           track.addNote({
             midi: instrument.midiNote,
-            time: step * 0.25, // Each step is a 16th note (0.25 beats)
-            duration: 0.25, // Duration of one step
+            ticks: startTicks,
+            durationTicks: durationTicks,
             velocity: 0.8, // Default velocity
           });
         }
@@ -310,6 +327,10 @@ async function processMidiFile(file) {
 
     const arrayBuffer = await file.arrayBuffer();
     const midi = new Midi(arrayBuffer);
+
+    // Store the source MIDI file's PPQ value for later use
+    window.sourceMidiPPQ = midi.header.ppq;
+    console.log("Source MIDI PPQ:", window.sourceMidiPPQ);
 
     // Update MIDI info display
     document.getElementById("bpm-display").textContent = Math.round(
