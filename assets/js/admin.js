@@ -158,43 +158,73 @@ function createPianoRoll(barIndex, pattern) {
 }
 
 // Play a specific bar
-function playBar(barIndex) {
-  if (isPlaying) {
-    Tone.Transport.stop();
+async function playBar(barIndex) {
+  try {
+    // If already playing, stop current playback
+    if (isPlaying) {
+      Tone.Transport.stop();
+      Tone.Transport.cancel();
+      isPlaying = false;
+      return;
+    }
+
+    // Initialize Tone.js if needed
+    await Tone.start();
+
+    // Get the pattern for this bar
+    const pattern = window.barPatterns[barIndex];
+    if (!pattern) {
+      console.error("No pattern found for bar", barIndex);
+      return;
+    }
+
+    // Set the BPM from the display
+    const bpm =
+      parseInt(document.getElementById("bpm-display").textContent) || 120;
+    Tone.Transport.bpm.value = bpm;
+
+    // Clear any existing events
     Tone.Transport.cancel();
+
+    // Create a sequence for each instrument that has notes in this pattern
+    pattern.forEach((row, instrumentIndex) => {
+      // Skip if instrument has no active notes in this pattern
+      if (!row.some((step) => step === true)) return;
+
+      const instrument = INSTRUMENTS[instrumentIndex];
+      if (!instrument || !players[instrument.midiNote]) return;
+
+      const seq = new Tone.Sequence(
+        (time, step) => {
+          if (row[step] && players[instrument.midiNote]?.loaded) {
+            players[instrument.midiNote].start(time);
+          }
+        },
+        [...Array(STEPS).keys()],
+        "16n"
+      ).start(0);
+
+      // Stop sequence after one bar
+      Tone.Transport.schedule(() => {
+        seq.stop();
+        seq.dispose();
+      }, "1m");
+    });
+
+    // Start playback
+    Tone.Transport.start();
+    isPlaying = true;
+
+    // Stop after one bar
+    Tone.Transport.schedule(() => {
+      Tone.Transport.stop();
+      Tone.Transport.cancel();
+      isPlaying = false;
+    }, "1m");
+  } catch (error) {
+    console.error("Error in playBar:", error);
     isPlaying = false;
-    return;
   }
-
-  const pattern = window.barPatterns[barIndex];
-
-  // Clear any existing events
-  Tone.Transport.cancel();
-
-  // Create a sequence for each instrument
-  pattern.forEach((row, instrumentIndex) => {
-    const instrument = INSTRUMENTS[instrumentIndex];
-    new Tone.Sequence(
-      (time, step) => {
-        if (row[step] && players[instrument.midiNote]?.loaded) {
-          players[instrument.midiNote].start(time);
-        }
-      },
-      [...Array(STEPS).keys()],
-      "16n"
-    ).start(0);
-  });
-
-  // Start playback
-  Tone.Transport.start();
-  isPlaying = true;
-
-  // Stop after one bar
-  Tone.Transport.schedule(() => {
-    Tone.Transport.stop();
-    Tone.Transport.cancel();
-    isPlaying = false;
-  }, "1m");
 }
 
 // Process MIDI file
