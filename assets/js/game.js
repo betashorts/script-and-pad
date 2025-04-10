@@ -164,6 +164,7 @@ async function loadMIDIFile(beatFile = AVAILABLE_BEATS[0].file) {
     INSTRUMENTS = Array.from(uniqueNotes).map((note) => ({
       midiNote: note,
       soundFile: findSoundFileForMidiNote(note),
+      name: formatInstrumentName(findSoundFileForMidiNote(note)),
       sample: null, // Will be loaded later
     }));
 
