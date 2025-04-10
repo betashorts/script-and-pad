@@ -1,5 +1,5 @@
 let INSTRUMENTS = [];
-let MIDI_MAPPING = null;
+let MIDI_MAPPING = null; // Loaded from Midi mapping json file
 let players = {};
 let isPlaying = false;
 const STEPS = 16;
