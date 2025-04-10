@@ -105,13 +105,19 @@
 
 /* Piano roll specific styles */
 .bar-pattern .piano-roll {
-  display: grid;
-  grid-template-columns: 150px repeat(16, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 2px;
   background: #333;
   padding: 4px;
   border-radius: 4px;
   margin-top: 10px;
+}
+
+.bar-pattern .piano-roll-row {
+  display: grid;
+  grid-template-columns: 150px repeat(16, 1fr);
+  gap: 2px;
 }
 
 .bar-pattern .instrument-label {
@@ -121,6 +127,7 @@
   display: flex;
   align-items: center;
   font-size: 0.9em;
+  height: 100%;
 }
 
 .bar-pattern .grid-cell {
@@ -139,7 +146,7 @@
   border-left: 2px solid #444;
 }
 
-/* Make sure each row spans full width */
-.bar-pattern .piano-roll > * {
+/* Make sure each row has consistent height */
+.bar-pattern .piano-roll-row {
   height: 40px;
 }

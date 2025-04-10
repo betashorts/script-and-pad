@@ -116,19 +116,21 @@ function createPianoRoll(barIndex, pattern) {
     INSTRUMENTS.findIndex((i) => i.midiNote === inst.midiNote)
   );
 
+  // Create a row for each instrument
   usedInstruments.forEach((instrument, displayIndex) => {
     const originalIndex = instrumentIndices[displayIndex];
+    const row = document.createElement("div");
+    row.className = "piano-roll-row";
 
     // Add instrument label
     const label = document.createElement("div");
     label.className = "instrument-label";
-    // Use the mapped name from the game if available
     const instrumentName =
       MIDI_MAPPING && MIDI_MAPPING[instrument.midiNote]
         ? MIDI_MAPPING[instrument.midiNote].split(".")[0].replace(/_/g, " ")
         : `Note ${instrument.midiNote}`;
     label.textContent = instrumentName;
-    pianoRoll.appendChild(label);
+    row.appendChild(label);
 
     // Add grid cells for this instrument
     for (let step = 0; step < STEPS; step++) {
@@ -145,8 +147,10 @@ function createPianoRoll(barIndex, pattern) {
         cell.classList.add("active");
       }
 
-      pianoRoll.appendChild(cell);
+      row.appendChild(cell);
     }
+
+    pianoRoll.appendChild(row);
   });
 
   container.appendChild(pianoRoll);
