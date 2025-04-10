@@ -245,6 +245,12 @@ function createPianoRoll() {
   const pianoRoll = document.getElementById("piano-roll");
   pianoRoll.innerHTML = "";
 
+  // Initialize userPattern when creating piano roll
+  userPattern = Array(INSTRUMENTS.length)
+    .fill()
+    .map(() => Array(STEPS).fill(false));
+  console.log("Initialized userPattern:", userPattern);
+
   INSTRUMENTS.forEach((instrument, instrumentIndex) => {
     // Add instrument label
     const label = document.createElement("div");
@@ -265,18 +271,58 @@ function createPianoRoll() {
       }
 
       cell.addEventListener("click", () => {
+        console.log(
+          `Grid cell clicked - Instrument: ${instrument.name}, Step: ${step}`
+        );
+        console.log(
+          `Current state before click: ${userPattern[instrumentIndex][step]}`
+        );
+
+        // Toggle the pattern
         userPattern[instrumentIndex][step] =
           !userPattern[instrumentIndex][step];
+
+        console.log(
+          `New state after click: ${userPattern[instrumentIndex][step]}`
+        );
+        console.log(`Attempting to play note: ${instrument.midiNote}`);
+
+        // Play the sound if turning on
+        if (userPattern[instrumentIndex][step]) {
+          try {
+            const player = players[instrument.midiNote];
+            console.log("Player object:", player);
+            if (player) {
+              console.log("Starting player...");
+              player.start();
+            } else {
+              console.warn(
+                `No player found for MIDI note ${instrument.midiNote}`
+              );
+            }
+          } catch (error) {
+            console.error("Error playing note:", error);
+          }
+        }
+
+        // Update UI
         updatePianoRollUI();
+        console.log("UI updated");
       });
 
       pianoRoll.appendChild(cell);
     }
   });
+
+  console.log(
+    "Piano roll created with instruments:",
+    INSTRUMENTS.map((i) => i.name)
+  );
 }
 
 // Update the piano roll UI
 function updatePianoRollUI() {
+  console.log("Updating piano roll UI");
   const cells = document.querySelectorAll(".grid-cell");
   cells.forEach((cell) => {
     const instrumentIndex = parseInt(cell.dataset.instrumentIndex);
@@ -293,6 +339,7 @@ function updatePianoRollUI() {
       cell.classList.add("reference");
     }
   });
+  console.log("Piano roll UI update complete");
 }
 
 // Play the reference pattern
