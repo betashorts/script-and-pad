@@ -271,7 +271,23 @@ function createPianoRoll() {
     .map(() => Array(STEPS).fill(false));
   console.log("Initialized userPattern:", userPattern);
 
-  INSTRUMENTS.forEach((instrument, instrumentIndex) => {
+  // Filter out instruments that aren't used in the reference pattern
+  const usedInstruments = INSTRUMENTS.filter((_, index) => {
+    // Check if this instrument has any active steps in the reference pattern
+    return referencePattern[index].some((step) => step === true);
+  });
+
+  console.log(
+    "Filtered instruments:",
+    usedInstruments.map((i) => i.name)
+  );
+
+  usedInstruments.forEach((instrument, filteredIndex) => {
+    // Find original index in INSTRUMENTS array
+    const originalIndex = INSTRUMENTS.findIndex(
+      (i) => i.midiNote === instrument.midiNote
+    );
+
     // Add instrument label
     const label = document.createElement("div");
     label.className = "instrument-label";
@@ -282,7 +298,8 @@ function createPianoRoll() {
     for (let step = 0; step < STEPS; step++) {
       const cell = document.createElement("div");
       cell.className = "grid-cell";
-      cell.dataset.instrumentIndex = instrumentIndex;
+      // Store the original instrument index for pattern updates
+      cell.dataset.instrumentIndex = originalIndex;
       cell.dataset.step = step;
 
       // Add beat markers (every 4th step)
@@ -295,20 +312,19 @@ function createPianoRoll() {
           `Grid cell clicked - Instrument: ${instrument.name}, Step: ${step}`
         );
         console.log(
-          `Current state before click: ${userPattern[instrumentIndex][step]}`
+          `Current state before click: ${userPattern[originalIndex][step]}`
         );
 
-        // Toggle the pattern
-        userPattern[instrumentIndex][step] =
-          !userPattern[instrumentIndex][step];
+        // Toggle the pattern using original index
+        userPattern[originalIndex][step] = !userPattern[originalIndex][step];
 
         console.log(
-          `New state after click: ${userPattern[instrumentIndex][step]}`
+          `New state after click: ${userPattern[originalIndex][step]}`
         );
         console.log(`Attempting to play note: ${instrument.midiNote}`);
 
         // Play the sound if turning on
-        if (userPattern[instrumentIndex][step]) {
+        if (userPattern[originalIndex][step]) {
           try {
             const player = players[instrument.midiNote];
             console.log("Player object:", player);
@@ -335,8 +351,8 @@ function createPianoRoll() {
   });
 
   console.log(
-    "Piano roll created with instruments:",
-    INSTRUMENTS.map((i) => i.name)
+    "Piano roll created with active instruments:",
+    usedInstruments.map((i) => i.name)
   );
 }
 
