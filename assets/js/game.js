@@ -440,20 +440,66 @@ function createBeatList() {
   });
 }
 
-// Add event listeners
-document
-  .getElementById("playReference")
-  .addEventListener("click", playReferencePattern);
-document.getElementById("playUser").addEventListener("click", playUserPattern);
-document
-  .getElementById("checkAccuracy")
-  .addEventListener("click", checkUserAccuracy);
-document
-  .getElementById("toggleSolution")
-  .addEventListener("click", toggleSolution);
-
 // Initialize when the page loads
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  // Create beat list first
   createBeatList();
-  loadMIDIFile();
+
+  // Add event listeners only after DOM is loaded
+  document
+    .getElementById("playReference")
+    ?.addEventListener("click", async () => {
+      // Ensure audio context is started
+      if (Tone.context.state !== "running") {
+        await Tone.start();
+      }
+      playReferencePattern();
+    });
+
+  document.getElementById("playUser")?.addEventListener("click", async () => {
+    // Ensure audio context is started
+    if (Tone.context.state !== "running") {
+      await Tone.start();
+    }
+    playUserPattern();
+  });
+
+  document
+    .getElementById("checkAccuracy")
+    ?.addEventListener("click", checkUserAccuracy);
+  document
+    .getElementById("toggleSolution")
+    ?.addEventListener("click", toggleSolution);
+
+  // Set up initial audio context state
+  document.getElementById("status").textContent =
+    "Click any button to enable audio";
+
+  // Add a click handler to the entire document to initialize audio
+  document.body.addEventListener(
+    "click",
+    async () => {
+      try {
+        if (Tone.context.state !== "running") {
+          await Tone.start();
+          document.getElementById("status").textContent =
+            "Audio enabled - Click grid cells to create your beat!";
+        }
+      } catch (error) {
+        console.error("Error starting audio context:", error);
+        document.getElementById("status").textContent =
+          "Error enabling audio. Please try again.";
+      }
+    },
+    { once: true }
+  ); // Only handle the first click
+
+  // Load initial MIDI file
+  try {
+    await loadMIDIFile();
+  } catch (error) {
+    console.error("Error loading initial MIDI file:", error);
+    document.getElementById("status").textContent =
+      "Error loading beat. Please try refreshing the page.";
+  }
 });
