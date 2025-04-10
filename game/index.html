@@ -19,7 +19,7 @@ title: Drum Loop Game
     <link rel="stylesheet" href="../assets/css/game.css">
     
     <!-- JavaScript Dependencies -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+    <script src="../assets/js/tone.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tonejs/midi@2.0.28/build/Midi.min.js"></script>
     
     <!-- Game Logic -->
@@ -36,7 +36,7 @@ title: Drum Loop Game
       <h1>Recreate This Drum Beat</h1>
       <div class="beat-info">
         <h2 id="current-beat-name">Basic Rock Beat</h2>
-        <div id="current-beat-bpm">120 BPM</div>
+        <div id="current-beat-bpm">100 BPM</div>
       </div>
 
       <div id="piano-roll"></div>
@@ -52,6 +52,7 @@ title: Drum Loop Game
 
       <div id="debug-info" class="debug-info">
         <div>BPM: <span id="debug-bpm">-</span></div>
+        <div>Time Signature: <span id="debug-time-signature">-</span></div>
         <div>Bars: <span id="debug-bars">-</span></div>
         <div>Duration: <span id="debug-duration">-</span>s</div>
         <div>MIDI Notes: <span id="debug-midi-notes">-</span></div>
