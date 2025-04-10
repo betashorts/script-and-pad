@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drum Pattern Admin</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/game.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    
+    <!-- JavaScript Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.8.25/Tone.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tonejs/midi@2.0.28/build/Midi.min.js"></script>
+    
+    <!-- Admin Logic -->
+    <script src="../assets/js/admin.js" defer></script>
+</head>
+<body>
+    <div class="container admin-container">
+        <h1>MIDI Pattern Analysis</h1>
+        
+        <!-- File Upload Section -->
+        <div class="upload-section">
+            <input type="file" id="midiFileInput" accept=".mid,.midi">
+            <button id="uploadButton">Analyze MIDI</button>
+        </div>
+
+        <!-- MIDI Info Display -->
+        <div class="midi-info">
+            <h2>MIDI File Information</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <label>BPM:</label>
+                    <span id="bpm-display">-</span>
+                </div>
+                <div class="info-item">
+                    <label>Time Signature:</label>
+                    <span id="time-signature-display">-</span>
+                </div>
+                <div class="info-item">
+                    <label>Total Bars:</label>
+                    <span id="total-bars-display">-</span>
+                </div>
+                <div class="info-item">
+                    <label>Duration:</label>
+                    <span id="duration-display">-</span>
+                </div>
+                <div class="info-item">
+                    <label>MIDI Notes:</label>
+                    <span id="midi-notes-display">-</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patterns Display -->
+        <div class="patterns-container">
+            <h2>Bar Patterns</h2>
+            <div id="bar-patterns"></div>
+        </div>
+    </div>
+</body>
+</html> 
