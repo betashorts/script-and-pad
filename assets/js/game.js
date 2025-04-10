@@ -419,12 +419,29 @@ function createBeatList() {
 async function loadSamples() {
   try {
     // Clear existing players
-    Object.values(players).forEach((player) => {
-      if (player && typeof player.dispose === "function") {
-        player.dispose();
-      }
-    });
     players = {};
+
+    // Ensure AudioContext is started with user interaction
+    const startAudioContext = async () => {
+      try {
+        await Tone.start();
+        console.log("Audio context started successfully");
+      } catch (error) {
+        console.error("Failed to start audio context:", error);
+        document.getElementById("status").textContent =
+          "Click anywhere to start audio";
+      }
+    };
+
+    // Add click handler if audio context isn't started
+    if (Tone.context.state !== "running") {
+      document.body.addEventListener("click", startAudioContext, {
+        once: true,
+      });
+      document.getElementById("status").textContent =
+        "Click anywhere to start audio";
+      return;
+    }
 
     // Load samples for all instruments
     await Promise.all(
@@ -435,40 +452,42 @@ async function loadSamples() {
             instrument.soundFile.includes("Unknown")
           ) {
             console.warn(
-              `No sound file for instrument with MIDI note ${instrument.midiNote}`
+              `No valid sound file for instrument with MIDI note ${instrument.midiNote}`
             );
             return;
           }
 
-          const player = new Tone.Player({
-            url: `../assets/sounds/${instrument.soundFile}`,
-            autostart: false,
+          // Ensure the sound file path is correct and the file exists
+          const soundPath = `../assets/sounds/${instrument.soundFile}`;
+          players[instrument.midiNote] = new Tone.Player({
+            url: soundPath,
+            onload: () => {
+              console.log(`Loaded sample for MIDI note ${instrument.midiNote}`);
+            },
+            onerror: (error) => {
+              console.error(
+                `Failed to load sample for MIDI note ${instrument.midiNote}:`,
+                error
+              );
+            },
           }).toDestination();
 
-          await player.load();
-          players[instrument.midiNote] = player;
-          instrument.sample = player;
-          console.log(
-            `Loaded sample for MIDI note ${instrument.midiNote}: ${instrument.soundFile}`
-          );
+          // Wait for the player to load
+          await players[instrument.midiNote].load();
         } catch (error) {
           console.error(
-            `Error loading sample for MIDI note ${instrument.midiNote}:`,
+            `Error setting up player for MIDI note ${instrument.midiNote}:`,
             error
           );
-          document.getElementById(
-            "status"
-          ).textContent = `Error loading sample for MIDI note ${instrument.midiNote}`;
         }
       })
     );
 
     console.log("All samples loaded successfully");
+    document.getElementById("status").textContent = "Ready to play!";
   } catch (error) {
     console.error("Error in loadSamples:", error);
-    document.getElementById("status").textContent =
-      "Error loading samples. Please try again.";
-    throw error;
+    document.getElementById("status").textContent = "Error loading samples";
   }
 }
 
