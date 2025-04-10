@@ -40,6 +40,9 @@ function findSoundFileForMidiNote(midiNote) {
 // Load audio samples
 async function loadSamples() {
   try {
+    console.log("Starting loadSamples function");
+    console.log("Current INSTRUMENTS array:", INSTRUMENTS);
+
     // Clear existing players
     players = {};
 
@@ -52,17 +55,26 @@ async function loadSamples() {
     }
 
     // Load samples for all instruments
+    console.log("Beginning to load samples for instruments");
     await Promise.all(
       INSTRUMENTS.map(async (instrument) => {
         try {
+          console.log(`Processing instrument: ${JSON.stringify(instrument)}`);
+
           if (
             !instrument.soundFile ||
             instrument.soundFile.includes("Unknown")
           ) {
+            console.warn(
+              `Skipping invalid sound file for MIDI note ${instrument.midiNote}:`,
+              instrument.soundFile
+            );
             return;
           }
 
+          // Ensure the sound file path is correct and the file exists
           const soundPath = `../assets/sounds/${instrument.soundFile}`;
+          console.log(`Attempting to load sound from path: ${soundPath}`);
 
           // Create buffer first
           const buffer = new Tone.Buffer(soundPath, () => {
@@ -70,25 +82,33 @@ async function loadSamples() {
           });
 
           // Create player with buffer
-          const player = new Tone.Player(buffer);
-
-          // Connect to master output
-          player.connect(Tone.getDestination());
+          const player = new Tone.Player(buffer).toDestination();
 
           // Store in players object
           players[instrument.midiNote] = player;
+
+          console.log(`Player ${instrument.midiNote} setup complete`);
         } catch (error) {
           console.error(
             `Error setting up player for MIDI note ${instrument.midiNote}:`,
-            error
+            {
+              error: error,
+              instrument: instrument,
+              stack: error.stack,
+            }
           );
         }
       })
     );
 
-    console.log("All samples loaded");
+    console.log("All samples loading process complete");
+    console.log("Final players object:", Object.keys(players));
   } catch (error) {
-    console.error("Error in loadSamples:", error);
+    console.error("Error in loadSamples:", {
+      error: error,
+      stack: error.stack,
+      instruments: INSTRUMENTS,
+    });
   }
 }
 
