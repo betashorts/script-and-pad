@@ -482,7 +482,8 @@ async function loadSamples() {
           const soundPath = `../assets/sounds/${instrument.soundFile}`;
           console.log(`Attempting to load sound from path: ${soundPath}`);
 
-          players[instrument.midiNote] = new Tone.Player({
+          // Create player with proper connection to destination
+          const player = new Tone.Player({
             url: soundPath,
             onload: () => {
               console.log(
@@ -495,11 +496,15 @@ async function loadSamples() {
                 error
               );
             },
-          }).toDestination();
+          });
+
+          // Connect to destination after creation
+          player.connect(Tone.Destination);
+          players[instrument.midiNote] = player;
 
           // Wait for the player to load
           console.log(`Waiting for player ${instrument.midiNote} to load...`);
-          await players[instrument.midiNote].load();
+          await player.load();
           console.log(`Player ${instrument.midiNote} loaded successfully`);
         } catch (error) {
           console.error(
