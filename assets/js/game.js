@@ -96,31 +96,43 @@ function getBaseInstrumentName(filename) {
 
 async function loadMIDIMapping() {
   try {
+    console.log(
+      "Attempting to load MIDI mapping from ../assets/json/mapping.json"
+    );
     const response = await fetch("../assets/json/mapping.json");
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     MIDI_MAPPING = await response.json();
-    console.log("MIDI mapping loaded:", MIDI_MAPPING);
+    console.log("MIDI mapping loaded successfully:", MIDI_MAPPING);
     return MIDI_MAPPING;
   } catch (error) {
     console.error("Error loading MIDI mapping:", error);
+    console.error("Full error details:", {
+      message: error.message,
+      stack: error.stack,
+    });
     throw error;
   }
 }
 
 function findSoundFileForMidiNote(midiNote) {
+  console.log(`Finding sound file for MIDI note ${midiNote}`);
   if (!MIDI_MAPPING) {
-    console.error("MIDI mapping not loaded!");
+    console.error("MIDI mapping not loaded when searching for note", midiNote);
     return `Unknown (${midiNote})`;
   }
 
   const soundFile = MIDI_MAPPING[midiNote];
   if (!soundFile) {
-    console.warn(`No sound file found for MIDI note ${midiNote}`);
+    console.warn(
+      `No sound file mapping found for MIDI note ${midiNote} in mapping:`,
+      MIDI_MAPPING
+    );
     return `Unknown (${midiNote})`;
   }
 
+  console.log(`Found sound file ${soundFile} for MIDI note ${midiNote}`);
   return soundFile;
 }
 
@@ -418,12 +430,16 @@ function createBeatList() {
 
 async function loadSamples() {
   try {
+    console.log("Starting loadSamples function");
+    console.log("Current INSTRUMENTS array:", INSTRUMENTS);
+
     // Clear existing players
     players = {};
 
     // Ensure AudioContext is started with user interaction
     const startAudioContext = async () => {
       try {
+        console.log("Attempting to start audio context");
         await Tone.start();
         console.log("Audio context started successfully");
       } catch (error) {
@@ -435,6 +451,7 @@ async function loadSamples() {
 
     // Add click handler if audio context isn't started
     if (Tone.context.state !== "running") {
+      console.log("Audio context not running, adding click handler");
       document.body.addEventListener("click", startAudioContext, {
         once: true,
       });
@@ -444,49 +461,68 @@ async function loadSamples() {
     }
 
     // Load samples for all instruments
+    console.log("Beginning to load samples for instruments");
     await Promise.all(
       INSTRUMENTS.map(async (instrument) => {
         try {
+          console.log(`Processing instrument: ${JSON.stringify(instrument)}`);
+
           if (
             !instrument.soundFile ||
             instrument.soundFile.includes("Unknown")
           ) {
             console.warn(
-              `No valid sound file for instrument with MIDI note ${instrument.midiNote}`
+              `Skipping invalid sound file for MIDI note ${instrument.midiNote}:`,
+              instrument.soundFile
             );
             return;
           }
 
           // Ensure the sound file path is correct and the file exists
           const soundPath = `../assets/sounds/${instrument.soundFile}`;
+          console.log(`Attempting to load sound from path: ${soundPath}`);
+
           players[instrument.midiNote] = new Tone.Player({
             url: soundPath,
             onload: () => {
-              console.log(`Loaded sample for MIDI note ${instrument.midiNote}`);
+              console.log(
+                `Successfully loaded sample for MIDI note ${instrument.midiNote} from ${soundPath}`
+              );
             },
             onerror: (error) => {
               console.error(
-                `Failed to load sample for MIDI note ${instrument.midiNote}:`,
+                `Failed to load sample for MIDI note ${instrument.midiNote} from ${soundPath}:`,
                 error
               );
             },
           }).toDestination();
 
           // Wait for the player to load
+          console.log(`Waiting for player ${instrument.midiNote} to load...`);
           await players[instrument.midiNote].load();
+          console.log(`Player ${instrument.midiNote} loaded successfully`);
         } catch (error) {
           console.error(
             `Error setting up player for MIDI note ${instrument.midiNote}:`,
-            error
+            {
+              error: error,
+              instrument: instrument,
+              stack: error.stack,
+            }
           );
         }
       })
     );
 
-    console.log("All samples loaded successfully");
+    console.log("All samples loading process complete");
+    console.log("Final players object:", Object.keys(players));
     document.getElementById("status").textContent = "Ready to play!";
   } catch (error) {
-    console.error("Error in loadSamples:", error);
+    console.error("Error in loadSamples:", {
+      error: error,
+      stack: error.stack,
+      instruments: INSTRUMENTS,
+    });
     document.getElementById("status").textContent = "Error loading samples";
   }
 }
