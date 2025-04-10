@@ -106,22 +106,45 @@ function createPianoRoll(barIndex, pattern) {
   const pianoRoll = document.createElement("div");
   pianoRoll.className = "piano-roll";
 
-  // Add instrument labels and grid cells
-  INSTRUMENTS.forEach((instrument, instrumentIndex) => {
+  // Filter out unused instruments in this pattern
+  const usedInstruments = INSTRUMENTS.filter((_, index) =>
+    pattern[index].some((step) => step === true)
+  );
+
+  // Map original indices
+  const instrumentIndices = usedInstruments.map((inst) =>
+    INSTRUMENTS.findIndex((i) => i.midiNote === inst.midiNote)
+  );
+
+  usedInstruments.forEach((instrument, displayIndex) => {
+    const originalIndex = instrumentIndices[displayIndex];
+
+    // Add instrument label
     const label = document.createElement("div");
     label.className = "instrument-label";
-    label.textContent = instrument.name;
+    // Use the mapped name from the game if available
+    const instrumentName =
+      MIDI_MAPPING && MIDI_MAPPING[instrument.midiNote]
+        ? MIDI_MAPPING[instrument.midiNote].split(".")[0].replace(/_/g, " ")
+        : `Note ${instrument.midiNote}`;
+    label.textContent = instrumentName;
     pianoRoll.appendChild(label);
 
+    // Add grid cells for this instrument
     for (let step = 0; step < STEPS; step++) {
       const cell = document.createElement("div");
       cell.className = "grid-cell";
-      if (pattern[instrumentIndex][step]) {
-        cell.classList.add("active");
-      }
+
+      // Add beat markers
       if (step % 4 === 0) {
         cell.classList.add("beat-marker");
       }
+
+      // Show active notes
+      if (pattern[originalIndex][step]) {
+        cell.classList.add("active");
+      }
+
       pianoRoll.appendChild(cell);
     }
   });
@@ -203,12 +226,18 @@ async function processMidiFile(file) {
     document.getElementById("midi-notes-display").textContent =
       Array.from(uniqueNotes).join(", ");
 
-    // Create INSTRUMENTS array
-    INSTRUMENTS = Array.from(uniqueNotes).map((note) => ({
-      midiNote: note,
-      soundFile: findSoundFileForMidiNote(note),
-      name: note.toString(),
-    }));
+    // Create INSTRUMENTS array with proper naming
+    INSTRUMENTS = Array.from(uniqueNotes).map((note) => {
+      const soundFile = findSoundFileForMidiNote(note);
+      const name = soundFile.includes("Unknown")
+        ? `Note ${note}`
+        : soundFile.split(".")[0].replace(/_/g, " ");
+      return {
+        midiNote: note,
+        soundFile,
+        name,
+      };
+    });
 
     // Calculate total bars
     const totalBars = Math.ceil(midi.durationTicks / (midi.header.ppq * 4));
