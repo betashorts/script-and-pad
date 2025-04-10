@@ -1,7 +1,7 @@
 // Constants
 const STEPS = 16;
 let INSTRUMENTS = []; // Will be populated from MIDI file
-let MIDI_MAPPING = {}; // Will store the MIDI mapping from JSON
+let MIDI_MAPPING = null;
 
 const BEAT_CATEGORIES = {
   "Basic Beats": [
@@ -94,161 +94,122 @@ function getBaseInstrumentName(filename) {
   return words.join(" ");
 }
 
-// Function to find sound file for MIDI note
-async function findSoundFileForMidiNote(midiNote) {
-  // If we haven't loaded the mapping yet, load it
-  if (Object.keys(MIDI_MAPPING).length === 0) {
-    try {
-      const response = await fetch("../assets/json/midi_mapping.json");
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      MIDI_MAPPING = await response.json();
-    } catch (error) {
-      console.error("Error loading MIDI mapping:", error);
-      return `unknown_${midiNote}.wav`;
+async function loadMIDIMapping() {
+  try {
+    const response = await fetch("../assets/json/mapping.json");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+    MIDI_MAPPING = await response.json();
+    console.log("MIDI mapping loaded:", MIDI_MAPPING);
+    return MIDI_MAPPING;
+  } catch (error) {
+    console.error("Error loading MIDI mapping:", error);
+    throw error;
+  }
+}
+
+function findSoundFileForMidiNote(midiNote) {
+  if (!MIDI_MAPPING) {
+    console.error("MIDI mapping not loaded!");
+    return `Unknown (${midiNote})`;
   }
 
-  // Find the mapping for this MIDI note
-  const mapping = MIDI_MAPPING[midiNote];
-  if (mapping && mapping.sound) {
-    return mapping.sound;
+  const soundFile = MIDI_MAPPING[midiNote];
+  if (!soundFile) {
+    console.warn(`No sound file found for MIDI note ${midiNote}`);
+    return `Unknown (${midiNote})`;
   }
 
-  // If no mapping found, return a default name
-  return `unknown_${midiNote}.wav`;
+  return soundFile;
 }
 
 // Load and parse MIDI file
-async function loadMIDIFile(beatFile = currentBeat.file) {
+async function loadMIDIFile(beatFile = AVAILABLE_BEATS[0].file) {
   try {
-    // Load MIDI mapping if not already loaded
-    if (Object.keys(MIDI_MAPPING).length === 0) {
-      try {
-        const mappingResponse = await fetch("../assets/json/mapping.json");
-        if (!mappingResponse.ok) {
-          throw new Error(`HTTP error! status: ${mappingResponse.status}`);
-        }
-        MIDI_MAPPING = await mappingResponse.json();
-      } catch (error) {
-        console.error("Error loading MIDI mapping:", error);
-        throw error;
-      }
+    // First ensure MIDI mapping is loaded
+    if (!MIDI_MAPPING) {
+      await loadMIDIMapping();
     }
 
+    // Then load the MIDI file
     const response = await fetch(`../assets/midi/${beatFile}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const arrayBuffer = await response.arrayBuffer();
 
-    // Create a new Midi instance
-    const midi = new Midi(arrayBuffer);
-
-    // Get BPM from MIDI file
-    let fileBPM = 120; // Default BPM
-    if (midi.header && midi.header.tempos && midi.header.tempos.length > 0) {
-      fileBPM = midi.header.tempos[0].bpm;
+    // Check if MIDI library is loaded
+    if (typeof Midi === "undefined") {
+      throw new Error("MIDI library not loaded!");
     }
-    BPM = fileBPM;
-    Tone.Transport.bpm.value = BPM;
-    document.getElementById("current-beat-bpm").textContent = `${Math.round(
-      BPM
-    )} BPM`;
 
-    // Get the first track
-    const track = midi.tracks[0];
-    const uniqueMidiNotes = new Set();
-    let maxTime = 0;
+    const midi = new Midi(arrayBuffer);
+    console.log("MIDI file loaded:", midi);
 
-    // Initialize patterns
+    // Set BPM
+    const bpm = Math.round(midi.header.tempos[0]?.bpm || 120);
+    Tone.Transport.bpm.value = bpm;
+    document.getElementById("bpm-display").textContent = `BPM: ${bpm}`;
+
+    // Get unique MIDI notes
+    const uniqueNotes = new Set();
+    midi.tracks.forEach((track) => {
+      track.notes.forEach((note) => {
+        uniqueNotes.add(note.midi);
+      });
+    });
+
+    // Create INSTRUMENTS array from unique notes
+    INSTRUMENTS = Array.from(uniqueNotes).map((note) => ({
+      midiNote: note,
+      soundFile: findSoundFileForMidiNote(note),
+      sample: null, // Will be loaded later
+    }));
+
+    console.log("Created instruments:", INSTRUMENTS);
+
+    // Fill in referencePattern based on MIDI notes
     referencePattern = Array(INSTRUMENTS.length)
       .fill()
-      .map(() => Array(STEPS).fill(false));
-    userPattern = Array(INSTRUMENTS.length)
-      .fill()
-      .map(() => Array(STEPS).fill(false));
-
-    // Process notes
-    if (track && track.notes) {
+      .map(() => Array(16).fill(false));
+    midi.tracks.forEach((track) => {
       track.notes.forEach((note) => {
-        uniqueMidiNotes.add(note.midi);
-        maxTime = Math.max(maxTime, note.time + note.duration);
-
         const instrumentIndex = INSTRUMENTS.findIndex(
-          (instr) => instr.midiNote === note.midi
+          (inst) => inst.midiNote === note.midi
         );
         if (instrumentIndex !== -1) {
-          const stepIndex = Math.floor((note.time * BPM * 16) / 60) % STEPS;
-          if (stepIndex >= 0 && stepIndex < STEPS) {
-            referencePattern[instrumentIndex][stepIndex] = true;
+          const startTick = Math.floor((note.time * 16) / (60 / bpm));
+          if (startTick < 16) {
+            referencePattern[instrumentIndex][startTick] = true;
           }
         }
       });
-    }
+    });
 
-    // Create instruments array from unique MIDI notes
-    INSTRUMENTS = Array.from(uniqueMidiNotes)
-      .sort((a, b) => a - b)
-      .map((midiNote) => {
-        const soundFile = MIDI_MAPPING[midiNote];
-        if (!soundFile) {
-          console.warn(`No mapping found for MIDI note ${midiNote}`);
-          return {
-            name: `Unknown (${midiNote})`,
-            file: `unknown_${midiNote}.wav`,
-            midiNote: midiNote,
-          };
-        }
-        return {
-          name: formatInstrumentName(soundFile),
-          file: soundFile,
-          midiNote: midiNote,
-        };
-      });
-
-    const totalBars = Math.ceil((maxTime * fileBPM) / 240);
-
-    // Update debug information
-    document.getElementById("debug-bpm").textContent = Math.round(fileBPM);
-    document.getElementById("debug-bars").textContent = totalBars;
-    document.getElementById("debug-duration").textContent = maxTime.toFixed(2);
-    document.getElementById("debug-midi-notes").textContent = Array.from(
-      uniqueMidiNotes
-    )
-      .sort((a, b) => a - b)
-      .join(", ");
-
-    // Update UI
-    createPianoRoll();
-    updatePianoRollUI();
-
-    // Load samples for all instruments
-    await Promise.all(
-      INSTRUMENTS.map(async (instrument) => {
-        try {
-          players[instrument.midiNote] = new Tone.Player({
-            url: `../assets/sounds/${instrument.file}`,
-            autostart: false,
-          }).toDestination();
-          await players[instrument.midiNote].load();
-        } catch (error) {
-          console.error(`Error loading sample for ${instrument.name}:`, error);
-        }
-      })
-    );
-  } catch (error) {
-    console.error("Error loading MIDI file:", error);
+    // Update debug info
+    document.getElementById("bars-display").textContent = `Bars: ${
+      midi.header.timeSignatures[0]?.timeSignature[0] || 4
+    }/${midi.header.timeSignatures[0]?.timeSignature[1] || 4}`;
     document.getElementById(
-      "status"
-    ).textContent = `Error loading MIDI file: ${error.message}. Please try again.`;
+      "notes-display"
+    ).textContent = `MIDI Notes: ${Array.from(uniqueNotes).join(", ")}`;
+    document.getElementById(
+      "duration-display"
+    ).textContent = `Duration: ${midi.duration.toFixed(2)}s`;
 
-    // Clear debug information on error
-    document.getElementById("debug-bpm").textContent = "-";
-    document.getElementById("debug-bars").textContent = "-";
-    document.getElementById("debug-duration").textContent = "-";
-    document.getElementById("debug-midi-notes").textContent = "-";
+    // Load samples
+    await loadSamples();
+    console.log("Samples loaded successfully");
+
+    // Create piano roll after everything is loaded
+    createPianoRoll();
+    document.getElementById("status").textContent = "Ready to play!";
+  } catch (error) {
+    console.error("Error in loadMIDIFile:", error);
+    document.getElementById("status").textContent =
+      "Error loading MIDI file. Please try again.";
+    throw error;
   }
 }
 
@@ -440,66 +401,184 @@ function createBeatList() {
   });
 }
 
+async function loadSamples() {
+  try {
+    // Clear existing players
+    Object.values(players).forEach((player) => {
+      if (player && typeof player.dispose === "function") {
+        player.dispose();
+      }
+    });
+    players = {};
+
+    // Load samples for all instruments
+    await Promise.all(
+      INSTRUMENTS.map(async (instrument) => {
+        try {
+          if (!instrument.soundFile) {
+            console.warn(
+              `No sound file for instrument with MIDI note ${instrument.midiNote}`
+            );
+            return;
+          }
+
+          const player = new Tone.Player({
+            url: `../assets/sounds/${instrument.soundFile}`,
+            autostart: false,
+          }).toDestination();
+
+          await player.load();
+          players[instrument.midiNote] = player;
+          instrument.sample = player;
+          console.log(
+            `Loaded sample for MIDI note ${instrument.midiNote}: ${instrument.soundFile}`
+          );
+        } catch (error) {
+          console.error(
+            `Error loading sample for MIDI note ${instrument.midiNote}:`,
+            error
+          );
+          document.getElementById(
+            "status"
+          ).textContent = `Error loading sample for MIDI note ${instrument.midiNote}`;
+        }
+      })
+    );
+
+    console.log("All samples loaded successfully");
+  } catch (error) {
+    console.error("Error in loadSamples:", error);
+    document.getElementById("status").textContent =
+      "Error loading samples. Please try again.";
+    throw error;
+  }
+}
+
+// Function to play a single note
+function playNote(midiNote) {
+  const player = players[midiNote];
+  if (player) {
+    player.start();
+  } else {
+    console.warn(`No player found for MIDI note ${midiNote}`);
+  }
+}
+
+async function init() {
+  try {
+    document.getElementById("status").textContent = "Loading MIDI mapping...";
+    await loadMIDIMapping();
+
+    document.getElementById("status").textContent = "Creating beat list...";
+    createBeatList();
+
+    // Request audio context
+    document.getElementById("status").textContent =
+      "Requesting audio context...";
+    await Tone.start();
+    console.log("Audio context started");
+
+    // Load initial MIDI file
+    document.getElementById("status").textContent = "Loading initial beat...";
+    await loadMIDIFile(AVAILABLE_BEATS[0].file);
+
+    // Load samples for all instruments
+    document.getElementById("status").textContent =
+      "Loading instrument samples...";
+    await loadSamples();
+
+    // Set up Tone.js with the correct BPM
+    Tone.Transport.bpm.value = BPM;
+
+    document.getElementById("status").textContent = "Ready to play!";
+    console.log("Initialization complete");
+  } catch (error) {
+    console.error("Error during initialization:", error);
+    document.getElementById("status").textContent =
+      "Error during initialization. Please refresh the page.";
+  }
+}
+
 // Initialize when the page loads
 document.addEventListener("DOMContentLoaded", async () => {
-  // Create beat list first
-  createBeatList();
-
-  // Add event listeners only after DOM is loaded
-  document
-    .getElementById("playReference")
-    ?.addEventListener("click", async () => {
-      // Ensure audio context is started
-      if (Tone.context.state !== "running") {
-        await Tone.start();
-      }
-      playReferencePattern();
-    });
-
-  document.getElementById("playUser")?.addEventListener("click", async () => {
-    // Ensure audio context is started
-    if (Tone.context.state !== "running") {
-      await Tone.start();
-    }
-    playUserPattern();
-  });
-
-  document
-    .getElementById("checkAccuracy")
-    ?.addEventListener("click", checkUserAccuracy);
-  document
-    .getElementById("toggleSolution")
-    ?.addEventListener("click", toggleSolution);
-
-  // Set up initial audio context state
-  document.getElementById("status").textContent =
-    "Click any button to enable audio";
-
-  // Add a click handler to the entire document to initialize audio
-  document.body.addEventListener(
-    "click",
-    async () => {
-      try {
-        if (Tone.context.state !== "running") {
-          await Tone.start();
-          document.getElementById("status").textContent =
-            "Audio enabled - Click grid cells to create your beat!";
-        }
-      } catch (error) {
-        console.error("Error starting audio context:", error);
-        document.getElementById("status").textContent =
-          "Error enabling audio. Please try again.";
-      }
-    },
-    { once: true }
-  ); // Only handle the first click
-
-  // Load initial MIDI file
   try {
-    await loadMIDIFile();
-  } catch (error) {
-    console.error("Error loading initial MIDI file:", error);
+    // Create beat list first
+    createBeatList();
+
+    // Add event listeners only after DOM is loaded
+    const playReferenceButton = document.getElementById("playReference");
+    if (playReferenceButton) {
+      playReferenceButton.addEventListener("click", async () => {
+        try {
+          // Ensure audio context is started
+          if (Tone.context.state !== "running") {
+            await Tone.start();
+          }
+          playReferencePattern();
+        } catch (error) {
+          console.error("Error playing reference pattern:", error);
+          document.getElementById("status").textContent =
+            "Error playing reference pattern. Please try again.";
+        }
+      });
+    }
+
+    const playUserButton = document.getElementById("playUser");
+    if (playUserButton) {
+      playUserButton.addEventListener("click", async () => {
+        try {
+          // Ensure audio context is started
+          if (Tone.context.state !== "running") {
+            await Tone.start();
+          }
+          playUserPattern();
+        } catch (error) {
+          console.error("Error playing user pattern:", error);
+          document.getElementById("status").textContent =
+            "Error playing your pattern. Please try again.";
+        }
+      });
+    }
+
+    const checkAccuracyButton = document.getElementById("checkAccuracy");
+    if (checkAccuracyButton) {
+      checkAccuracyButton.addEventListener("click", checkUserAccuracy);
+    }
+
+    const toggleSolutionButton = document.getElementById("toggleSolution");
+    if (toggleSolutionButton) {
+      toggleSolutionButton.addEventListener("click", toggleSolution);
+    }
+
+    // Set up initial audio context state
     document.getElementById("status").textContent =
-      "Error loading beat. Please try refreshing the page.";
+      "Click any button to enable audio";
+
+    // Add a click handler to the entire document to initialize audio
+    document.body.addEventListener(
+      "click",
+      async () => {
+        try {
+          if (Tone.context.state !== "running") {
+            await Tone.start();
+            document.getElementById("status").textContent =
+              "Audio enabled - Click grid cells to create your beat!";
+          }
+        } catch (error) {
+          console.error("Error starting audio context:", error);
+          document.getElementById("status").textContent =
+            "Error enabling audio. Please try again.";
+        }
+      },
+      { once: true }
+    ); // Only handle the first click
+
+    // Load initial MIDI file
+    await init();
+    console.log("Initial MIDI file loaded successfully");
+  } catch (error) {
+    console.error("Error during initialization:", error);
+    document.getElementById("status").textContent =
+      "Error initializing the game. Please refresh the page.";
   }
 });
