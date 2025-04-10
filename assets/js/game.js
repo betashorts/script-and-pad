@@ -1,77 +1,13 @@
+// Import beat categories
+import { BEAT_CATEGORIES, getAllBeats } from "../constants/beats.js";
+
 // Constants
 const STEPS = 16;
 let INSTRUMENTS = []; // Will be populated from MIDI file
 let MIDI_MAPPING = null;
 
-const BEAT_CATEGORIES = {
-  "Basic Beats": [
-    {
-      name: "Basic Rock Beat",
-      file: "basic_rock_beat.mid",
-      description: "Classic rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 2",
-      file: "basic_rock_beat_2.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 3",
-      file: "basic_rock_beat_3.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 4",
-      file: "basic_rock_beat_4.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 5",
-      file: "basic_rock_beat_5.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-  ],
-  "Advanced Beats": [
-    {
-      name: "Groove Beat",
-      file: "groove_hihat_1.mid",
-      description: "Standard 4/4 hihat beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 6",
-      file: "basic_rock_beat_6.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 7",
-      file: "basic_rock_beat_7.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 8",
-      file: "basic_rock_beat_8.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 9",
-      file: "basic_rock_beat_9.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-    {
-      name: "Basic Rock Beat 10",
-      file: "basic_rock_beat_10.mid",
-      description: "Standard 4/4 rock beat pattern",
-    },
-  ],
-};
-
 // Get all beats in a flat array when needed
-const AVAILABLE_BEATS = Object.values(BEAT_CATEGORIES)
-  .flat()
-  .map((beat) => ({
-    ...beat,
-    name: formatBeatName(beat.file), // Format the beat name from the filename
-  }));
+const AVAILABLE_BEATS = getAllBeats(formatBeatName);
 
 // Global state
 let players = {};
