@@ -42,6 +42,26 @@ const BEAT_CATEGORIES = {
       file: "basic_rock_beat_6.mid",
       description: "Standard 4/4 rock beat pattern",
     },
+    {
+      name: "Basic Rock Beat 7",
+      file: "basic_rock_beat_7.mid",
+      description: "Standard 4/4 rock beat pattern",
+    },
+    {
+      name: "Basic Rock Beat 8",
+      file: "basic_rock_beat_8.mid",
+      description: "Standard 4/4 rock beat pattern",
+    },
+    {
+      name: "Basic Rock Beat 9",
+      file: "basic_rock_beat_9.mid",
+      description: "Standard 4/4 rock beat pattern",
+    },
+    {
+      name: "Basic Rock Beat 10",
+      file: "basic_rock_beat_10.mid",
+      description: "Standard 4/4 rock beat pattern",
+    },
   ],
 };
 
