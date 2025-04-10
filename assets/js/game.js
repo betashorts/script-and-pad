@@ -58,7 +58,7 @@ let players = {};
 let userPattern = [];
 let referencePattern = [];
 let isPlaying = false;
-let BPM = 120; // Default BPM
+let BPM = 100; // Default BPM
 let currentBeat = AVAILABLE_BEATS[0]; // Start with the first beat
 let uniqueBarPatterns = [];
 let currentBarIndex = 0;
@@ -148,9 +148,9 @@ async function loadMIDIFile(beatFile = AVAILABLE_BEATS[0].file) {
     console.log("MIDI file loaded:", midi);
 
     // Set BPM
-    const bpm = Math.round(midi.header.tempos[0]?.bpm || 120);
+    const bpm = Math.round(midi.header.tempos[0]?.bpm || 100);
     Tone.Transport.bpm.value = bpm;
-    document.getElementById("bpm-display").textContent = `BPM: ${bpm}`;
+    document.getElementById("current-beat-bpm").textContent = `BPM: ${bpm}`;
 
     // Get unique MIDI notes
     const uniqueNotes = new Set();
@@ -173,30 +173,44 @@ async function loadMIDIFile(beatFile = AVAILABLE_BEATS[0].file) {
     referencePattern = Array(INSTRUMENTS.length)
       .fill()
       .map(() => Array(16).fill(false));
+
     midi.tracks.forEach((track) => {
       track.notes.forEach((note) => {
         const instrumentIndex = INSTRUMENTS.findIndex(
-          (inst) => inst.midiNote === note.midi
+          (inst) =>
+            inst.midiNote === note.midi && !inst.soundFile.includes("Unknown")
         );
         if (instrumentIndex !== -1) {
-          const startTick = Math.floor((note.time * 16) / (60 / bpm));
+          const startTick = Math.floor(note.ticks / (midi.header.ppq / 4));
           if (startTick < 16) {
             referencePattern[instrumentIndex][startTick] = true;
           }
+        } else {
+          console.log("Instrument Index not found for :", note.midi);
         }
       });
     });
 
     // Update debug info
-    document.getElementById("bars-display").textContent = `Bars: ${
+    document.getElementById("debug-time-signature").textContent = `${
       midi.header.timeSignatures[0]?.timeSignature[0] || 4
     }/${midi.header.timeSignatures[0]?.timeSignature[1] || 4}`;
+
+    // Calculate BPM from duration and ticks
+    const calculatedBPM = Math.round(
+      (midi.durationTicks / midi.header.ppq) * (60 / midi.duration)
+    );
+    const totalBars = Math.ceil(midi.durationTicks / (midi.header.ppq * 4));
+
+    document.getElementById("debug-bpm").textContent = `${calculatedBPM}`;
+    document.getElementById("debug-bars").textContent = `${totalBars}`;
+
+    document.getElementById("debug-midi-notes").textContent = `${Array.from(
+      uniqueNotes
+    ).join(", ")}`;
     document.getElementById(
-      "notes-display"
-    ).textContent = `MIDI Notes: ${Array.from(uniqueNotes).join(", ")}`;
-    document.getElementById(
-      "duration-display"
-    ).textContent = `Duration: ${midi.duration.toFixed(2)}s`;
+      "debug-duration"
+    ).textContent = `${midi.duration.toFixed(2)}s`;
 
     // Load samples
     await loadSamples();
@@ -415,7 +429,10 @@ async function loadSamples() {
     await Promise.all(
       INSTRUMENTS.map(async (instrument) => {
         try {
-          if (!instrument.soundFile) {
+          if (
+            !instrument.soundFile ||
+            instrument.soundFile.includes("Unknown")
+          ) {
             console.warn(
               `No sound file for instrument with MIDI note ${instrument.midiNote}`
             );
