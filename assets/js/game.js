@@ -436,28 +436,12 @@ async function loadSamples() {
     // Clear existing players
     players = {};
 
-    // Ensure AudioContext is started with user interaction
-    const startAudioContext = async () => {
-      try {
-        console.log("Attempting to start audio context");
-        await Tone.start();
-        console.log("Audio context started successfully");
-      } catch (error) {
-        console.error("Failed to start audio context:", error);
-        document.getElementById("status").textContent =
-          "Click anywhere to start audio";
-      }
-    };
+    // Make sure Tone.js is initialized
+    await Tone.start();
 
-    // Add click handler if audio context isn't started
-    if (Tone.context.state !== "running") {
-      console.log("Audio context not running, adding click handler");
-      document.body.addEventListener("click", startAudioContext, {
-        once: true,
-      });
-      document.getElementById("status").textContent =
-        "Click anywhere to start audio";
-      return;
+    // Create audio context if it doesn't exist
+    if (!Tone.context) {
+      Tone.context = new AudioContext();
     }
 
     // Load samples for all instruments
@@ -482,30 +466,21 @@ async function loadSamples() {
           const soundPath = `../assets/sounds/${instrument.soundFile}`;
           console.log(`Attempting to load sound from path: ${soundPath}`);
 
-          // Create player with proper connection to destination
-          const player = new Tone.Player({
-            url: soundPath,
-            onload: () => {
-              console.log(
-                `Successfully loaded sample for MIDI note ${instrument.midiNote} from ${soundPath}`
-              );
-            },
-            onerror: (error) => {
-              console.error(
-                `Failed to load sample for MIDI note ${instrument.midiNote} from ${soundPath}:`,
-                error
-              );
-            },
+          // Create buffer first
+          const buffer = new Tone.Buffer(soundPath, () => {
+            console.log(`Buffer loaded for ${instrument.midiNote}`);
           });
 
-          // Connect to destination after creation
-          player.connect(Tone.Destination);
+          // Create player with buffer
+          const player = new Tone.Player(buffer);
+
+          // Connect to master output
+          player.connect(Tone.getDestination());
+
+          // Store in players object
           players[instrument.midiNote] = player;
 
-          // Wait for the player to load
-          console.log(`Waiting for player ${instrument.midiNote} to load...`);
-          await player.load();
-          console.log(`Player ${instrument.midiNote} loaded successfully`);
+          console.log(`Player ${instrument.midiNote} setup complete`);
         } catch (error) {
           console.error(
             `Error setting up player for MIDI note ${instrument.midiNote}:`,
@@ -532,43 +507,45 @@ async function loadSamples() {
   }
 }
 
-// Function to play a single note
+// Update the playNote function
 function playNote(midiNote) {
-  const player = players[midiNote];
-  if (player) {
-    player.start();
-  } else {
-    console.warn(`No player found for MIDI note ${midiNote}`);
+  try {
+    const player = players[midiNote];
+    if (player && player.loaded) {
+      player.start();
+    } else {
+      console.warn(`Player not ready for MIDI note ${midiNote}`);
+    }
+  } catch (error) {
+    console.error(`Error playing note ${midiNote}:`, error);
   }
 }
 
 async function init() {
   try {
-    document.getElementById("status").textContent = "Loading MIDI mapping...";
+    // Start audio context with user interaction
+    const startAudio = async () => {
+      await Tone.start();
+      document.removeEventListener("click", startAudio);
+      document.getElementById("status").textContent = "Audio enabled!";
+    };
+
+    document.addEventListener("click", startAudio);
+    document.getElementById("status").textContent =
+      "Click anywhere to start audio";
+
+    // Load MIDI mapping
     await loadMIDIMapping();
 
-    document.getElementById("status").textContent = "Creating beat list...";
+    // Create beat list
     createBeatList();
 
-    // Request audio context
-    document.getElementById("status").textContent =
-      "Requesting audio context...";
-    await Tone.start();
-    console.log("Audio context started");
-
     // Load initial MIDI file
-    document.getElementById("status").textContent = "Loading initial beat...";
     await loadMIDIFile(AVAILABLE_BEATS[0].file);
-
-    // Load samples for all instruments
-    document.getElementById("status").textContent =
-      "Loading instrument samples...";
-    await loadSamples();
 
     // Set up Tone.js with the correct BPM
     Tone.Transport.bpm.value = BPM;
 
-    document.getElementById("status").textContent = "Ready to play!";
     console.log("Initialization complete");
   } catch (error) {
     console.error("Error during initialization:", error);
@@ -627,29 +604,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (toggleSolutionButton) {
       toggleSolutionButton.addEventListener("click", toggleSolution);
     }
-
-    // Set up initial audio context state
-    document.getElementById("status").textContent =
-      "Click any button to enable audio";
-
-    // Add a click handler to the entire document to initialize audio
-    document.body.addEventListener(
-      "click",
-      async () => {
-        try {
-          if (Tone.context.state !== "running") {
-            await Tone.start();
-            document.getElementById("status").textContent =
-              "Audio enabled - Click grid cells to create your beat!";
-          }
-        } catch (error) {
-          console.error("Error starting audio context:", error);
-          document.getElementById("status").textContent =
-            "Error enabling audio. Please try again.";
-        }
-      },
-      { once: true }
-    ); // Only handle the first click
 
     // Load initial MIDI file
     await init();
