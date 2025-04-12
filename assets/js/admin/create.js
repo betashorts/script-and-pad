@@ -324,35 +324,39 @@ function setupEventListeners() {
     try {
       // Create a new MIDI file
       const midi = new Midi();
-
-      // Set PPQ
-      midi.header.ppq = DEFAULT_PPQ;
-
-      // Set BPM
-      const bpm = parseInt(document.getElementById("bpm").value) || 120;
-      midi.header.setTempo(bpm);
-
-      // Set time signature (4/4)
-      midi.header.timeSignatures.push({
-        ticks: 0,
-        timeSignature: [4, 4],
-      });
-
-      // Create a track
       const track = midi.addTrack();
+
+      // Get BPM
+      const bpm = parseInt(document.getElementById("bpm").value) || 120;
+
+      // Add tempo information
+      midi.header.tempos = [
+        {
+          bpm: bpm,
+          ticks: 0,
+        },
+      ];
+
+      // Add time signature
+      midi.header.timeSignatures = [
+        {
+          ticks: 0,
+          timeSignature: [4, 4],
+        },
+      ];
 
       // Add notes to the track
       INSTRUMENTS.forEach((instrument, i) => {
         pattern[i].forEach((isActive, step) => {
           if (isActive) {
-            // Calculate precise timing using PPQ
-            const startTicks = Math.round((step * midi.header.ppq) / 4); // Convert step to ticks (16th notes)
-            const durationTicks = Math.round(midi.header.ppq / 4); // Duration of one 16th note
+            // Calculate timing (assuming 480 PPQ)
+            const startTicks = step * 120; // 480/4 = 120 ticks per 16th note
+            const durationTicks = 120; // Duration of one 16th note
 
             track.addNote({
               midi: instrument.midiNote,
-              ticks: startTicks,
-              durationTicks: durationTicks,
+              time: step * 0.25, // Each step is a 16th note (1/4 of a quarter note)
+              duration: 0.25, // Duration of a 16th note
               velocity: 0.8, // Standard velocity
             });
           }
