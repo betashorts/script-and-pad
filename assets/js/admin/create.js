@@ -287,8 +287,8 @@ function setupEventListeners() {
       ];
 
       // Set PPQ
-      const ppq = 480; // Standard MIDI PPQ
-      console.log("Setting PPQ:", ppq);
+      // const ppq = 480; // Standard MIDI PPQ
+      // console.log("Setting PPQ:", ppq);
       // midi.header.ppq = ppq;
 
       // Filter out instruments that have no active notes
