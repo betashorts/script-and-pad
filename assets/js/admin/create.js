@@ -1,4 +1,4 @@
-import { MIDI_MAPPING } from "../../constants/midi_mapping.js";
+import { MIDI_MAPPING } from "../../json/mapping.json";
 
 // Constants
 const STEPS = 16;
