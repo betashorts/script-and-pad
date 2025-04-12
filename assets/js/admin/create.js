@@ -124,39 +124,34 @@ async function loadInstruments() {
 // Load audio samples for all instruments
 async function loadSamples() {
   try {
-    console.log("Beginning to load samples...");
-
-    // Check if audio context is running
-    if (Tone.context.state !== "running") {
-      console.log("Audio context not running. Waiting for user interaction...");
-      return;
-    }
-
     // Clear existing players
-    if (players) {
-      Object.values(players).forEach((player) => player.dispose());
-    }
+    Object.values(players).forEach((player) => {
+      if (player) {
+        player.dispose();
+      }
+    });
     players = {};
 
+    // Create audio context if needed
+    if (!Tone.context.running) {
+      await Tone.context.resume();
+    }
+
     // Load samples for all instruments
-    await Promise.all(
-      INSTRUMENTS.map(async (instrument) => {
-        try {
-          const player = new Tone.Player({
-            url: `../../assets/sounds/${instrument.soundFile}`,
-            onload: () => console.log(`Loaded sample for ${instrument.name}`),
-          }).toDestination();
-          players[instrument.midiNote] = player;
-        } catch (error) {
-          console.error(`Error loading sample for ${instrument.name}:`, error);
-        }
-      })
-    );
+    for (const instrument of INSTRUMENTS) {
+      try {
+        const player = new Tone.Player().toDestination();
+        await player.load(`../../assets/sounds/${instrument.soundFile}`);
+        console.log(`Loaded sample for ${instrument.name}`);
+        players[instrument.midiNote] = player;
+      } catch (error) {
+        console.error(`Failed to load sample for ${instrument.name}:`, error);
+      }
+    }
 
     console.log("All samples loaded successfully");
   } catch (error) {
-    console.error("Error loading samples:", error);
-    throw error;
+    console.error("Error in loadSamples:", error);
   }
 }
 
