@@ -124,6 +124,7 @@ async function loadInstruments() {
 // Load audio samples for all instruments
 async function loadSamples() {
   try {
+    // Clear existing players
     Object.values(players).forEach((player) => {
       if (player) {
         player.dispose();
@@ -131,12 +132,15 @@ async function loadSamples() {
     });
     players = {};
 
+    // Make sure Tone.js is initialized
     await Tone.start();
 
+    // Create audio context if it doesn't exist
     if (!Tone.context) {
       Tone.context = new AudioContext();
     }
 
+    // Load samples for all instruments
     await Promise.all(
       INSTRUMENTS.map(async (instrument) => {
         try {
@@ -148,8 +152,19 @@ async function loadSamples() {
           }
 
           const soundPath = `../../assets/sounds/${instrument.soundFile}`;
-          const buffer = new Tone.Buffer(soundPath);
-          const player = new Tone.Player(buffer).toDestination();
+
+          // Create buffer first
+          const buffer = new Tone.Buffer(soundPath, () => {
+            console.log(`Buffer loaded for ${instrument.midiNote}`);
+          });
+
+          // Create player with buffer
+          const player = new Tone.Player(buffer);
+
+          // Connect to master output
+          player.connect(Tone.getDestination());
+
+          // Store in players object
           players[instrument.midiNote] = player;
         } catch (error) {
           console.error(`Error loading sample for ${instrument.name}:`, error);
@@ -207,24 +222,14 @@ function createPianoRoll() {
 }
 
 // Play a single note
-async function playNote(midiNote) {
+function playNote(midiNote) {
   try {
-    // Check if audio context is running
-    if (Tone.context.state !== "running") {
-      console.log("Audio context not running. Cannot play note.");
-      return;
-    }
-
     const player = players[midiNote];
-    if (!player) {
-      console.warn(`No player found for MIDI note ${midiNote}`);
-      return;
+    if (player && player.loaded) {
+      player.start();
+    } else {
+      console.warn(`Player not ready for MIDI note ${midiNote}`);
     }
-
-    // Create a new buffer source each time
-    const buffer = player.buffer;
-    const source = new Tone.ToneBufferSource(buffer).toDestination();
-    source.start();
   } catch (error) {
     console.error(`Error playing note ${midiNote}:`, error);
   }
