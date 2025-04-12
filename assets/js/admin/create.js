@@ -265,6 +265,13 @@ function setupEventListeners() {
       // Create a new MIDI file
       console.log("Creating new MIDI object");
       const midi = new Midi();
+
+      // Set PPQ
+      const ppq = 480; // Standard MIDI PPQ
+      console.log("Setting PPQ:", ppq);
+      midi.header.ppq = ppq;
+
+      // Create track
       const track = midi.addTrack();
 
       // Get BPM
@@ -273,14 +280,9 @@ function setupEventListeners() {
 
       // Add tempo information
       console.log("Setting tempo information");
-      midi.header.tempos = [
-        {
-          bpm: bpm,
-          ticks: 0,
-        },
-      ];
+      midi.header.setTempo(bpm);
 
-      // Add time signature
+      // Add time signature (4/4)
       console.log("Setting time signature");
       midi.header.timeSignatures = [
         {
@@ -295,10 +297,14 @@ function setupEventListeners() {
       INSTRUMENTS.forEach((instrument, i) => {
         pattern[i].forEach((isActive, step) => {
           if (isActive) {
+            // Calculate precise timing using PPQ
+            const startTicks = Math.round((step * ppq) / 4); // Convert step to ticks (16th notes)
+            const durationTicks = Math.round(ppq / 4); // Duration of one 16th note
+
             track.addNote({
               midi: instrument.midiNote,
-              time: step * 0.25,
-              duration: 0.25,
+              ticks: startTicks,
+              durationTicks: durationTicks,
               velocity: 0.8,
             });
             noteCount++;
@@ -307,16 +313,22 @@ function setupEventListeners() {
       });
       console.log(`Added ${noteCount} notes to the track`);
 
+      // Convert to array buffer
+      console.log("Converting MIDI to array buffer");
+      const arrayBuffer = midi.toArray();
+
       // Create and download the file
       console.log("Creating MIDI blob");
-      const blob = new Blob([midi.toArray()], { type: "audio/midi" });
+      const blob = new Blob([arrayBuffer], { type: "audio/midi" });
       console.log("Creating download URL");
       const url = URL.createObjectURL(blob);
       console.log("Initiating download");
       const a = document.createElement("a");
       a.href = url;
       a.download = "custom_pattern.mid";
+      document.body.appendChild(a); // Append to body
       a.click();
+      document.body.removeChild(a); // Clean up
       console.log("Cleaning up URL");
       URL.revokeObjectURL(url);
 
