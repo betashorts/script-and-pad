@@ -291,11 +291,25 @@ function setupEventListeners() {
         },
       ];
 
-      // Add notes to the track
+      // Filter out instruments that have no active notes
+      console.log("Filtering active instruments...");
+      const activeInstruments = INSTRUMENTS.filter((_, index) =>
+        pattern[index].some((step) => step === true)
+      );
+      console.log(
+        `Found ${activeInstruments.length} active instruments out of ${INSTRUMENTS.length}`
+      );
+
+      // Add notes to the track only for active instruments
       console.log("Starting to add notes to track");
       let noteCount = 0;
-      INSTRUMENTS.forEach((instrument, i) => {
-        pattern[i].forEach((isActive, step) => {
+      activeInstruments.forEach((instrument, i) => {
+        // Find original index in pattern array
+        const originalIndex = INSTRUMENTS.findIndex(
+          (inst) => inst.midiNote === instrument.midiNote
+        );
+
+        pattern[originalIndex].forEach((isActive, step) => {
           if (isActive) {
             // Calculate precise timing using PPQ
             const startTicks = Math.round((step * ppq) / 4); // Convert step to ticks (16th notes)
@@ -326,9 +340,9 @@ function setupEventListeners() {
       const a = document.createElement("a");
       a.href = url;
       a.download = "custom_pattern.mid";
-      document.body.appendChild(a); // Append to body
+      document.body.appendChild(a);
       a.click();
-      document.body.removeChild(a); // Clean up
+      document.body.removeChild(a);
       console.log("Cleaning up URL");
       URL.revokeObjectURL(url);
 
