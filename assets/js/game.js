@@ -434,16 +434,27 @@ function createBeatList() {
   const beatList = document.getElementById("beat-list");
   beatList.innerHTML = "";
 
-  AVAILABLE_BEATS.forEach((beat) => {
-    const beatItem = document.createElement("div");
-    beatItem.className = "beat-item";
-    beatItem.textContent = beat.name;
-    beatItem.addEventListener("click", () => {
-      currentBeat = beat;
+  Object.entries(BEAT_CATEGORIES).forEach(([category, beats]) => {
+    const categoryHeader = document.createElement("h3");
+    categoryHeader.textContent = category;
+    categoryHeader.className = "beat-category";
+    beatList.appendChild(categoryHeader);
+
+    beats.forEach((beat) => {
+      const beatItem = document.createElement("div");
+      beatItem.className = "beat-item";
+      beatItem.textContent = beat.name;
+      beatItem.addEventListener("click", () => {
+        currentBeat = beat;
+        loadMIDIFile(beat.file);
+        document
+          .querySelectorAll(".beat-item")
+          .forEach((item) => item.classList.remove("active"));
+        beatItem.classList.add("active");
+      });
       document.getElementById("current-beat-name").textContent = beat.name;
-      loadMIDIFile(beat.file);
+      beatList.appendChild(beatItem);
     });
-    beatList.appendChild(beatItem);
   });
 }
 
