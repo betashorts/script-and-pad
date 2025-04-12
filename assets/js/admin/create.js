@@ -266,11 +266,6 @@ function setupEventListeners() {
       console.log("Creating new MIDI object");
       const midi = new Midi();
 
-      // Set PPQ
-      const ppq = 480; // Standard MIDI PPQ
-      console.log("Setting PPQ:", ppq);
-      midi.header.ppq = ppq;
-
       // Create track
       const track = midi.addTrack();
 
@@ -290,6 +285,11 @@ function setupEventListeners() {
           timeSignature: [4, 4],
         },
       ];
+
+      // Set PPQ
+      const ppq = 480; // Standard MIDI PPQ
+      console.log("Setting PPQ:", ppq);
+      midi.header.ppq = ppq;
 
       // Filter out instruments that have no active notes
       console.log("Filtering active instruments...");
