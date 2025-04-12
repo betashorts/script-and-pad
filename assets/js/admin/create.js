@@ -124,6 +124,9 @@ async function loadInstruments() {
 // Load audio samples for all instruments
 async function loadSamples() {
   try {
+    console.log("Starting loadSamples function");
+    console.log("Current INSTRUMENTS array:", INSTRUMENTS);
+
     // Clear existing players
     Object.values(players).forEach((player) => {
       if (player) {
@@ -132,22 +135,60 @@ async function loadSamples() {
     });
     players = {};
 
-    // Create audio context if needed
-    if (!Tone.context.running) {
-      await Tone.context.resume();
+    // Make sure Tone.js is initialized
+    await Tone.start();
+
+    // Create audio context if it doesn't exist
+    if (!Tone.context) {
+      Tone.context = new AudioContext();
     }
 
     // Load samples for all instruments
-    for (const instrument of INSTRUMENTS) {
-      try {
-        const player = new Tone.Player().toDestination();
-        await player.load(`../../assets/sounds/${instrument.soundFile}`);
-        console.log(`Loaded sample for ${instrument.name}`);
-        players[instrument.midiNote] = player;
-      } catch (error) {
-        console.error(`Failed to load sample for ${instrument.name}:`, error);
-      }
-    }
+    console.log("Beginning to load samples for instruments");
+    await Promise.all(
+      INSTRUMENTS.map(async (instrument) => {
+        try {
+          console.log(`Processing instrument: ${JSON.stringify(instrument)}`);
+
+          if (
+            !instrument.soundFile ||
+            instrument.soundFile.includes("Unknown")
+          ) {
+            console.warn(
+              `Skipping invalid sound file for MIDI note ${instrument.midiNote}:`,
+              instrument.soundFile
+            );
+            return;
+          }
+
+          // Ensure the sound file path is correct and the file exists
+          const soundPath = `../../assets/sounds/${instrument.soundFile}`;
+          console.log(`Attempting to load sound from path: ${soundPath}`);
+
+          // Create buffer first
+          const buffer = new Tone.Buffer(soundPath, () => {
+            console.log(`Buffer loaded for ${instrument.midiNote}`);
+          });
+
+          // Create player with buffer
+          const player = new Tone.Player(buffer).toDestination();
+
+          // Store in players object
+          players[instrument.midiNote] = player;
+
+          console.log(`Player ${instrument.midiNote} setup complete`);
+        } catch (error) {
+          console.error(
+            `Error setting up player for MIDI note ${instrument.midiNote}:`,
+            {
+              error: error,
+              instrument: instrument,
+              stack: error.stack,
+            }
+          );
+        }
+      })
+    );
 
     console.log("All samples loaded successfully");
   } catch (error) {
