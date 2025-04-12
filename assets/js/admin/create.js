@@ -1,5 +1,3 @@
-import { MIDI_MAPPING } from "../../json/mapping.json";
-
 // Constants
 const STEPS = 16;
 let INSTRUMENTS = [];
