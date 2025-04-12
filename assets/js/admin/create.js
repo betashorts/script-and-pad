@@ -6,6 +6,33 @@ let INSTRUMENTS = [];
 let pattern = [];
 let players = {};
 let isPlaying = false;
+const DEFAULT_PPQ = 480; // Standard MIDI PPQ
+
+// Load MIDI mapping
+async function loadMIDIMapping() {
+  try {
+    console.log("Loading MIDI mapping...");
+    const response = await fetch("../../../assets/json/mapping.json");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const mapping = await response.json();
+    console.log("MIDI mapping loaded:", mapping);
+    return mapping;
+  } catch (error) {
+    console.error("Error loading MIDI mapping:", error);
+    throw error;
+  }
+}
+
+// Format instrument name from filename
+function formatInstrumentName(filename) {
+  return filename
+    .replace(".wav", "")
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
 
 // Initialize the page
 async function init() {
@@ -35,18 +62,32 @@ async function init() {
 // Load instruments from MIDI mapping
 async function loadInstruments() {
   try {
-    INSTRUMENTS = Object.entries(MIDI_MAPPING).map(([midiNote, soundFile]) => ({
+    const mapping = await loadMIDIMapping();
+
+    INSTRUMENTS = Object.entries(mapping).map(([midiNote, soundFile]) => ({
       midiNote: parseInt(midiNote),
       soundFile: soundFile,
       name: formatInstrumentName(soundFile),
     }));
 
+    // Sort instruments by MIDI note number
+    INSTRUMENTS.sort((a, b) => a.midiNote - b.midiNote);
+
     // Create instrument list in sidebar
     const instrumentList = document.getElementById("instrument-list");
+    instrumentList.innerHTML = ""; // Clear existing list
+
     INSTRUMENTS.forEach((instrument) => {
       const div = document.createElement("div");
       div.className = "instrument-item";
-      div.textContent = `${instrument.name} (MIDI: ${instrument.midiNote})`;
+      div.textContent = `${instrument.name} (${instrument.midiNote})`;
+      div.title = `Sound file: ${instrument.soundFile}`;
+
+      // Add click handler to preview sound
+      div.addEventListener("click", () => {
+        playNote(instrument.midiNote);
+      });
+
       instrumentList.appendChild(div);
     });
 
@@ -56,15 +97,6 @@ async function loadInstruments() {
     console.error("Error loading instruments:", error);
     throw error;
   }
-}
-
-// Format instrument name from filename
-function formatInstrumentName(filename) {
-  return filename
-    .replace(".wav", "")
-    .split("_")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
 }
 
 // Load audio samples
@@ -79,48 +111,57 @@ async function loadSamples() {
     // Load samples for all instruments
     await Promise.all(
       INSTRUMENTS.map(async (instrument) => {
-        const player = new Tone.Player();
-        await player.load(`../../../assets/sounds/${instrument.soundFile}`);
-        player.connect(Tone.getDestination());
-        players[instrument.midiNote] = player;
+        try {
+          console.log(
+            `Loading sample for ${instrument.name} (${instrument.midiNote})`
+          );
+          const player = new Tone.Player();
+          await player.load(`../../../assets/sounds/${instrument.soundFile}`);
+          player.connect(Tone.getDestination());
+          players[instrument.midiNote] = player;
+          console.log(`Sample loaded for ${instrument.name}`);
+        } catch (error) {
+          console.error(`Error loading sample for ${instrument.name}:`, error);
+        }
       })
     );
+
+    console.log("All samples loaded");
   } catch (error) {
     console.error("Error loading samples:", error);
     throw error;
   }
 }
 
-// Create the piano roll grid
+// Create piano roll grid
 function createPianoRoll() {
   const pianoRoll = document.getElementById("piano-roll");
-  pianoRoll.innerHTML = "";
+  pianoRoll.innerHTML = ""; // Clear existing grid
 
-  INSTRUMENTS.forEach((instrument, instrumentIndex) => {
+  // Create grid
+  INSTRUMENTS.forEach((instrument, i) => {
     // Add instrument label
     const label = document.createElement("div");
     label.className = "instrument-label";
-    label.textContent = instrument.name;
+    label.textContent = `${instrument.name} (${instrument.midiNote})`;
     pianoRoll.appendChild(label);
 
-    // Add grid cells
+    // Add grid cells for this instrument
     for (let step = 0; step < STEPS; step++) {
       const cell = document.createElement("div");
       cell.className = "grid-cell";
-      cell.dataset.instrumentIndex = instrumentIndex;
+      if (step % 4 === 0) cell.classList.add("beat-marker");
+
+      cell.dataset.instrument = i;
       cell.dataset.step = step;
 
-      // Add beat markers (every 4th step)
-      if (step % 4 === 0) {
-        cell.classList.add("beat-marker");
-      }
-
       cell.addEventListener("click", () => {
-        pattern[instrumentIndex][step] = !pattern[instrumentIndex][step];
-        updatePianoRollUI();
+        // Toggle pattern
+        pattern[i][step] = !pattern[i][step];
+        cell.classList.toggle("active", pattern[i][step]);
 
-        // Play the sound if turning on
-        if (pattern[instrumentIndex][step]) {
+        // Play sound if activated
+        if (pattern[i][step]) {
           playNote(instrument.midiNote);
         }
       });
@@ -130,118 +171,96 @@ function createPianoRoll() {
   });
 }
 
-// Update the piano roll UI
-function updatePianoRollUI() {
-  const cells = document.querySelectorAll(".grid-cell");
-  cells.forEach((cell) => {
-    const instrumentIndex = parseInt(cell.dataset.instrumentIndex);
-    const step = parseInt(cell.dataset.step);
-
-    cell.classList.toggle("active", pattern[instrumentIndex][step]);
-  });
-}
-
 // Play a single note
 function playNote(midiNote) {
   const player = players[midiNote];
-  if (player) {
+  if (player && player.loaded) {
     player.start();
-  }
-}
-
-// Play the entire pattern
-function playPattern() {
-  if (isPlaying) {
-    Tone.Transport.stop();
-    Tone.Transport.cancel();
-    isPlaying = false;
-    document.getElementById("status").textContent = "Playback stopped";
-    return;
-  }
-
-  // Set BPM
-  const bpm = parseInt(document.getElementById("bpm").value);
-  Tone.Transport.bpm.value = bpm;
-
-  // Clear any existing events
-  Tone.Transport.cancel();
-
-  // Create a sequence for each instrument
-  pattern.forEach((row, instrumentIndex) => {
-    const instrument = INSTRUMENTS[instrumentIndex];
-    new Tone.Sequence(
-      (time, step) => {
-        if (row[step]) {
-          players[instrument.midiNote].start(time);
-        }
-      },
-      [...Array(STEPS).keys()],
-      "16n"
-    ).start(0);
-  });
-
-  // Start playback
-  Tone.Transport.start();
-  isPlaying = true;
-  document.getElementById("status").textContent = "Playing pattern...";
-
-  // Stop after one bar
-  Tone.Transport.schedule(() => {
-    Tone.Transport.stop();
-    Tone.Transport.cancel();
-    isPlaying = false;
-    document.getElementById("status").textContent = "Playback complete";
-  }, "1m");
-}
-
-// Download the pattern as MIDI
-function downloadPattern() {
-  try {
-    const midi = new Midi();
-    const track = midi.addTrack();
-
-    // Set BPM
-    const bpm = parseInt(document.getElementById("bpm").value);
-    midi.header.setTempo(bpm);
-
-    // Add notes to the track
-    pattern.forEach((row, instrumentIndex) => {
-      const instrument = INSTRUMENTS[instrumentIndex];
-      row.forEach((isActive, step) => {
-        if (isActive) {
-          track.addNote({
-            midi: instrument.midiNote,
-            time: step * 0.25, // 16th notes
-            duration: 0.25,
-          });
-        }
-      });
-    });
-
-    // Create download link
-    const blob = new Blob([midi.toArray()], { type: "audio/midi" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "custom_pattern.mid";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-
-    document.getElementById("status").textContent = "MIDI file downloaded!";
-  } catch (error) {
-    console.error("Error creating MIDI file:", error);
-    document.getElementById("status").textContent = "Error creating MIDI file";
+  } else {
+    console.warn(`Player not ready for MIDI note ${midiNote}`);
   }
 }
 
 // Set up event listeners
 function setupEventListeners() {
-  document.getElementById("playPattern").addEventListener("click", playPattern);
-  document
-    .getElementById("downloadPattern")
-    .addEventListener("click", downloadPattern);
+  // Play Pattern button
+  document.getElementById("playPattern").addEventListener("click", async () => {
+    if (isPlaying) return;
+    isPlaying = true;
+
+    const bpm = parseInt(document.getElementById("bpm").value) || 120;
+    const stepTime = 60 / bpm / 4; // Time for each 16th note
+
+    // Play through the pattern
+    for (let step = 0; step < STEPS; step++) {
+      INSTRUMENTS.forEach((instrument, i) => {
+        if (pattern[i][step]) {
+          playNote(instrument.midiNote);
+        }
+      });
+      await new Promise((resolve) => setTimeout(resolve, stepTime * 1000));
+    }
+
+    isPlaying = false;
+  });
+
+  // Download MIDI button
+  document.getElementById("downloadPattern").addEventListener("click", () => {
+    try {
+      // Create a new MIDI file
+      const midi = new Midi();
+
+      // Set PPQ
+      midi.header.ppq = DEFAULT_PPQ;
+
+      // Set BPM
+      const bpm = parseInt(document.getElementById("bpm").value) || 120;
+      midi.header.setTempo(bpm);
+
+      // Set time signature (4/4)
+      midi.header.timeSignatures.push({
+        ticks: 0,
+        timeSignature: [4, 4],
+      });
+
+      // Create a track
+      const track = midi.addTrack();
+
+      // Add notes to the track
+      INSTRUMENTS.forEach((instrument, i) => {
+        pattern[i].forEach((isActive, step) => {
+          if (isActive) {
+            // Calculate precise timing using PPQ
+            const startTicks = Math.round((step * midi.header.ppq) / 4); // Convert step to ticks (16th notes)
+            const durationTicks = Math.round(midi.header.ppq / 4); // Duration of one 16th note
+
+            track.addNote({
+              midi: instrument.midiNote,
+              ticks: startTicks,
+              durationTicks: durationTicks,
+              velocity: 0.8, // Standard velocity
+            });
+          }
+        });
+      });
+
+      // Download the file
+      const blob = new Blob([midi.toArray()], { type: "audio/midi" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "custom_pattern.mid";
+      a.click();
+      URL.revokeObjectURL(url);
+
+      document.getElementById("status").textContent =
+        "Pattern downloaded successfully!";
+    } catch (error) {
+      console.error("Error creating MIDI file:", error);
+      document.getElementById("status").textContent =
+        "Error creating MIDI file";
+    }
+  });
 }
 
 // Initialize when the page loads
