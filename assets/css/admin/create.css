@@ -1,0 +1,148 @@
+/* Main container */
+.admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.sidebar h2 {
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+}
+
+.instrument-item {
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: #3a3a3a;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.instrument-item:hover {
+  background-color: #4a4a4a;
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.bpm-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bpm-control label {
+  color: #fff;
+}
+
+.bpm-control input {
+  width: 60px;
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: #3a3a3a;
+  color: #fff;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4a4a4a;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #5a5a5a;
+}
+
+button.primary {
+  background-color: #007bff;
+}
+
+button.primary:hover {
+  background-color: #0069d9;
+}
+
+/* Piano roll */
+.piano-roll {
+  display: grid;
+  grid-template-columns: 150px repeat(16, 1fr);
+  gap: 2px;
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.instrument-label {
+  padding: 10px;
+  background-color: #3a3a3a;
+  color: #fff;
+  text-align: right;
+  font-size: 0.9em;
+}
+
+.grid-cell {
+  aspect-ratio: 1;
+  background-color: #3a3a3a;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.grid-cell:hover {
+  background-color: #4a4a4a;
+}
+
+.grid-cell.active {
+  background-color: #007bff;
+}
+
+.grid-cell.beat-marker {
+  border-left: 2px solid #fff;
+}
+
+/* Status message */
+.status {
+  text-align: center;
+  color: #fff;
+  padding: 10px;
+  background-color: #2a2a2a;
+  border-radius: 4px;
+  margin-top: 20px;
+}
