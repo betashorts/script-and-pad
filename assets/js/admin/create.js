@@ -221,11 +221,10 @@ async function playNote(midiNote) {
       return;
     }
 
-    // Stop and restart the player to allow retriggering
-    if (player.state === "started") {
-      player.stop();
-    }
-    player.start();
+    // Create a new buffer source each time
+    const buffer = player.buffer;
+    const source = new Tone.ToneBufferSource(buffer).toDestination();
+    source.start();
   } catch (error) {
     console.error(`Error playing note ${midiNote}:`, error);
   }
