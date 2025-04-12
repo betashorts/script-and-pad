@@ -37,6 +37,17 @@ async function init() {
   try {
     console.log("Starting initialization...");
 
+    // Start audio context with user interaction
+    const startAudio = async () => {
+      await Tone.start();
+      document.removeEventListener("click", startAudio);
+      document.getElementById("status").textContent = "Audio enabled!";
+    };
+
+    document.addEventListener("click", startAudio);
+    document.getElementById("status").textContent =
+      "Click anywhere to start audio";
+
     // Load MIDI mapping and create instruments
     await loadInstruments();
     console.log("Instruments loaded:", INSTRUMENTS);
@@ -62,7 +73,6 @@ async function init() {
     setupEventListeners();
     console.log("Event listeners set up");
 
-    document.getElementById("status").textContent = "Ready to create!";
     console.log("Initialization complete");
   } catch (error) {
     console.error("Error during initialization:", error);
@@ -111,83 +121,42 @@ async function loadInstruments() {
   }
 }
 
-// Load audio samples
+// Load audio samples for all instruments
 async function loadSamples() {
   try {
-    console.log("Starting loadSamples function");
-    console.log("Current INSTRUMENTS array:", INSTRUMENTS);
+    console.log("Beginning to load samples...");
 
-    // Clear existing players
-    players = {};
-
-    // Make sure Tone.js is initialized
-    await Tone.start();
-
-    // Create audio context if it doesn't exist
-    if (!Tone.context) {
-      Tone.context = new AudioContext();
+    // Check if audio context is running
+    if (Tone.context.state !== "running") {
+      console.log("Audio context not running. Waiting for user interaction...");
+      return;
     }
 
+    // Clear existing players
+    if (players) {
+      Object.values(players).forEach((player) => player.dispose());
+    }
+    players = {};
+
     // Load samples for all instruments
-    console.log("Beginning to load samples for instruments");
     await Promise.all(
       INSTRUMENTS.map(async (instrument) => {
         try {
-          console.log(`Processing instrument: ${JSON.stringify(instrument)}`);
-
-          if (
-            !instrument.soundFile ||
-            instrument.soundFile.includes("Unknown")
-          ) {
-            console.warn(
-              `Skipping invalid sound file for MIDI note ${instrument.midiNote}:`,
-              instrument.soundFile
-            );
-            return;
-          }
-
-          // Ensure the sound file path is correct and the file exists
-          const soundPath = `../../../assets/sounds/${instrument.soundFile}`;
-          console.log(`Attempting to load sound from path: ${soundPath}`);
-
-          // Create buffer first
-          const buffer = new Tone.Buffer(soundPath, () => {
-            console.log(`Buffer loaded for ${instrument.midiNote}`);
-          });
-
-          // Create player with buffer
-          const player = new Tone.Player(buffer);
-
-          // Connect to master output
-          player.connect(Tone.getDestination());
-
-          // Store in players object
+          const player = new Tone.Player({
+            url: `../../assets/sounds/${instrument.soundFile}`,
+            onload: () => console.log(`Loaded sample for ${instrument.name}`),
+          }).toDestination();
           players[instrument.midiNote] = player;
-
-          console.log(`Player ${instrument.midiNote} setup complete`);
         } catch (error) {
-          console.error(
-            `Error setting up player for MIDI note ${instrument.midiNote}:`,
-            {
-              error: error,
-              instrument: instrument,
-              stack: error.stack,
-            }
-          );
+          console.error(`Error loading sample for ${instrument.name}:`, error);
         }
       })
     );
 
-    console.log("All samples loading process complete");
-    console.log("Final players object:", Object.keys(players));
-    document.getElementById("status").textContent = "Ready to play!";
+    console.log("All samples loaded successfully");
   } catch (error) {
-    console.error("Error in loadSamples:", {
-      error: error,
-      stack: error.stack,
-      instruments: INSTRUMENTS,
-    });
-    document.getElementById("status").textContent = "Error loading samples";
+    console.error("Error loading samples:", error);
+    throw error;
   }
 }
 
@@ -267,12 +236,27 @@ function createPianoRoll() {
 }
 
 // Play a single note
-function playNote(midiNote) {
-  const player = players[midiNote];
-  if (player && player.loaded) {
+async function playNote(midiNote) {
+  try {
+    // Check if audio context is running
+    if (Tone.context.state !== "running") {
+      console.log("Audio context not running. Cannot play note.");
+      return;
+    }
+
+    const player = players[midiNote];
+    if (!player) {
+      console.warn(`No player found for MIDI note ${midiNote}`);
+      return;
+    }
+
+    // Stop and restart the player to allow retriggering
+    if (player.state === "started") {
+      player.stop();
+    }
     player.start();
-  } else {
-    console.warn(`Player not ready for MIDI note ${midiNote}`);
+  } catch (error) {
+    console.error(`Error playing note ${midiNote}:`, error);
   }
 }
 
@@ -356,6 +340,60 @@ function setupEventListeners() {
         "Error creating MIDI file";
     }
   });
+}
+
+// Play the entire pattern
+async function playPattern() {
+  try {
+    // Check if audio context is running
+    if (Tone.context.state !== "running") {
+      console.log("Audio context not running. Cannot play pattern.");
+      return;
+    }
+
+    // If already playing, stop
+    if (isPlaying) {
+      Tone.Transport.stop();
+      Tone.Transport.cancel();
+      isPlaying = false;
+      return;
+    }
+
+    // Set up transport
+    const bpm = 120; // Default tempo
+    Tone.Transport.bpm.value = bpm;
+
+    // Schedule notes
+    const subdivision = "16n";
+    let currentStep = 0;
+
+    const repeat = new Tone.Loop((time) => {
+      try {
+        // Play all active notes for current step
+        INSTRUMENTS.forEach((instrument, index) => {
+          if (pattern[index][currentStep]) {
+            playNote(instrument.midiNote);
+          }
+        });
+
+        // Update UI to show current step
+        updatePianoRollUI(currentStep);
+
+        // Move to next step
+        currentStep = (currentStep + 1) % STEPS;
+      } catch (error) {
+        console.error("Error in pattern loop:", error);
+      }
+    }, subdivision);
+
+    // Start transport and loop
+    repeat.start(0);
+    Tone.Transport.start();
+    isPlaying = true;
+  } catch (error) {
+    console.error("Error playing pattern:", error);
+    isPlaying = false;
+  }
 }
 
 // Initialize when the page loads
