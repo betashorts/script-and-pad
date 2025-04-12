@@ -138,17 +138,27 @@ function createPianoRoll() {
 
   // Create grid
   INSTRUMENTS.forEach((instrument, i) => {
+    // Create a row for each instrument
+    const row = document.createElement("div");
+    row.className = "piano-roll-row";
+    row.style.display = "contents"; // This makes the row's children participate directly in the grid
+
     // Add instrument label
     const label = document.createElement("div");
     label.className = "instrument-label";
-    label.textContent = `${instrument.name} (${instrument.midiNote})`;
-    pianoRoll.appendChild(label);
+    label.textContent = instrument.name;
+    if (instrument.midiNote) {
+      label.textContent += ` (${instrument.midiNote})`;
+    }
+    row.appendChild(label);
 
     // Add grid cells for this instrument
     for (let step = 0; step < STEPS; step++) {
       const cell = document.createElement("div");
       cell.className = "grid-cell";
-      if (step % 4 === 0) cell.classList.add("beat-marker");
+      if (step % 4 === 0) {
+        cell.classList.add("beat-marker");
+      }
 
       cell.dataset.instrument = i;
       cell.dataset.step = step;
@@ -164,8 +174,10 @@ function createPianoRoll() {
         }
       });
 
-      pianoRoll.appendChild(cell);
+      row.appendChild(cell);
     }
+
+    pianoRoll.appendChild(row);
   });
 }
 
