@@ -286,7 +286,7 @@ function setupEventListeners() {
         },
       ];
 
-      // Set PPQ
+      // Set PPQ Test
       const ppq = 480; // Standard MIDI PPQ
       console.log("Setting PPQ:", ppq);
       midi.header.ppq = ppq;
