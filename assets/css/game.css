@@ -157,3 +157,17 @@ body {
   color: var(--text-secondary);
   margin-top: 5px;
 }
+
+.beat-category {
+  font-size: 1.1em;
+  color: #fff;
+  margin: 20px 0 10px;
+  padding: 0 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.beat-category:first-child {
+  margin-top: 0;
+}
