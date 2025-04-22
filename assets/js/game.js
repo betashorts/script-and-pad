@@ -452,6 +452,7 @@ function createBeatList() {
           .forEach((item) => item.classList.remove("active"));
         beatItem.classList.add("active");
       });
+      console.log("Beat name:", beat.name);
       document.getElementById("current-beat-name").textContent = beat.name;
       beatList.appendChild(beatItem);
     });
