@@ -61,41 +61,59 @@ export const BEAT_CATEGORIES = {
   // ],
   "Backbeats Mastery": [
     {
-      name: "Basic Backbeat Rock",
-      file: "backbeat_rock_090.mid",
-      description:
-        "Snare on 2 & 4, kick on 1,3 - Classic backbeat foundation (90 BPM)",
+      name: "Basic Backbeat Foundation",
+      file: "backbeat_basic_085.mid",
+      description: "Essential backbeat pattern with steady kick (85 BPM)",
     },
     {
-      name: "Offbeat Kick Practice",
-      file: "backbeat_kickoff_095.mid",
-      description: "Kick on offbeats with steady hi-hat pattern (95 BPM)",
+      name: "Ghost Note Backbeat",
+      file: "backbeat_ghost_095.mid",
+      description: "Backbeat with ghost note accents (95 BPM)",
     },
     {
-      name: "Hat Variation Groove",
-      file: "backbeat_hatplay_100.mid",
-      description:
-        "Alternating open/closed hats with basic kick-snare pattern (100 BPM)",
+      name: "Clap Backbeat",
+      file: "backbeat_clap_100.mid",
+      description: "Backbeat pattern using clap sounds (100 BPM)",
     },
     {
-      name: "Ghost Note Snare Pattern",
-      file: "backbeat_ghost_105.mid",
-      description: "Ghost snare notes between main backbeats (105 BPM)",
+      name: "Offbeat Hi-Hat Backbeat",
+      file: "backbeat_offhat_105.mid",
+      description: "Backbeat with offbeat hi-hat accents (105 BPM)",
     },
     {
-      name: "Syncopated Backbeat",
-      file: "backbeat_syncopated_110.mid",
-      description: "Complex kick-snare interaction with syncopation (110 BPM)",
+      name: "Open Hi-Hat Backbeat",
+      file: "backbeat_ophat_110.mid",
+      description: "Backbeat with open hi-hat variations (110 BPM)",
     },
     {
-      name: "Fill Ending Pattern",
-      file: "backbeat_fill_115.mid",
-      description: "Basic backbeat with fill in final bar (115 BPM)",
+      name: "Tom Groove Backbeat",
+      file: "backbeat_tomgroove_110.mid",
+      description: "Backbeat with tom fills and accents (110 BPM)",
     },
     {
-      name: "Linear Groove Pattern",
-      file: "backbeat_linear_120.mid",
-      description: "No overlapping hits - one sound at a time (120 BPM)",
+      name: "Clap Syncopation",
+      file: "backbeat_clapsync_115.mid",
+      description: "Syncopated clap patterns with backbeat (115 BPM)",
+    },
+    {
+      name: "Fill Ending Backbeat",
+      file: "backbeat_fillend_115.mid",
+      description: "Backbeat with fill ending variations (115 BPM)",
+    },
+    {
+      name: "Linear Tom Backbeat",
+      file: "backbeat_lineartom_120.mid",
+      description: "Linear tom patterns with backbeat (120 BPM)",
+    },
+    {
+      name: "Dynamic Backbeat",
+      file: "backbeat_dynamics_120.mid",
+      description: "Backbeat with dynamic variations (120 BPM)",
+    },
+    {
+      name: "Full Funk Backbeat",
+      file: "backbeat_funkfull_125.mid",
+      description: "Complete funk backbeat pattern (125 BPM)",
     },
   ],
   "Kick Variations": [
