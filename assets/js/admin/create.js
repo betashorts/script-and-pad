@@ -73,6 +73,101 @@ async function init() {
     setupEventListeners();
     console.log("Event listeners set up");
 
+    // Add upload button
+    const uploadButton = document.createElement("button");
+    uploadButton.id = "uploadPattern";
+    uploadButton.className = "btn";
+    uploadButton.textContent = "Upload Pattern";
+    document.querySelector(".controls").appendChild(uploadButton);
+
+    // Add file input (hidden)
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = ".json";
+    fileInput.style.display = "none";
+    document.body.appendChild(fileInput);
+
+    // Add upload event listener
+    uploadButton.addEventListener("click", () => {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener("change", async (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      try {
+        const text = await file.text();
+        const patternData = JSON.parse(text);
+
+        // Validate pattern data
+        if (!validatePatternData(patternData)) {
+          throw new Error("Invalid pattern data structure");
+        }
+
+        // Set BPM
+        document.getElementById("bpm").value = patternData.bpm;
+        Tone.Transport.bpm.value = patternData.bpm;
+
+        // Clear existing pattern
+        pattern = Array(INSTRUMENTS.length)
+          .fill()
+          .map(() => Array(STEPS).fill(false));
+
+        // Load pattern data using MIDI numbers
+        Object.entries(patternData.pattern).forEach(([midiNote, steps]) => {
+          // Find the instrument index for this MIDI note
+          const instrumentIndex = INSTRUMENTS.findIndex(
+            (inst) => inst.midiNote === parseInt(midiNote)
+          );
+
+          if (instrumentIndex !== -1) {
+            // Update pattern for this instrument
+            steps.forEach((isActive, step) => {
+              if (isActive) {
+                pattern[instrumentIndex][step] = true;
+              }
+            });
+          }
+        });
+
+        // Update UI
+        updatePianoRollUI();
+        document.getElementById("status").textContent =
+          "Pattern loaded successfully!";
+      } catch (error) {
+        console.error("Error loading pattern:", error);
+        document.getElementById("status").textContent =
+          "Error loading pattern: " + error.message;
+      }
+    });
+
+    // Helper function to validate pattern data
+    function validatePatternData(data) {
+      if (!data || typeof data.bpm !== "number") {
+        return false;
+      }
+
+      if (!data.pattern || typeof data.pattern !== "object") {
+        return false;
+      }
+
+      // Validate each MIDI note pattern
+      return Object.entries(data.pattern).every(([midiNote, steps]) => {
+        // Check if MIDI note is a valid number
+        if (isNaN(parseInt(midiNote))) {
+          return false;
+        }
+
+        // Check if steps is an array of correct length with boolean values
+        return (
+          Array.isArray(steps) &&
+          steps.length === STEPS &&
+          steps.every((step) => typeof step === "boolean")
+        );
+      });
+    }
+
     console.log("Initialization complete");
   } catch (error) {
     console.error("Error during initialization:", error);
