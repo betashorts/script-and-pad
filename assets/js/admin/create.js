@@ -259,102 +259,120 @@ function setupEventListeners() {
   });
 
   // Download MIDI button
-  document.getElementById("downloadPattern").addEventListener("click", () => {
-    console.log("Starting MIDI download process...");
-    try {
-      // Create a new MIDI file
-      console.log("Creating new MIDI object");
-      const midi = new Midi();
+  document
+    .getElementById("downloadPattern")
+    .addEventListener("click", async () => {
+      console.log("Starting MIDI download process...");
+      try {
+        // Create a new MIDI file
+        console.log("Creating new MIDI object");
+        const midi = new Midi();
 
-      // Create track
-      const track = midi.addTrack();
+        // Create track
+        const track = midi.addTrack();
 
-      // Get BPM
-      const bpm = parseInt(document.getElementById("bpm").value) || 120;
-      console.log(`Using BPM: ${bpm}`);
+        // Get BPM
+        const bpm = parseInt(document.getElementById("bpm").value) || 120;
+        console.log(`Using BPM: ${bpm}`);
 
-      // Add tempo information
-      console.log("Setting tempo information");
-      midi.header.setTempo(bpm);
+        // Add tempo information
+        console.log("Setting tempo information");
+        midi.header.setTempo(bpm);
 
-      // Add time signature (4/4)
-      console.log("Setting time signature");
-      midi.header.timeSignatures = [
-        {
-          ticks: 0,
-          timeSignature: [4, 4],
-        },
-      ];
+        // Add time signature (4/4)
+        console.log("Setting time signature");
+        midi.header.timeSignatures = [
+          {
+            ticks: 0,
+            timeSignature: [4, 4],
+          },
+        ];
 
-      // Set PPQ
-      const ppq = 480; // Standard MIDI PPQ
-      // console.log("Setting PPQ:", ppq);
-      // midi.header.ppq = ppq;
+        // Set PPQ
+        const ppq = 480; // Standard MIDI PPQ
+        // console.log("Setting PPQ:", ppq);
+        // midi.header.ppq = ppq;
 
-      // Filter out instruments that have no active notes
-      console.log("Filtering active instruments...");
-      const activeInstruments = INSTRUMENTS.filter((_, index) =>
-        pattern[index].some((step) => step === true)
-      );
-      console.log(
-        `Found ${activeInstruments.length} active instruments out of ${INSTRUMENTS.length}`
-      );
-
-      // Add notes to the track only for active instruments
-      console.log("Starting to add notes to track");
-      let noteCount = 0;
-      activeInstruments.forEach((instrument, i) => {
-        // Find original index in pattern array
-        const originalIndex = INSTRUMENTS.findIndex(
-          (inst) => inst.midiNote === instrument.midiNote
+        // Filter out instruments that have no active notes
+        console.log("Filtering active instruments...");
+        const activeInstruments = INSTRUMENTS.filter((_, index) =>
+          pattern[index].some((step) => step === true)
+        );
+        console.log(
+          `Found ${activeInstruments.length} active instruments out of ${INSTRUMENTS.length}`
         );
 
-        pattern[originalIndex].forEach((isActive, step) => {
-          if (isActive) {
-            // Calculate precise timing using PPQ
-            const startTicks = Math.round((step * ppq) / 4); // Convert step to ticks (16th notes)
-            const durationTicks = Math.round(ppq / 4); // Duration of one 16th note
+        // Add notes to the track only for active instruments
+        console.log("Starting to add notes to track");
+        let noteCount = 0;
+        activeInstruments.forEach((instrument, i) => {
+          // Find original index in pattern array
+          const originalIndex = INSTRUMENTS.findIndex(
+            (inst) => inst.midiNote === instrument.midiNote
+          );
 
-            track.addNote({
-              midi: instrument.midiNote,
-              ticks: startTicks,
-              durationTicks: durationTicks,
-              velocity: 0.8,
-            });
-            noteCount++;
-          }
+          pattern[originalIndex].forEach((isActive, step) => {
+            if (isActive) {
+              // Calculate precise timing using PPQ
+              const startTicks = Math.round((step * ppq) / 4); // Convert step to ticks (16th notes)
+              const durationTicks = Math.round(ppq / 4); // Duration of one 16th note
+
+              track.addNote({
+                midi: instrument.midiNote,
+                ticks: startTicks,
+                durationTicks: durationTicks,
+                velocity: 0.8,
+              });
+              noteCount++;
+            }
+          });
         });
-      });
-      console.log(`Added ${noteCount} notes to the track`);
+        console.log(`Added ${noteCount} notes to the track`);
 
-      // Convert to array buffer
-      console.log("Converting MIDI to array buffer");
-      const arrayBuffer = midi.toArray();
+        // Convert to array buffer
+        console.log("Converting MIDI to array buffer");
+        const arrayBuffer = midi.toArray();
 
-      // Create and download the file
-      console.log("Creating MIDI blob");
-      const blob = new Blob([arrayBuffer], { type: "audio/midi" });
-      console.log("Creating download URL");
-      const url = URL.createObjectURL(blob);
-      console.log("Initiating download");
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "custom_pattern.mid";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      console.log("Cleaning up URL");
-      URL.revokeObjectURL(url);
+        // Create blob
+        console.log("Creating MIDI blob");
+        const blob = new Blob([arrayBuffer], { type: "audio/midi" });
 
-      document.getElementById("status").textContent =
-        "Pattern downloaded successfully!";
-      console.log("MIDI download process completed");
-    } catch (error) {
-      console.error("Error in MIDI download process:", error);
-      document.getElementById("status").textContent =
-        "Error creating MIDI file";
-    }
-  });
+        try {
+          // Show save file dialog
+          const options = {
+            suggestedName: "custom_pattern.mid",
+            types: [
+              {
+                description: "MIDI Files",
+                accept: {
+                  "audio/midi": [".mid"],
+                },
+              },
+            ],
+          };
+
+          const fileHandle = await window.showSaveFilePicker(options);
+          const writable = await fileHandle.createWritable();
+          await writable.write(blob);
+          await writable.close();
+
+          document.getElementById("status").textContent =
+            "Pattern downloaded successfully!";
+          console.log("MIDI download process completed");
+        } catch (error) {
+          if (error.name === "AbortError") {
+            console.log("User cancelled the save operation");
+            document.getElementById("status").textContent = "Save cancelled";
+          } else {
+            throw error;
+          }
+        }
+      } catch (error) {
+        console.error("Error in MIDI download process:", error);
+        document.getElementById("status").textContent =
+          "Error creating MIDI file";
+      }
+    });
 }
 
 // Play the entire pattern
