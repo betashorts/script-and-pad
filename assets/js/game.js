@@ -120,6 +120,12 @@ async function loadMIDIFile(beatFile = AVAILABLE_BEATS[0].file) {
     Tone.Transport.bpm.value = bpm;
     document.getElementById("current-beat-bpm").textContent = `BPM: ${bpm}`;
 
+    // Set beat name
+    const beatName =
+      AVAILABLE_BEATS.find((beat) => beat.file === beatFile)?.name ||
+      "Unknown Beat";
+    document.getElementById("current-beat-name").textContent = beatName;
+
     // Get unique MIDI notes
     const uniqueNotes = new Set();
     midi.tracks.forEach((track) => {
@@ -452,8 +458,6 @@ function createBeatList() {
           .forEach((item) => item.classList.remove("active"));
         beatItem.classList.add("active");
       });
-      console.log("Beat name:", beat.name);
-      document.getElementById("current-beat-name").textContent = beat.name;
       beatList.appendChild(beatItem);
     });
   });
