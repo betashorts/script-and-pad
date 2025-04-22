@@ -447,8 +447,6 @@ function setupEventListeners() {
 
         // Set PPQ
         const ppq = 480; // Standard MIDI PPQ
-        // console.log("Setting PPQ:", ppq);
-        // midi.header.ppq = ppq;
 
         // Filter out instruments that have no active notes
         console.log("Filtering active instruments...");
@@ -495,9 +493,23 @@ function setupEventListeners() {
         const blob = new Blob([arrayBuffer], { type: "audio/midi" });
 
         try {
+          // Get pattern ID from JSON input if available
+          let defaultFilename = "custom_pattern.mid";
+          try {
+            const jsonText = jsonTextArea.value.trim();
+            if (jsonText) {
+              const patternData = JSON.parse(jsonText);
+              if (patternData.id) {
+                defaultFilename = `${patternData.id}.mid`;
+              }
+            }
+          } catch (e) {
+            console.log("Could not parse JSON for filename, using default");
+          }
+
           // Show save file dialog
           const options = {
-            suggestedName: "custom_pattern.mid",
+            suggestedName: defaultFilename,
             types: [
               {
                 description: "MIDI Files",
