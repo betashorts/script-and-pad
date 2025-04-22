@@ -87,27 +87,58 @@ async function init() {
     fileInput.style.display = "none";
     document.body.appendChild(fileInput);
 
+    // Add JSON input area
+    const jsonInputContainer = document.createElement("div");
+    jsonInputContainer.className = "json-input-container";
+    jsonInputContainer.style.marginTop = "20px";
+
+    const jsonInputLabel = document.createElement("label");
+    jsonInputLabel.textContent = "Or paste JSON pattern:";
+    jsonInputLabel.style.display = "block";
+    jsonInputLabel.style.marginBottom = "5px";
+
+    const jsonTextArea = document.createElement("textarea");
+    jsonTextArea.id = "jsonPatternInput";
+    jsonTextArea.rows = 10;
+    jsonTextArea.cols = 50;
+    jsonTextArea.placeholder = `{
+    "bpm": 120,
+    "pattern": {
+      "35": [false, false, false, false, true, false, false, false, false, false, false, false, true, false, false, false],
+      "38": [false, false, true, false, false, false, true, false, false, false, true, false, false, false, true, false],
+      "42": [true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false]
+    }
+  }`;
+    jsonTextArea.style.width = "100%";
+    jsonTextArea.style.marginBottom = "10px";
+    jsonTextArea.style.fontFamily = "monospace";
+
+    const loadJsonButton = document.createElement("button");
+    loadJsonButton.id = "loadJsonPattern";
+    loadJsonButton.className = "btn";
+    loadJsonButton.textContent = "Load Pattern from JSON";
+
+    jsonInputContainer.appendChild(jsonInputLabel);
+    jsonInputContainer.appendChild(jsonTextArea);
+    jsonInputContainer.appendChild(loadJsonButton);
+    document.querySelector(".controls").appendChild(jsonInputContainer);
+
     // Add upload event listener
     uploadButton.addEventListener("click", () => {
       fileInput.click();
     });
 
-    fileInput.addEventListener("change", async (event) => {
-      const file = event.target.files[0];
-      if (!file) return;
-
+    // Function to load pattern from JSON data
+    async function loadPatternFromJson(jsonData) {
       try {
-        const text = await file.text();
-        const patternData = JSON.parse(text);
-
         // Validate pattern data
-        if (!validatePatternData(patternData)) {
+        if (!validatePatternData(jsonData)) {
           throw new Error("Invalid pattern data structure");
         }
 
         // Set BPM
-        document.getElementById("bpm").value = patternData.bpm;
-        Tone.Transport.bpm.value = patternData.bpm;
+        document.getElementById("bpm").value = jsonData.bpm;
+        Tone.Transport.bpm.value = jsonData.bpm;
 
         // Clear existing pattern
         pattern = Array(INSTRUMENTS.length)
@@ -115,7 +146,7 @@ async function init() {
           .map(() => Array(STEPS).fill(false));
 
         // Load pattern data using MIDI numbers
-        Object.entries(patternData.pattern).forEach(([midiNote, steps]) => {
+        Object.entries(jsonData.pattern).forEach(([midiNote, steps]) => {
           // Find the instrument index for this MIDI note
           const instrumentIndex = INSTRUMENTS.findIndex(
             (inst) => inst.midiNote === parseInt(midiNote)
@@ -137,6 +168,37 @@ async function init() {
           "Pattern loaded successfully!";
       } catch (error) {
         console.error("Error loading pattern:", error);
+        document.getElementById("status").textContent =
+          "Error loading pattern: " + error.message;
+      }
+    }
+
+    fileInput.addEventListener("change", async (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      try {
+        const text = await file.text();
+        const patternData = JSON.parse(text);
+        await loadPatternFromJson(patternData);
+      } catch (error) {
+        console.error("Error loading pattern:", error);
+        document.getElementById("status").textContent =
+          "Error loading pattern: " + error.message;
+      }
+    });
+
+    // Add event listener for JSON input button
+    loadJsonButton.addEventListener("click", async () => {
+      try {
+        const jsonText = jsonTextArea.value.trim();
+        if (!jsonText) {
+          throw new Error("Please enter JSON pattern data");
+        }
+        const patternData = JSON.parse(jsonText);
+        await loadPatternFromJson(patternData);
+      } catch (error) {
+        console.error("Error loading pattern from JSON:", error);
         document.getElementById("status").textContent =
           "Error loading pattern: " + error.message;
       }
