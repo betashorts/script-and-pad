@@ -378,6 +378,28 @@ function createPianoRoll() {
   });
 }
 
+// Function to update the piano roll UI based on the current pattern
+function updatePianoRollUI(currentStep = -1) {
+  const pianoRoll = document.getElementById("piano-roll");
+  if (!pianoRoll) return;
+
+  // Update all cells based on pattern
+  INSTRUMENTS.forEach((_, instrumentIndex) => {
+    for (let step = 0; step < STEPS; step++) {
+      const cell = pianoRoll.querySelector(
+        `[data-instrument="${instrumentIndex}"][data-step="${step}"]`
+      );
+      if (cell) {
+        // Update active state
+        cell.classList.toggle("active", pattern[instrumentIndex][step]);
+
+        // Update current step indicator
+        cell.classList.toggle("current", step === currentStep);
+      }
+    }
+  });
+}
+
 // Play a single note
 function playNote(midiNote) {
   try {
