@@ -118,45 +118,60 @@ export const BEAT_CATEGORIES = {
   ],
   "Kick Variations": [
     {
-      name: "Basic Double Kick",
-      file: "kick_double_090.mid",
+      name: "Basic Kick Pattern",
+      file: "kick_basic_090.mid",
       description:
-        "Close kick hits with steady backbeat - Boom-bap style (90 BPM)",
+        "Fundamental kick drum pattern with steady backbeat (90 BPM)",
     },
     {
-      name: "Syncopated Kicks",
-      file: "kick_sync_095.mid",
-      description:
-        "Kick on 16th note offbeats - Neo-soul/Dilla-style swing (95 BPM)",
+      name: "Syncopated Kick",
+      file: "kick_syncopate_095.mid",
+      description: "Kick drum syncopation with offbeat accents (95 BPM)",
     },
     {
-      name: "Ghost Kick Layer",
-      file: "kick_ghostlayer_100.mid",
-      description:
-        "Ghost kicks with snare interaction - Chillhop/RnB pocket (100 BPM)",
+      name: "Triplet Kick Flow",
+      file: "kick_triplet_095.mid",
+      description: "Kick drum triplets with steady groove (95 BPM)",
     },
     {
-      name: "Mid-Bar Kick Cluster",
-      file: "kick_cluster_105.mid",
-      description:
-        "Kick fills mid-bar for tension - Hip-hop boom-bap style (105 BPM)",
+      name: "Four on the Floor",
+      file: "kick_4floor_100.mid",
+      description: "Classic four-on-the-floor kick pattern (100 BPM)",
     },
     {
-      name: "Kick Flam Effect",
-      file: "kick_flam_110.mid",
-      description:
-        "Double-tap kick hits for flam feel - Funk/Breakbeat style (110 BPM)",
+      name: "Polyrhythmic Kick",
+      file: "kick_poly_100.mid",
+      description: "Complex polyrhythmic kick patterns (100 BPM)",
     },
     {
-      name: "Push Pull Kick Pattern",
-      file: "kick_pushpull_115.mid",
-      description: "Early + delayed kicks for groove manipulation (115 BPM)",
+      name: "Dotted Kick Rhythm",
+      file: "kick_dotted_105.mid",
+      description: "Kick patterns using dotted rhythms (105 BPM)",
     },
     {
-      name: "Hi-Hat Gaps Kick Fill",
-      file: "kick_fillgap_120.mid",
-      description:
-        "Kicks filling hi-hat gaps - Breakbeat/Dance style (120 BPM)",
+      name: "Gallop Kick Pattern",
+      file: "kick_gallop_105.mid",
+      description: "Galloping kick rhythm with syncopation (105 BPM)",
+    },
+    {
+      name: "Snare Call Kick",
+      file: "kick_snarecall_110.mid",
+      description: "Kick patterns responding to snare calls (110 BPM)",
+    },
+    {
+      name: "Linear Kick Pattern",
+      file: "kick_linear_110.mid",
+      description: "Linear kick patterns with no overlap (110 BPM)",
+    },
+    {
+      name: "Pedal Coordination",
+      file: "kick_pedalcoord_115.mid",
+      description: "Kick patterns with hi-hat pedal coordination (115 BPM)",
+    },
+    {
+      name: "Fill Kick Pattern",
+      file: "kick_fill_120.mid",
+      description: "Kick drum fills and variations (120 BPM)",
     },
   ],
   "Funky Offbeats": [
