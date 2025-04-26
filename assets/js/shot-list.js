@@ -15,7 +15,6 @@ function processText(text) {
   const result = {};
   let currentAct = "ACT 0";
   let currentScene = "scene_0_act_0";
-  let currentLines = [];
 
   result[currentAct] = {
     [currentScene]: [],
@@ -29,7 +28,7 @@ function processText(text) {
     const actMatch = trimmedLine.match(/^ACT\s+(I|II|III|IV|V)$/i);
     if (actMatch) {
       currentAct = `ACT ${actMatch[1]}`;
-      currentScene = "scene_0_act_" + actMatch[1];
+      currentScene = `scene_0_act_${actMatch[1]}`;
       result[currentAct] = {
         [currentScene]: [],
       };
@@ -71,21 +70,35 @@ async function processPdf(file) {
 
     return processText(fullText);
   } catch (error) {
+    console.error("PDF processing error:", error);
     throw new Error("Error processing PDF: " + error.message);
   }
 }
 
 async function processDocx(file) {
   try {
+    console.log("Starting DOCX processing...");
     const arrayBuffer = await file.arrayBuffer();
+    console.log("File loaded as ArrayBuffer");
+
+    if (!window.mammoth) {
+      throw new Error(
+        "Mammoth library not loaded. Please refresh the page and try again."
+      );
+    }
+
+    console.log("Using Mammoth.js for processing...");
     const result = await mammoth.extractRawText({ arrayBuffer: arrayBuffer });
-    if (result.value) {
-      return processText(result.value);
-    } else {
+    console.log("Text extracted successfully");
+
+    if (!result.value) {
       throw new Error("No text content found in the document");
     }
+
+    return processText(result.value);
   } catch (error) {
-    throw new Error("Error processing DOCX: " + error.message);
+    console.error("DOCX processing error:", error);
+    throw new Error(`Error processing DOCX: ${error.message}`);
   }
 }
 
@@ -103,6 +116,7 @@ async function processFile() {
 
   try {
     updateStatus("Processing file...");
+    console.log(`Processing file of type: ${fileType}`);
 
     if (fileType === "pdf") {
       result = await processPdf(file);
@@ -117,6 +131,7 @@ async function processFile() {
     showJsonOutput(result);
     updateStatus("File processed successfully!");
   } catch (error) {
+    console.error("Processing error:", error);
     updateStatus(error.message, true);
   }
 }
