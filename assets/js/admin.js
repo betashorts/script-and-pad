@@ -432,8 +432,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // --- Grouped MIDI Patterns Feature ---
-import { getAllBeats } from "../constants/beats.js";
-
 async function getPatternSignatureForMidiFile(midiFile) {
   // Fetch and parse the MIDI file, then return a stringified pattern signature
   const response = await fetch(`../assets/midi/${midiFile}`);
