@@ -430,3 +430,106 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// --- Grouped MIDI Patterns Feature ---
+import { getAllBeats } from "../constants/beats.js";
+
+async function getPatternSignatureForMidiFile(midiFile) {
+  // Fetch and parse the MIDI file, then return a stringified pattern signature
+  const response = await fetch(`../assets/midi/${midiFile}`);
+  const arrayBuffer = await response.arrayBuffer();
+  const midi = new Midi(arrayBuffer);
+  // Use the first bar's pattern as the signature (or all bars if you want to be strict)
+  const uniqueNotes = Array.from(
+    new Set(
+      midi.tracks.flatMap((track) => track.notes.map((note) => note.midi))
+    )
+  );
+  const INSTRUMENTS = uniqueNotes.map((note) => ({ midiNote: note }));
+  const STEPS = 16;
+  const totalBars = Math.ceil(midi.durationTicks / (midi.header.ppq * 4));
+  let barPatterns = [];
+  for (let bar = 0; bar < totalBars; bar++) {
+    const pattern = Array(INSTRUMENTS.length)
+      .fill()
+      .map(() => Array(STEPS).fill(false));
+    const barStartTick = bar * midi.header.ppq * 4;
+    const barEndTick = (bar + 1) * midi.header.ppq * 4;
+    midi.tracks.forEach((track) => {
+      track.notes.forEach((note) => {
+        if (note.ticks >= barStartTick && note.ticks < barEndTick) {
+          const instrumentIndex = INSTRUMENTS.findIndex(
+            (inst) => inst.midiNote === note.midi
+          );
+          if (instrumentIndex !== -1) {
+            const stepInBar = Math.floor(
+              (note.ticks - barStartTick) / (midi.header.ppq / 4)
+            );
+            if (stepInBar < STEPS) {
+              pattern[instrumentIndex][stepInBar] = true;
+            }
+          }
+        }
+      });
+    });
+    barPatterns.push(pattern);
+  }
+  // Use all bars for signature (for strict grouping)
+  return JSON.stringify(barPatterns);
+}
+
+async function groupMidiFilesByPattern() {
+  const beats = getAllBeats();
+  const groups = {};
+  for (const beat of beats) {
+    try {
+      const signature = await getPatternSignatureForMidiFile(beat.file);
+      if (!groups[signature]) groups[signature] = [];
+      groups[signature].push(beat);
+    } catch (e) {
+      console.error("Error processing MIDI file for grouping:", beat.file, e);
+    }
+  }
+  return groups;
+}
+
+async function renderGroupedMidiPatterns() {
+  const container = document.getElementById("grouped-midi-patterns");
+  container.innerHTML = "<div>Loading grouped MIDI patterns...</div>";
+  const groups = await groupMidiFilesByPattern();
+  container.innerHTML = "";
+  let groupIndex = 0;
+  for (const [signature, beats] of Object.entries(groups)) {
+    const groupDiv = document.createElement("div");
+    groupDiv.className = "midi-pattern-group";
+    const header = document.createElement("h3");
+    header.textContent = `Pattern Group #${++groupIndex} (${
+      beats.length
+    } file(s))`;
+    groupDiv.appendChild(header);
+    const fileList = document.createElement("ul");
+    beats.forEach((beat) => {
+      const li = document.createElement("li");
+      li.textContent = beat.name + " (" + beat.file + ") ";
+      const loadBtn = document.createElement("button");
+      loadBtn.textContent = "Load in Piano Roll";
+      loadBtn.onclick = () => processMidiFileFromAssets(beat.file);
+      li.appendChild(loadBtn);
+      fileList.appendChild(li);
+    });
+    groupDiv.appendChild(fileList);
+    container.appendChild(groupDiv);
+  }
+}
+
+// Helper to process MIDI file from assets (not upload)
+async function processMidiFileFromAssets(filename) {
+  const response = await fetch(`../assets/midi/${filename}`);
+  const file = new File([await response.arrayBuffer()], filename);
+  await processMidiFile(file);
+}
+
+// On DOMContentLoaded, render grouped patterns
+window.addEventListener("DOMContentLoaded", () => {
+  renderGroupedMidiPatterns();
+});
