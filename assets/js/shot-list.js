@@ -78,9 +78,12 @@ async function processPdf(file) {
 async function processDocx(file) {
   try {
     const arrayBuffer = await file.arrayBuffer();
-    const docx = await docx4js.load(arrayBuffer);
-    const text = docx.getText();
-    return processText(text);
+    const result = await mammoth.extractRawText({ arrayBuffer: arrayBuffer });
+    if (result.value) {
+      return processText(result.value);
+    } else {
+      throw new Error("No text content found in the document");
+    }
   } catch (error) {
     throw new Error("Error processing DOCX: " + error.message);
   }
