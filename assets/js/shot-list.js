@@ -55,6 +55,49 @@ function processText(text) {
   return result;
 }
 
+function groupItemsIntoLines(items, yTolerance = 2) {
+  // Sort items by y (descending, because PDF y=0 is bottom), then x (ascending)
+  items.sort((a, b) => {
+    const dy = b.transform[5] - a.transform[5];
+    if (Math.abs(dy) > yTolerance) return dy;
+    return a.transform[4] - b.transform[4];
+  });
+
+  const lines = [];
+  let currentLine = [];
+  let currentY = null;
+
+  items.forEach((item) => {
+    const y = item.transform[5];
+    if (currentY === null || Math.abs(y - currentY) <= yTolerance) {
+      currentLine.push(item);
+      currentY = y;
+    } else {
+      // Sort currentLine by x, join, and push to lines
+      lines.push(
+        currentLine
+          .sort((a, b) => a.transform[4] - b.transform[4])
+          .map((i) => i.str)
+          .join(" ")
+      );
+      currentLine = [item];
+      currentY = y;
+    }
+  });
+
+  // Push the last line
+  if (currentLine.length) {
+    lines.push(
+      currentLine
+        .sort((a, b) => a.transform[4] - b.transform[4])
+        .map((i) => i.str)
+        .join(" ")
+    );
+  }
+
+  return lines;
+}
+
 async function processPdf(file) {
   try {
     const arrayBuffer = await file.arrayBuffer();
