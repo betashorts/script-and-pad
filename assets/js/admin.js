@@ -1,6 +1,3 @@
-// Import beat categories
-import { BEAT_CATEGORIES, getAllBeats } from "../constants/beats.js";
-
 let INSTRUMENTS = [];
 let MIDI_MAPPING = null; // Loaded from Midi mapping json file
 let players = {};
@@ -435,6 +432,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // --- Grouped MIDI Patterns Feature ---
+import { getAllBeats } from "../constants/beats.js";
+
 async function getPatternSignatureForMidiFile(midiFile) {
   // Fetch and parse the MIDI file, then return a stringified pattern signature
   const response = await fetch(`../assets/midi/${midiFile}`);
@@ -479,17 +478,8 @@ async function getPatternSignatureForMidiFile(midiFile) {
   return JSON.stringify(barPatterns);
 }
 
-// Function to format beat name from filename (for sidebar)
-function formatBeatName(filename) {
-  return filename
-    .replace(".mid", "")
-    .split("_")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
-
 async function groupMidiFilesByPattern() {
-  const beats = getAllBeats(formatBeatName);
+  const beats = getAllBeats();
   const groups = {};
   for (const beat of beats) {
     try {
