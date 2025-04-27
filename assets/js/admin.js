@@ -1,3 +1,6 @@
+// --- Grouped MIDI Patterns Feature ---
+import { getAllBeats } from "../constants/beats.js";
+
 let INSTRUMENTS = [];
 let MIDI_MAPPING = null; // Loaded from Midi mapping json file
 let players = {};
@@ -430,9 +433,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-// --- Grouped MIDI Patterns Feature ---
-import { getAllBeats } from "../constants/beats.js";
 
 async function getPatternSignatureForMidiFile(midiFile) {
   // Fetch and parse the MIDI file, then return a stringified pattern signature
