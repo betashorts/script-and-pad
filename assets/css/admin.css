@@ -72,6 +72,53 @@
   background: #2a2a2a;
   padding: 20px;
   border-radius: 8px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+#grouped-midi-patterns {
+  margin-top: 20px;
+}
+
+.midi-pattern-group {
+  margin-bottom: 30px;
+  background: #232323;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.midi-pattern-group h3 {
+  margin-top: 0;
+  font-size: 1.1em;
+  color: #fff;
+}
+
+.midi-pattern-group ul {
+  list-style: disc inside;
+  padding-left: 20px;
+}
+
+.midi-pattern-group li {
+  margin-bottom: 10px;
+  color: #eee;
+  font-size: 1em;
+}
+
+.midi-pattern-group button {
+  margin-top: 5px;
+  padding: 6px 14px;
+  background: #4a90e2;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.95em;
+  transition: background 0.2s;
+  display: block;
+}
+
+.midi-pattern-group button:hover {
+  background: #357abd;
 }
 
 .bar-pattern {
