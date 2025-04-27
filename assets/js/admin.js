@@ -1,3 +1,6 @@
+// Import beat categories
+import { BEAT_CATEGORIES, getAllBeats } from "../constants/beats.js";
+
 let INSTRUMENTS = [];
 let MIDI_MAPPING = null; // Loaded from Midi mapping json file
 let players = {};
