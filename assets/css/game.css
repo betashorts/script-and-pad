@@ -29,6 +29,8 @@ body {
   background: var(--surface-color);
   padding: 20px;
   border-right: 1px solid var(--surface-secondary);
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 .main-content {
