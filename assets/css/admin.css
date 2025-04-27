@@ -221,3 +221,24 @@
   background-color: #28a745;
   color: white;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: #232323;
+  padding: 20px;
+  border-right: 1px solid #333;
+  max-height: 100vh;
+  overflow-y: auto;
+  min-width: 260px;
+}
+
+.main-content {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
