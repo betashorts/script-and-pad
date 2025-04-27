@@ -1,5 +1,5 @@
 // Beat categories and their associated MIDI files
-window.BEAT_CATEGORIES = {
+export const BEAT_CATEGORIES = {
   // "Basic Beats": [
   //   {
   //     name: "Basic Rock Beat",
@@ -180,11 +180,11 @@ window.BEAT_CATEGORIES = {
 };
 
 // Helper function to get all beats in a flat array
-window.getAllBeats = function (formatBeatName) {
-  return Object.values(window.BEAT_CATEGORIES)
+export function getAllBeats(formatBeatName) {
+  return Object.values(BEAT_CATEGORIES)
     .flat()
     .map((beat) => ({
       ...beat,
       name: formatBeatName ? formatBeatName(beat.file) : beat.name,
     }));
-};
+}
