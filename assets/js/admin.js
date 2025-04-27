@@ -479,8 +479,17 @@ async function getPatternSignatureForMidiFile(midiFile) {
   return JSON.stringify(barPatterns);
 }
 
+// Function to format beat name from filename (for sidebar)
+function formatBeatName(filename) {
+  return filename
+    .replace(".mid", "")
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 async function groupMidiFilesByPattern() {
-  const beats = getAllBeats();
+  const beats = getAllBeats(formatBeatName);
   const groups = {};
   for (const beat of beats) {
     try {
