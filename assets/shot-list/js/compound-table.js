@@ -117,26 +117,37 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
     insertBtn.onclick = () => {
       let newItem;
       if (unit.type === "super") {
+        // Insert new L1 (super) below
+        newItem = {
+          type: "super",
+          number: getNextNumber(window.compoundTableDataList),
+          children: [],
+        };
+        window.compoundTableDataList.splice(l1Idx + 1, 0, newItem);
+      } else if (unit.type === "high") {
+        // Insert new L2 (high) below
         newItem = {
           type: "high",
-          number: getNextNumber(unit.children),
+          number: getNextNumber(parentArr),
           children: [],
         };
-        unit.children.splice(unitIdx + 1, 0, newItem);
-      } else if (unit.type === "high") {
+        parentArr.splice(unitIdx + 1, 0, newItem);
+      } else if (unit.type === "compound") {
+        // Insert new L3 (compound) below
         newItem = {
           type: "compound",
-          number: getNextNumber(unit.children),
+          number: getNextNumber(parentArr),
           children: [],
         };
-        unit.children.splice(unitIdx + 1, 0, newItem);
-      } else if (unit.type === "compound") {
+        parentArr.splice(unitIdx + 1, 0, newItem);
+      } else if (unit.type === "basic") {
+        // Insert new L4 (basic) below
         newItem = {
           type: "basic",
-          number: getNextNumber(unit.children),
+          number: getNextNumber(parentArr),
           columns: [{ content: "" }],
         };
-        unit.children.splice(unitIdx + 1, 0, newItem);
+        parentArr.splice(unitIdx + 1, 0, newItem);
       }
       window.renderAllL1Tables();
     };
@@ -255,7 +266,7 @@ function renderBasicUnitRow(
         rootData,
         l1Idx,
         parentArr,
-        colIdx
+        unitIdx
       );
     }
     parent.appendChild(row);
@@ -280,7 +291,7 @@ function renderBasicUnitCell(
   rootData,
   l1Idx,
   parentArr,
-  colArrIdx
+  unitArrIdx
 ) {
   const cell = document.createElement("div");
   cell.className = "basic-unit";
@@ -307,22 +318,31 @@ function renderBasicUnitCell(
   colDiv.oninput = (e) => {
     unit.columns[colIdx].content = e.target.textContent;
   };
-  // Insert button for column
+  // Insert button for L4 (basic) unit
   const insertBtn = document.createElement("button");
   insertBtn.textContent = "+";
-  insertBtn.title = "Insert column after";
+  insertBtn.title = "Insert L4 after";
   insertBtn.onclick = () => {
-    parentArr.splice(colArrIdx + 1, 0, { content: "" });
-    window.renderAllL1Tables();
+    // Insert a new L4 (basic) after the current one in the parentArr
+    if (parentArr && typeof unitArrIdx === "number") {
+      parentArr.splice(unitArrIdx + 1, 0, {
+        type: "basic",
+        number: getNextNumber(parentArr),
+        columns: [{ content: "" }],
+      });
+      window.renderAllL1Tables();
+    }
   };
   colDiv.appendChild(insertBtn);
-  // Remove button for column
+  // Remove button for L4 (basic) unit
   const removeBtn = document.createElement("button");
   removeBtn.textContent = "-";
-  removeBtn.title = "Remove column";
+  removeBtn.title = "Remove L4";
   removeBtn.onclick = (ev) => {
-    parentArr.splice(colArrIdx, 1);
-    window.renderAllL1Tables();
+    if (parentArr && typeof unitArrIdx === "number") {
+      parentArr.splice(unitArrIdx, 1);
+      window.renderAllL1Tables();
+    }
     ev.stopPropagation();
   };
   colDiv.appendChild(removeBtn);
