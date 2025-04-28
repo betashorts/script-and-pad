@@ -308,7 +308,7 @@ async function loadSamples() {
             return;
           }
 
-          const soundPath = `../../assets/game/sounds/${instrument.soundFile}`;
+          const soundPath = `/assets/game/sounds/${instrument.soundFile}`;
 
           // Create buffer first
           const buffer = new Tone.Buffer(soundPath, () => {
