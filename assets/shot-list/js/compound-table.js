@@ -35,33 +35,97 @@ function renderCompoundTable(container, data) {
 }
 
 function renderCompoundRow(parent, basicUnits, level) {
-  let row = document.createElement("div");
-  row.className = "compound-table-row";
-  let colCount = 0;
+  // Step 1: Flatten all columns from all L4 units, preserving order
+  let flatColumns = [];
   for (let i = 0; i < basicUnits.length; i++) {
     let unit = basicUnits[i];
-    let unitColIdx = 0;
-    while (unitColIdx < unit.columns.length) {
-      let remainingCols = 6 - colCount;
-      let colsToRender = Math.min(
-        remainingCols,
-        unit.columns.length - unitColIdx
-      );
-      // Pass the original unit and the starting index
-      renderBasicUnit(row, unit, level, unitColIdx, colsToRender);
-      colCount += colsToRender;
-      unitColIdx += colsToRender;
-      if (colCount === 6) {
-        parent.appendChild(row);
-        row = document.createElement("div");
-        row.className = "compound-table-row";
-        colCount = 0;
-      }
+    for (let j = 0; j < unit.columns.length; j++) {
+      flatColumns.push({ unit, col: unit.columns[j], colIdx: j });
     }
   }
-  if (colCount > 0) {
+  // Step 2: Compute number of rows
+  const numRows = Math.ceil(flatColumns.length / 6);
+  // Step 3: Fill rows
+  let colPointer = 0;
+  for (let rowIdx = 0; rowIdx < numRows; rowIdx++) {
+    let row = document.createElement("div");
+    row.className = "compound-table-row";
+    // Step 4: Render up to 6 columns in this row
+    let renderedL4s = new Set();
+    for (
+      let colInRow = 0;
+      colInRow < 6 && colPointer < flatColumns.length;
+      colInRow++, colPointer++
+    ) {
+      const { unit, col, colIdx } = flatColumns[colPointer];
+      // Only render the L4 number cell if this is the first column for this L4 in this row
+      let showL4Header = !renderedL4s.has(unit) || colIdx === 0;
+      renderBasicUnitCell(row, unit, level, colIdx, col, showL4Header);
+      renderedL4s.add(unit);
+    }
     parent.appendChild(row);
   }
+  // Add column button for the last L4 unit
+  if (basicUnits.length > 0) {
+    const lastUnit = basicUnits[basicUnits.length - 1];
+    const addColBtn = document.createElement("button");
+    addColBtn.textContent = "+";
+    addColBtn.onclick = () => {
+      console.log(`[ADD] Adding column to unit`, lastUnit);
+      lastUnit.columns.push({ content: "" });
+      renderCompoundTable(
+        document.getElementById("compound-table-root"),
+        compoundTableData
+      );
+    };
+    parent.appendChild(addColBtn);
+  }
+}
+
+function renderBasicUnitCell(parent, unit, level, colIdx, col, showL4Header) {
+  const cell = document.createElement("div");
+  cell.className = "basic-unit";
+  // Top row (number with level prefix) only if showL4Header
+  if (showL4Header) {
+    const top = document.createElement("div");
+    top.className = "basic-unit-top";
+    top.textContent = `L${
+      unit.level !== undefined ? unit.level + 1 : level + 1
+    } ${unit.number}`;
+    cell.appendChild(top);
+  } else {
+    // Add an empty top row for alignment
+    const top = document.createElement("div");
+    top.className = "basic-unit-top";
+    top.style.visibility = "hidden";
+    top.textContent = "";
+    cell.appendChild(top);
+  }
+  // Bottom row (single column)
+  const bottom = document.createElement("div");
+  bottom.className = "basic-unit-bottom";
+  const colDiv = document.createElement("div");
+  colDiv.className = "basic-unit-col";
+  colDiv.contentEditable = true;
+  colDiv.textContent = col.content;
+  colDiv.oninput = (e) => {
+    unit.columns[colIdx].content = e.target.textContent;
+  };
+  // Remove column button
+  const removeBtn = document.createElement("button");
+  removeBtn.textContent = "-";
+  removeBtn.onclick = (ev) => {
+    unit.columns.splice(colIdx, 1);
+    renderCompoundTable(
+      document.getElementById("compound-table-root"),
+      compoundTableData
+    );
+    ev.stopPropagation();
+  };
+  colDiv.appendChild(removeBtn);
+  bottom.appendChild(colDiv);
+  cell.appendChild(bottom);
+  parent.appendChild(cell);
 }
 
 function renderUnit(parent, unit, level) {
