@@ -29,9 +29,9 @@ function getNextNumber(arr) {
 }
 
 // Render the compound table recursively
-function renderCompoundTable(container, data, rootData) {
+function renderCompoundTable(container, data, rootData, l1Idx) {
   container.innerHTML = "";
-  renderUnit(container, data, 0, rootData);
+  renderUnit(container, data, 0, rootData, l1Idx);
 }
 
 function renderCompoundRow(parent, basicUnits, level) {
@@ -104,7 +104,8 @@ function renderBasicUnitCell(
   colIdx,
   col,
   showL4Header,
-  rootData
+  rootData,
+  l1Idx
 ) {
   console.log(
     `[L${level + 1}] Rendering basic unit cell: L4 ${
@@ -143,6 +144,7 @@ function renderBasicUnitCell(
   const removeBtn = document.createElement("button");
   removeBtn.textContent = "-";
   removeBtn.onclick = (ev) => {
+    const l1 = window.compoundTableDataList[l1Idx];
     unit.columns.splice(colIdx, 1);
     window.renderAllL1Tables();
     ev.stopPropagation();
@@ -153,7 +155,7 @@ function renderBasicUnitCell(
   parent.appendChild(cell);
 }
 
-function renderUnit(parent, unit, level, rootData) {
+function renderUnit(parent, unit, level, rootData, l1Idx) {
   const wrapper = document.createElement("div");
   wrapper.className = `compound-level compound-level-${level}`;
 
@@ -171,16 +173,17 @@ function renderUnit(parent, unit, level, rootData) {
 
   if (unit.type === "basic") {
     // L4: Render columns horizontally with 6-column rule
-    renderBasicUnitRow(bottomRow, unit, level, rootData);
+    renderBasicUnitRow(bottomRow, unit, level, rootData, l1Idx);
   } else {
     // For L1, L2, L3: stack children vertically
     unit.children.forEach((child) => {
-      renderUnit(bottomRow, child, level + 1, rootData);
+      renderUnit(bottomRow, child, level + 1, rootData, l1Idx);
     });
     // Add button to add new child
     const addBtn = document.createElement("button");
     addBtn.textContent = "+";
     addBtn.onclick = () => {
+      const l1 = window.compoundTableDataList[l1Idx];
       if (unit.type === "compound") {
         console.log(
           "[ADD BASIC UNIT] Appending new basic unit to children array (L3 block will stack vertically)",
@@ -221,7 +224,7 @@ function renderUnit(parent, unit, level, rootData) {
 }
 
 // Render a basic unit (L4) and its columns horizontally with the 6-column rule
-function renderBasicUnitRow(parent, unit, level, rootData) {
+function renderBasicUnitRow(parent, unit, level, rootData, l1Idx) {
   // Flatten columns for this L4 unit
   let flatColumns = unit.columns.map((col, colIdx) => ({ unit, col, colIdx }));
   const numRows = Math.ceil(flatColumns.length / 6);
@@ -244,7 +247,8 @@ function renderBasicUnitRow(parent, unit, level, rootData) {
         colIdx,
         col,
         showL4Header,
-        rootData
+        rootData,
+        l1Idx
       );
     }
     parent.appendChild(row);
@@ -253,7 +257,7 @@ function renderBasicUnitRow(parent, unit, level, rootData) {
   const addColBtn = document.createElement("button");
   addColBtn.textContent = "+";
   addColBtn.onclick = () => {
-    console.log(`[ADD] Adding column to unit`, unit);
+    const l1 = window.compoundTableDataList[l1Idx];
     unit.columns.push({ content: "" });
     window.renderAllL1Tables();
   };
@@ -354,10 +358,10 @@ window.addEventListener("DOMContentLoaded", () => {
     window.compoundTableDataList = [compoundTableData];
     function renderAllL1Tables() {
       root.innerHTML = "";
-      window.compoundTableDataList.forEach((data) => {
+      window.compoundTableDataList.forEach((data, idx) => {
         const l1Div = document.createElement("div");
         l1Div.className = "compound-l1-block";
-        renderCompoundTable(l1Div, data, data);
+        renderCompoundTable(l1Div, data, data, idx);
         root.appendChild(l1Div);
       });
     }
