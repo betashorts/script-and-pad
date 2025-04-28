@@ -29,9 +29,9 @@ function getNextNumber(arr) {
 }
 
 // Render the compound table recursively
-function renderCompoundTable(container, data) {
+function renderCompoundTable(container, data, rootData) {
   container.innerHTML = "";
-  renderUnit(container, data, 0);
+  renderUnit(container, data, 0, rootData);
 }
 
 function renderCompoundRow(parent, basicUnits, level) {
@@ -97,7 +97,15 @@ function renderCompoundRow(parent, basicUnits, level) {
   }
 }
 
-function renderBasicUnitCell(parent, unit, level, colIdx, col, showL4Header) {
+function renderBasicUnitCell(
+  parent,
+  unit,
+  level,
+  colIdx,
+  col,
+  showL4Header,
+  rootData
+) {
   console.log(
     `[L${level + 1}] Rendering basic unit cell: L4 ${
       unit.number
@@ -136,10 +144,7 @@ function renderBasicUnitCell(parent, unit, level, colIdx, col, showL4Header) {
   removeBtn.textContent = "-";
   removeBtn.onclick = (ev) => {
     unit.columns.splice(colIdx, 1);
-    renderCompoundTable(
-      document.getElementById("compound-table-root"),
-      compoundTableData
-    );
+    window.renderAllL1Tables();
     ev.stopPropagation();
   };
   colDiv.appendChild(removeBtn);
@@ -148,7 +153,7 @@ function renderBasicUnitCell(parent, unit, level, colIdx, col, showL4Header) {
   parent.appendChild(cell);
 }
 
-function renderUnit(parent, unit, level) {
+function renderUnit(parent, unit, level, rootData) {
   const wrapper = document.createElement("div");
   wrapper.className = `compound-level compound-level-${level}`;
 
@@ -166,11 +171,11 @@ function renderUnit(parent, unit, level) {
 
   if (unit.type === "basic") {
     // L4: Render columns horizontally with 6-column rule
-    renderBasicUnitRow(bottomRow, unit, level);
+    renderBasicUnitRow(bottomRow, unit, level, rootData);
   } else {
     // For L1, L2, L3: stack children vertically
     unit.children.forEach((child) => {
-      renderUnit(bottomRow, child, level + 1);
+      renderUnit(bottomRow, child, level + 1, rootData);
     });
     // Add button to add new child
     const addBtn = document.createElement("button");
@@ -207,10 +212,7 @@ function renderUnit(parent, unit, level) {
           children: [],
         });
       }
-      renderCompoundTable(
-        document.getElementById("compound-table-root"),
-        compoundTableData
-      );
+      window.renderAllL1Tables();
     };
     bottomRow.appendChild(addBtn);
   }
@@ -219,7 +221,7 @@ function renderUnit(parent, unit, level) {
 }
 
 // Render a basic unit (L4) and its columns horizontally with the 6-column rule
-function renderBasicUnitRow(parent, unit, level) {
+function renderBasicUnitRow(parent, unit, level, rootData) {
   // Flatten columns for this L4 unit
   let flatColumns = unit.columns.map((col, colIdx) => ({ unit, col, colIdx }));
   const numRows = Math.ceil(flatColumns.length / 6);
@@ -235,7 +237,15 @@ function renderBasicUnitRow(parent, unit, level) {
       const { unit, col, colIdx } = flatColumns[colPointer];
       // Show L4 header only for the first column in the first row
       let showL4Header = rowIdx === 0 && colInRow === 0;
-      renderBasicUnitCell(row, unit, level, colIdx, col, showL4Header);
+      renderBasicUnitCell(
+        row,
+        unit,
+        level,
+        colIdx,
+        col,
+        showL4Header,
+        rootData
+      );
     }
     parent.appendChild(row);
   }
@@ -245,10 +255,7 @@ function renderBasicUnitRow(parent, unit, level) {
   addColBtn.onclick = () => {
     console.log(`[ADD] Adding column to unit`, unit);
     unit.columns.push({ content: "" });
-    renderCompoundTable(
-      document.getElementById("compound-table-root"),
-      compoundTableData
-    );
+    window.renderAllL1Tables();
   };
   parent.appendChild(addColBtn);
 }
@@ -350,7 +357,7 @@ window.addEventListener("DOMContentLoaded", () => {
       window.compoundTableDataList.forEach((data) => {
         const l1Div = document.createElement("div");
         l1Div.className = "compound-l1-block";
-        renderCompoundTable(l1Div, data);
+        renderCompoundTable(l1Div, data, data);
         root.appendChild(l1Div);
       });
     }
