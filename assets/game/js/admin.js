@@ -435,7 +435,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function getPatternSignatureForMidiFile(midiFile) {
-  // Fetch and parse the MIDI file, then return a stringified pattern signature
+  // Fetch and parse the MIDI file, then return a stringified pattern signature : Test
   const midiPath = `/assets/game/midi/${midiFile}`;
   const response = await fetch(midiPath);
   const arrayBuffer = await response.arrayBuffer();
