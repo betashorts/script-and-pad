@@ -316,10 +316,45 @@ function renderBasicUnit(parent, unit, level, startIdx = 0, count = null) {
   parent.appendChild(cell);
 }
 
-// Initial render on page load
+// Add a button for adding L1 elements at the root level
 window.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("compound-table-root");
   if (root) {
-    renderCompoundTable(root, compoundTableData);
+    // Create a container for the root and the add button
+    const rootContainer = document.createElement("div");
+    rootContainer.id = "compound-table-root-container";
+    root.parentNode.insertBefore(rootContainer, root);
+    rootContainer.appendChild(root);
+
+    // Add button for new L1
+    const addL1Btn = document.createElement("button");
+    addL1Btn.textContent = "+";
+    addL1Btn.style.marginBottom = "10px";
+    addL1Btn.onclick = () => {
+      if (!Array.isArray(window.compoundTableDataList)) {
+        window.compoundTableDataList = [compoundTableData];
+      }
+      window.compoundTableDataList.push({
+        type: "super",
+        number: getNextNumber(window.compoundTableDataList),
+        children: [],
+      });
+      renderAllL1Tables();
+    };
+    rootContainer.insertBefore(addL1Btn, root);
+
+    // Support for multiple L1s
+    window.compoundTableDataList = [compoundTableData];
+    function renderAllL1Tables() {
+      root.innerHTML = "";
+      window.compoundTableDataList.forEach((data) => {
+        const l1Div = document.createElement("div");
+        l1Div.className = "compound-l1-block";
+        renderCompoundTable(l1Div, data);
+        root.appendChild(l1Div);
+      });
+    }
+    window.renderAllL1Tables = renderAllL1Tables;
+    renderAllL1Tables();
   }
 });
