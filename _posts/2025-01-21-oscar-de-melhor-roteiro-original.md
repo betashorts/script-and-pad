@@ -8,15 +8,15 @@ meta: >
   <meta name="author" content="Screenplay Writer" />
   <meta name="robots" content="index, follow" /><link rel="canonical" href="https://scriptandpad.com/oscar-de-melhor-roteiro-original" />
 images:
-    - url: '/assets/images/oscar-melhor-roteiro-800.webp'
+    - url: '/assets/blog/images/oscar-melhor-roteiro-800.webp'
       width: 800
       height: 400
       description: 'A estatueta do Oscar em destaque, simbolizando o prêmio de Melhor Roteiro Original.'
-    - url: '/assets/images/roteiristas-famosos-800.webp'
+    - url: '/assets/blog/images/roteiristas-famosos-800.webp'
       width: 800
       height: 400
       description: 'Roteiristas famosos recebendo prêmios por seus roteiros originais.'
-    - url: '/assets/images/melhores-roteiros-cinema-800.webp'
+    - url: '/assets/blog/images/melhores-roteiros-cinema-800.webp'
       width: 800
       height: 400
       description: 'Um roteiro de cinema sendo revisado em uma mesa de trabalho.'
@@ -38,10 +38,10 @@ tags: [Oscar, roteiro original, cinema, melhores roteiros, roteiro de cinema]
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/oscar-melhor-roteiro-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/oscar-melhor-roteiro-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/oscar-melhor-roteiro-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/oscar-melhor-roteiro-1200.webp" alt="A estatueta do Oscar em destaque, simbolizando o prêmio de Melhor Roteiro Original" loading="lazy">
+  <source srcset="/assets/blog/images/oscar-melhor-roteiro-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/oscar-melhor-roteiro-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/oscar-melhor-roteiro-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/oscar-melhor-roteiro-1200.webp" alt="A estatueta do Oscar em destaque, simbolizando o prêmio de Melhor Roteiro Original" loading="lazy">
 </picture>
 </div>
 
@@ -61,10 +61,10 @@ tags: [Oscar, roteiro original, cinema, melhores roteiros, roteiro de cinema]
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/roteiristas-famosos-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/roteiristas-famosos-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/roteiristas-famosos-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/roteiristas-famosos-1200.webp" alt="Roteiristas famosos recebendo prêmios por seus roteiros originais" loading="lazy">
+  <source srcset="/assets/blog/images/roteiristas-famosos-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/roteiristas-famosos-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/roteiristas-famosos-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/roteiristas-famosos-1200.webp" alt="Roteiristas famosos recebendo prêmios por seus roteiros originais" loading="lazy">
 </picture>
 </div>
 
@@ -100,10 +100,10 @@ tags: [Oscar, roteiro original, cinema, melhores roteiros, roteiro de cinema]
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/melhores-roteiros-cinema-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/melhores-roteiros-cinema-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/melhores-roteiros-cinema-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/melhores-roteiros-cinema-1200.webp" alt="Um roteiro de cinema sendo revisado em uma mesa de trabalho" loading="lazy">
+  <source srcset="/assets/blog/images/melhores-roteiros-cinema-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/melhores-roteiros-cinema-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/melhores-roteiros-cinema-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/melhores-roteiros-cinema-1200.webp" alt="Um roteiro de cinema sendo revisado em uma mesa de trabalho" loading="lazy">
 </picture>
 </div>
 

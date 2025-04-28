@@ -4,11 +4,11 @@ title: "How to Know If a Movie Had a Bad Script"
 date: 2025-02-07
 meta: '<meta name="description" content="Wondering how to tell if a movie had a bad script? Learn the key signs of poor screenwriting, from weak dialogue to plot holes."><meta name="keywords" content="How to Know If a Movie Had a Bad Script, bad movie script, screenplay issues, signs of bad screenwriting, scriptwriting mistakes"><meta name="author" content="Screenplay Writer"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/how-to-know-if-a-movie-had-a-bad-script">'
 images:
-    - url: '/assets/images/bad-movie-script-800.webp'
+    - url: '/assets/blog/images/bad-movie-script-800.webp'
       width: 800
       height: 400
       description: 'A frustrated screenwriter struggling with a bad movie script.'
-    - url: '/assets/images/movie-plot-holes-800.webp'
+    - url: '/assets/blog/images/movie-plot-holes-800.webp'
       width: 800
       height: 400
       description: 'Illustration of confusing plot holes and unresolved storylines in bad scripts.'
@@ -26,10 +26,10 @@ tags: [screenwriting, bad scripts, movie mistakes, screenplay tips, storytelling
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/bad-movie-script-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/bad-movie-script-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/bad-movie-script-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/bad-movie-script-1200.webp" alt="A frustrated screenwriter struggling with a bad movie script" loading="lazy">
+  <source srcset="/assets/blog/images/bad-movie-script-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/bad-movie-script-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/bad-movie-script-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/bad-movie-script-1200.webp" alt="A frustrated screenwriter struggling with a bad movie script" loading="lazy">
 </picture>
 </div>
 
@@ -67,10 +67,10 @@ tags: [screenwriting, bad scripts, movie mistakes, screenplay tips, storytelling
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/movie-plot-holes-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/movie-plot-holes-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/movie-plot-holes-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/movie-plot-holes-1200.webp" alt="Illustration of confusing plot holes and unresolved storylines in bad scripts" loading="lazy">
+  <source srcset="/assets/blog/images/movie-plot-holes-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/movie-plot-holes-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/movie-plot-holes-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/movie-plot-holes-1200.webp" alt="Illustration of confusing plot holes and unresolved storylines in bad scripts" loading="lazy">
 </picture>
 </div>
 

@@ -1,5 +1,5 @@
 // --- Grouped MIDI Patterns Feature ---
-import { getAllBeats } from "../constants/beats.js";
+import { getAllBeats } from "../../game/constants/beats.js";
 
 let INSTRUMENTS = [];
 let MIDI_MAPPING = null; // Loaded from Midi mapping json file
@@ -11,7 +11,7 @@ const STEPS = 16;
 async function loadMIDIMapping() {
   try {
     console.log("Loading MIDI mapping...");
-    const response = await fetch("../assets/json/mapping.json");
+    const response = await fetch("/assets/game/json/mapping.json");
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

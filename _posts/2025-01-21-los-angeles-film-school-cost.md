@@ -8,15 +8,15 @@ meta: >
   <meta name="author" content="Screenplay Writer">
   <meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/los-angeles-film-school-cost">
 images:
-      - url: '/assets/images/la-film-school-classroom-800.webp'
+      - url: '/assets/blog/images/la-film-school-classroom-800.webp'
         width: 800
         height: 400
         description: 'A classroom in the Los Angeles Film School featuring advanced equipment.'
-      - url: '/assets/images/film-students-project-800.webp'
+      - url: '/assets/blog/images/film-students-project-800.webp'
         width: 800
         height: 400
         description: 'Film students collaborating on a project at the Los Angeles Film School.'
-      - url: '/assets/images/networking-film-industry-800.webp'
+      - url: '/assets/blog/images/networking-film-industry-800.webp'
         width: 800
         height: 400
         description: 'Filmmaking professionals networking during a film school event.'
@@ -36,10 +36,10 @@ tags: [film school, filmmaking, los angeles film school, education costs, filmma
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/la-film-school-classroom-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/la-film-school-classroom-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/la-film-school-classroom-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/la-film-school-classroom-1200.webp" alt="A classroom in the Los Angeles Film School featuring advanced equipment" loading="lazy">
+  <source srcset="/assets/blog/images/la-film-school-classroom-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/la-film-school-classroom-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/la-film-school-classroom-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/la-film-school-classroom-1200.webp" alt="A classroom in the Los Angeles Film School featuring advanced equipment" loading="lazy">
 </picture>
 </div>
 
@@ -60,10 +60,10 @@ tags: [film school, filmmaking, los angeles film school, education costs, filmma
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/networking-film-industry-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/networking-film-industry-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/networking-film-industry-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/networking-film-industry-1200.webp" alt="Filmmaking professionals networking during a film school event" loading="lazy">
+  <source srcset="/assets/blog/images/networking-film-industry-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/networking-film-industry-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/networking-film-industry-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/networking-film-industry-1200.webp" alt="Filmmaking professionals networking during a film school event" loading="lazy">
 </picture>
 </div>
 
@@ -83,10 +83,10 @@ tags: [film school, filmmaking, los angeles film school, education costs, filmma
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/film-students-project-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/film-students-project-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/film-students-project-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/film-students-project-1200.webp" alt="Film students collaborating on a project at the Los Angeles Film School" loading="lazy">
+  <source srcset="/assets/blog/images/film-students-project-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/film-students-project-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/film-students-project-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/film-students-project-1200.webp" alt="Film students collaborating on a project at the Los Angeles Film School" loading="lazy">
 </picture>
 </div>
 

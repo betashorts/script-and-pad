@@ -4,15 +4,15 @@ title: "Directors Who Didn''t Go to Film School"
 date: 2025-01-07
 meta: '<meta name="description" content="Discover the stories of successful directors who skipped film school and learn how you can follow their footsteps. Practical tips and tools included!"><meta name="keywords" content="directors who didn''t go to film school, famous directors without film school, how to become a director, self-taught filmmakers, filmmaking tips"><meta name="author" content="Screenplay Writer"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/directors-who-didnt-go-to-film-school">'
 images:
-    - url: '/assets/images/directors-no-film-school-800.webp'
+    - url: '/assets/blog/images/directors-no-film-school-800.webp'
       width: 800
       height: 400
       description: 'A collage of successful directors who skipped traditional film education.'
-    - url: '/assets/images/independent-filmmaking-800.webp'
+    - url: '/assets/blog/images/independent-filmmaking-800.webp'
       width: 800
       height: 400
       description: 'An independent filmmaker working on set.'
-    - url: '/assets/images/passion-over-degree-800.webp'
+    - url: '/assets/blog/images/passion-over-degree-800.webp'
       width: 800
       height: 400
       description: 'A symbolic representation of creative passion triumphing over formal degrees.'
@@ -21,7 +21,7 @@ og: >
   description: "Be inspired by the journeys of self-taught filmmakers who made it big without attending film school. Learn their secrets and tips to succeed in filmmaking."
   url: "https://scriptandpad.com/directors-who-didnt-go-to-film-school"
   type: "article"
-  image: "https://scriptandpad.com/assets/images/logo.jpg"
+  image: "https://scriptandpad.com/assets/blog/images/logo.jpg"
 tags: [film school, filmmaking, self-taught directors, storytelling, screenplay writing]
 ---
 <p>Breaking into the film industry often feels like an impossible dream, especially when the common advice is to attend an expensive film school. Film school is a significant commitment—financially, emotionally, and in terms of time. You might be wondering, “Do I need film school to succeed?” or “Are there directors who made it without going down this traditional path?”</p>
@@ -35,10 +35,10 @@ tags: [film school, filmmaking, self-taught directors, storytelling, screenplay 
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/directors-no-film-school-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/directors-no-film-school-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/directors-no-film-school-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/directors-no-film-school-1200.webp" alt="A collage of successful directors who skipped traditional film education" loading="lazy">
+  <source srcset="/assets/blog/images/directors-no-film-school-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/directors-no-film-school-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/directors-no-film-school-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/directors-no-film-school-1200.webp" alt="A collage of successful directors who skipped traditional film education" loading="lazy">
 </picture>
 </div>
 
@@ -59,10 +59,10 @@ tags: [film school, filmmaking, self-taught directors, storytelling, screenplay 
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/independent-filmmaking-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/independent-filmmaking-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/independent-filmmaking-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/independent-filmmaking-1200.webp" alt="An independent filmmaker working on set" loading="lazy">
+  <source srcset="/assets/blog/images/independent-filmmaking-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/independent-filmmaking-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/independent-filmmaking-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/independent-filmmaking-1200.webp" alt="An independent filmmaker working on set" loading="lazy">
 </picture>
 </div>
 
@@ -80,10 +80,10 @@ tags: [film school, filmmaking, self-taught directors, storytelling, screenplay 
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/passion-over-degree-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/passion-over-degree-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/passion-over-degree-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/passion-over-degree-1200.webp" alt="A symbolic representation of creative passion triumphing over formal degrees" loading="lazy">
+  <source srcset="/assets/blog/images/passion-over-degree-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/passion-over-degree-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/passion-over-degree-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/passion-over-degree-1200.webp" alt="A symbolic representation of creative passion triumphing over formal degrees" loading="lazy">
 </picture>
 </div>
 

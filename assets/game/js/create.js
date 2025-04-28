@@ -10,7 +10,7 @@ const DEFAULT_PPQ = 480; // Standard MIDI PPQ
 async function loadMIDIMapping() {
   try {
     console.log("Loading MIDI mapping...");
-    const response = await fetch("../../../assets/json/mapping.json");
+    const response = await fetch("/assets/game/json/mapping.json");
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

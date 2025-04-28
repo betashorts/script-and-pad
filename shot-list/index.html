@@ -1,48 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Script Shot List Generator</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
-        .upload-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .file-input {
-            margin: 1rem 0;
-        }
-        .json-output {
-            margin-top: 2rem;
-            padding: 1rem;
-            background: #f5f5f5;
-            border-radius: 4px;
-            white-space: pre-wrap;
-            font-family: monospace;
-            max-height: 500px;
-            overflow-y: auto;
-        }
-        .status-message {
-            margin: 1rem 0;
-            padding: 0.5rem;
-            border-radius: 4px;
-        }
-        .error {
-            background-color: #ffebee;
-            color: #c62828;
-        }
-        .success {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-        }
-    </style>
-</head>
-<body>
+---
+layout: default
+title: Script Shot List Generator
+---
+
+<div class="shot-list-container">
     <div class="upload-container">
         <h1>Script Shot List Generator</h1>
         <p>Upload a script file (.pdf, .docx, or .doc) to generate a structured shot list.</p>
@@ -55,17 +16,16 @@
         <div id="status" class="status-message"></div>
         <div id="jsonOutput" class="json-output" style="display: none;"></div>
     </div>
+</div>
 
-    <!-- PDF.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script>
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-    </script>
-    
-    <!-- DOCX Processing -->
-    <script src="https://unpkg.com/mammoth@1.6.0/mammoth.browser.min.js"></script>
-    
-    <!-- Main script -->
-    <script src="../assets/js/shot-list.js"></script>
-</body>
-</html> 
+<!-- PDF.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+</script>
+
+<!-- DOCX Processing -->
+<script src="https://unpkg.com/mammoth@1.6.0/mammoth.browser.min.js"></script>
+
+<!-- Main script -->
+<script src="/assets/shot-list/js/shot-list.js"></script> 

@@ -4,15 +4,15 @@ title: "What Makes the Kingsman Screenplay Stand Out?"
 date: 2025-02-07
 meta: '<meta name="description" content="Explore what makes the Kingsman screenplay unique, from its subversive take on spy tropes to Jane Goldman’s distinct approach to storytelling."><meta name="keywords" content="What Makes the Kingsman Screenplay Stand Out, Kingsman screenplay analysis, Jane Goldman screenwriting, spy movie scripts, unique screenplay structures"><meta name="author" content="Screenplay Writer"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/kingsman-screenplay-analysis">'
 images:
-    - url: '/assets/images/kingsman-screenplay-800.webp'
+    - url: '/assets/blog/images/kingsman-screenplay-800.webp'
       width: 800
       height: 400
       description: 'A Kingsman script page showcasing its unique dialogue and action style.'
-    - url: '/assets/images/jane-goldman-screenwriter-800.webp'
+    - url: '/assets/blog/images/jane-goldman-screenwriter-800.webp'
       width: 800
       height: 400
       description: 'Screenwriter Jane Goldman, co-writer of Kingsman, known for her bold storytelling choices.'
-    - url: '/assets/images/kingsman-action-sequence-800.webp'
+    - url: '/assets/blog/images/kingsman-action-sequence-800.webp'
       width: 800
       height: 400
       description: 'An iconic Kingsman action sequence that defines its screenplay style.'
@@ -29,10 +29,10 @@ tags: [Kingsman, screenplay analysis, Jane Goldman, spy movie scripts, screenwri
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/kingsman-screenplay-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/kingsman-screenplay-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/kingsman-screenplay-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/kingsman-screenplay-1200.webp" alt="A Kingsman script page showcasing its unique dialogue and action style" loading="lazy">
+  <source srcset="/assets/blog/images/kingsman-screenplay-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/kingsman-screenplay-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/kingsman-screenplay-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/kingsman-screenplay-1200.webp" alt="A Kingsman script page showcasing its unique dialogue and action style" loading="lazy">
 </picture>
 </div>
 
@@ -43,10 +43,10 @@ tags: [Kingsman, screenplay analysis, Jane Goldman, spy movie scripts, screenwri
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/jane-goldman-screenwriter-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/jane-goldman-screenwriter-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/jane-goldman-screenwriter-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/jane-goldman-screenwriter-1200.webp" alt="Screenwriter Jane Goldman, co-writer of Kingsman, known for her bold storytelling choices" loading="lazy">
+  <source srcset="/assets/blog/images/jane-goldman-screenwriter-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/jane-goldman-screenwriter-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/jane-goldman-screenwriter-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/jane-goldman-screenwriter-1200.webp" alt="Screenwriter Jane Goldman, co-writer of Kingsman, known for her bold storytelling choices" loading="lazy">
 </picture>
 </div>
 
@@ -64,10 +64,10 @@ tags: [Kingsman, screenplay analysis, Jane Goldman, spy movie scripts, screenwri
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/kingsman-action-sequence-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/kingsman-action-sequence-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/kingsman-action-sequence-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/kingsman-action-sequence-1200.webp" alt="An iconic Kingsman action sequence that defines its screenplay style" loading="lazy">
+  <source srcset="/assets/blog/images/kingsman-action-sequence-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/kingsman-action-sequence-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/kingsman-action-sequence-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/kingsman-action-sequence-1200.webp" alt="An iconic Kingsman action sequence that defines its screenplay style" loading="lazy">
 </picture>
 </div>
 

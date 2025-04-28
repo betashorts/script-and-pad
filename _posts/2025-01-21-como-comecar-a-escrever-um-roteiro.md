@@ -9,15 +9,15 @@ meta: >
   <meta name="author" content="Screenplay Writer">
   <meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/como-comecar-a-escrever-um-roteiro">
 images:
-    - url: '/assets/images/roteirista-trabalhando-800.webp'
+    - url: '/assets/blog/images/roteirista-trabalhando-800.webp'
       width: 800
       height: 400
       description: 'Roteirista usando o Screenplay Writer no Google Docs para escrever seu roteiro.'
-    - url: '/assets/images/estrutura-de-roteiro-800.webp'
+    - url: '/assets/blog/images/estrutura-de-roteiro-800.webp'
       width: 800
       height: 400
       description: 'Um gráfico mostrando a estrutura básica de um roteiro em três atos.'
-    - url: '/assets/images/screenplay-writer-tool-800.webp'
+    - url: '/assets/blog/images/screenplay-writer-tool-800.webp'
       width: 800
       height: 400
       description: 'Uma visão do Screenplay Writer funcionando no Google Docs.'
@@ -26,7 +26,7 @@ og: >
   description: "Descubra como o Screenplay Writer pode transformar seu processo de criação de roteiros, simplificando formatações e ajudando você a focar na narrativa."
   url: "https://scriptandpad.com/como-comecar-a-escrever-um-roteiro"
   type: "article"
-  image: "https://scriptandpad.com/assets/images/logo.jpg"
+  image: "https://scriptandpad.com/assets/blog/images/logo.jpg"
 tags: [roteiro, ferramentas para roteiristas, screenplay writer, roteiro de filme, estrutura narrativa]
 ---
 
@@ -44,10 +44,10 @@ tags: [roteiro, ferramentas para roteiristas, screenplay writer, roteiro de film
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/roteirista-trabalhando-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/roteirista-trabalhando-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/roteirista-trabalhando-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/roteirista-trabalhando-1200.webp" alt="Roteirista usando o Screenplay Writer no Google Docs para escrever seu roteiro" loading="lazy">
+  <source srcset="/assets/blog/images/roteirista-trabalhando-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/roteirista-trabalhando-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/roteirista-trabalhando-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/roteirista-trabalhando-1200.webp" alt="Roteirista usando o Screenplay Writer no Google Docs para escrever seu roteiro" loading="lazy">
 </picture>
 </div>
 
@@ -79,10 +79,10 @@ tags: [roteiro, ferramentas para roteiristas, screenplay writer, roteiro de film
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/estrutura-de-roteiro-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/estrutura-de-roteiro-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/estrutura-de-roteiro-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/estrutura-de-roteiro-1200.webp" alt="Um gráfico mostrando a estrutura básica de um roteiro em três atos" loading="lazy">
+  <source srcset="/assets/blog/images/estrutura-de-roteiro-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/estrutura-de-roteiro-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/estrutura-de-roteiro-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/estrutura-de-roteiro-1200.webp" alt="Um gráfico mostrando a estrutura básica de um roteiro em três atos" loading="lazy">
 </picture>
 </div>
 
@@ -98,10 +98,10 @@ tags: [roteiro, ferramentas para roteiristas, screenplay writer, roteiro de film
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/screenplay-writer-tool-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/screenplay-writer-tool-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/screenplay-writer-tool-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/screenplay-writer-tool-1200.webp" alt="Uma visão do Screenplay Writer funcionando no Google Docs" loading="lazy">
+  <source srcset="/assets/blog/images/screenplay-writer-tool-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/screenplay-writer-tool-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/screenplay-writer-tool-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/screenplay-writer-tool-1200.webp" alt="Uma visão do Screenplay Writer funcionando no Google Docs" loading="lazy">
 </picture>
 </div>
 

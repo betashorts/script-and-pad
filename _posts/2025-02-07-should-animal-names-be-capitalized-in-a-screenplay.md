@@ -4,15 +4,15 @@ title: "Should Animal Names Be Capitalized in a Screenplay?"
 date: 2025-02-07
 meta: '<meta name="description" content="Wondering if animal names should be capitalized in a screenplay? Learn the industry-standard formatting rules for writing animals in scripts."><meta name="keywords" content="Should Animal Names Be Capitalized in a Screenplay, screenplay formatting, animal names in scripts, screenwriting tips, proper script capitalization"><meta name="author" content="Screenplay Writer"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/should-animal-names-be-capitalized-in-a-screenplay">'
 images:
-    - url: '/assets/images/screenplay-animal-formatting-800.webp'
+    - url: '/assets/blog/images/screenplay-animal-formatting-800.webp'
       width: 800
       height: 400
       description: 'A formatted screenplay script with proper capitalization of an animal character.'
-    - url: '/assets/images/screenwriting-dog-scene-800.webp'
+    - url: '/assets/blog/images/screenwriting-dog-scene-800.webp'
       width: 800
       height: 400
       description: 'A scene in a screenplay where a dog character interacts with the protagonist.'
-    - url: '/assets/images/script-formatting-rules-800.webp'
+    - url: '/assets/blog/images/script-formatting-rules-800.webp'
       width: 800
       height: 400
       description: 'A checklist of script formatting rules, including capitalization guidelines.'
@@ -30,10 +30,10 @@ tags: [screenwriting, screenplay formatting, writing tips, script rules, capital
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/screenplay-animal-formatting-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/screenplay-animal-formatting-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/screenplay-animal-formatting-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/screenplay-animal-formatting-1200.webp" alt="A formatted screenplay script with proper capitalization of an animal character" loading="lazy">
+  <source srcset="/assets/blog/images/screenplay-animal-formatting-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/screenplay-animal-formatting-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/screenplay-animal-formatting-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/screenplay-animal-formatting-1200.webp" alt="A formatted screenplay script with proper capitalization of an animal character" loading="lazy">
 </picture>
 </div>
 
@@ -45,10 +45,10 @@ tags: [screenwriting, screenplay formatting, writing tips, script rules, capital
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/screenwriting-dog-scene-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/screenwriting-dog-scene-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/screenwriting-dog-scene-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/screenwriting-dog-scene-1200.webp" alt="A scene in a screenplay where a dog character interacts with the protagonist" loading="lazy">
+  <source srcset="/assets/blog/images/screenwriting-dog-scene-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/screenwriting-dog-scene-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/screenwriting-dog-scene-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/screenwriting-dog-scene-1200.webp" alt="A scene in a screenplay where a dog character interacts with the protagonist" loading="lazy">
 </picture>
 </div>
 
@@ -126,10 +126,10 @@ A wise-looking **OWL** perches on a tree branch.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/script-formatting-rules-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/script-formatting-rules-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/script-formatting-rules-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/script-formatting-rules-1200.webp" alt="A checklist of script formatting rules, including capitalization guidelines" loading="lazy">
+  <source srcset="/assets/blog/images/script-formatting-rules-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/script-formatting-rules-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/script-formatting-rules-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/script-formatting-rules-1200.webp" alt="A checklist of script formatting rules, including capitalization guidelines" loading="lazy">
 </picture>
 </div>
 

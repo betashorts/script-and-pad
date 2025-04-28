@@ -8,15 +8,15 @@ meta: >
   <meta name="author" content="Screenplay Writer" />
   <meta name="robots" content="index, follow" />  <link rel="canonical" href="https://scriptandpad.com/cannes-pronunciation" />
 images:
-    - url: '/assets/images/cannes-film-festival-800.webp'
+    - url: '/assets/blog/images/cannes-film-festival-800.webp'
       width: 800
       height: 400
       description: 'The iconic Cannes Film Festival red carpet, a hub of global cinema.'
-    - url: '/assets/images/french-accent-800.webp'
+    - url: '/assets/blog/images/french-accent-800.webp'
       width: 800
       height: 400
       description: 'A helpful pronunciation guide for saying “Cannes” correctly in French.'
-    - url: '/assets/images/screenplay-writer-tool-800.webp'
+    - url: '/assets/blog/images/screenplay-writer-tool-800.webp'
       width: 800
       height: 400
       description: 'The Screenplay Writer tool showcased on Google Docs for screenplay formatting.'
@@ -45,10 +45,10 @@ tags: [Cannes pronunciation, Cannes Film Festival, French pronunciation, film in
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/cannes-film-festival-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/cannes-film-festival-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/cannes-film-festival-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/cannes-film-festival-1200.webp" alt="The iconic Cannes Film Festival red carpet, a hub of global cinema" loading="lazy">
+  <source srcset="/assets/blog/images/cannes-film-festival-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/cannes-film-festival-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/cannes-film-festival-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/cannes-film-festival-1200.webp" alt="The iconic Cannes Film Festival red carpet, a hub of global cinema" loading="lazy">
 </picture>
 </div>
 
@@ -68,10 +68,10 @@ tags: [Cannes pronunciation, Cannes Film Festival, French pronunciation, film in
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/french-accent-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/french-accent-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/french-accent-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/french-accent-1200.webp" alt="A helpful pronunciation guide for saying “Cannes” correctly in French" loading="lazy">
+  <source srcset="/assets/blog/images/french-accent-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/french-accent-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/french-accent-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/french-accent-1200.webp" alt="A helpful pronunciation guide for saying “Cannes” correctly in French" loading="lazy">
 </picture>
 </div>
 
@@ -109,10 +109,10 @@ tags: [Cannes pronunciation, Cannes Film Festival, French pronunciation, film in
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/screenplay-writer-tool-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/screenplay-writer-tool-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/screenplay-writer-tool-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/screenplay-writer-tool-1200.webp" alt="The Screenplay Writer tool showcased on Google Docs for screenplay formatting" loading="lazy">
+  <source srcset="/assets/blog/images/screenplay-writer-tool-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/screenplay-writer-tool-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/screenplay-writer-tool-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/screenplay-writer-tool-1200.webp" alt="The Screenplay Writer tool showcased on Google Docs for screenplay formatting" loading="lazy">
 </picture>
 </div>
 

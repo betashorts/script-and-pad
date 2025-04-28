@@ -8,15 +8,15 @@ meta: >
   <meta name="author" content="Screenplay Writer">
   <meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/los-angeles-film-school-acceptance-rate">
 images:
-    - url: '/assets/images/la-film-school-campus-800.webp'
+    - url: '/assets/blog/images/la-film-school-campus-800.webp'
       width: 800
       height: 400
       description: 'The Los Angeles Film School campus in the heart of Hollywood.'
-    - url: '/assets/images/aspiring-filmmakers-800.webp'
+    - url: '/assets/blog/images/aspiring-filmmakers-800.webp'
       width: 800
       height: 400
       description: 'A group of aspiring filmmakers working on a project.'
-    - url: '/assets/images/film-school-alternatives-800.webp'
+    - url: '/assets/blog/images/film-school-alternatives-800.webp'
       width: 800
       height: 400
       description: 'Creative alternatives to traditional film schools.'
@@ -36,10 +36,10 @@ tags: [film school, filmmaking, los angeles film school, aspiring filmmakers, sc
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/la-film-school-campus-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/la-film-school-campus-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/la-film-school-campus-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/la-film-school-campus-1200.webp" alt="The Los Angeles Film School campus in the heart of Hollywood" loading="lazy">
+  <source srcset="/assets/blog/images/la-film-school-campus-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/la-film-school-campus-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/la-film-school-campus-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/la-film-school-campus-1200.webp" alt="The Los Angeles Film School campus in the heart of Hollywood" loading="lazy">
 </picture>
 </div>
 
@@ -70,10 +70,10 @@ tags: [film school, filmmaking, los angeles film school, aspiring filmmakers, sc
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/aspiring-filmmakers-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/aspiring-filmmakers-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/aspiring-filmmakers-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/aspiring-filmmakers-1200.webp" alt="A group of aspiring filmmakers working on a project" loading="lazy">
+  <source srcset="/assets/blog/images/aspiring-filmmakers-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/aspiring-filmmakers-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/aspiring-filmmakers-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/aspiring-filmmakers-1200.webp" alt="A group of aspiring filmmakers working on a project" loading="lazy">
 </picture>
 </div>
 
@@ -87,10 +87,10 @@ tags: [film school, filmmaking, los angeles film school, aspiring filmmakers, sc
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/film-school-alternatives-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/film-school-alternatives-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/film-school-alternatives-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/film-school-alternatives-1200.webp" alt="Creative alternatives to traditional film schools" loading="lazy">
+  <source srcset="/assets/blog/images/film-school-alternatives-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/film-school-alternatives-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/film-school-alternatives-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/film-school-alternatives-1200.webp" alt="Creative alternatives to traditional film schools" loading="lazy">
 </picture>
 </div>
 

@@ -8,15 +8,15 @@ meta: >
   <meta name="author" content="Screenplay Writer">
   <meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/tips-on-getting-into-ucla-film-school">
 images:
-    - url: '/assets/images/ucla-campus-800.webp'
+    - url: '/assets/blog/images/ucla-campus-800.webp'
       width: 800
       height: 400
       description: 'The UCLA Film School campus in Los Angeles.'
-    - url: '/assets/images/ucla-film-students-800.webp'
+    - url: '/assets/blog/images/ucla-film-students-800.webp'
       width: 800
       height: 400
       description: 'Film students collaborating on a project at UCLA Film School.'
-    - url: '/assets/images/filmmaking-portfolio-tips-800.webp'
+    - url: '/assets/blog/images/filmmaking-portfolio-tips-800.webp'
       width: 800
       height: 400
       description: 'A student showcasing their portfolio during the admissions process.'
@@ -44,10 +44,10 @@ tags: [film school, filmmaking, ucla film school, theater film and television, a
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/ucla-campus-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/ucla-campus-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/ucla-campus-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/ucla-campus-1200.webp" alt="The UCLA Film School campus in Los Angeles" loading="lazy">
+  <source srcset="/assets/blog/images/ucla-campus-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/ucla-campus-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/ucla-campus-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/ucla-campus-1200.webp" alt="The UCLA Film School campus in Los Angeles" loading="lazy">
 </picture>
 </div>
 
@@ -67,10 +67,10 @@ tags: [film school, filmmaking, ucla film school, theater film and television, a
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/filmmaking-portfolio-tips-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/filmmaking-portfolio-tips-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/filmmaking-portfolio-tips-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/filmmaking-portfolio-tips-1200.webp" alt="A student showcasing their portfolio during the admissions process" loading="lazy">
+  <source srcset="/assets/blog/images/filmmaking-portfolio-tips-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/filmmaking-portfolio-tips-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/filmmaking-portfolio-tips-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/filmmaking-portfolio-tips-1200.webp" alt="A student showcasing their portfolio during the admissions process" loading="lazy">
 </picture>
 </div>
 
@@ -88,10 +88,10 @@ tags: [film school, filmmaking, ucla film school, theater film and television, a
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/ucla-film-students-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/ucla-film-students-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/ucla-film-students-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/ucla-film-students-1200.webp" alt="Film students collaborating on a project at UCLA Film School" loading="lazy">
+  <source srcset="/assets/blog/images/ucla-film-students-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/ucla-film-students-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/ucla-film-students-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/ucla-film-students-1200.webp" alt="Film students collaborating on a project at UCLA Film School" loading="lazy">
 </picture>
 </div>
 

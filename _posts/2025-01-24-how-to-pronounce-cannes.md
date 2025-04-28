@@ -8,15 +8,15 @@ meta: >
   <meta name="author" content="Screenplay Writer" />
   <meta name="robots" content="index, follow" /><link rel="canonical" href="https://scriptandpad.com/how-to-pronounce-cannes" />
 images:
-    - url: '/assets/images/cannes-film-festival-800.webp'
+    - url: '/assets/blog/images/cannes-film-festival-800.webp'
       width: 800
       height: 400
       description: 'The Cannes Film Festival red carpet – a global symbol of cinema and glamour.'
-    - url: '/assets/images/french-accent-guide-800.webp'
+    - url: '/assets/blog/images/french-accent-guide-800.webp'
       width: 800
       height: 400
       description: 'A simple guide to pronouncing “Cannes” correctly in French.'
-    - url: '/assets/images/screenplay-writing-tool-800.webp'
+    - url: '/assets/blog/images/screenplay-writing-tool-800.webp'
       width: 800
       height: 400
       description: 'The Screenplay Writer tool for Google Docs in action, helping writers format scripts for success.'
@@ -47,10 +47,10 @@ tags: [Cannes pronunciation, how to pronounce Cannes, French pronunciation, Cann
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/cannes-film-festival-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/cannes-film-festival-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/cannes-film-festival-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/cannes-film-festival-1200.webp" alt="The Cannes Film Festival red carpet – a global symbol of cinema and glamour" loading="lazy">
+  <source srcset="/assets/blog/images/cannes-film-festival-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/cannes-film-festival-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/cannes-film-festival-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/cannes-film-festival-1200.webp" alt="The Cannes Film Festival red carpet – a global symbol of cinema and glamour" loading="lazy">
 </picture>
 </div>
 
@@ -70,10 +70,10 @@ tags: [Cannes pronunciation, how to pronounce Cannes, French pronunciation, Cann
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/french-accent-guide-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/french-accent-guide-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/french-accent-guide-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/french-accent-guide-1200.webp" alt="A simple guide to pronouncing “Cannes” correctly in French" loading="lazy">
+  <source srcset="/assets/blog/images/french-accent-guide-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/french-accent-guide-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/french-accent-guide-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/french-accent-guide-1200.webp" alt="A simple guide to pronouncing “Cannes” correctly in French" loading="lazy">
 </picture>
 </div>
 
@@ -111,10 +111,10 @@ tags: [Cannes pronunciation, how to pronounce Cannes, French pronunciation, Cann
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/screenplay-writing-tool-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/screenplay-writing-tool-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/screenplay-writing-tool-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/screenplay-writing-tool-1200.webp" alt="The Screenplay Writer tool for Google Docs in action, helping writers format scripts for success" loading="lazy">
+  <source srcset="/assets/blog/images/screenplay-writing-tool-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/screenplay-writing-tool-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/screenplay-writing-tool-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/screenplay-writing-tool-1200.webp" alt="The Screenplay Writer tool for Google Docs in action, helping writers format scripts for success" loading="lazy">
 </picture>
 </div>
 

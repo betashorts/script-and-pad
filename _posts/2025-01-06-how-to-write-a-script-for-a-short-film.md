@@ -4,19 +4,19 @@ title: "How to Write a Script for a Short Film"
 date: 2025-01-06
 meta: '<meta name="description" content="Learn how to write a script for a short film with step-by-step tips, formatting guidelines, and storytelling techniques for your next creative project."><meta name="keywords" content="how to write a script for a short film, short film script, short film script writing format, screenplay for short film, short movie script"><meta name="author" content="Screenplay Writer"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/how-to-write-a-script-for-a-short-film">'
 images:
-    - url: '/assets/images/short-film-script-basics-800.webp'
+    - url: '/assets/blog/images/short-film-script-basics-800.webp'
       width: 800
       height: 400
       description: 'An example of a basic short film script showing formatting tips.'
-    - url: '/assets/images/short-film-simple-concept-800.webp'
+    - url: '/assets/blog/images/short-film-simple-concept-800.webp'
       width: 800
       height: 400
       description: 'Visuals of simple and impactful story ideas for short films.'
-    - url: '/assets/images/short-film-structure-800.webp'
+    - url: '/assets/blog/images/short-film-structure-800.webp'
       width: 800
       height: 400
       description: 'Illustration of short film story structure with three main acts.'
-    - url: '/assets/images/short-film-dialogue-800.webp'
+    - url: '/assets/blog/images/short-film-dialogue-800.webp'
       width: 800
       height: 400
       description: 'A minimalist script showing how actions replace excessive dialogue.'
@@ -25,7 +25,7 @@ og: >
   description: "Master the art of writing a script for a short film with tips on story structure, dialogue, and professional formatting."
   url: "https://scriptandpad.com/how-to-write-a-script-for-a-short-film"
   type: "article"
-  image: "https://scriptandpad.com/assets/images/logo.jpg"
+  image: "https://scriptandpad.com/assets/blog/images/logo.jpg"
 tags: [short film, scriptwriting, screenplay, storytelling, formatting]
 ---
 
@@ -36,10 +36,10 @@ tags: [short film, scriptwriting, screenplay, storytelling, formatting]
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/short-film-script-basics-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/short-film-script-basics-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/short-film-script-basics-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/short-film-script-basics-1200.webp" alt="An example of a basic short film script showing formatting tips" loading="lazy">
+  <source srcset="/assets/blog/images/short-film-script-basics-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/short-film-script-basics-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/short-film-script-basics-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/short-film-script-basics-1200.webp" alt="An example of a basic short film script showing formatting tips" loading="lazy">
 </picture>
 </div>
 
@@ -55,10 +55,10 @@ tags: [short film, scriptwriting, screenplay, storytelling, formatting]
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/short-film-simple-concept-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/short-film-simple-concept-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/short-film-simple-concept-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/short-film-simple-concept-1200.webp" alt="Visuals of simple and impactful story ideas for short films" loading="lazy">
+  <source srcset="/assets/blog/images/short-film-simple-concept-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/short-film-simple-concept-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/short-film-simple-concept-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/short-film-simple-concept-1200.webp" alt="Visuals of simple and impactful story ideas for short films" loading="lazy">
 </picture>
 </div>
 
@@ -73,10 +73,10 @@ tags: [short film, scriptwriting, screenplay, storytelling, formatting]
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/short-film-structure-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/short-film-structure-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/short-film-structure-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/short-film-structure-1200.webp" alt="Illustration of short film story structure with three main acts" loading="lazy">
+  <source srcset="/assets/blog/images/short-film-structure-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/short-film-structure-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/short-film-structure-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/short-film-structure-1200.webp" alt="Illustration of short film story structure with three main acts" loading="lazy">
 </picture>
 </div>
 
@@ -85,10 +85,10 @@ tags: [short film, scriptwriting, screenplay, storytelling, formatting]
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/short-film-dialogue-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/short-film-dialogue-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/short-film-dialogue-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/short-film-dialogue-1200.webp" alt="A minimalist script showing how actions replace excessive dialogue" loading="lazy">
+  <source srcset="/assets/blog/images/short-film-dialogue-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/short-film-dialogue-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/short-film-dialogue-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/short-film-dialogue-1200.webp" alt="A minimalist script showing how actions replace excessive dialogue" loading="lazy">
 </picture>
 </div>
 

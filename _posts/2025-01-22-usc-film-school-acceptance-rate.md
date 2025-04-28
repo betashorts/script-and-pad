@@ -8,15 +8,15 @@ meta: >
   <meta name="author" content="Screenplay Writer">
   <meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/usc-film-school-acceptance-rate">
 images:
-    - url: '/assets/images/usc-film-campus-800.webp'
+    - url: '/assets/blog/images/usc-film-campus-800.webp'
       width: 800
       height: 400
       description: 'The iconic USC Film School campus in Los Angeles.'
-    - url: '/assets/images/usc-students-filming-800.webp'
+    - url: '/assets/blog/images/usc-students-filming-800.webp'
       width: 800
       height: 400
       description: 'USC film students collaborating on a short film project.'
-    - url: '/assets/images/film-industry-networking-800.webp'
+    - url: '/assets/blog/images/film-industry-networking-800.webp'
       width: 800
       height: 400
       description: 'Networking events hosted by USC Film School for aspiring filmmakers.'
@@ -36,10 +36,10 @@ tags: [film school, filmmaking, usc film school, cinematic arts, film school adm
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/usc-film-campus-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/usc-film-campus-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/usc-film-campus-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/usc-film-campus-1200.webp" alt="The iconic USC Film School campus in Los Angeles" loading="lazy">
+  <source srcset="/assets/blog/images/usc-film-campus-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/usc-film-campus-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/usc-film-campus-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/usc-film-campus-1200.webp" alt="The iconic USC Film School campus in Los Angeles" loading="lazy">
 </picture>
 </div>
 
@@ -72,10 +72,10 @@ tags: [film school, filmmaking, usc film school, cinematic arts, film school adm
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/usc-students-filming-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/usc-students-filming-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/usc-students-filming-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/usc-students-filming-1200.webp" alt="USC film students collaborating on a short film project" loading="lazy">
+  <source srcset="/assets/blog/images/usc-students-filming-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/usc-students-filming-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/usc-students-filming-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/usc-students-filming-1200.webp" alt="USC film students collaborating on a short film project" loading="lazy">
 </picture>
 </div>
 
@@ -90,10 +90,10 @@ tags: [film school, filmmaking, usc film school, cinematic arts, film school adm
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/film-industry-networking-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/film-industry-networking-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/film-industry-networking-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/film-industry-networking-1200.webp" alt="Networking events hosted by USC Film School for aspiring filmmakers" loading="lazy">
+  <source srcset="/assets/blog/images/film-industry-networking-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/film-industry-networking-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/film-industry-networking-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/film-industry-networking-1200.webp" alt="Networking events hosted by USC Film School for aspiring filmmakers" loading="lazy">
 </picture>
 </div>
 

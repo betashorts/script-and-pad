@@ -4,7 +4,7 @@ title: "How to Write a Montage in a Script"
 date: 2025-01-05
 meta: '<meta name="description" content="Learn how to write a montage in a script. Explore tips for formatting, scene transitions, and storytelling techniques for engaging montages."><meta name="keywords" content="How to Write a Montage in a Script, montage in a script, screenplay montage, how to write a montage, screenplay formatting tips"><meta name="author" content="Screenplay Writer"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/how-to-write-a-montage-in-a-script">'
 images:
-    - url: '/assets/images/montage-definition-800.webp'
+    - url: '/assets/blog/images/montage-definition-800.webp'
       width: 800
       height: 400
       description: 'A training montage scene from Rocky and Forrest Gump.'
@@ -24,10 +24,10 @@ tags: [scriptwriting, montage, screenplay, writing tips, formatting]
 <div class="content">
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/montage-definition-400.webp" type="image/webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/montage-definition-800.webp" type="image/webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/montage-definition-1200.webp" type="image/webp" media="(max-width: 1200px)">
-  <img src="/assets/images/montage-definition-1200.webp" 
+  <source srcset="/assets/blog/images/montage-definition-400.webp" type="image/webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/montage-definition-800.webp" type="image/webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/montage-definition-1200.webp" type="image/webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/montage-definition-1200.webp" 
        alt="Montage examples in Rocky and Forrest Gump" 
        loading="lazy">
 </picture>
@@ -75,10 +75,10 @@ John beams as he aces his presentation.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/montage-formatting-400.webp" type="image/webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/montage-formatting-800.webp" type="image/webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/montage-formatting-1200.webp" type="image/webp" media="(max-width: 1200px)">
-  <img src="/assets/images/montage-formatting-1200.webp" 
+  <source srcset="/assets/blog/images/montage-formatting-400.webp" type="image/webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/montage-formatting-800.webp" type="image/webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/montage-formatting-1200.webp" type="image/webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/montage-formatting-1200.webp" 
        alt="How to format a montage in a script" 
        loading="lazy">
 </picture>

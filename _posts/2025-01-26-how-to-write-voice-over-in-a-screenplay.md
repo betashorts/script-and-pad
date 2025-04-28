@@ -8,11 +8,11 @@ meta: |
   <meta name="author" content="Screenplay Writer" />
   <meta name="robots" content="index, follow" />  <link rel="canonical" href="https://scriptandpad.com/how-to-write-voice-over-in-a-screenplay" />
 images:
-    - url: '/assets/images/voice-over-screenplay-800.webp'
+    - url: '/assets/blog/images/voice-over-screenplay-800.webp'
       width: 800
       height: 400
       description: 'A script showing a voice over format with a microphone in the background.'
-    - url: '/assets/images/screenplay-formatting-800.webp'
+    - url: '/assets/blog/images/screenplay-formatting-800.webp'
       width: 800
       height: 400
       description: 'Properly formatted screenplay for a voice over narration.'
@@ -41,10 +41,10 @@ tags: [screenplay, voice over, scriptwriting, screenplay formatting, writing tip
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/voice-over-screenplay-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/voice-over-screenplay-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/voice-over-screenplay-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/voice-over-screenplay-1200.webp" alt="A script showing a voice over format with a microphone in the background" loading="lazy">
+  <source srcset="/assets/blog/images/voice-over-screenplay-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/voice-over-screenplay-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/voice-over-screenplay-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/voice-over-screenplay-1200.webp" alt="A script showing a voice over format with a microphone in the background" loading="lazy">
 </picture>
 </div>
 
@@ -117,10 +117,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/screenplay-formatting-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/screenplay-formatting-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/screenplay-formatting-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/screenplay-formatting-1200.webp" alt="Properly formatted screenplay for a voice over narration" loading="lazy">
+  <source srcset="/assets/blog/images/screenplay-formatting-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/screenplay-formatting-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/screenplay-formatting-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/screenplay-formatting-1200.webp" alt="Properly formatted screenplay for a voice over narration" loading="lazy">
 </picture>
 </div>
 

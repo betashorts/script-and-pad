@@ -8,15 +8,15 @@ meta: >
   <meta name="author" content="Screenplay Writer">
   <meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/nyu-film-school-acceptance-rate">
 images:
-    - url: '/assets/images/nyu-film-campus-800.webp'
+    - url: '/assets/blog/images/nyu-film-campus-800.webp'
       width: 800
       height: 400
       description: 'The NYU Tisch School of the Arts campus in New York City.'
-    - url: '/assets/images/film-students-editing-800.webp'
+    - url: '/assets/blog/images/film-students-editing-800.webp'
       width: 800
       height: 400
       description: 'Film students editing their projects at NYU.'
-    - url: '/assets/images/nyu-film-networking-800.webp'
+    - url: '/assets/blog/images/nyu-film-networking-800.webp'
       width: 800
       height: 400
       description: 'An NYU Film School networking event in progress.'
@@ -36,10 +36,10 @@ tags: [film school, filmmaking, nyu film school, tisch school of the arts, film 
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/nyu-film-campus-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/nyu-film-campus-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/nyu-film-campus-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/nyu-film-campus-1200.webp" alt="The NYU Tisch School of the Arts campus in New York City" loading="lazy">
+  <source srcset="/assets/blog/images/nyu-film-campus-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/nyu-film-campus-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/nyu-film-campus-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/nyu-film-campus-1200.webp" alt="The NYU Tisch School of the Arts campus in New York City" loading="lazy">
 </picture>
 </div>
 
@@ -72,10 +72,10 @@ tags: [film school, filmmaking, nyu film school, tisch school of the arts, film 
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/film-students-editing-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/film-students-editing-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/film-students-editing-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/film-students-editing-1200.webp" alt="Film students editing their projects at NYU" loading="lazy">
+  <source srcset="/assets/blog/images/film-students-editing-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/film-students-editing-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/film-students-editing-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/film-students-editing-1200.webp" alt="Film students editing their projects at NYU" loading="lazy">
 </picture>
 </div>
 
@@ -99,10 +99,10 @@ tags: [film school, filmmaking, nyu film school, tisch school of the arts, film 
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/nyu-film-networking-400.webp" media="(max-width: 480px)">
-  <source srcset="/assets/images/nyu-film-networking-800.webp" media="(max-width: 768px)">
-  <source srcset="/assets/images/nyu-film-networking-1200.webp" media="(max-width: 1200px)">
-  <img src="/assets/images/nyu-film-networking-1200.webp" alt="An NYU Film School networking event in progress" loading="lazy">
+  <source srcset="/assets/blog/images/nyu-film-networking-400.webp" media="(max-width: 480px)">
+  <source srcset="/assets/blog/images/nyu-film-networking-800.webp" media="(max-width: 768px)">
+  <source srcset="/assets/blog/images/nyu-film-networking-1200.webp" media="(max-width: 1200px)">
+  <img src="/assets/blog/images/nyu-film-networking-1200.webp" alt="An NYU Film School networking event in progress" loading="lazy">
 </picture>
 </div>
 
