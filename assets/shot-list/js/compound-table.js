@@ -43,8 +43,14 @@ function renderCompoundRow(parent, basicUnits, level) {
       flatColumns.push({ unit, col: unit.columns[j], colIdx: j });
     }
   }
+  console.log(
+    `[L${level + 1}] Flattened columns:`,
+    flatColumns.length,
+    flatColumns
+  );
   // Step 2: Compute number of rows
   const numRows = Math.ceil(flatColumns.length / 6);
+  console.log(`[L${level + 1}] Number of rows needed:`, numRows);
   // Step 3: Fill rows
   let colPointer = 0;
   for (let rowIdx = 0; rowIdx < numRows; rowIdx++) {
@@ -58,8 +64,17 @@ function renderCompoundRow(parent, basicUnits, level) {
       colInRow++, colPointer++
     ) {
       const { unit, col, colIdx } = flatColumns[colPointer];
-      // Only render the L4 number cell if this is the first column for this L4 in this row
       let showL4Header = !renderedL4s.has(unit) || colIdx === 0;
+      console.log(
+        `[L${level + 1}] Row ${rowIdx + 1}, Col ${
+          colInRow + 1
+        }: Rendering L4 unit`,
+        unit.number,
+        "column",
+        colIdx,
+        "showL4Header:",
+        showL4Header
+      );
       renderBasicUnitCell(row, unit, level, colIdx, col, showL4Header);
       renderedL4s.add(unit);
     }
@@ -83,6 +98,11 @@ function renderCompoundRow(parent, basicUnits, level) {
 }
 
 function renderBasicUnitCell(parent, unit, level, colIdx, col, showL4Header) {
+  console.log(
+    `[L${level + 1}] Rendering basic unit cell: L4 ${
+      unit.number
+    }, column ${colIdx}, showL4Header: ${showL4Header}`
+  );
   const cell = document.createElement("div");
   cell.className = "basic-unit";
   // Top row (number with level prefix) only if showL4Header
