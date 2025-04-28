@@ -28,4 +28,34 @@ title: Script Shot List Generator
 <script src="https://unpkg.com/mammoth@1.6.0/mammoth.browser.min.js"></script>
 
 <!-- Main script -->
-<script src="/assets/shot-list/js/shot-list.js"></script> 
+<script src="/assets/shot-list/js/shot-list.js"></script>
+
+<link rel="stylesheet" href="/assets/shot-list/css/compound-table.css">
+
+<div class="tab-switcher">
+  <button id="tab-shot-list">Shot List</button>
+  <button id="tab-compound-table">Compound Table</button>
+</div>
+<div id="shot-list-section">
+  <!-- Existing shot list UI here -->
+</div>
+<div id="compound-table-section" style="display:none;">
+  <h2>Compound Table</h2>
+  <div id="compound-table-root"></div>
+</div>
+<script src="/assets/shot-list/js/compound-table.js"></script>
+<script>
+// Tab switching logic
+const tabShotList = document.getElementById('tab-shot-list');
+const tabCompoundTable = document.getElementById('tab-compound-table');
+const shotListSection = document.getElementById('shot-list-section');
+const compoundTableSection = document.getElementById('compound-table-section');
+tabShotList.onclick = () => {
+  shotListSection.style.display = '';
+  compoundTableSection.style.display = 'none';
+};
+tabCompoundTable.onclick = () => {
+  shotListSection.style.display = 'none';
+  compoundTableSection.style.display = '';
+};
+</script> 
