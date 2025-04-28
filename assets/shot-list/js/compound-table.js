@@ -34,7 +34,7 @@ function renderCompoundTable(container, data) {
   renderUnit(container, data, 0);
 }
 
-function renderCompoundRow(parent, basicUnits) {
+function renderCompoundRow(parent, basicUnits, level) {
   let row = document.createElement("div");
   row.className = "compound-table-row";
   let colCount = 0;
@@ -51,8 +51,9 @@ function renderCompoundRow(parent, basicUnits) {
       let partUnit = {
         ...unit,
         columns: unit.columns.slice(unitColIdx, unitColIdx + colsToRender),
+        level: level,
       };
-      renderBasicUnit(row, partUnit);
+      renderBasicUnit(row, partUnit, level);
       colCount += colsToRender;
       unitColIdx += colsToRender;
       if (colCount === 6) {
@@ -72,10 +73,10 @@ function renderUnit(parent, unit, level) {
   const wrapper = document.createElement("div");
   wrapper.className = `compound-level compound-level-${level}`;
 
-  // Top row with number
+  // Top row with number and level prefix
   const topRow = document.createElement("div");
   topRow.className = "compound-top-row";
-  topRow.textContent = unit.number;
+  topRow.textContent = `L${level + 1} ${unit.number}`;
   wrapper.appendChild(topRow);
 
   // Bottom row
@@ -83,10 +84,9 @@ function renderUnit(parent, unit, level) {
   bottomRow.className = "compound-bottom-row";
 
   if (unit.type === "basic") {
-    renderBasicUnit(bottomRow, unit);
+    renderBasicUnit(bottomRow, unit, level);
   } else if (unit.type === "compound") {
-    // Render all basic units in rows with max 6 columns
-    renderCompoundRow(bottomRow, unit.children);
+    renderCompoundRow(bottomRow, unit.children, level + 1);
     // Add button to add new child
     const addBtn = document.createElement("button");
     addBtn.textContent = "+ Add Basic Unit";
@@ -135,14 +135,16 @@ function renderUnit(parent, unit, level) {
   parent.appendChild(wrapper);
 }
 
-function renderBasicUnit(parent, unit) {
+function renderBasicUnit(parent, unit, level) {
   const cell = document.createElement("div");
   cell.className = "basic-unit";
 
-  // Top row (number)
+  // Top row (number with level prefix)
   const top = document.createElement("div");
   top.className = "basic-unit-top";
-  top.textContent = unit.number;
+  top.textContent = `L${
+    unit.level !== undefined ? unit.level + 1 : level + 1
+  } ${unit.number}`;
   cell.appendChild(top);
 
   // Bottom row (columns)
@@ -174,13 +176,11 @@ function renderBasicUnit(parent, unit) {
   const addColBtn = document.createElement("button");
   addColBtn.textContent = "+ Add Column";
   addColBtn.onclick = () => {
-    if (unit.columns.length < 6) {
-      unit.columns.push({ content: "" });
-      renderCompoundTable(
-        document.getElementById("compound-table-root"),
-        compoundTableData
-      );
-    }
+    unit.columns.push({ content: "" });
+    renderCompoundTable(
+      document.getElementById("compound-table-root"),
+      compoundTableData
+    );
   };
   bottom.appendChild(addColBtn);
   cell.appendChild(bottom);
