@@ -356,12 +356,10 @@ function renderBasicUnitCell(
   // Remove button for L4 (basic) unit
   const removeBtn = document.createElement("button");
   removeBtn.textContent = "-";
-  removeBtn.title = "Remove L4";
+  removeBtn.title = "Remove column";
   removeBtn.onclick = (ev) => {
-    if (parentArr && typeof unitArrIdx === "number") {
-      parentArr.splice(unitArrIdx, 1);
-      window.renderAllL1Tables();
-    }
+    unit.columns.splice(colIdx, 1);
+    window.renderAllL1Tables();
     ev.stopPropagation();
   };
   colDiv.appendChild(removeBtn);
