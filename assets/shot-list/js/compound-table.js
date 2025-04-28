@@ -84,7 +84,7 @@ function renderUnit(parent, unit, level) {
     renderCompoundRow(bottomRow, unit.children, level + 1);
     // Add button to add new child
     const addBtn = document.createElement("button");
-    addBtn.textContent = "+ Add Basic Unit";
+    addBtn.textContent = "+";
     addBtn.onclick = () => {
       unit.children.push({
         type: "basic",
@@ -103,8 +103,7 @@ function renderUnit(parent, unit, level) {
     });
     // Add button to add new child
     const addBtn = document.createElement("button");
-    addBtn.textContent =
-      unit.type === "high" ? "+ Add Compound Cell" : "+ Add High Level Cell";
+    addBtn.textContent = "+";
     addBtn.onclick = () => {
       if (unit.type === "high") {
         unit.children.push({
@@ -178,7 +177,7 @@ function renderBasicUnit(parent, unit, level, startIdx = 0, count = null) {
   // Add column button (only show if this is the last split part for this unit)
   if (startIdx + columnsToRender.length === unit.columns.length) {
     const addColBtn = document.createElement("button");
-    addColBtn.textContent = "+ Add Column";
+    addColBtn.textContent = "+";
     addColBtn.onclick = () => {
       console.log(`[ADD] Adding column to unit`, unit);
       unit.columns.push({ content: "" });
