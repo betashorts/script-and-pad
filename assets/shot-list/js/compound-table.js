@@ -166,12 +166,12 @@ function renderUnit(parent, unit, level) {
     renderBasicUnit(bottomRow, unit, level);
   } else if (unit.type === "compound") {
     renderCompoundRow(bottomRow, unit.children, level + 1);
-    // Add button to add new child
+    // Add button to add new child (L4 units are handled in rows, but L3 blocks stack vertically)
     const addBtn = document.createElement("button");
     addBtn.textContent = "+";
     addBtn.onclick = () => {
       console.log(
-        "[ADD BASIC UNIT] Appending new basic unit to children array",
+        "[ADD BASIC UNIT] Appending new basic unit to children array (L3 block will stack vertically)",
         unit.children
       );
       unit.children.push({
@@ -186,20 +186,29 @@ function renderUnit(parent, unit, level) {
     };
     bottomRow.appendChild(addBtn);
   } else {
+    // For L1 and L2, stack children vertically
     unit.children.forEach((child) => {
       renderUnit(bottomRow, child, level + 1);
     });
-    // Add button to add new child
+    // Add button to add new child (L1/L2 blocks stack vertically)
     const addBtn = document.createElement("button");
     addBtn.textContent = "+";
     addBtn.onclick = () => {
       if (unit.type === "high") {
+        console.log(
+          "[ADD COMPOUND CELL] Appending new compound cell to children array (L2 block will stack vertically)",
+          unit.children
+        );
         unit.children.push({
           type: "compound",
           number: getNextNumber(unit.children),
           children: [],
         });
       } else if (unit.type === "super") {
+        console.log(
+          "[ADD HIGH LEVEL CELL] Appending new high level cell to children array (L1 block will stack vertically)",
+          unit.children
+        );
         unit.children.push({
           type: "high",
           number: getNextNumber(unit.children),
