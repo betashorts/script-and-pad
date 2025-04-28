@@ -75,7 +75,7 @@ async function loadSamples() {
             return;
           }
 
-          // Ensure the sound file path is correct and the file exists : Testing
+          // Ensure the sound file path is correct and the file exists : Test
           const soundPath = `/assets/game/sounds/${instrument.soundFile}`;
           console.log(`Attempting to load sound from path: ${soundPath}`);
 
