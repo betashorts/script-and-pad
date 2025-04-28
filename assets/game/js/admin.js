@@ -319,6 +319,7 @@ async function playBar(barIndex) {
     isPlaying = false;
   }
 }
+window.playBar = playBar;
 
 // Process MIDI file
 async function processMidiFile(file) {
