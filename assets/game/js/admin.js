@@ -436,7 +436,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function getPatternSignatureForMidiFile(midiFile) {
   // Fetch and parse the MIDI file, then return a stringified pattern signature
-  const response = await fetch(`../assets/midi/${midiFile}`);
+  const midiPath = `/assets/game/midi/${midiFile}`;
+  const response = await fetch(midiPath);
   const arrayBuffer = await response.arrayBuffer();
   const midi = new Midi(arrayBuffer);
   // Use the first bar's pattern as the signature (or all bars if you want to be strict)
@@ -524,7 +525,8 @@ async function renderGroupedMidiPatterns() {
 
 // Helper to process MIDI file from assets (not upload)
 async function processMidiFileFromAssets(filename) {
-  const response = await fetch(`../assets/midi/${filename}`);
+  const midiPath = `/assets/game/midi/${filename}`;
+  const response = await fetch(midiPath);
   const file = new File([await response.arrayBuffer()], filename);
   await processMidiFile(file);
 }
