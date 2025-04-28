@@ -161,40 +161,32 @@ function renderUnit(parent, unit, level) {
   // Bottom row
   const bottomRow = document.createElement("div");
   bottomRow.className = "compound-bottom-row";
+  bottomRow.style.display = "flex";
+  bottomRow.style.flexDirection = "column"; // Always stack vertically for L1, L2, L3
 
   if (unit.type === "basic") {
-    renderBasicUnit(bottomRow, unit, level);
-  } else if (unit.type === "compound") {
-    renderCompoundRow(bottomRow, unit.children, level + 1);
-    // Add button to add new child (L4 units are handled in rows, but L3 blocks stack vertically)
-    const addBtn = document.createElement("button");
-    addBtn.textContent = "+";
-    addBtn.onclick = () => {
-      console.log(
-        "[ADD BASIC UNIT] Appending new basic unit to children array (L3 block will stack vertically)",
-        unit.children
-      );
-      unit.children.push({
-        type: "basic",
-        number: getNextNumber(unit.children),
-        columns: [{ content: "" }],
-      });
-      renderCompoundTable(
-        document.getElementById("compound-table-root"),
-        compoundTableData
-      );
-    };
-    bottomRow.appendChild(addBtn);
+    // L4: Render columns horizontally with 6-column rule
+    renderBasicUnitRow(bottomRow, unit, level);
   } else {
-    // For L1 and L2, stack children vertically
+    // For L1, L2, L3: stack children vertically
     unit.children.forEach((child) => {
       renderUnit(bottomRow, child, level + 1);
     });
-    // Add button to add new child (L1/L2 blocks stack vertically)
+    // Add button to add new child
     const addBtn = document.createElement("button");
     addBtn.textContent = "+";
     addBtn.onclick = () => {
-      if (unit.type === "high") {
+      if (unit.type === "compound") {
+        console.log(
+          "[ADD BASIC UNIT] Appending new basic unit to children array (L3 block will stack vertically)",
+          unit.children
+        );
+        unit.children.push({
+          type: "basic",
+          number: getNextNumber(unit.children),
+          columns: [{ content: "" }],
+        });
+      } else if (unit.type === "high") {
         console.log(
           "[ADD COMPOUND CELL] Appending new compound cell to children array (L2 block will stack vertically)",
           unit.children
@@ -224,6 +216,41 @@ function renderUnit(parent, unit, level) {
   }
   wrapper.appendChild(bottomRow);
   parent.appendChild(wrapper);
+}
+
+// Render a basic unit (L4) and its columns horizontally with the 6-column rule
+function renderBasicUnitRow(parent, unit, level) {
+  // Flatten columns for this L4 unit
+  let flatColumns = unit.columns.map((col, colIdx) => ({ unit, col, colIdx }));
+  const numRows = Math.ceil(flatColumns.length / 6);
+  let colPointer = 0;
+  for (let rowIdx = 0; rowIdx < numRows; rowIdx++) {
+    let row = document.createElement("div");
+    row.className = "compound-table-row";
+    for (
+      let colInRow = 0;
+      colInRow < 6 && colPointer < flatColumns.length;
+      colInRow++, colPointer++
+    ) {
+      const { unit, col, colIdx } = flatColumns[colPointer];
+      // Show L4 header only for the first column in the first row
+      let showL4Header = rowIdx === 0 && colInRow === 0;
+      renderBasicUnitCell(row, unit, level, colIdx, col, showL4Header);
+    }
+    parent.appendChild(row);
+  }
+  // Add column button for this L4 unit
+  const addColBtn = document.createElement("button");
+  addColBtn.textContent = "+";
+  addColBtn.onclick = () => {
+    console.log(`[ADD] Adding column to unit`, unit);
+    unit.columns.push({ content: "" });
+    renderCompoundTable(
+      document.getElementById("compound-table-root"),
+      compoundTableData
+    );
+  };
+  parent.appendChild(addColBtn);
 }
 
 function renderBasicUnit(parent, unit, level, startIdx = 0, count = null) {
