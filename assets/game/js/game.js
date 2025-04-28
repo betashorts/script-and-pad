@@ -1,5 +1,5 @@
 // Import beat categories
-import { BEAT_CATEGORIES, getAllBeats } from "../constants/beats.js";
+import { BEAT_CATEGORIES, getAllBeats } from "../../game/constants/beats.js";
 
 // Constants
 const STEPS = 16;

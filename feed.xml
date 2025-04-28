@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://scriptandpad.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://scriptandpad.com/" rel="alternate" type="text/html" /><updated>2025-04-27T10:59:16+00:00</updated><id>https://scriptandpad.com/feed.xml</id><title type="html">Screenplay Writer</title><subtitle>Learn to create engaging screenplays with tips, insights, and techniques for writers.</subtitle><author><name>Screenplay Writer</name></author><entry><title type="html">How to Know If a Movie Had a Bad Script</title><link href="https://scriptandpad.com/how-to-know-if-a-movie-had-a-bad-script/" rel="alternate" type="text/html" title="How to Know If a Movie Had a Bad Script" /><published>2025-02-07T00:00:00+00:00</published><updated>2025-02-07T00:00:00+00:00</updated><id>https://scriptandpad.com/how-to-know-if-a-movie-had-a-bad-script</id><content type="html" xml:base="https://scriptandpad.com/how-to-know-if-a-movie-had-a-bad-script/"><![CDATA[<h2>Introduction</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://scriptandpad.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://scriptandpad.com/" rel="alternate" type="text/html" /><updated>2025-04-28T05:59:55+00:00</updated><id>https://scriptandpad.com/feed.xml</id><title type="html">Screenplay Writer</title><subtitle>Learn to create engaging screenplays with tips, insights, and techniques for writers.</subtitle><author><name>Screenplay Writer</name></author><entry><title type="html">How to Know If a Movie Had a Bad Script</title><link href="https://scriptandpad.com/how-to-know-if-a-movie-had-a-bad-script/" rel="alternate" type="text/html" title="How to Know If a Movie Had a Bad Script" /><published>2025-02-07T00:00:00+00:00</published><updated>2025-02-07T00:00:00+00:00</updated><id>https://scriptandpad.com/how-to-know-if-a-movie-had-a-bad-script</id><content type="html" xml:base="https://scriptandpad.com/how-to-know-if-a-movie-had-a-bad-script/"><![CDATA[<h2>Introduction</h2>
 <p>We’ve all been there—watching a movie that had potential, but something felt off. More often than not, **a bad script** is to blame. But how can you tell if a movie suffered from poor screenwriting? Whether you're an aspiring filmmaker, a critic, or just a curious moviegoer, here’s a breakdown of the biggest red flags that indicate a weak script.</p>
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/bad-movie-script-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/bad-movie-script-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/bad-movie-script-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/bad-movie-script-1200.webp" alt="A frustrated screenwriter struggling with a bad movie script" loading="lazy" />
+  <source srcset="/assets/blog/images/bad-movie-script-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/bad-movie-script-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/bad-movie-script-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/bad-movie-script-1200.webp" alt="A frustrated screenwriter struggling with a bad movie script" loading="lazy" />
 </picture>
 </div>
 
@@ -44,10 +44,10 @@
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/movie-plot-holes-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/movie-plot-holes-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/movie-plot-holes-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/movie-plot-holes-1200.webp" alt="Illustration of confusing plot holes and unresolved storylines in bad scripts" loading="lazy" />
+  <source srcset="/assets/blog/images/movie-plot-holes-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/movie-plot-holes-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/movie-plot-holes-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/movie-plot-holes-1200.webp" alt="Illustration of confusing plot holes and unresolved storylines in bad scripts" loading="lazy" />
 </picture>
 </div>
 
@@ -79,10 +79,10 @@
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/kingsman-screenplay-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/kingsman-screenplay-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/kingsman-screenplay-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/kingsman-screenplay-1200.webp" alt="A Kingsman script page showcasing its unique dialogue and action style" loading="lazy" />
+  <source srcset="/assets/blog/images/kingsman-screenplay-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/kingsman-screenplay-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/kingsman-screenplay-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/kingsman-screenplay-1200.webp" alt="A Kingsman script page showcasing its unique dialogue and action style" loading="lazy" />
 </picture>
 </div>
 
@@ -93,10 +93,10 @@
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/jane-goldman-screenwriter-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/jane-goldman-screenwriter-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/jane-goldman-screenwriter-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/jane-goldman-screenwriter-1200.webp" alt="Screenwriter Jane Goldman, co-writer of Kingsman, known for her bold storytelling choices" loading="lazy" />
+  <source srcset="/assets/blog/images/jane-goldman-screenwriter-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/jane-goldman-screenwriter-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/jane-goldman-screenwriter-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/jane-goldman-screenwriter-1200.webp" alt="Screenwriter Jane Goldman, co-writer of Kingsman, known for her bold storytelling choices" loading="lazy" />
 </picture>
 </div>
 
@@ -114,10 +114,10 @@
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/kingsman-action-sequence-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/kingsman-action-sequence-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/kingsman-action-sequence-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/kingsman-action-sequence-1200.webp" alt="An iconic Kingsman action sequence that defines its screenplay style" loading="lazy" />
+  <source srcset="/assets/blog/images/kingsman-action-sequence-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/kingsman-action-sequence-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/kingsman-action-sequence-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/kingsman-action-sequence-1200.webp" alt="An iconic Kingsman action sequence that defines its screenplay style" loading="lazy" />
 </picture>
 </div>
 
@@ -157,10 +157,10 @@ Heads slam, bodies fly. A symphony of violence set to Free Bird.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/screenplay-animal-formatting-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/screenplay-animal-formatting-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/screenplay-animal-formatting-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/screenplay-animal-formatting-1200.webp" alt="A formatted screenplay script with proper capitalization of an animal character" loading="lazy" />
+  <source srcset="/assets/blog/images/screenplay-animal-formatting-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/screenplay-animal-formatting-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/screenplay-animal-formatting-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/screenplay-animal-formatting-1200.webp" alt="A formatted screenplay script with proper capitalization of an animal character" loading="lazy" />
 </picture>
 </div>
 
@@ -172,10 +172,10 @@ Heads slam, bodies fly. A symphony of violence set to Free Bird.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/screenwriting-dog-scene-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/screenwriting-dog-scene-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/screenwriting-dog-scene-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/screenwriting-dog-scene-1200.webp" alt="A scene in a screenplay where a dog character interacts with the protagonist" loading="lazy" />
+  <source srcset="/assets/blog/images/screenwriting-dog-scene-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/screenwriting-dog-scene-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/screenwriting-dog-scene-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/screenwriting-dog-scene-1200.webp" alt="A scene in a screenplay where a dog character interacts with the protagonist" loading="lazy" />
 </picture>
 </div>
 
@@ -248,10 +248,10 @@ A wise-looking **OWL** perches on a tree branch.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/script-formatting-rules-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/script-formatting-rules-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/script-formatting-rules-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/script-formatting-rules-1200.webp" alt="A checklist of script formatting rules, including capitalization guidelines" loading="lazy" />
+  <source srcset="/assets/blog/images/script-formatting-rules-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/script-formatting-rules-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/script-formatting-rules-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/script-formatting-rules-1200.webp" alt="A checklist of script formatting rules, including capitalization guidelines" loading="lazy" />
 </picture>
 </div>
 
@@ -275,10 +275,10 @@ A wise-looking **OWL** perches on a tree branch.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/voice-over-screenplay-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/voice-over-screenplay-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/voice-over-screenplay-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/voice-over-screenplay-1200.webp" alt="A script showing a voice over format with a microphone in the background" loading="lazy" />
+  <source srcset="/assets/blog/images/voice-over-screenplay-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/voice-over-screenplay-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/voice-over-screenplay-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/voice-over-screenplay-1200.webp" alt="A script showing a voice over format with a microphone in the background" loading="lazy" />
 </picture>
 </div>
 
@@ -351,10 +351,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/screenplay-formatting-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/screenplay-formatting-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/screenplay-formatting-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/screenplay-formatting-1200.webp" alt="Properly formatted screenplay for a voice over narration" loading="lazy" />
+  <source srcset="/assets/blog/images/screenplay-formatting-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/screenplay-formatting-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/screenplay-formatting-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/screenplay-formatting-1200.webp" alt="Properly formatted screenplay for a voice over narration" loading="lazy" />
 </picture>
 </div>
 
@@ -385,10 +385,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/cannes-film-festival-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/cannes-film-festival-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/cannes-film-festival-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/cannes-film-festival-1200.webp" alt="The iconic Cannes Film Festival red carpet, a hub of global cinema" loading="lazy" />
+  <source srcset="/assets/blog/images/cannes-film-festival-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/cannes-film-festival-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/cannes-film-festival-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/cannes-film-festival-1200.webp" alt="The iconic Cannes Film Festival red carpet, a hub of global cinema" loading="lazy" />
 </picture>
 </div>
 
@@ -408,10 +408,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/french-accent-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/french-accent-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/french-accent-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/french-accent-1200.webp" alt="A helpful pronunciation guide for saying “Cannes” correctly in French" loading="lazy" />
+  <source srcset="/assets/blog/images/french-accent-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/french-accent-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/french-accent-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/french-accent-1200.webp" alt="A helpful pronunciation guide for saying “Cannes” correctly in French" loading="lazy" />
 </picture>
 </div>
 
@@ -449,10 +449,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/screenplay-writer-tool-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/screenplay-writer-tool-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/screenplay-writer-tool-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/screenplay-writer-tool-1200.webp" alt="The Screenplay Writer tool showcased on Google Docs for screenplay formatting" loading="lazy" />
+  <source srcset="/assets/blog/images/screenplay-writer-tool-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/screenplay-writer-tool-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/screenplay-writer-tool-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/screenplay-writer-tool-1200.webp" alt="The Screenplay Writer tool showcased on Google Docs for screenplay formatting" loading="lazy" />
 </picture>
 </div>
 
@@ -484,10 +484,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/cannes-film-festival-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/cannes-film-festival-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/cannes-film-festival-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/cannes-film-festival-1200.webp" alt="The Cannes Film Festival red carpet – a global symbol of cinema and glamour" loading="lazy" />
+  <source srcset="/assets/blog/images/cannes-film-festival-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/cannes-film-festival-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/cannes-film-festival-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/cannes-film-festival-1200.webp" alt="The Cannes Film Festival red carpet – a global symbol of cinema and glamour" loading="lazy" />
 </picture>
 </div>
 
@@ -507,10 +507,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/french-accent-guide-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/french-accent-guide-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/french-accent-guide-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/french-accent-guide-1200.webp" alt="A simple guide to pronouncing “Cannes” correctly in French" loading="lazy" />
+  <source srcset="/assets/blog/images/french-accent-guide-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/french-accent-guide-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/french-accent-guide-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/french-accent-guide-1200.webp" alt="A simple guide to pronouncing “Cannes” correctly in French" loading="lazy" />
 </picture>
 </div>
 
@@ -548,10 +548,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/screenplay-writing-tool-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/screenplay-writing-tool-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/screenplay-writing-tool-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/screenplay-writing-tool-1200.webp" alt="The Screenplay Writer tool for Google Docs in action, helping writers format scripts for success" loading="lazy" />
+  <source srcset="/assets/blog/images/screenplay-writing-tool-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/screenplay-writing-tool-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/screenplay-writing-tool-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/screenplay-writing-tool-1200.webp" alt="The Screenplay Writer tool for Google Docs in action, helping writers format scripts for success" loading="lazy" />
 </picture>
 </div>
 
@@ -574,10 +574,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/la-film-school-campus-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/la-film-school-campus-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/la-film-school-campus-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/la-film-school-campus-1200.webp" alt="The Los Angeles Film School campus in the heart of Hollywood" loading="lazy" />
+  <source srcset="/assets/blog/images/la-film-school-campus-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/la-film-school-campus-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/la-film-school-campus-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/la-film-school-campus-1200.webp" alt="The Los Angeles Film School campus in the heart of Hollywood" loading="lazy" />
 </picture>
 </div>
 
@@ -608,10 +608,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/aspiring-filmmakers-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/aspiring-filmmakers-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/aspiring-filmmakers-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/aspiring-filmmakers-1200.webp" alt="A group of aspiring filmmakers working on a project" loading="lazy" />
+  <source srcset="/assets/blog/images/aspiring-filmmakers-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/aspiring-filmmakers-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/aspiring-filmmakers-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/aspiring-filmmakers-1200.webp" alt="A group of aspiring filmmakers working on a project" loading="lazy" />
 </picture>
 </div>
 
@@ -625,10 +625,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/film-school-alternatives-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/film-school-alternatives-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/film-school-alternatives-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/film-school-alternatives-1200.webp" alt="Creative alternatives to traditional film schools" loading="lazy" />
+  <source srcset="/assets/blog/images/film-school-alternatives-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/film-school-alternatives-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/film-school-alternatives-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/film-school-alternatives-1200.webp" alt="Creative alternatives to traditional film schools" loading="lazy" />
 </picture>
 </div>
 
@@ -650,10 +650,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/roteirista-trabalhando-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/roteirista-trabalhando-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/roteirista-trabalhando-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/roteirista-trabalhando-1200.webp" alt="Roteirista usando o Screenplay Writer no Google Docs para escrever seu roteiro" loading="lazy" />
+  <source srcset="/assets/blog/images/roteirista-trabalhando-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/roteirista-trabalhando-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/roteirista-trabalhando-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/roteirista-trabalhando-1200.webp" alt="Roteirista usando o Screenplay Writer no Google Docs para escrever seu roteiro" loading="lazy" />
 </picture>
 </div>
 
@@ -685,10 +685,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/estrutura-de-roteiro-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/estrutura-de-roteiro-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/estrutura-de-roteiro-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/estrutura-de-roteiro-1200.webp" alt="Um gráfico mostrando a estrutura básica de um roteiro em três atos" loading="lazy" />
+  <source srcset="/assets/blog/images/estrutura-de-roteiro-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/estrutura-de-roteiro-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/estrutura-de-roteiro-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/estrutura-de-roteiro-1200.webp" alt="Um gráfico mostrando a estrutura básica de um roteiro em três atos" loading="lazy" />
 </picture>
 </div>
 
@@ -704,10 +704,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/screenplay-writer-tool-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/screenplay-writer-tool-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/screenplay-writer-tool-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/screenplay-writer-tool-1200.webp" alt="Uma visão do Screenplay Writer funcionando no Google Docs" loading="lazy" />
+  <source srcset="/assets/blog/images/screenplay-writer-tool-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/screenplay-writer-tool-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/screenplay-writer-tool-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/screenplay-writer-tool-1200.webp" alt="Uma visão do Screenplay Writer funcionando no Google Docs" loading="lazy" />
 </picture>
 </div>
 
@@ -725,10 +725,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/la-film-school-classroom-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/la-film-school-classroom-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/la-film-school-classroom-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/la-film-school-classroom-1200.webp" alt="A classroom in the Los Angeles Film School featuring advanced equipment" loading="lazy" />
+  <source srcset="/assets/blog/images/la-film-school-classroom-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/la-film-school-classroom-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/la-film-school-classroom-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/la-film-school-classroom-1200.webp" alt="A classroom in the Los Angeles Film School featuring advanced equipment" loading="lazy" />
 </picture>
 </div>
 
@@ -749,10 +749,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/networking-film-industry-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/networking-film-industry-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/networking-film-industry-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/networking-film-industry-1200.webp" alt="Filmmaking professionals networking during a film school event" loading="lazy" />
+  <source srcset="/assets/blog/images/networking-film-industry-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/networking-film-industry-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/networking-film-industry-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/networking-film-industry-1200.webp" alt="Filmmaking professionals networking during a film school event" loading="lazy" />
 </picture>
 </div>
 
@@ -772,10 +772,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/film-students-project-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/film-students-project-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/film-students-project-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/film-students-project-1200.webp" alt="Film students collaborating on a project at the Los Angeles Film School" loading="lazy" />
+  <source srcset="/assets/blog/images/film-students-project-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/film-students-project-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/film-students-project-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/film-students-project-1200.webp" alt="Film students collaborating on a project at the Los Angeles Film School" loading="lazy" />
 </picture>
 </div>
 
@@ -789,10 +789,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/oscar-melhor-roteiro-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/oscar-melhor-roteiro-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/oscar-melhor-roteiro-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/oscar-melhor-roteiro-1200.webp" alt="A estatueta do Oscar em destaque, simbolizando o prêmio de Melhor Roteiro Original" loading="lazy" />
+  <source srcset="/assets/blog/images/oscar-melhor-roteiro-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/oscar-melhor-roteiro-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/oscar-melhor-roteiro-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/oscar-melhor-roteiro-1200.webp" alt="A estatueta do Oscar em destaque, simbolizando o prêmio de Melhor Roteiro Original" loading="lazy" />
 </picture>
 </div>
 
@@ -812,10 +812,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/roteiristas-famosos-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/roteiristas-famosos-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/roteiristas-famosos-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/roteiristas-famosos-1200.webp" alt="Roteiristas famosos recebendo prêmios por seus roteiros originais" loading="lazy" />
+  <source srcset="/assets/blog/images/roteiristas-famosos-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/roteiristas-famosos-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/roteiristas-famosos-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/roteiristas-famosos-1200.webp" alt="Roteiristas famosos recebendo prêmios por seus roteiros originais" loading="lazy" />
 </picture>
 </div>
 
@@ -851,10 +851,10 @@ The city was alive, buzzing with energy, yet I felt invisible.
 
 <div class="picture-container">
 <picture>
-  <source srcset="/assets/images/melhores-roteiros-cinema-400.webp" media="(max-width: 480px)" />
-  <source srcset="/assets/images/melhores-roteiros-cinema-800.webp" media="(max-width: 768px)" />
-  <source srcset="/assets/images/melhores-roteiros-cinema-1200.webp" media="(max-width: 1200px)" />
-  <img src="/assets/images/melhores-roteiros-cinema-1200.webp" alt="Um roteiro de cinema sendo revisado em uma mesa de trabalho" loading="lazy" />
+  <source srcset="/assets/blog/images/melhores-roteiros-cinema-400.webp" media="(max-width: 480px)" />
+  <source srcset="/assets/blog/images/melhores-roteiros-cinema-800.webp" media="(max-width: 768px)" />
+  <source srcset="/assets/blog/images/melhores-roteiros-cinema-1200.webp" media="(max-width: 1200px)" />
+  <img src="/assets/blog/images/melhores-roteiros-cinema-1200.webp" alt="Um roteiro de cinema sendo revisado em uma mesa de trabalho" loading="lazy" />
 </picture>
 </div>
 

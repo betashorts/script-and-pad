@@ -5,12 +5,12 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Drum Loop Game">
+    <meta property="og:title" content="Create Custom Pattern">
     <meta property="og:description" content="Learn to create engaging screenplays with tips, insights, and techniques for writers.">
     <meta property="og:image" content="https://scriptandpad.com/logo.jpg">
-    <meta property="og:url" content="https://scriptandpad.com/game/">
+    <meta property="og:url" content="https://scriptandpad.com/game/admin/create/">
     <meta property="og:type" content="article">
-    <title>Drum Loop Game</title>
+    <title>Create Custom Pattern</title>
     <link rel="stylesheet" href="/css/styles.css">
     
 
@@ -18,7 +18,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "headline": "Drum Loop Game",
+  "headline": "Create Custom Pattern",
   "image": "https://scriptandpad.com/logo.jpg", 
   "author": {
     "@type": "Person",
@@ -76,46 +76,38 @@
 </header>
 
     <main>
-        <div class="game-container">
-  <div class="sidebar">
-    <h2>Drum Beats</h2>
-    <div id="beat-list"></div>
-  </div>
-  
-  <div class="main-content">
-    <h1>Recreate This Drum Beat</h1>
-    <div class="beat-info">
-      <h2 id="current-beat-name">Basic Rock Beat</h2>
-      <div id="current-beat-bpm">100 BPM</div>
+        <div class="game-container admin-container">
+    <div class="sidebar">
+        <h2>Instruments</h2>
+        <div id="instrument-list"></div>
     </div>
+    
+    <div class="main-content">
+        <div class="header">
+            <h1>Create Custom Pattern</h1>
+        </div>
+        
+        <div class="controls">
+            <div class="bpm-control">
+                <label for="bpm">BPM:</label>
+                <input type="number" id="bpm" value="120" min="40" max="300">
+            </div>
+            <div class="control-buttons">
+                <button id="playPattern" class="btn primary">Play Pattern</button>
+                <button id="downloadPattern" class="btn">Download MIDI</button>
+            </div>
+        </div>
 
-    <div id="piano-roll"></div>
+        <div id="piano-roll" class="piano-roll"></div>
 
-    <div class="controls">
-      <button id="playReference" class="btn">Play Reference Beat</button>
-      <button id="playUser" class="btn">Play Your Version</button>
-      <button id="checkAccuracy" class="btn">Check Accuracy</button>
-      <button id="toggleSolution" class="btn">Show/Hide Solution</button>
+        <div id="status" class="status">Ready to create!</div>
     </div>
-
-    <div id="status" class="status">Ready to play!</div>
-
-    <div id="debug-info" class="debug-info">
-      <div>BPM: <span id="debug-bpm">-</span></div>
-      <div>Time Signature: <span id="debug-time-signature">-</span></div>
-      <div>Bars: <span id="debug-bars">-</span></div>
-      <div>Duration: <span id="debug-duration">-</span>s</div>
-      <div>MIDI Notes: <span id="debug-midi-notes">-</span></div>
-    </div>
-  </div>
 </div>
 
 <!-- JavaScript Dependencies -->
 <script src="https://unpkg.com/@tonejs/midi"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>    
-<!-- Game Logic -->
-<script src="/assets/game/js/game.js" type="module" defer></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+<script src="/assets/game/js/create.js" type="module" defer></script> 
     </main>
 
     <footer>

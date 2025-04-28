@@ -1,48 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Script Shot List Generator">
+    <meta property="og:description" content="Learn to create engaging screenplays with tips, insights, and techniques for writers.">
+    <meta property="og:image" content="https://scriptandpad.com/logo.jpg">
+    <meta property="og:url" content="https://scriptandpad.com/shot-list/">
+    <meta property="og:type" content="article">
     <title>Script Shot List Generator</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
-        .upload-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .file-input {
-            margin: 1rem 0;
-        }
-        .json-output {
-            margin-top: 2rem;
-            padding: 1rem;
-            background: #f5f5f5;
-            border-radius: 4px;
-            white-space: pre-wrap;
-            font-family: monospace;
-            max-height: 500px;
-            overflow-y: auto;
-        }
-        .status-message {
-            margin: 1rem 0;
-            padding: 0.5rem;
-            border-radius: 4px;
-        }
-        .error {
-            background-color: #ffebee;
-            color: #c62828;
-        }
-        .success {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/styles.css">
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "headline": "Script Shot List Generator",
+  "image": "https://scriptandpad.com/logo.jpg", 
+  "author": {
+    "@type": "Person",
+    "name": "Screenplay Writer"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Screenplay Writer",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://scriptandpad.com/logo.jpg"
+    },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://scriptandpad.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+  },
+  "datePublished": "",
+  "dateModified": "",
+  "description": "Learn to create engaging screenplays with tips, insights, and techniques for writers."
+}
+</script>
+
+
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M5L6M6HPR2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-M5L6M6HPR2');
+</script>
 </head>
 <body>
+<header>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">
+                <img src="/logo.jpg" alt="Screenplay Writer Logo" class="navbar-logo" />
+                Screenplay Writer
+            </a>
+            <ul class="navbar-links">
+                <li><a href="/game/">Game</a></li>
+                <li><a href="/shot-list/">Shot List</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/privacy.html">Privacy Policy</a></li>
+                <li><a href="/terms.html">Terms of Service</a></li>
+                <li><a href="/support.html">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+    <main>
+        <div class="shot-list-container">
     <div class="upload-container">
         <h1>Script Shot List Generator</h1>
         <p>Upload a script file (.pdf, .docx, or .doc) to generate a structured shot list.</p>
@@ -55,17 +89,25 @@
         <div id="status" class="status-message"></div>
         <div id="jsonOutput" class="json-output" style="display: none;"></div>
     </div>
+</div>
 
-    <!-- PDF.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script>
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-    </script>
-    
-    <!-- DOCX Processing -->
-    <script src="https://unpkg.com/mammoth@1.6.0/mammoth.browser.min.js"></script>
-    
-    <!-- Main script -->
-    <script src="../assets/js/shot-list.js"></script>
+<!-- PDF.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+</script>
+
+<!-- DOCX Processing -->
+<script src="https://unpkg.com/mammoth@1.6.0/mammoth.browser.min.js"></script>
+
+<!-- Main script -->
+<script src="/assets/shot-list/js/shot-list.js"></script> 
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>© 2024 Screenplay Writer. All Rights Reserved.</p>
+        </div>
+    </footer>
 </body>
-</html> 
+</html>
