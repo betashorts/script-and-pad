@@ -157,12 +157,14 @@ function renderBasicUnit(parent, unit, level, startIdx = 0, count = null) {
     colDiv.contentEditable = true;
     colDiv.textContent = col.content;
     colDiv.oninput = (e) => {
+      console.log(`[EDIT] Editing column at index ${colIdx} in unit`, unit);
       unit.columns[colIdx].content = e.target.textContent;
     };
     // Remove column button
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "-";
     removeBtn.onclick = (ev) => {
+      console.log(`[REMOVE] Removing column at index ${colIdx} in unit`, unit);
       unit.columns.splice(colIdx, 1);
       renderCompoundTable(
         document.getElementById("compound-table-root"),
@@ -178,6 +180,7 @@ function renderBasicUnit(parent, unit, level, startIdx = 0, count = null) {
     const addColBtn = document.createElement("button");
     addColBtn.textContent = "+ Add Column";
     addColBtn.onclick = () => {
+      console.log(`[ADD] Adding column to unit`, unit);
       unit.columns.push({ content: "" });
       renderCompoundTable(
         document.getElementById("compound-table-root"),
