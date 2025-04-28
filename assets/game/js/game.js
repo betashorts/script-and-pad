@@ -53,9 +53,9 @@ function getBaseInstrumentName(filename) {
 async function loadMIDIMapping() {
   try {
     console.log(
-      "Attempting to load MIDI mapping from ../assets/json/mapping.json"
+      "Attempting to load MIDI mapping from /assets/game/json/mapping.json"
     );
-    const response = await fetch("../assets/json/mapping.json");
+    const response = await fetch("/assets/game/json/mapping.json");
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -101,7 +101,7 @@ async function loadMIDIFile(beatFile = AVAILABLE_BEATS[0].file) {
     }
 
     // Then load the MIDI file
-    const response = await fetch(`../assets/midi/${beatFile}`);
+    const response = await fetch(`/assets/game/midi/${beatFile}`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -498,7 +498,7 @@ async function loadSamples() {
           }
 
           // Ensure the sound file path is correct and the file exists
-          const soundPath = `../assets/sounds/${instrument.soundFile}`;
+          const soundPath = `/assets/game/sounds/${instrument.soundFile}`;
           console.log(`Attempting to load sound from path: ${soundPath}`);
 
           // Create buffer first
