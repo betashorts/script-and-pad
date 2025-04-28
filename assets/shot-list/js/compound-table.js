@@ -34,6 +34,40 @@ function renderCompoundTable(container, data) {
   renderUnit(container, data, 0);
 }
 
+function renderCompoundRow(parent, basicUnits) {
+  let row = document.createElement("div");
+  row.className = "compound-table-row";
+  let colCount = 0;
+  for (let i = 0; i < basicUnits.length; i++) {
+    let unit = basicUnits[i];
+    let unitColIdx = 0;
+    while (unitColIdx < unit.columns.length) {
+      let remainingCols = 6 - colCount;
+      let colsToRender = Math.min(
+        remainingCols,
+        unit.columns.length - unitColIdx
+      );
+      // Create a shallow copy of the unit for this part
+      let partUnit = {
+        ...unit,
+        columns: unit.columns.slice(unitColIdx, unitColIdx + colsToRender),
+      };
+      renderBasicUnit(row, partUnit);
+      colCount += colsToRender;
+      unitColIdx += colsToRender;
+      if (colCount === 6) {
+        parent.appendChild(row);
+        row = document.createElement("div");
+        row.className = "compound-table-row";
+        colCount = 0;
+      }
+    }
+  }
+  if (colCount > 0) {
+    parent.appendChild(row);
+  }
+}
+
 function renderUnit(parent, unit, level) {
   const wrapper = document.createElement("div");
   wrapper.className = `compound-level compound-level-${level}`;
@@ -50,27 +84,34 @@ function renderUnit(parent, unit, level) {
 
   if (unit.type === "basic") {
     renderBasicUnit(bottomRow, unit);
+  } else if (unit.type === "compound") {
+    // Render all basic units in rows with max 6 columns
+    renderCompoundRow(bottomRow, unit.children);
+    // Add button to add new child
+    const addBtn = document.createElement("button");
+    addBtn.textContent = "+ Add Basic Unit";
+    addBtn.onclick = () => {
+      unit.children.push({
+        type: "basic",
+        number: getNextNumber(unit.children),
+        columns: [{ content: "" }],
+      });
+      renderCompoundTable(
+        document.getElementById("compound-table-root"),
+        compoundTableData
+      );
+    };
+    bottomRow.appendChild(addBtn);
   } else {
     unit.children.forEach((child) => {
       renderUnit(bottomRow, child, level + 1);
     });
     // Add button to add new child
     const addBtn = document.createElement("button");
-    addBtn.textContent = `+ Add ${
-      unit.type === "compound"
-        ? "Basic Unit"
-        : unit.type === "high"
-        ? "Compound Cell"
-        : "High Level Cell"
-    }`;
+    addBtn.textContent =
+      unit.type === "high" ? "+ Add Compound Cell" : "+ Add High Level Cell";
     addBtn.onclick = () => {
-      if (unit.type === "compound") {
-        unit.children.push({
-          type: "basic",
-          number: getNextNumber(unit.children),
-          columns: [{ content: "" }],
-        });
-      } else if (unit.type === "high") {
+      if (unit.type === "high") {
         unit.children.push({
           type: "compound",
           number: getNextNumber(unit.children),
