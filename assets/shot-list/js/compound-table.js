@@ -86,6 +86,10 @@ function renderUnit(parent, unit, level) {
     const addBtn = document.createElement("button");
     addBtn.textContent = "+";
     addBtn.onclick = () => {
+      console.log(
+        "[ADD BASIC UNIT] Appending new basic unit to children array",
+        unit.children
+      );
       unit.children.push({
         type: "basic",
         number: getNextNumber(unit.children),
