@@ -47,13 +47,8 @@ function renderCompoundRow(parent, basicUnits, level) {
         remainingCols,
         unit.columns.length - unitColIdx
       );
-      // Create a shallow copy of the unit for this part
-      let partUnit = {
-        ...unit,
-        columns: unit.columns.slice(unitColIdx, unitColIdx + colsToRender),
-        level: level,
-      };
-      renderBasicUnit(row, partUnit, level);
+      // Pass the original unit and the starting index
+      renderBasicUnit(row, unit, level, unitColIdx, colsToRender);
       colCount += colsToRender;
       unitColIdx += colsToRender;
       if (colCount === 6) {
@@ -135,7 +130,7 @@ function renderUnit(parent, unit, level) {
   parent.appendChild(wrapper);
 }
 
-function renderBasicUnit(parent, unit, level) {
+function renderBasicUnit(parent, unit, level, startIdx = 0, count = null) {
   const cell = document.createElement("div");
   cell.className = "basic-unit";
 
@@ -150,19 +145,25 @@ function renderBasicUnit(parent, unit, level) {
   // Bottom row (columns)
   const bottom = document.createElement("div");
   bottom.className = "basic-unit-bottom";
-  unit.columns.forEach((col, idx) => {
+  const columnsToRender =
+    count === null
+      ? unit.columns
+      : unit.columns.slice(startIdx, startIdx + count);
+  for (let j = 0; j < columnsToRender.length; j++) {
+    const colIdx = startIdx + j;
+    const col = unit.columns[colIdx];
     const colDiv = document.createElement("div");
     colDiv.className = "basic-unit-col";
     colDiv.contentEditable = true;
     colDiv.textContent = col.content;
     colDiv.oninput = (e) => {
-      unit.columns[idx].content = e.target.textContent;
+      unit.columns[colIdx].content = e.target.textContent;
     };
     // Remove column button
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "-";
     removeBtn.onclick = (ev) => {
-      unit.columns.splice(idx, 1);
+      unit.columns.splice(colIdx, 1);
       renderCompoundTable(
         document.getElementById("compound-table-root"),
         compoundTableData
@@ -171,18 +172,20 @@ function renderBasicUnit(parent, unit, level) {
     };
     colDiv.appendChild(removeBtn);
     bottom.appendChild(colDiv);
-  });
-  // Add column button
-  const addColBtn = document.createElement("button");
-  addColBtn.textContent = "+ Add Column";
-  addColBtn.onclick = () => {
-    unit.columns.push({ content: "" });
-    renderCompoundTable(
-      document.getElementById("compound-table-root"),
-      compoundTableData
-    );
-  };
-  bottom.appendChild(addColBtn);
+  }
+  // Add column button (only show if this is the last split part for this unit)
+  if (startIdx + columnsToRender.length === unit.columns.length) {
+    const addColBtn = document.createElement("button");
+    addColBtn.textContent = "+ Add Column";
+    addColBtn.onclick = () => {
+      unit.columns.push({ content: "" });
+      renderCompoundTable(
+        document.getElementById("compound-table-root"),
+        compoundTableData
+      );
+    };
+    bottom.appendChild(addColBtn);
+  }
   cell.appendChild(bottom);
   parent.appendChild(cell);
 }
