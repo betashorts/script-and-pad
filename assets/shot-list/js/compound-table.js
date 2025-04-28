@@ -31,7 +31,7 @@ function getNextNumber(arr) {
 // Render the compound table recursively
 function renderCompoundTable(container, data, rootData, l1Idx) {
   container.innerHTML = "";
-  renderUnit(container, data, 0, rootData, l1Idx);
+  renderUnit(container, data, 0, rootData, l1Idx, null, null);
 }
 
 function renderCompoundRow(parent, basicUnits, level) {
@@ -97,65 +97,7 @@ function renderCompoundRow(parent, basicUnits, level) {
   }
 }
 
-function renderBasicUnitCell(
-  parent,
-  unit,
-  level,
-  colIdx,
-  col,
-  showL4Header,
-  rootData,
-  l1Idx
-) {
-  console.log(
-    `[L${level + 1}] Rendering basic unit cell: L4 ${
-      unit.number
-    }, column ${colIdx}, showL4Header: ${showL4Header}`
-  );
-  const cell = document.createElement("div");
-  cell.className = "basic-unit";
-  // Top row (number with level prefix) only if showL4Header
-  if (showL4Header) {
-    const top = document.createElement("div");
-    top.className = "basic-unit-top";
-    top.textContent = `L${
-      unit.level !== undefined ? unit.level + 1 : level + 1
-    } ${unit.number}`;
-    cell.appendChild(top);
-  } else {
-    // Add an empty top row for alignment
-    const top = document.createElement("div");
-    top.className = "basic-unit-top";
-    top.style.visibility = "hidden";
-    top.textContent = "";
-    cell.appendChild(top);
-  }
-  // Bottom row (single column)
-  const bottom = document.createElement("div");
-  bottom.className = "basic-unit-bottom";
-  const colDiv = document.createElement("div");
-  colDiv.className = "basic-unit-col";
-  colDiv.contentEditable = true;
-  colDiv.textContent = col.content;
-  colDiv.oninput = (e) => {
-    unit.columns[colIdx].content = e.target.textContent;
-  };
-  // Remove column button
-  const removeBtn = document.createElement("button");
-  removeBtn.textContent = "-";
-  removeBtn.onclick = (ev) => {
-    const l1 = window.compoundTableDataList[l1Idx];
-    unit.columns.splice(colIdx, 1);
-    window.renderAllL1Tables();
-    ev.stopPropagation();
-  };
-  colDiv.appendChild(removeBtn);
-  bottom.appendChild(colDiv);
-  cell.appendChild(bottom);
-  parent.appendChild(cell);
-}
-
-function renderUnit(parent, unit, level, rootData, l1Idx) {
+function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
   const wrapper = document.createElement("div");
   wrapper.className = `compound-level compound-level-${level}`;
 
@@ -163,52 +105,110 @@ function renderUnit(parent, unit, level, rootData, l1Idx) {
   const topRow = document.createElement("div");
   topRow.className = "compound-top-row";
   topRow.textContent = `L${level + 1} ${unit.number}`;
+
+  // Insert and Remove buttons for this unit (except for the root L1 if only one left)
+  const btnGroup = document.createElement("span");
+  btnGroup.style.marginLeft = "8px";
+  // Insert button
+  if (parentArr) {
+    const insertBtn = document.createElement("button");
+    insertBtn.textContent = "+";
+    insertBtn.title = "Insert after";
+    insertBtn.onclick = () => {
+      let newItem;
+      if (unit.type === "super") {
+        newItem = {
+          type: "high",
+          number: getNextNumber(unit.children),
+          children: [],
+        };
+        unit.children.splice(unitIdx + 1, 0, newItem);
+      } else if (unit.type === "high") {
+        newItem = {
+          type: "compound",
+          number: getNextNumber(unit.children),
+          children: [],
+        };
+        unit.children.splice(unitIdx + 1, 0, newItem);
+      } else if (unit.type === "compound") {
+        newItem = {
+          type: "basic",
+          number: getNextNumber(unit.children),
+          columns: [{ content: "" }],
+        };
+        unit.children.splice(unitIdx + 1, 0, newItem);
+      }
+      window.renderAllL1Tables();
+    };
+    btnGroup.appendChild(insertBtn);
+    // Remove button
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "-";
+    removeBtn.title = "Remove";
+    removeBtn.onclick = () => {
+      parentArr.splice(unitIdx, 1);
+      window.renderAllL1Tables();
+    };
+    btnGroup.appendChild(removeBtn);
+  } else if (level === 0 && window.compoundTableDataList.length > 1) {
+    // Remove button for L1
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "-";
+    removeBtn.title = "Remove L1";
+    removeBtn.onclick = () => {
+      window.compoundTableDataList.splice(l1Idx, 1);
+      window.renderAllL1Tables();
+    };
+    btnGroup.appendChild(removeBtn);
+  }
+  topRow.appendChild(btnGroup);
   wrapper.appendChild(topRow);
 
   // Bottom row
   const bottomRow = document.createElement("div");
   bottomRow.className = "compound-bottom-row";
   bottomRow.style.display = "flex";
-  bottomRow.style.flexDirection = "column"; // Always stack vertically for L1, L2, L3
+  bottomRow.style.flexDirection = "column";
 
   if (unit.type === "basic") {
-    // L4: Render columns horizontally with 6-column rule
-    renderBasicUnitRow(bottomRow, unit, level, rootData, l1Idx);
+    renderBasicUnitRow(
+      bottomRow,
+      unit,
+      level,
+      rootData,
+      l1Idx,
+      parentArr,
+      unitIdx
+    );
   } else {
-    // For L1, L2, L3: stack children vertically
-    unit.children.forEach((child) => {
-      renderUnit(bottomRow, child, level + 1, rootData, l1Idx);
+    unit.children.forEach((child, idx) => {
+      renderUnit(
+        bottomRow,
+        child,
+        level + 1,
+        rootData,
+        l1Idx,
+        unit.children,
+        idx
+      );
     });
-    // Add button to add new child
+    // Add button to add new child at the end
     const addBtn = document.createElement("button");
     addBtn.textContent = "+";
     addBtn.onclick = () => {
-      const l1 = window.compoundTableDataList[l1Idx];
       if (unit.type === "compound") {
-        console.log(
-          "[ADD BASIC UNIT] Appending new basic unit to children array (L3 block will stack vertically)",
-          unit.children
-        );
         unit.children.push({
           type: "basic",
           number: getNextNumber(unit.children),
           columns: [{ content: "" }],
         });
       } else if (unit.type === "high") {
-        console.log(
-          "[ADD COMPOUND CELL] Appending new compound cell to children array (L2 block will stack vertically)",
-          unit.children
-        );
         unit.children.push({
           type: "compound",
           number: getNextNumber(unit.children),
           children: [],
         });
       } else if (unit.type === "super") {
-        console.log(
-          "[ADD HIGH LEVEL CELL] Appending new high level cell to children array (L1 block will stack vertically)",
-          unit.children
-        );
         unit.children.push({
           type: "high",
           number: getNextNumber(unit.children),
@@ -223,9 +223,15 @@ function renderUnit(parent, unit, level, rootData, l1Idx) {
   parent.appendChild(wrapper);
 }
 
-// Render a basic unit (L4) and its columns horizontally with the 6-column rule
-function renderBasicUnitRow(parent, unit, level, rootData, l1Idx) {
-  // Flatten columns for this L4 unit
+function renderBasicUnitRow(
+  parent,
+  unit,
+  level,
+  rootData,
+  l1Idx,
+  parentArr,
+  unitIdx
+) {
   let flatColumns = unit.columns.map((col, colIdx) => ({ unit, col, colIdx }));
   const numRows = Math.ceil(flatColumns.length / 6);
   let colPointer = 0;
@@ -238,7 +244,6 @@ function renderBasicUnitRow(parent, unit, level, rootData, l1Idx) {
       colInRow++, colPointer++
     ) {
       const { unit, col, colIdx } = flatColumns[colPointer];
-      // Show L4 header only for the first column in the first row
       let showL4Header = rowIdx === 0 && colInRow === 0;
       renderBasicUnitCell(
         row,
@@ -248,81 +253,80 @@ function renderBasicUnitRow(parent, unit, level, rootData, l1Idx) {
         col,
         showL4Header,
         rootData,
-        l1Idx
+        l1Idx,
+        parentArr,
+        colIdx
       );
     }
     parent.appendChild(row);
   }
-  // Add column button for this L4 unit
+  // Add column at end
   const addColBtn = document.createElement("button");
   addColBtn.textContent = "+";
   addColBtn.onclick = () => {
-    const l1 = window.compoundTableDataList[l1Idx];
     unit.columns.push({ content: "" });
     window.renderAllL1Tables();
   };
   parent.appendChild(addColBtn);
 }
 
-function renderBasicUnit(parent, unit, level, startIdx = 0, count = null) {
+function renderBasicUnitCell(
+  parent,
+  unit,
+  level,
+  colIdx,
+  col,
+  showL4Header,
+  rootData,
+  l1Idx,
+  parentArr,
+  colArrIdx
+) {
   const cell = document.createElement("div");
   cell.className = "basic-unit";
-
-  // Top row (number with level prefix)
-  const top = document.createElement("div");
-  top.className = "basic-unit-top";
-  top.textContent = `L${
-    unit.level !== undefined ? unit.level + 1 : level + 1
-  } ${unit.number}`;
-  cell.appendChild(top);
-
-  // Bottom row (columns)
+  if (showL4Header) {
+    const top = document.createElement("div");
+    top.className = "basic-unit-top";
+    top.textContent = `L${
+      unit.level !== undefined ? unit.level + 1 : level + 1
+    } ${unit.number}`;
+    cell.appendChild(top);
+  } else {
+    const top = document.createElement("div");
+    top.className = "basic-unit-top";
+    top.style.visibility = "hidden";
+    top.textContent = "";
+    cell.appendChild(top);
+  }
   const bottom = document.createElement("div");
   bottom.className = "basic-unit-bottom";
-  const columnsToRender =
-    count === null
-      ? unit.columns
-      : unit.columns.slice(startIdx, startIdx + count);
-  for (let j = 0; j < columnsToRender.length; j++) {
-    const colIdx = startIdx + j;
-    const col = unit.columns[colIdx];
-    const colDiv = document.createElement("div");
-    colDiv.className = "basic-unit-col";
-    colDiv.contentEditable = true;
-    colDiv.textContent = col.content;
-    colDiv.oninput = (e) => {
-      console.log(`[EDIT] Editing column at index ${colIdx} in unit`, unit);
-      unit.columns[colIdx].content = e.target.textContent;
-    };
-    // Remove column button
-    const removeBtn = document.createElement("button");
-    removeBtn.textContent = "-";
-    removeBtn.onclick = (ev) => {
-      console.log(`[REMOVE] Removing column at index ${colIdx} in unit`, unit);
-      unit.columns.splice(colIdx, 1);
-      renderCompoundTable(
-        document.getElementById("compound-table-root"),
-        compoundTableData
-      );
-      ev.stopPropagation();
-    };
-    colDiv.appendChild(removeBtn);
-    bottom.appendChild(colDiv);
-  }
-  // Add column button (only show if this is the last split part for this unit)
-  if (startIdx + columnsToRender.length === unit.columns.length) {
-    const addColBtn = document.createElement("button");
-    addColBtn.textContent = "+";
-    addColBtn.onclick = () => {
-      console.log(`[ADD] Adding column to unit`, unit);
-      unit.columns.push({ content: "" });
-      renderCompoundTable(
-        document.getElementById("compound-table-root"),
-        compoundTableData
-      );
-    };
-    bottom.appendChild(addColBtn);
-  }
+  const colDiv = document.createElement("div");
+  colDiv.className = "basic-unit-col";
+  colDiv.contentEditable = true;
+  colDiv.textContent = col.content;
+  colDiv.oninput = (e) => {
+    unit.columns[colIdx].content = e.target.textContent;
+  };
+  // Insert button for column
+  const insertBtn = document.createElement("button");
+  insertBtn.textContent = "+";
+  insertBtn.title = "Insert column after";
+  insertBtn.onclick = () => {
+    parentArr.splice(colArrIdx + 1, 0, { content: "" });
+    window.renderAllL1Tables();
+  };
+  colDiv.appendChild(insertBtn);
+  // Remove button for column
+  const removeBtn = document.createElement("button");
+  removeBtn.textContent = "-";
+  removeBtn.title = "Remove column";
+  removeBtn.onclick = (ev) => {
+    parentArr.splice(colArrIdx, 1);
+    window.renderAllL1Tables();
+    ev.stopPropagation();
+  };
+  colDiv.appendChild(removeBtn);
+  bottom.appendChild(colDiv);
   cell.appendChild(bottom);
   parent.appendChild(cell);
 }
