@@ -19,6 +19,12 @@
   border-right: 0;
 }
 
+/* Padding between L3 and L4 */
+.compound-level[class*="level-2"] > .compound-bottom-row > .compound-level {
+  padding: 0 20px;
+  margin: 0 10px;
+}
+
 .compound-top-row {
   font-weight: bold;
   font-size: 1.2em;
