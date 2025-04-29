@@ -240,6 +240,43 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
     };
     btnGroup.appendChild(l1InsertBtn);
   }
+  // L4 left/right arrow buttons (for basic units)
+  if (parentArr && unit.type === "basic") {
+    const leftBtn = document.createElement("button");
+    leftBtn.textContent = "←";
+    leftBtn.title = "Move left";
+    leftBtn.disabled = unitIdx === 0;
+    leftBtn.onclick = () => {
+      if (unitIdx > 0) {
+        [parentArr[unitIdx - 1], parentArr[unitIdx]] = [
+          parentArr[unitIdx],
+          parentArr[unitIdx - 1],
+        ];
+        parentArr.forEach((item, idx) => {
+          item.number = idx + 1;
+        });
+        window.renderAllL1Tables();
+      }
+    };
+    btnGroup.appendChild(leftBtn);
+    const rightBtn = document.createElement("button");
+    rightBtn.textContent = "→";
+    rightBtn.title = "Move right";
+    rightBtn.disabled = unitIdx === parentArr.length - 1;
+    rightBtn.onclick = () => {
+      if (unitIdx < parentArr.length - 1) {
+        [parentArr[unitIdx + 1], parentArr[unitIdx]] = [
+          parentArr[unitIdx],
+          parentArr[unitIdx + 1],
+        ];
+        parentArr.forEach((item, idx) => {
+          item.number = idx + 1;
+        });
+        window.renderAllL1Tables();
+      }
+    };
+    btnGroup.appendChild(rightBtn);
+  }
   if (parentArr && level !== 0) {
     const insertBtn = document.createElement("button");
     insertBtn.textContent = "+";
