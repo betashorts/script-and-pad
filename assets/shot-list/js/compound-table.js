@@ -389,7 +389,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // Add button for new L1
     const addL1Btn = document.createElement("button");
-    addL1Btn.textContent = "+";
+    addL1Btn.textContent = "Add L1";
     addL1Btn.style.marginBottom = "10px";
     addL1Btn.onclick = () => {
       if (!Array.isArray(window.compoundTableDataList)) {
