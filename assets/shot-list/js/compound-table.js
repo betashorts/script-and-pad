@@ -593,6 +593,7 @@ function renderBasicUnitCell(
   canvas.className = "basic-unit-canvas";
   canvas.width = 300;
   canvas.height = 200;
+  canvas.style.display = "none"; // Set initial display state explicitly
   let isDrawing = false;
   let context = canvas.getContext("2d");
 
@@ -633,6 +634,7 @@ function renderBasicUnitCell(
     const img = new Image();
     img.onload = () => {
       context.drawImage(img, 0, 0);
+      canvas.style.display = "block"; // Show canvas if it has content
     };
     img.src = col.canvasData;
   }
@@ -718,9 +720,11 @@ function renderBasicUnitCell(
   drawBtn.innerHTML = "&#9999;&#65039;"; // Pencil emoji
   drawBtn.title = "Toggle Drawing Mode";
   drawBtn.className = "draw-btn";
+  let isCanvasVisible = canvas.style.display === "block"; // Track canvas visibility
   drawBtn.onclick = () => {
-    canvas.style.display = canvas.style.display === "none" ? "block" : "none";
-    drawBtn.classList.toggle("active");
+    isCanvasVisible = !isCanvasVisible; // Toggle state
+    canvas.style.display = isCanvasVisible ? "block" : "none";
+    drawBtn.classList.toggle("active", isCanvasVisible); // Toggle active class based on visibility
   };
 
   // Clear button
