@@ -230,6 +230,8 @@
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .basic-unit-text {
@@ -290,11 +292,13 @@
 .basic-unit-tools {
   display: flex;
   gap: 5px;
-  padding: 5px;
+  padding: 8px;
   background: #f5f5f5;
   border-radius: 4px;
   margin-bottom: 10px;
   justify-content: flex-start;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .basic-unit-tools button {
@@ -311,6 +315,7 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  flex-shrink: 0; /* Prevent buttons from shrinking */
 }
 
 .basic-unit-tools button:hover {
