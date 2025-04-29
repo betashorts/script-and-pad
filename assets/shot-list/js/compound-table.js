@@ -239,6 +239,49 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
       window.renderAllL1Tables();
     };
     btnGroup.appendChild(l1InsertBtn);
+
+    // Add up/down arrow buttons for L1
+    const upBtn = document.createElement("button");
+    upBtn.textContent = "↑";
+    upBtn.title = "Move up";
+    upBtn.disabled = l1Idx === 0;
+    upBtn.onclick = () => {
+      if (l1Idx > 0) {
+        [
+          window.compoundTableDataList[l1Idx - 1],
+          window.compoundTableDataList[l1Idx],
+        ] = [
+          window.compoundTableDataList[l1Idx],
+          window.compoundTableDataList[l1Idx - 1],
+        ];
+        window.compoundTableDataList.forEach((item, idx) => {
+          item.number = idx + 1;
+        });
+        window.renderAllL1Tables();
+      }
+    };
+    btnGroup.appendChild(upBtn);
+
+    const downBtn = document.createElement("button");
+    downBtn.textContent = "↓";
+    downBtn.title = "Move down";
+    downBtn.disabled = l1Idx === window.compoundTableDataList.length - 1;
+    downBtn.onclick = () => {
+      if (l1Idx < window.compoundTableDataList.length - 1) {
+        [
+          window.compoundTableDataList[l1Idx + 1],
+          window.compoundTableDataList[l1Idx],
+        ] = [
+          window.compoundTableDataList[l1Idx],
+          window.compoundTableDataList[l1Idx + 1],
+        ];
+        window.compoundTableDataList.forEach((item, idx) => {
+          item.number = idx + 1;
+        });
+        window.renderAllL1Tables();
+      }
+    };
+    btnGroup.appendChild(downBtn);
   }
   // L4 left/right arrow buttons (for basic units)
   if (parentArr && unit.type === "basic") {
