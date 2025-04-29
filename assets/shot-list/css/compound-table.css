@@ -1,9 +1,10 @@
 .compound-level {
   border: 2px solid #bbb;
   margin: 10px 0;
-  padding: 10px 0;
+  padding: 0;
   border-radius: 8px;
   background: #f9f9f9;
+  width: 100%;
 }
 .compound-top-row {
   font-weight: bold;
@@ -13,9 +14,11 @@
 }
 .compound-bottom-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex-wrap: nowrap;
   gap: 0;
   padding: 0;
+  width: 100%;
 }
 .basic-unit {
   border: 1px solid #888;
@@ -23,8 +26,7 @@
   margin: 5px 0;
   padding: 0;
   background: #fff;
-  min-width: 120px;
-  flex-grow: 1;
+  width: 100%;
 }
 .basic-unit-top {
   background: #e0e0e0;
@@ -38,6 +40,7 @@
   flex-wrap: wrap;
   gap: 0;
   padding: 6px 0;
+  width: 100%;
 }
 .basic-unit-col {
   border: 1px solid #ccc;
@@ -49,6 +52,7 @@
   margin: 0;
   position: relative;
   flex-grow: 1;
+  width: 100%;
 }
 .basic-unit-col[contenteditable="true"]:focus {
   outline: 2px solid #4a90e2;
