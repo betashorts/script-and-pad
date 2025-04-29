@@ -643,11 +643,10 @@ function renderBasicUnitCell(
 
   // Insert button for L4 (basic) unit
   const insertBtn = document.createElement("button");
-  insertBtn.textContent = "+";
-  insertBtn.title = "Insert L4 after";
+  insertBtn.innerHTML = "&#43;"; // Plus sign
+  insertBtn.title = "Insert column below";
   insertBtn.className = "insert-btn";
   insertBtn.onclick = () => {
-    // Insert a new L4 (basic) after the current one in the parentArr
     if (parentArr && typeof unitArrIdx === "number") {
       parentArr.splice(unitArrIdx + 1, 0, {
         type: "basic",
@@ -658,10 +657,10 @@ function renderBasicUnitCell(
     }
   };
 
-  // Remove button for L4 (basic) unit
+  // Remove button
   const removeBtn = document.createElement("button");
-  removeBtn.textContent = "-";
-  removeBtn.title = "Remove column";
+  removeBtn.innerHTML = "&#8722;"; // Minus sign
+  removeBtn.title = "Remove this column";
   removeBtn.className = "remove-btn";
   removeBtn.onclick = (ev) => {
     unit.columns.splice(colIdx, 1);
@@ -671,7 +670,7 @@ function renderBasicUnitCell(
 
   // File upload button
   const uploadBtn = document.createElement("button");
-  uploadBtn.textContent = "📷";
+  uploadBtn.innerHTML = "&#128247;"; // Camera emoji
   uploadBtn.title = "Upload Image";
   uploadBtn.className = "upload-btn";
 
@@ -682,57 +681,20 @@ function renderBasicUnitCell(
 
   uploadBtn.onclick = () => fileInput.click();
 
-  fileInput.onchange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        col.imageData = event.target.result;
-        const img = document.createElement("img");
-        img.src = col.imageData;
-        imageContainer.innerHTML = "";
-        imageContainer.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  // Handle paste events for both text and images
-  contentContainer.addEventListener("paste", (e) => {
-    e.preventDefault();
-
-    // Handle image paste
-    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
-    for (const item of items) {
-      if (item.type.indexOf("image") !== -1) {
-        const blob = item.getAsFile();
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          col.imageData = event.target.result;
-          const img = document.createElement("img");
-          img.src = col.imageData;
-          imageContainer.innerHTML = "";
-          imageContainer.appendChild(img);
-        };
-        reader.readAsDataURL(blob);
-        return;
-      }
-    }
-
-    // Handle text paste
-    const text = e.clipboardData.getData("text/plain");
-    document.execCommand("insertText", false, text);
-  });
-
-  // Save text content
-  textEditor.oninput = (e) => {
-    col.content = e.target.innerHTML;
+  // Drawing toggle button
+  const drawBtn = document.createElement("button");
+  drawBtn.innerHTML = "&#9999;&#65039;"; // Pencil emoji
+  drawBtn.title = "Toggle Drawing Mode";
+  drawBtn.className = "draw-btn";
+  drawBtn.onclick = () => {
+    canvas.style.display = canvas.style.display === "none" ? "block" : "none";
+    drawBtn.classList.toggle("active");
   };
 
   // Clear button
   const clearBtn = document.createElement("button");
-  clearBtn.textContent = "🗑️";
-  clearBtn.title = "Clear All";
+  clearBtn.innerHTML = "&#128465;"; // Trash emoji
+  clearBtn.title = "Clear Content";
   clearBtn.className = "clear-btn";
   clearBtn.onclick = () => {
     textEditor.innerHTML = "";
@@ -743,29 +705,20 @@ function renderBasicUnitCell(
     col.canvasData = null;
   };
 
-  // Drawing toggle button
-  const drawBtn = document.createElement("button");
-  drawBtn.textContent = "✏️";
-  drawBtn.title = "Toggle Drawing";
-  drawBtn.className = "draw-btn";
-  drawBtn.onclick = () => {
-    canvas.style.display = canvas.style.display === "none" ? "block" : "none";
-  };
-
   // Add all elements to the container
-  toolsContainer.appendChild(insertBtn); // Add insert button first
-  toolsContainer.appendChild(removeBtn); // Add remove button second
+  toolsContainer.appendChild(insertBtn);
+  toolsContainer.appendChild(removeBtn);
   toolsContainer.appendChild(uploadBtn);
   toolsContainer.appendChild(drawBtn);
   toolsContainer.appendChild(clearBtn);
+  toolsContainer.appendChild(fileInput);
 
+  contentContainer.appendChild(toolsContainer); // Move tools to top
   contentContainer.appendChild(textEditor);
   contentContainer.appendChild(imageContainer);
   contentContainer.appendChild(canvas);
 
   bottom.appendChild(contentContainer);
-  bottom.appendChild(toolsContainer);
-  bottom.appendChild(fileInput);
 
   cell.appendChild(bottom);
   parent.appendChild(cell);
