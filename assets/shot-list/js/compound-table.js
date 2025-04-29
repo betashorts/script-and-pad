@@ -1,5 +1,5 @@
-// Debug version 16
-console.log("Compound Table deployed - version 16");
+// Debug version 17
+console.log("Compound Table deployed - version 17");
 
 // Compound Table Data Structure Example
 let compoundTableData = {
@@ -31,7 +31,7 @@ function getNextNumber(arr) {
   return arr.length ? Math.max(...arr.map((x) => x.number)) + 1 : 1;
 }
 
-// Add drag-and-drop functionality
+// Simplified drag-and-drop functionality
 function initDragAndDrop(element, unit, parentArr, index) {
   element.setAttribute("draggable", true);
   element.dataset.index = index;
@@ -40,8 +40,14 @@ function initDragAndDrop(element, unit, parentArr, index) {
   element.addEventListener("dragstart", (e) => {
     e.stopPropagation();
     element.classList.add("dragging");
-    e.dataTransfer.setData("text/plain", index);
-    e.dataTransfer.effectAllowed = "move";
+    // Store the source index and unit type
+    e.dataTransfer.setData(
+      "text/plain",
+      JSON.stringify({
+        index: index,
+        type: unit.type,
+      })
+    );
   });
 
   element.addEventListener("dragend", () => {
@@ -54,15 +60,12 @@ function initDragAndDrop(element, unit, parentArr, index) {
   element.addEventListener("dragover", (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.target.closest(".compound-level").dataset.level === unit.type) {
-      e.dataTransfer.dropEffect = "move";
-    }
-  });
 
-  element.addEventListener("dragenter", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.target.closest(".compound-level").dataset.level === unit.type) {
+    // Only allow dropping if it's the same type of unit
+    const draggedData = JSON.parse(
+      e.dataTransfer.getData("text/plain") || "{}"
+    );
+    if (draggedData.type === unit.type) {
       element.classList.add("drag-over");
     }
   });
@@ -76,21 +79,44 @@ function initDragAndDrop(element, unit, parentArr, index) {
     e.stopPropagation();
     element.classList.remove("drag-over");
 
-    const sourceIndex = parseInt(e.dataTransfer.getData("text/plain"));
-    const targetIndex = parseInt(element.dataset.index);
+    try {
+      const draggedData = JSON.parse(
+        e.dataTransfer.getData("text/plain") || "{}"
+      );
+      const sourceIndex = draggedData.index;
+      const targetIndex = parseInt(element.dataset.index);
 
-    if (sourceIndex !== targetIndex && parentArr) {
-      // Reorder the array
-      const [movedItem] = parentArr.splice(sourceIndex, 1);
-      parentArr.splice(targetIndex, 0, movedItem);
+      // Only proceed if:
+      // 1. We have valid indices
+      // 2. Source and target are different
+      // 3. Same type of units
+      // 4. We have a valid parent array
+      if (
+        !isNaN(sourceIndex) &&
+        !isNaN(targetIndex) &&
+        sourceIndex !== targetIndex &&
+        draggedData.type === unit.type &&
+        parentArr
+      ) {
+        // Remove the item from its original position
+        const [movedItem] = parentArr.splice(sourceIndex, 1);
 
-      // Update the numbers
-      parentArr.forEach((item, idx) => {
-        item.number = idx + 1;
-      });
+        // Insert at the new position
+        // If dropping after current position, we need to adjust the target index
+        const adjustedTargetIndex =
+          sourceIndex < targetIndex ? targetIndex - 1 : targetIndex;
+        parentArr.splice(adjustedTargetIndex + 1, 0, movedItem);
 
-      // Rerender
-      window.renderAllL1Tables();
+        // Update all numbers sequentially
+        parentArr.forEach((item, idx) => {
+          item.number = idx + 1;
+        });
+
+        // Rerender
+        window.renderAllL1Tables();
+      }
+    } catch (error) {
+      console.error("Error during drag and drop:", error);
     }
   });
 }
