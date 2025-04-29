@@ -1,5 +1,5 @@
 // Debug version 17
-console.log("Compound Table deployed - version 19");
+console.log("Compound Table deployed - version 20");
 
 // Compound Table Data Structure Example
 let compoundTableData = {
@@ -664,6 +664,54 @@ function renderBasicUnitCell(
   fileInput.style.display = "none";
 
   uploadBtn.onclick = () => fileInput.click();
+
+  // Add back file upload handling
+  fileInput.onchange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        col.imageData = event.target.result;
+        const img = document.createElement("img");
+        img.src = col.imageData;
+        imageContainer.innerHTML = "";
+        imageContainer.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Handle paste events for both text and images
+  contentContainer.addEventListener("paste", (e) => {
+    e.preventDefault();
+
+    // Handle image paste
+    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+    for (const item of items) {
+      if (item.type.indexOf("image") !== -1) {
+        const blob = item.getAsFile();
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          col.imageData = event.target.result;
+          const img = document.createElement("img");
+          img.src = col.imageData;
+          imageContainer.innerHTML = "";
+          imageContainer.appendChild(img);
+        };
+        reader.readAsDataURL(blob);
+        return;
+      }
+    }
+
+    // Handle text paste
+    const text = e.clipboardData.getData("text/plain");
+    document.execCommand("insertText", false, text);
+  });
+
+  // Save text content
+  textEditor.oninput = (e) => {
+    col.content = e.target.innerHTML;
+  };
 
   // Drawing toggle button
   const drawBtn = document.createElement("button");
