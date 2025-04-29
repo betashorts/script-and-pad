@@ -1,3 +1,6 @@
+// Debug version 3
+console.log("Compound Table deployed - version 3");
+
 // Compound Table Data Structure Example
 let compoundTableData = {
   type: "super",
