@@ -107,10 +107,32 @@
 
 .compound-bottom-row > button {
   margin-top: 8px;
-  background: #388e3c;
+  background: #2e7d32;
   color: #fff;
   border: none;
-  padding: 4px 10px;
+  padding: 2px 8px;
   cursor: pointer;
-  font-size: 1em;
+  font-size: 0.85em;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+
+.compound-bottom-row > button:hover {
+  opacity: 1;
+}
+
+/* Root L1 add button */
+#compound-table-root-container > button {
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  padding: 2px 8px;
+  cursor: pointer;
+  font-size: 0.85em;
+  opacity: 0.9;
+  margin-bottom: 10px;
+}
+
+#compound-table-root-container > button:hover {
+  opacity: 1;
 }
