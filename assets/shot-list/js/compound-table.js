@@ -223,26 +223,8 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
   const btnGroup = document.createElement("span");
   btnGroup.style.marginLeft = "8px";
 
-  // Dedicated L1 plus button (for level 0)
-  if (level === 0) {
-    const l1InsertBtn = document.createElement("button");
-    l1InsertBtn.textContent = "+";
-    l1InsertBtn.title = "Insert L1 below";
-    l1InsertBtn.onclick = () => {
-      // Insert new L1 (super) below the current one
-      const newItem = {
-        type: "super",
-        number: getNextNumber(window.compoundTableDataList),
-        children: [],
-      };
-      window.compoundTableDataList.splice(l1Idx + 1, 0, newItem);
-      window.renderAllL1Tables();
-    };
-    btnGroup.appendChild(l1InsertBtn);
-  }
-
   // Insert and Remove buttons for this unit (except for the root L1 if only one left)
-  if (parentArr) {
+  if (parentArr && level !== 0) {
     const insertBtn = document.createElement("button");
     insertBtn.textContent = "+";
     insertBtn.title = "Insert after";
