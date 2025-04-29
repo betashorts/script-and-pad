@@ -590,6 +590,8 @@ function renderBasicUnitCell(
   canvas.width = 300;
   canvas.height = 200;
   canvas.style.display = "none";
+  canvas.style.userSelect = "none"; // Prevent selection
+  canvas.draggable = false; // Prevent dragging of canvas itself
   let isDrawing = false;
   let context = canvas.getContext("2d");
 
@@ -600,27 +602,27 @@ function renderBasicUnitCell(
   canvas.addEventListener("mouseleave", stopDrawing);
 
   function startDrawing(e) {
+    e.preventDefault();
     isDrawing = true;
+    const rect = canvas.getBoundingClientRect();
     context.beginPath();
-    context.moveTo(
-      e.clientX - canvas.getBoundingClientRect().left,
-      e.clientY - canvas.getBoundingClientRect().top
-    );
+    context.moveTo(e.clientX - rect.left, e.clientY - rect.top);
   }
 
   function draw(e) {
+    e.preventDefault();
     if (!isDrawing) return;
-    context.lineTo(
-      e.clientX - canvas.getBoundingClientRect().left,
-      e.clientY - canvas.getBoundingClientRect().top
-    );
+    const rect = canvas.getBoundingClientRect();
+    context.lineTo(e.clientX - rect.left, e.clientY - rect.top);
     context.stroke();
   }
 
-  function stopDrawing() {
+  function stopDrawing(e) {
+    if (e) {
+      e.preventDefault();
+    }
     if (isDrawing) {
       isDrawing = false;
-      // Save canvas data to column
       col.canvasData = canvas.toDataURL();
     }
   }
