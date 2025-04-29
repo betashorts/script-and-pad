@@ -266,6 +266,43 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
       window.renderAllL1Tables();
     };
     btnGroup.appendChild(insertBtn);
+    // Up/Down arrow buttons for L1, L2, L3
+    if (unit.type !== "basic") {
+      const upBtn = document.createElement("button");
+      upBtn.textContent = "↑";
+      upBtn.title = "Move up";
+      upBtn.disabled = unitIdx === 0;
+      upBtn.onclick = () => {
+        if (unitIdx > 0) {
+          [parentArr[unitIdx - 1], parentArr[unitIdx]] = [
+            parentArr[unitIdx],
+            parentArr[unitIdx - 1],
+          ];
+          parentArr.forEach((item, idx) => {
+            item.number = idx + 1;
+          });
+          window.renderAllL1Tables();
+        }
+      };
+      btnGroup.appendChild(upBtn);
+      const downBtn = document.createElement("button");
+      downBtn.textContent = "↓";
+      downBtn.title = "Move down";
+      downBtn.disabled = unitIdx === parentArr.length - 1;
+      downBtn.onclick = () => {
+        if (unitIdx < parentArr.length - 1) {
+          [parentArr[unitIdx + 1], parentArr[unitIdx]] = [
+            parentArr[unitIdx],
+            parentArr[unitIdx + 1],
+          ];
+          parentArr.forEach((item, idx) => {
+            item.number = idx + 1;
+          });
+          window.renderAllL1Tables();
+        }
+      };
+      btnGroup.appendChild(downBtn);
+    }
     // Remove button
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "-";
@@ -392,6 +429,43 @@ function renderBasicUnitRow(
       );
     }
     parent.appendChild(row);
+  }
+  // Add left/right arrow buttons for L4 (basic) units
+  if (parentArr && unit.type === "basic") {
+    const leftBtn = document.createElement("button");
+    leftBtn.textContent = "←";
+    leftBtn.title = "Move left";
+    leftBtn.disabled = unitIdx === 0;
+    leftBtn.onclick = () => {
+      if (unitIdx > 0) {
+        [parentArr[unitIdx - 1], parentArr[unitIdx]] = [
+          parentArr[unitIdx],
+          parentArr[unitIdx - 1],
+        ];
+        parentArr.forEach((item, idx) => {
+          item.number = idx + 1;
+        });
+        window.renderAllL1Tables();
+      }
+    };
+    parent.appendChild(leftBtn);
+    const rightBtn = document.createElement("button");
+    rightBtn.textContent = "→";
+    rightBtn.title = "Move right";
+    rightBtn.disabled = unitIdx === parentArr.length - 1;
+    rightBtn.onclick = () => {
+      if (unitIdx < parentArr.length - 1) {
+        [parentArr[unitIdx + 1], parentArr[unitIdx]] = [
+          parentArr[unitIdx],
+          parentArr[unitIdx + 1],
+        ];
+        parentArr.forEach((item, idx) => {
+          item.number = idx + 1;
+        });
+        window.renderAllL1Tables();
+      }
+    };
+    parent.appendChild(rightBtn);
   }
   // Add column at end
   const addColBtn = document.createElement("button");
