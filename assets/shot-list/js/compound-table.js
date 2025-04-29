@@ -1,4 +1,4 @@
-// Debug version 14
+// Debug version 15
 console.log("Compound Table deployed - version 15");
 
 // Compound Table Data Structure Example
@@ -29,6 +29,70 @@ let compoundTableData = {
 // Utility to generate incremental numbers
 function getNextNumber(arr) {
   return arr.length ? Math.max(...arr.map((x) => x.number)) + 1 : 1;
+}
+
+// Add drag-and-drop functionality
+function initDragAndDrop(element, unit, parentArr, index) {
+  element.setAttribute("draggable", true);
+  element.dataset.index = index;
+  element.dataset.level = unit.type;
+
+  element.addEventListener("dragstart", (e) => {
+    e.stopPropagation();
+    element.classList.add("dragging");
+    e.dataTransfer.setData("text/plain", index);
+    e.dataTransfer.effectAllowed = "move";
+  });
+
+  element.addEventListener("dragend", () => {
+    element.classList.remove("dragging");
+    document
+      .querySelectorAll(".drag-over")
+      .forEach((el) => el.classList.remove("drag-over"));
+  });
+
+  element.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.target.closest(".compound-level").dataset.level === unit.type) {
+      e.dataTransfer.dropEffect = "move";
+    }
+  });
+
+  element.addEventListener("dragenter", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.target.closest(".compound-level").dataset.level === unit.type) {
+      element.classList.add("drag-over");
+    }
+  });
+
+  element.addEventListener("dragleave", () => {
+    element.classList.remove("drag-over");
+  });
+
+  element.addEventListener("drop", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    element.classList.remove("drag-over");
+
+    const sourceIndex = parseInt(e.dataTransfer.getData("text/plain"));
+    const targetIndex = parseInt(element.dataset.index);
+
+    if (sourceIndex !== targetIndex && parentArr) {
+      // Reorder the array
+      const [movedItem] = parentArr.splice(sourceIndex, 1);
+      parentArr.splice(targetIndex, 0, movedItem);
+
+      // Update the numbers
+      parentArr.forEach((item, idx) => {
+        item.number = idx + 1;
+      });
+
+      // Rerender
+      window.renderAllL1Tables();
+    }
+  });
 }
 
 // Render the compound table recursively
@@ -107,12 +171,27 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
 
   const wrapper = document.createElement("div");
   wrapper.className = `compound-level compound-level-${level}`;
+  wrapper.dataset.level = unit.type;
   console.log(`Created wrapper with class: ${wrapper.className}`);
 
   // Top row with number and level prefix
   const topRow = document.createElement("div");
   topRow.className = "compound-top-row";
-  topRow.textContent = `L${level + 1} ${unit.number}`;
+
+  // Add drag handle
+  const dragHandle = document.createElement("span");
+  dragHandle.className = "drag-handle";
+  dragHandle.textContent = "⋮⋮";
+  topRow.appendChild(dragHandle);
+
+  const label = document.createElement("span");
+  label.textContent = `L${level + 1} ${unit.number}`;
+  topRow.appendChild(label);
+
+  // Initialize drag and drop if we have a parent array
+  if (parentArr) {
+    initDragAndDrop(wrapper, unit, parentArr, unitIdx);
+  }
 
   // Insert and Remove buttons for this unit (except for the root L1 if only one left)
   const btnGroup = document.createElement("span");
@@ -384,7 +463,7 @@ function renderBasicUnitCell(
   parent.appendChild(cell);
 }
 
-// Add a button for adding L1 elements at the root level
+// Update the root level drag and drop
 window.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("compound-table-root");
   if (root) {
@@ -397,7 +476,6 @@ window.addEventListener("DOMContentLoaded", () => {
     // Add button for new L1
     const addL1Btn = document.createElement("button");
     addL1Btn.textContent = "Add L1";
-    addL1Btn.style.marginBottom = "10px";
     addL1Btn.onclick = () => {
       if (!Array.isArray(window.compoundTableDataList)) {
         window.compoundTableDataList = [compoundTableData];
