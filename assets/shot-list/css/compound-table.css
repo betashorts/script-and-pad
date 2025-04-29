@@ -12,6 +12,13 @@
   margin: 0 20px;
 }
 
+/* L2 and L3 specific border styles */
+.compound-level[class*="level-1"] > .compound-bottom-row > .compound-level,
+.compound-level[class*="level-2"] > .compound-bottom-row > .compound-level {
+  border-left: 0;
+  border-right: 0;
+}
+
 .compound-top-row {
   font-weight: bold;
   font-size: 1.2em;
