@@ -26,6 +26,48 @@ let compoundTableData = {
   ],
 };
 
+// Add shot options data
+const SHOT_SIZES = {
+  CLOSEUPS: [
+    "Extreme Close-up (ECU)",
+    "Medium Close-up",
+    "Full Close-up",
+    "Wide Close-up",
+  ],
+  MEDIUM_SHOTS: ["Close Shot", "Medium Close Shot", "Medium Shot"],
+  FULL_SHOTS: ["Medium Full Shot", "Full Shot"],
+  LONG_SHOTS: ["Wide Shot", "Long Shot", "Extreme Long Shot"],
+};
+
+const SHOT_TYPES = {
+  FRAMING: [
+    "Over The Shoulder",
+    "Over The Hip",
+    "Two Shot",
+    "Three Shot",
+    "Point of View",
+  ],
+  FOCUS_DOF: [
+    "Rack Focus",
+    "Shallow Focus",
+    "Deep Focus",
+    "Tilt-Shift",
+    "Zoom",
+    "Dutch",
+  ],
+  CAMERA_HEIGHT: [
+    "Eye Level",
+    "Low Angle",
+    "High Angle",
+    "Bird's Eye View",
+    "Overhead",
+    "Shoulder Level",
+    "Hip Level",
+    "Knee Level",
+    "Ground Level",
+  ],
+};
+
 // Utility to generate incremental numbers
 function getNextNumber(arr) {
   return arr.length ? Math.max(...arr.map((x) => x.number)) + 1 : 1;
@@ -516,12 +558,81 @@ function renderBasicUnitRow(
   parent.appendChild(row);
 }
 
+function createAutocompleteDropdown(options, placeholder, customPlaceholder) {
+  const container = document.createElement("div");
+  container.className = "autocomplete-container";
+
+  const select = document.createElement("select");
+  select.className = "shot-dropdown";
+
+  // Add default option
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = placeholder;
+  defaultOption.selected = true;
+  defaultOption.disabled = true;
+  select.appendChild(defaultOption);
+
+  // Add option groups and their options
+  Object.entries(options).forEach(([group, items]) => {
+    const optgroup = document.createElement("optgroup");
+    optgroup.label = group.replace("_", " ");
+
+    items.forEach((item) => {
+      const option = document.createElement("option");
+      option.value = item;
+      option.textContent = item;
+      optgroup.appendChild(option);
+    });
+
+    select.appendChild(optgroup);
+  });
+
+  // Add custom option at the end
+  const customOptgroup = document.createElement("optgroup");
+  customOptgroup.label = "CUSTOM";
+  const customOption = document.createElement("option");
+  customOption.value = "custom";
+  customOption.textContent = "Custom...";
+  customOptgroup.appendChild(customOption);
+  select.appendChild(customOptgroup);
+
+  // Custom input (hidden by default)
+  const customInput = document.createElement("input");
+  customInput.type = "text";
+  customInput.className = "custom-shot-input";
+  customInput.placeholder = customPlaceholder;
+  customInput.style.display = "none";
+
+  // Handle dropdown change
+  select.addEventListener("change", (e) => {
+    if (e.target.value === "custom") {
+      select.style.display = "none";
+      customInput.style.display = "block";
+      customInput.focus();
+    }
+  });
+
+  // Handle custom input blur
+  customInput.addEventListener("blur", () => {
+    if (!customInput.value.trim()) {
+      customInput.style.display = "none";
+      select.style.display = "block";
+      select.value = "";
+    }
+  });
+
+  container.appendChild(select);
+  container.appendChild(customInput);
+  return container;
+}
+
 function renderBasicUnitCell(
   parent,
   unit,
   level,
-  colIdx, // always 0 now
-  col, // this is unit.content
+  colIdx,
+  col,
   showL4Header,
   rootData,
   l1Idx,
@@ -663,6 +774,86 @@ function renderBasicUnitCell(
     col.canvasData = null;
   };
 
+  // Create shot details container
+  const shotDetailsContainer = document.createElement("div");
+  shotDetailsContainer.className = "shot-details-container";
+
+  // Add shot size dropdown
+  const shotSizeDropdown = createAutocompleteDropdown(
+    SHOT_SIZES,
+    "Select Shot Size",
+    "Enter custom shot size..."
+  );
+  shotSizeDropdown.className = "shot-size-dropdown";
+
+  // Add shot type dropdown
+  const shotTypeDropdown = createAutocompleteDropdown(
+    SHOT_TYPES,
+    "Select Shot Type",
+    "Enter custom shot type..."
+  );
+  shotTypeDropdown.className = "shot-type-dropdown";
+
+  // Add dropdowns to shot details container
+  shotDetailsContainer.appendChild(shotSizeDropdown);
+  shotDetailsContainer.appendChild(shotTypeDropdown);
+
+  // Save shot details
+  const saveShots = () => {
+    const sizeSelect = shotSizeDropdown.querySelector("select");
+    const sizeInput = shotSizeDropdown.querySelector("input");
+    const typeSelect = shotTypeDropdown.querySelector("select");
+    const typeInput = shotTypeDropdown.querySelector("input");
+
+    col.shotSize =
+      sizeSelect.style.display !== "none" ? sizeSelect.value : sizeInput.value;
+    col.shotType =
+      typeSelect.style.display !== "none" ? typeSelect.value : typeInput.value;
+  };
+
+  // Add change listeners
+  shotSizeDropdown
+    .querySelectorAll("select, input")
+    .forEach((el) => el.addEventListener("change", saveShots));
+  shotTypeDropdown
+    .querySelectorAll("select, input")
+    .forEach((el) => el.addEventListener("change", saveShots));
+
+  // Restore previous values if they exist
+  if (col.shotSize) {
+    const sizeSelect = shotSizeDropdown.querySelector("select");
+    const sizeInput = shotSizeDropdown.querySelector("input");
+    if (
+      [].slice
+        .call(sizeSelect.options)
+        .some((opt) => opt.value === col.shotSize)
+    ) {
+      sizeSelect.value = col.shotSize;
+    } else {
+      sizeSelect.value = "custom";
+      sizeSelect.style.display = "none";
+      sizeInput.style.display = "block";
+      sizeInput.value = col.shotSize;
+    }
+  }
+
+  if (col.shotType) {
+    const typeSelect = shotTypeDropdown.querySelector("select");
+    const typeInput = shotTypeDropdown.querySelector("input");
+    if (
+      [].slice
+        .call(typeSelect.options)
+        .some((opt) => opt.value === col.shotType)
+    ) {
+      typeSelect.value = col.shotType;
+    } else {
+      typeSelect.value = "custom";
+      typeSelect.style.display = "none";
+      typeInput.style.display = "block";
+      typeInput.value = col.shotType;
+    }
+  }
+
   // Add all elements to the container
   toolsContainer.appendChild(uploadBtn);
   toolsContainer.appendChild(drawBtn);
@@ -719,6 +910,7 @@ function renderBasicUnitCell(
     col.content = e.target.innerHTML;
   };
 
+  contentContainer.appendChild(shotDetailsContainer);
   contentContainer.appendChild(textEditor);
   contentContainer.appendChild(imageContainer);
   contentContainer.appendChild(canvas);
