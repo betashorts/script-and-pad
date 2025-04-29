@@ -19,31 +19,29 @@
   border-right: 0;
 }
 
-/* Container for L4 blocks */
-.compound-level[class*="level-2"]
-  > .compound-bottom-row
-  > .compound-level
-  > .compound-bottom-row {
-  padding: 0 20px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
+/* Force horizontal layout for L4 containers */
+.compound-level[class*="level-2"] > .compound-bottom-row {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  width: 100% !important;
 }
 
-/* L4 blocks layout */
+/* L4 block sizing */
 .compound-level[class*="level-3"] {
-  width: calc(33.33% - 7px);
-  margin: 0;
-  border: 2px solid #bbb;
+  flex: 0 0 calc(33.33% - 7px) !important;
+  max-width: calc(33.33% - 7px) !important;
+  margin: 0 !important;
+  border: 2px solid #bbb !important;
 }
 
-/* Keep the L4 header and buttons aligned */
-.compound-level[class*="level-2"]
-  > .compound-bottom-row
-  > .compound-level
-  > .compound-top-row {
-  padding: 0;
+/* Keep L4's internal content vertical */
+.compound-level[class*="level-3"] .compound-bottom-row {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
 }
 
 .compound-top-row {
@@ -51,22 +49,6 @@
   font-size: 1.2em;
   margin-bottom: 6px;
   padding: 0;
-}
-
-/* Make L4's parent container horizontal */
-.compound-level[class*="level-2"] .compound-bottom-row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 0;
-  width: 100%;
-}
-
-/* Keep L4's internal content vertical */
-.compound-level[class*="level-3"] .compound-bottom-row {
-  flex-direction: column;
-  gap: 0;
 }
 
 .basic-unit {
