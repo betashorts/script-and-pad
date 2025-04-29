@@ -1,5 +1,5 @@
-// Debug version 9
-console.log("Compound Table deployed - version 9");
+// Debug version 10
+console.log("Compound Table deployed - version 10");
 
 // Compound Table Data Structure Example
 let compoundTableData = {
@@ -283,7 +283,7 @@ function renderBasicUnitRow(
       colInRow++, colPointer++
     ) {
       const { unit, col, colIdx } = flatColumns[colPointer];
-      let showL4Header = rowIdx === 0 && colInRow === 0;
+      let showL4Header = false; // Never show L4 header in the gray bar
       renderBasicUnitCell(
         row,
         unit,
