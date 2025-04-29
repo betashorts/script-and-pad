@@ -641,22 +641,6 @@ function renderBasicUnitCell(
   const toolsContainer = document.createElement("div");
   toolsContainer.className = "basic-unit-tools";
 
-  // Insert button for L4 (basic) unit
-  const insertBtn = document.createElement("button");
-  insertBtn.innerHTML = "&#43;"; // Plus sign
-  insertBtn.title = "Insert column below";
-  insertBtn.className = "insert-btn";
-  insertBtn.onclick = () => {
-    if (parentArr && typeof unitArrIdx === "number") {
-      parentArr.splice(unitArrIdx + 1, 0, {
-        type: "basic",
-        number: getNextNumber(parentArr),
-        columns: [{ content: "" }],
-      });
-      window.renderAllL1Tables();
-    }
-  };
-
   // Remove button
   const removeBtn = document.createElement("button");
   removeBtn.innerHTML = "&#8722;"; // Minus sign
@@ -706,14 +690,13 @@ function renderBasicUnitCell(
   };
 
   // Add all elements to the container
-  toolsContainer.appendChild(insertBtn);
   toolsContainer.appendChild(removeBtn);
   toolsContainer.appendChild(uploadBtn);
   toolsContainer.appendChild(drawBtn);
   toolsContainer.appendChild(clearBtn);
   toolsContainer.appendChild(fileInput);
 
-  contentContainer.appendChild(toolsContainer); // Move tools to top
+  contentContainer.appendChild(toolsContainer);
   contentContainer.appendChild(textEditor);
   contentContainer.appendChild(imageContainer);
   contentContainer.appendChild(canvas);
