@@ -5,6 +5,7 @@
   background: #f9f9f9;
   width: 100%;
   box-sizing: border-box;
+  transition: background-color 0.2s, border 0.2s;
 }
 
 /* Special styling for L1 (outermost) container : Redeploy*/
@@ -172,5 +173,5 @@
 
 .drag-over {
   border: 2px dashed #4a90e2 !important;
-  background: #f0f7ff;
+  background-color: rgba(74, 144, 226, 0.1) !important;
 }
