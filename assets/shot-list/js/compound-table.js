@@ -1,5 +1,5 @@
-// Debug version 5
-console.log("Compound Table deployed - version 5");
+// Debug version 6
+console.log("Compound Table deployed - version 6");
 
 // Compound Table Data Structure Example
 let compoundTableData = {

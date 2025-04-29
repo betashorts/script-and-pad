@@ -1,9 +1,10 @@
 .compound-level {
-  border: 1px solid #bbb;
+  border: 2px solid #bbb;
   margin: 10px 0;
   padding: 0;
+  background: #f9f9f9;
   width: 100%;
-  background: none;
+  box-sizing: border-box;
 }
 
 /* Special styling for L1 (outermost) container : Redeploy*/
@@ -16,7 +17,6 @@
   font-size: 1.2em;
   margin-bottom: 6px;
   padding: 0;
-  border-bottom: 1px solid #bbb;
 }
 
 .compound-bottom-row {
@@ -29,19 +29,25 @@
 }
 
 .basic-unit {
-  border: 1px solid #bbb;
+  border: 1px solid #888;
   margin: 0;
   padding: 0;
+  background: #fff;
   width: 100%;
-  background: none;
+  box-sizing: border-box;
 }
 
 .basic-unit-top {
-  background: none;
+  background: #e0e0e0;
   padding: 4px 8px;
   font-weight: bold;
-  border-bottom: 1px solid #bbb;
+  border-bottom: 1px solid #ccc;
   text-align: center;
+}
+
+/* Only add padding between L3 and L4 */
+.compound-level[class*="level-3"] > .compound-bottom-row > .compound-level {
+  padding: 0 10px;
 }
 
 .basic-unit-bottom {
@@ -53,15 +59,16 @@
 }
 
 .basic-unit-col {
-  border: 1px solid #bbb;
-  padding: 4px 0;
+  border: 1px solid #ccc;
+  padding: 4px 8px;
   min-width: 60px;
   min-height: 24px;
-  background: none;
+  background: #f5f5f5;
   margin: 0;
   position: relative;
   flex-grow: 1;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .basic-unit-col[contenteditable="true"]:focus {
