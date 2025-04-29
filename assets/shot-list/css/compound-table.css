@@ -373,3 +373,83 @@ input[type="file"] {
     font-size: 14px;
   }
 }
+
+/* Shot details styling */
+.shot-details-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.autocomplete-container {
+  flex: 1;
+  position: relative;
+}
+
+.shot-dropdown {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.shot-dropdown:hover {
+  border-color: #4a90e2;
+}
+
+.shot-dropdown:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.shot-dropdown optgroup {
+  font-weight: 600;
+  color: #666;
+  background: #f5f5f5;
+}
+
+.shot-dropdown option {
+  padding: 8px;
+  background: #fff;
+  color: #333;
+}
+
+.shot-dropdown option:hover {
+  background: #f0f0f0;
+}
+
+.custom-shot-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #4a90e2;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.custom-shot-input:focus {
+  outline: none;
+  border-color: #2171d3;
+}
+
+.custom-shot-input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .shot-details-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
