@@ -25,6 +25,16 @@
   > .compound-level
   > .compound-bottom-row {
   padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* L4 block sizing for 3 per row */
+.compound-level[class*="level-3"] {
+  width: calc(33.33% - 7px); /* Account for gap */
+  margin: 0;
 }
 
 /* Keep the L4 header and buttons aligned with parent */
@@ -49,6 +59,11 @@
   gap: 0;
   padding: 0;
   width: 100%;
+}
+
+/* Ensure L4 internal content stays vertical */
+.compound-level[class*="level-3"] .compound-bottom-row {
+  flex-direction: column;
 }
 
 .basic-unit {
