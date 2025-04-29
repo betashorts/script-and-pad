@@ -112,30 +112,76 @@
   padding: 0 4px;
 }
 
-.basic-unit-bottom > button {
-  margin-left: 8px;
-  background: #4a90e2;
-  color: #fff;
+/* Modern control button styles */
+.compound-top-row button,
+.compound-top-row .control-btn,
+.basic-unit-bottom > button,
+.compound-table-row > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2px;
+  padding: 3px 8px;
   border: none;
-  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+  background: #e0e4ea;
+  color: #333;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
   cursor: pointer;
-  font-size: 0.9em;
+  outline: none;
 }
 
+.compound-top-row button[disabled],
+.basic-unit-bottom > button[disabled],
+.compound-table-row > button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Add (plus) button */
+.compound-top-row button[title*="Insert"],
+.basic-unit-bottom > button[title*="Insert"],
+.compound-table-row > button[title*="Insert"],
+.compound-top-row button[title*="Add"],
 .compound-bottom-row > button {
-  margin-top: 8px;
-  background: #2e7d32;
+  background: #43a047;
   color: #fff;
-  border: none;
-  padding: 2px 8px;
-  cursor: pointer;
-  font-size: 0.85em;
-  opacity: 0.9;
-  transition: opacity 0.2s;
+}
+.compound-top-row button[title*="Insert"]:hover,
+.basic-unit-bottom > button[title*="Insert"]:hover,
+.compound-table-row > button[title*="Insert"]:hover,
+.compound-top-row button[title*="Add"]:hover,
+.compound-bottom-row > button:hover {
+  background: #388e3c;
 }
 
-.compound-bottom-row > button:hover {
-  opacity: 1;
+/* Remove (minus) button */
+.compound-top-row button[title*="Remove"],
+.basic-unit-bottom > button[title*="Remove"],
+.compound-table-row > button[title*="Remove"] {
+  background: #e53935;
+  color: #fff;
+}
+.compound-top-row button[title*="Remove"]:hover,
+.basic-unit-bottom > button[title*="Remove"]:hover,
+.compound-table-row > button[title*="Remove"]:hover {
+  background: #b71c1c;
+}
+
+/* Up/Down/Left/Right arrow buttons */
+.compound-top-row button[title*="Move"],
+.basic-unit-bottom > button[title*="Move"],
+.compound-table-row > button[title*="Move"] {
+  background: #1976d2;
+  color: #fff;
+}
+.compound-top-row button[title*="Move"]:hover,
+.basic-unit-bottom > button[title*="Move"]:hover,
+.compound-table-row > button[title*="Move"]:hover {
+  background: #0d47a1;
 }
 
 /* Root L1 add button */
