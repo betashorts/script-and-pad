@@ -1,5 +1,5 @@
-// Debug version 7
-console.log("Compound Table deployed - version 7");
+// Debug version 8
+console.log("Compound Table deployed - version 8");
 
 // Compound Table Data Structure Example
 let compoundTableData = {
@@ -227,7 +227,13 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
     });
     // Add button to add new child at the end
     const addBtn = document.createElement("button");
-    addBtn.textContent = "+";
+    if (unit.type === "compound") {
+      addBtn.textContent = "Add L4";
+    } else if (unit.type === "high") {
+      addBtn.textContent = "Add L3";
+    } else if (unit.type === "super") {
+      addBtn.textContent = "Add L2";
+    }
     addBtn.onclick = () => {
       if (unit.type === "compound") {
         unit.children.push({
