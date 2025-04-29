@@ -225,6 +225,7 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
     // Add button to add new child at the end
     const addBtn = document.createElement("button");
     addBtn.textContent = "+";
+    addBtn.style.display = "none";
     addBtn.onclick = () => {
       if (unit.type === "compound") {
         unit.children.push({
@@ -293,6 +294,7 @@ function renderBasicUnitRow(
   // Add column at end
   const addColBtn = document.createElement("button");
   addColBtn.textContent = "+";
+  addColBtn.style.display = "none";
   addColBtn.onclick = () => {
     unit.columns.push({ content: "" });
     window.renderAllL1Tables();
