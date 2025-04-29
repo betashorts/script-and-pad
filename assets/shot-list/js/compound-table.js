@@ -1,5 +1,5 @@
 // Debug version 17
-console.log("Compound Table deployed - version 24");
+console.log("Compound Table deployed - version 25");
 
 // Compound Table Data Structure Example
 let compoundTableData = {
@@ -1003,6 +1003,37 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     window.renderAllL1Tables = renderAllL1Tables;
     renderAllL1Tables();
+
+    // Initialize file upload functionality
+    const uploadContainer = document.createElement("div");
+    uploadContainer.className = "script-upload-container";
+
+    // Create file input
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.id = "scriptFileInput";
+    fileInput.accept = ".pdf,.docx,.doc";
+
+    // Create upload button
+    const uploadButton = document.createElement("button");
+    uploadButton.textContent = "Upload and Process";
+    uploadButton.onclick = () => {
+      const file = fileInput.files[0];
+      if (file) {
+        // Here you can add your file processing logic
+        console.log("Processing file:", file);
+        // After processing, you would call initializeFromScript with the processed data
+      }
+    };
+
+    // Add elements to container
+    uploadContainer.appendChild(fileInput);
+    uploadContainer.appendChild(uploadButton);
+
+    // Insert container before the compound table root
+    if (root && root.parentNode) {
+      root.parentNode.insertBefore(uploadContainer, root);
+    }
   }
 });
 
