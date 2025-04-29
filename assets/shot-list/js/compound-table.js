@@ -716,15 +716,25 @@ function renderBasicUnitCell(
     e.preventDefault();
     isDrawing = true;
     const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
     context.beginPath();
-    context.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    context.moveTo(
+      (e.clientX - rect.left) * scaleX,
+      (e.clientY - rect.top) * scaleY
+    );
   }
 
   function draw(e) {
     e.preventDefault();
     if (!isDrawing) return;
     const rect = canvas.getBoundingClientRect();
-    context.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    context.lineTo(
+      (e.clientX - rect.left) * scaleX,
+      (e.clientY - rect.top) * scaleY
+    );
     context.stroke();
   }
 
