@@ -152,3 +152,25 @@
 #compound-table-root-container > button:hover {
   opacity: 1;
 }
+
+.drag-handle {
+  cursor: move;
+  padding: 0 8px;
+  color: #666;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.drag-handle:hover {
+  color: #333;
+}
+
+.dragging {
+  opacity: 0.5;
+  border: 2px dashed #666 !important;
+}
+
+.drag-over {
+  border: 2px dashed #4a90e2 !important;
+  background: #f0f7ff;
+}
