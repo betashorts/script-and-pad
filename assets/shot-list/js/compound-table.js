@@ -1,18 +1,21 @@
 // Debug version 17
-console.log("Compound Table deployed - version 22");
+console.log("Compound Table deployed - version 24");
 
 // Compound Table Data Structure Example
 let compoundTableData = {
   type: "super",
   number: 1,
+  title: "ACT 1",
   children: [
     {
       type: "high",
       number: 1,
+      title: "Scene 1",
       children: [
         {
           type: "compound",
           number: 1,
+          title: "Sequence 1",
           children: [
             {
               type: "basic",
@@ -252,8 +255,26 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
   dragHandle.textContent = "⋮⋮";
   topRow.appendChild(dragHandle);
 
+  // Update the label based on level
   const label = document.createElement("span");
-  label.textContent = `L${level + 1} ${unit.number}`;
+  let levelText;
+  switch (level) {
+    case 0:
+      levelText = unit.title || `ACT ${unit.number}`;
+      break;
+    case 1:
+      levelText = unit.title || `Scene ${unit.number}`;
+      break;
+    case 2:
+      levelText = unit.title || `Sequence ${unit.number}`;
+      break;
+    case 3:
+      levelText = `Shot ${unit.number}`;
+      break;
+    default:
+      levelText = `Level ${level + 1} ${unit.number}`;
+  }
+  label.textContent = levelText;
   topRow.appendChild(label);
 
   // Initialize drag and drop if we have a parent array
@@ -275,6 +296,7 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
       const newItem = {
         type: "super",
         number: getNextNumber(window.compoundTableDataList),
+        title: `ACT ${getNextNumber(window.compoundTableDataList)}`,
         children: [],
       };
       window.compoundTableDataList.splice(l1Idx + 1, 0, newItem);
@@ -373,6 +395,7 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
         newItem = {
           type: "super",
           number: getNextNumber(window.compoundTableDataList),
+          title: `ACT ${getNextNumber(window.compoundTableDataList)}`,
           children: [],
         };
         window.compoundTableDataList.splice(l1Idx + 1, 0, newItem);
@@ -381,6 +404,7 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
         newItem = {
           type: "high",
           number: getNextNumber(parentArr),
+          title: `Scene ${getNextNumber(parentArr)}`,
           children: [],
         };
         parentArr.splice(unitIdx + 1, 0, newItem);
@@ -389,6 +413,7 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
         newItem = {
           type: "compound",
           number: getNextNumber(parentArr),
+          title: `Sequence ${getNextNumber(parentArr)}`,
           children: [],
         };
         parentArr.splice(unitIdx + 1, 0, newItem);
@@ -497,11 +522,11 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
     // Add button to add new child at the end
     const addBtn = document.createElement("button");
     if (unit.type === "compound") {
-      addBtn.textContent = "Add L4";
+      addBtn.textContent = "Add Shot";
     } else if (unit.type === "high") {
-      addBtn.textContent = "Add L3";
+      addBtn.textContent = "Add Sequence";
     } else if (unit.type === "super") {
-      addBtn.textContent = "Add L2";
+      addBtn.textContent = "Add Scene";
     }
     addBtn.onclick = () => {
       if (unit.type === "compound") {
@@ -940,9 +965,9 @@ window.addEventListener("DOMContentLoaded", () => {
     root.parentNode.insertBefore(rootContainer, root);
     rootContainer.appendChild(root);
 
-    // Add button for new L1
+    // Update Add L1 button text
     const addL1Btn = document.createElement("button");
-    addL1Btn.textContent = "Add L1";
+    addL1Btn.textContent = "Add Act";
     addL1Btn.onclick = () => {
       if (!Array.isArray(window.compoundTableDataList)) {
         window.compoundTableDataList = [compoundTableData];
@@ -950,6 +975,7 @@ window.addEventListener("DOMContentLoaded", () => {
       window.compoundTableDataList.push({
         type: "super",
         number: getNextNumber(window.compoundTableDataList),
+        title: `ACT ${getNextNumber(window.compoundTableDataList)}`,
         children: [],
       });
       renderAllL1Tables();
@@ -979,3 +1005,50 @@ window.addEventListener("DOMContentLoaded", () => {
     renderAllL1Tables();
   }
 });
+
+// Function to initialize compound table from script data
+function initializeFromScript(scriptData) {
+  if (!scriptData || !scriptData.acts) return;
+
+  // Convert script data to compound table format
+  window.compoundTableDataList = scriptData.acts.map((act, actIndex) => {
+    return {
+      type: "super",
+      number: actIndex + 1,
+      title: act.title || `ACT ${actIndex + 1}`,
+      children: act.sceneHeadings.map((scene, sceneIndex) => {
+        return {
+          type: "high",
+          number: sceneIndex + 1,
+          title: scene.title || `Scene ${sceneIndex + 1}`,
+          children: scene.components.map((component, compIndex) => {
+            return {
+              type: "compound",
+              number: compIndex + 1,
+              title: component.text || `Sequence ${compIndex + 1}`,
+              children: [
+                {
+                  type: "basic",
+                  number: 1,
+                  content: { content: "", imageData: null, canvasData: null },
+                },
+              ],
+            };
+          }),
+        };
+      }),
+    };
+  });
+
+  // Render the table
+  window.renderAllL1Tables();
+}
+
+// Listen for script upload event
+window.addEventListener("scriptUploaded", function (e) {
+  console.log("Script uploaded, initializing compound table...", e.detail);
+  initializeFromScript(e.detail);
+});
+
+// Export the initialize function for direct calls
+window.initializeCompoundTableFromScript = initializeFromScript;
