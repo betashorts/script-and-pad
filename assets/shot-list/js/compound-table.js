@@ -522,7 +522,15 @@ window.addEventListener("DOMContentLoaded", () => {
       window.compoundTableDataList.forEach((data, idx) => {
         const l1Div = document.createElement("div");
         l1Div.className = "compound-l1-block";
-        renderCompoundTable(l1Div, data, data, idx);
+        renderUnit(
+          l1Div,
+          data,
+          0,
+          data,
+          idx,
+          window.compoundTableDataList,
+          idx
+        );
         root.appendChild(l1Div);
       });
     }
