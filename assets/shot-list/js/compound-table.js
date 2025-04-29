@@ -17,7 +17,7 @@ let compoundTableData = {
             {
               type: "basic",
               number: 1,
-              columns: [{ content: "" }, { content: "" }],
+              content: { content: "", imageData: null, canvasData: null },
             },
           ],
         },
@@ -355,7 +355,7 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
         newItem = {
           type: "basic",
           number: getNextNumber(parentArr),
-          columns: [{ content: "" }],
+          content: { content: "", imageData: null, canvasData: null },
         };
         parentArr.splice(unitIdx + 1, 0, newItem);
       }
@@ -466,7 +466,7 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
         unit.children.push({
           type: "basic",
           number: getNextNumber(unit.children),
-          columns: [{ content: "" }],
+          content: { content: "", imageData: null, canvasData: null },
         });
       } else if (unit.type === "high") {
         unit.children.push({
@@ -498,51 +498,30 @@ function renderBasicUnitRow(
   parentArr,
   unitIdx
 ) {
-  let flatColumns = unit.columns.map((col, colIdx) => ({ unit, col, colIdx }));
-  const numRows = Math.ceil(flatColumns.length / 6);
-  let colPointer = 0;
-  for (let rowIdx = 0; rowIdx < numRows; rowIdx++) {
-    let row = document.createElement("div");
-    row.className = "compound-table-row";
-    for (
-      let colInRow = 0;
-      colInRow < 6 && colPointer < flatColumns.length;
-      colInRow++, colPointer++
-    ) {
-      const { unit, col, colIdx } = flatColumns[colPointer];
-      let showL4Header = false; // Never show L4 header in the gray bar
-      renderBasicUnitCell(
-        row,
-        unit,
-        level,
-        colIdx,
-        col,
-        showL4Header,
-        rootData,
-        l1Idx,
-        parentArr,
-        unitIdx
-      );
-    }
-    parent.appendChild(row);
-  }
-
-  // Add column at end
-  const addColBtn = document.createElement("button");
-  addColBtn.textContent = "+";
-  addColBtn.onclick = () => {
-    unit.columns.push({ content: "" });
-    window.renderAllL1Tables();
-  };
-  parent.appendChild(addColBtn);
+  // Only one content area per L4
+  let row = document.createElement("div");
+  row.className = "compound-table-row";
+  renderBasicUnitCell(
+    row,
+    unit,
+    level,
+    0, // colIdx is always 0
+    unit.content || { content: "", imageData: null, canvasData: null },
+    false, // showL4Header
+    rootData,
+    l1Idx,
+    parentArr,
+    unitIdx
+  );
+  parent.appendChild(row);
 }
 
 function renderBasicUnitCell(
   parent,
   unit,
   level,
-  colIdx,
-  col,
+  colIdx, // always 0 now
+  col, // this is unit.content
   showL4Header,
   rootData,
   l1Idx,
@@ -573,27 +552,44 @@ function renderBasicUnitCell(
   const contentContainer = document.createElement("div");
   contentContainer.className = "basic-unit-content";
 
-  // Text editor div
-  const textEditor = document.createElement("div");
-  textEditor.className = "basic-unit-text";
-  textEditor.contentEditable = true;
-  textEditor.innerHTML = col.content || "";
+  // Tool buttons container
+  const toolsContainer = document.createElement("div");
+  toolsContainer.className = "basic-unit-tools";
 
-  // Image container
-  const imageContainer = document.createElement("div");
-  imageContainer.className = "basic-unit-image";
-  if (col.imageData) {
-    const img = document.createElement("img");
-    img.src = col.imageData;
-    imageContainer.appendChild(img);
-  }
+  // File upload button
+  const uploadBtn = document.createElement("button");
+  uploadBtn.innerHTML = "&#128247;"; // Camera emoji
+  uploadBtn.title = "Upload Image";
+  uploadBtn.className = "upload-btn";
+
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = "image/*";
+  fileInput.style.display = "none";
+
+  uploadBtn.onclick = () => fileInput.click();
+
+  fileInput.onchange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        col.imageData = event.target.result;
+        const img = document.createElement("img");
+        img.src = col.imageData;
+        imageContainer.innerHTML = "";
+        imageContainer.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   // Drawing canvas (optional)
   const canvas = document.createElement("canvas");
   canvas.className = "basic-unit-canvas";
   canvas.width = 300;
   canvas.height = 200;
-  canvas.style.display = "none"; // Set initial display state explicitly
+  canvas.style.display = "none";
   let isDrawing = false;
   let context = canvas.getContext("2d");
 
@@ -634,97 +630,21 @@ function renderBasicUnitCell(
     const img = new Image();
     img.onload = () => {
       context.drawImage(img, 0, 0);
-      canvas.style.display = "block"; // Show canvas if it has content
+      canvas.style.display = "block";
     };
     img.src = col.canvasData;
   }
-
-  // Tool buttons container
-  const toolsContainer = document.createElement("div");
-  toolsContainer.className = "basic-unit-tools";
-
-  // Remove button
-  const removeBtn = document.createElement("button");
-  removeBtn.innerHTML = "&#8722;"; // Minus sign
-  removeBtn.title = "Remove this column";
-  removeBtn.className = "remove-btn";
-  removeBtn.onclick = (ev) => {
-    unit.columns.splice(colIdx, 1);
-    window.renderAllL1Tables();
-    ev.stopPropagation();
-  };
-
-  // File upload button
-  const uploadBtn = document.createElement("button");
-  uploadBtn.innerHTML = "&#128247;"; // Camera emoji
-  uploadBtn.title = "Upload Image";
-  uploadBtn.className = "upload-btn";
-
-  const fileInput = document.createElement("input");
-  fileInput.type = "file";
-  fileInput.accept = "image/*";
-  fileInput.style.display = "none";
-
-  uploadBtn.onclick = () => fileInput.click();
-
-  // Add back file upload handling
-  fileInput.onchange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        col.imageData = event.target.result;
-        const img = document.createElement("img");
-        img.src = col.imageData;
-        imageContainer.innerHTML = "";
-        imageContainer.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  // Handle paste events for both text and images
-  contentContainer.addEventListener("paste", (e) => {
-    e.preventDefault();
-
-    // Handle image paste
-    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
-    for (const item of items) {
-      if (item.type.indexOf("image") !== -1) {
-        const blob = item.getAsFile();
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          col.imageData = event.target.result;
-          const img = document.createElement("img");
-          img.src = col.imageData;
-          imageContainer.innerHTML = "";
-          imageContainer.appendChild(img);
-        };
-        reader.readAsDataURL(blob);
-        return;
-      }
-    }
-
-    // Handle text paste
-    const text = e.clipboardData.getData("text/plain");
-    document.execCommand("insertText", false, text);
-  });
-
-  // Save text content
-  textEditor.oninput = (e) => {
-    col.content = e.target.innerHTML;
-  };
 
   // Drawing toggle button
   const drawBtn = document.createElement("button");
   drawBtn.innerHTML = "&#9999;&#65039;"; // Pencil emoji
   drawBtn.title = "Toggle Drawing Mode";
   drawBtn.className = "draw-btn";
-  let isCanvasVisible = canvas.style.display === "block"; // Track canvas visibility
+  let isCanvasVisible = canvas.style.display === "block";
   drawBtn.onclick = () => {
-    isCanvasVisible = !isCanvasVisible; // Toggle state
+    isCanvasVisible = !isCanvasVisible;
     canvas.style.display = isCanvasVisible ? "block" : "none";
-    drawBtn.classList.toggle("active", isCanvasVisible); // Toggle active class based on visibility
+    drawBtn.classList.toggle("active", isCanvasVisible);
   };
 
   // Clear button
@@ -742,19 +662,66 @@ function renderBasicUnitCell(
   };
 
   // Add all elements to the container
-  toolsContainer.appendChild(removeBtn);
   toolsContainer.appendChild(uploadBtn);
   toolsContainer.appendChild(drawBtn);
   toolsContainer.appendChild(clearBtn);
   toolsContainer.appendChild(fileInput);
 
   contentContainer.appendChild(toolsContainer);
+
+  // Text editor div
+  const textEditor = document.createElement("div");
+  textEditor.className = "basic-unit-text";
+  textEditor.contentEditable = true;
+  textEditor.innerHTML = col.content || "";
+
+  // Placeholder for text
+  textEditor.setAttribute("placeholder", "Enter description...");
+
+  // Image container
+  const imageContainer = document.createElement("div");
+  imageContainer.className = "basic-unit-image";
+  if (col.imageData) {
+    const img = document.createElement("img");
+    img.src = col.imageData;
+    imageContainer.appendChild(img);
+  }
+
+  // Handle paste events for both text and images
+  contentContainer.addEventListener("paste", (e) => {
+    e.preventDefault();
+    // Handle image paste
+    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+    for (const item of items) {
+      if (item.type.indexOf("image") !== -1) {
+        const blob = item.getAsFile();
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          col.imageData = event.target.result;
+          const img = document.createElement("img");
+          img.src = col.imageData;
+          imageContainer.innerHTML = "";
+          imageContainer.appendChild(img);
+        };
+        reader.readAsDataURL(blob);
+        return;
+      }
+    }
+    // Handle text paste
+    const text = e.clipboardData.getData("text/plain");
+    document.execCommand("insertText", false, text);
+  });
+
+  // Save text content
+  textEditor.oninput = (e) => {
+    col.content = e.target.innerHTML;
+  };
+
   contentContainer.appendChild(textEditor);
   contentContainer.appendChild(imageContainer);
   contentContainer.appendChild(canvas);
 
   bottom.appendChild(contentContainer);
-
   cell.appendChild(bottom);
   parent.appendChild(cell);
 }
