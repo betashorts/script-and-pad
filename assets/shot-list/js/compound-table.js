@@ -1,5 +1,5 @@
-// Debug version 13
-console.log("Compound Table deployed - version 13");
+// Debug version 14
+console.log("Compound Table deployed - version 14");
 
 // Compound Table Data Structure Example
 let compoundTableData = {
@@ -101,8 +101,13 @@ function renderCompoundRow(parent, basicUnits, level) {
 }
 
 function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
+  console.log(
+    `Rendering unit: type=${unit.type}, level=${level}, number=${unit.number}`
+  );
+
   const wrapper = document.createElement("div");
   wrapper.className = `compound-level compound-level-${level}`;
+  console.log(`Created wrapper with class: ${wrapper.className}`);
 
   // Top row with number and level prefix
   const topRow = document.createElement("div");
@@ -204,6 +209,7 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
   bottomRow.style.flexDirection = "column";
 
   if (unit.type === "basic") {
+    console.log(`Rendering basic unit row at level ${level}`);
     renderBasicUnitRow(
       bottomRow,
       unit,
@@ -214,6 +220,7 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
       unitIdx
     );
   } else {
+    console.log(`Rendering children for ${unit.type} unit at level ${level}`);
     unit.children.forEach((child, idx) => {
       renderUnit(
         bottomRow,
