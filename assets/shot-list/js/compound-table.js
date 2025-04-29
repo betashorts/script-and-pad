@@ -565,19 +565,87 @@ function renderBasicUnitCell(
     top.textContent = "";
     cell.appendChild(top);
   }
+
   const bottom = document.createElement("div");
   bottom.className = "basic-unit-bottom";
-  const colDiv = document.createElement("div");
-  colDiv.className = "basic-unit-col";
-  colDiv.contentEditable = true;
-  colDiv.textContent = col.content;
-  colDiv.oninput = (e) => {
-    unit.columns[colIdx].content = e.target.textContent;
-  };
+
+  // Create content container
+  const contentContainer = document.createElement("div");
+  contentContainer.className = "basic-unit-content";
+
+  // Text editor div
+  const textEditor = document.createElement("div");
+  textEditor.className = "basic-unit-text";
+  textEditor.contentEditable = true;
+  textEditor.innerHTML = col.content || "";
+
+  // Image container
+  const imageContainer = document.createElement("div");
+  imageContainer.className = "basic-unit-image";
+  if (col.imageData) {
+    const img = document.createElement("img");
+    img.src = col.imageData;
+    imageContainer.appendChild(img);
+  }
+
+  // Drawing canvas (optional)
+  const canvas = document.createElement("canvas");
+  canvas.className = "basic-unit-canvas";
+  canvas.width = 300;
+  canvas.height = 200;
+  let isDrawing = false;
+  let context = canvas.getContext("2d");
+
+  // Drawing event listeners
+  canvas.addEventListener("mousedown", startDrawing);
+  canvas.addEventListener("mousemove", draw);
+  canvas.addEventListener("mouseup", stopDrawing);
+  canvas.addEventListener("mouseleave", stopDrawing);
+
+  function startDrawing(e) {
+    isDrawing = true;
+    context.beginPath();
+    context.moveTo(
+      e.clientX - canvas.getBoundingClientRect().left,
+      e.clientY - canvas.getBoundingClientRect().top
+    );
+  }
+
+  function draw(e) {
+    if (!isDrawing) return;
+    context.lineTo(
+      e.clientX - canvas.getBoundingClientRect().left,
+      e.clientY - canvas.getBoundingClientRect().top
+    );
+    context.stroke();
+  }
+
+  function stopDrawing() {
+    if (isDrawing) {
+      isDrawing = false;
+      // Save canvas data to column
+      col.canvasData = canvas.toDataURL();
+    }
+  }
+
+  // Restore previous canvas data if it exists
+  if (col.canvasData) {
+    const img = new Image();
+    img.onload = () => {
+      context.drawImage(img, 0, 0);
+    };
+    img.src = col.canvasData;
+  }
+
+  // Tool buttons container
+  const toolsContainer = document.createElement("div");
+  toolsContainer.className = "basic-unit-tools";
+
   // Insert button for L4 (basic) unit
   const insertBtn = document.createElement("button");
   insertBtn.textContent = "+";
   insertBtn.title = "Insert L4 after";
+  insertBtn.className = "insert-btn";
   insertBtn.onclick = () => {
     // Insert a new L4 (basic) after the current one in the parentArr
     if (parentArr && typeof unitArrIdx === "number") {
@@ -589,18 +657,116 @@ function renderBasicUnitCell(
       window.renderAllL1Tables();
     }
   };
-  colDiv.appendChild(insertBtn);
+
   // Remove button for L4 (basic) unit
   const removeBtn = document.createElement("button");
   removeBtn.textContent = "-";
   removeBtn.title = "Remove column";
+  removeBtn.className = "remove-btn";
   removeBtn.onclick = (ev) => {
     unit.columns.splice(colIdx, 1);
     window.renderAllL1Tables();
     ev.stopPropagation();
   };
-  colDiv.appendChild(removeBtn);
-  bottom.appendChild(colDiv);
+
+  // File upload button
+  const uploadBtn = document.createElement("button");
+  uploadBtn.textContent = "📷";
+  uploadBtn.title = "Upload Image";
+  uploadBtn.className = "upload-btn";
+
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = "image/*";
+  fileInput.style.display = "none";
+
+  uploadBtn.onclick = () => fileInput.click();
+
+  fileInput.onchange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        col.imageData = event.target.result;
+        const img = document.createElement("img");
+        img.src = col.imageData;
+        imageContainer.innerHTML = "";
+        imageContainer.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Handle paste events for both text and images
+  contentContainer.addEventListener("paste", (e) => {
+    e.preventDefault();
+
+    // Handle image paste
+    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+    for (const item of items) {
+      if (item.type.indexOf("image") !== -1) {
+        const blob = item.getAsFile();
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          col.imageData = event.target.result;
+          const img = document.createElement("img");
+          img.src = col.imageData;
+          imageContainer.innerHTML = "";
+          imageContainer.appendChild(img);
+        };
+        reader.readAsDataURL(blob);
+        return;
+      }
+    }
+
+    // Handle text paste
+    const text = e.clipboardData.getData("text/plain");
+    document.execCommand("insertText", false, text);
+  });
+
+  // Save text content
+  textEditor.oninput = (e) => {
+    col.content = e.target.innerHTML;
+  };
+
+  // Clear button
+  const clearBtn = document.createElement("button");
+  clearBtn.textContent = "🗑️";
+  clearBtn.title = "Clear All";
+  clearBtn.className = "clear-btn";
+  clearBtn.onclick = () => {
+    textEditor.innerHTML = "";
+    imageContainer.innerHTML = "";
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    col.content = "";
+    col.imageData = null;
+    col.canvasData = null;
+  };
+
+  // Drawing toggle button
+  const drawBtn = document.createElement("button");
+  drawBtn.textContent = "✏️";
+  drawBtn.title = "Toggle Drawing";
+  drawBtn.className = "draw-btn";
+  drawBtn.onclick = () => {
+    canvas.style.display = canvas.style.display === "none" ? "block" : "none";
+  };
+
+  // Add all elements to the container
+  toolsContainer.appendChild(insertBtn); // Add insert button first
+  toolsContainer.appendChild(removeBtn); // Add remove button second
+  toolsContainer.appendChild(uploadBtn);
+  toolsContainer.appendChild(drawBtn);
+  toolsContainer.appendChild(clearBtn);
+
+  contentContainer.appendChild(textEditor);
+  contentContainer.appendChild(imageContainer);
+  contentContainer.appendChild(canvas);
+
+  bottom.appendChild(contentContainer);
+  bottom.appendChild(toolsContainer);
+  bottom.appendChild(fileInput);
+
   cell.appendChild(bottom);
   parent.appendChild(cell);
 }
