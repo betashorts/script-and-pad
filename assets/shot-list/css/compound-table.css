@@ -1,6 +1,6 @@
 .compound-level {
   border: 2px solid #bbb;
-  margin: 10px;
+  margin: 10px 0;
   padding: 10px;
   border-radius: 8px;
   background: #f9f9f9;
@@ -18,7 +18,7 @@
 .basic-unit {
   border: 1px solid #888;
   border-radius: 6px;
-  margin: 5px;
+  margin: 5px 0;
   background: #fff;
   min-width: 120px;
 }
