@@ -19,7 +19,7 @@
   border-right: 0;
 }
 
-/* Padding between L3 and L4 - only for the content area */
+/* Container for L4 blocks */
 .compound-level[class*="level-2"]
   > .compound-bottom-row
   > .compound-level
@@ -31,13 +31,14 @@
   gap: 10px;
 }
 
-/* L4 block sizing for 3 per row */
+/* L4 blocks layout */
 .compound-level[class*="level-3"] {
-  width: calc(33.33% - 7px); /* Account for gap */
+  width: calc(33.33% - 7px);
   margin: 0;
+  border: 2px solid #bbb;
 }
 
-/* Keep the L4 header and buttons aligned with parent */
+/* Keep the L4 header and buttons aligned */
 .compound-level[class*="level-2"]
   > .compound-bottom-row
   > .compound-level
@@ -52,18 +53,20 @@
   padding: 0;
 }
 
-.compound-bottom-row {
+/* Make L4's parent container horizontal */
+.compound-level[class*="level-2"] .compound-bottom-row {
   display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  gap: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
   padding: 0;
   width: 100%;
 }
 
-/* Ensure L4 internal content stays vertical */
+/* Keep L4's internal content vertical */
 .compound-level[class*="level-3"] .compound-bottom-row {
   flex-direction: column;
+  gap: 0;
 }
 
 .basic-unit {
