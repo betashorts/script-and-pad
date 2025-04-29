@@ -19,10 +19,20 @@
   border-right: 0;
 }
 
-/* Padding between L3 and L4 */
-.compound-level[class*="level-2"] > .compound-bottom-row > .compound-level {
+/* Padding between L3 and L4 - only for the content area */
+.compound-level[class*="level-2"]
+  > .compound-bottom-row
+  > .compound-level
+  > .compound-bottom-row {
   padding: 0 20px;
-  margin: 0 10px;
+}
+
+/* Keep the L4 header and buttons aligned with parent */
+.compound-level[class*="level-2"]
+  > .compound-bottom-row
+  > .compound-level
+  > .compound-top-row {
+  padding: 0;
 }
 
 .compound-top-row {
