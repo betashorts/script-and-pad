@@ -1207,3 +1207,19 @@ function loadCompoundTableFromLocal() {
   }
   return false;
 }
+
+function createFloatingSaveButton() {
+  if (document.getElementById("floating-save-btn")) return; // Prevent duplicates
+
+  const btn = document.createElement("button");
+  btn.id = "floating-save-btn";
+  btn.innerHTML = "💾 Save";
+  btn.title = "Save your work";
+  btn.onclick = () => {
+    saveCompoundTableToLocal();
+    btn.classList.add("saved");
+    setTimeout(() => btn.classList.remove("saved"), 1200);
+  };
+  document.body.appendChild(btn);
+}
+createFloatingSaveButton();
