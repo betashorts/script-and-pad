@@ -159,24 +159,24 @@ function convertToCompoundTableFormat(scriptData) {
               type: "high",
               number: sceneIndex + 1,
               title: sceneTitle,
-              children: [
-                {
+              children: content.map((contentLine, contentIndex) => {
+                return {
                   type: "compound",
-                  number: 1,
-                  title: "Sequence 1",
+                  number: contentIndex + 1,
+                  title: contentLine.trim(),
                   children: [
                     {
                       type: "basic",
                       number: 1,
                       content: {
-                        content: content.join("\n"),
+                        content: "", // Empty content since we're using the line as title
                         imageData: null,
                         canvasData: null,
                       },
                     },
                   ],
-                },
-              ],
+                };
+              }),
             };
           }
         ),
