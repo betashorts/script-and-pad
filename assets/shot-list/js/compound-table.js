@@ -1,20 +1,20 @@
 // Debug version 17
-console.log("Compound Table deployed - version 33");
+console.log("Compound Table deployed - version 34");
 
 // Performance monitoring utility
 const perf = {
   startTime: null,
-  start(operation) {
+  async start(operation) {
     this.startTime = performance.now();
     this.operation = operation;
-    loader.show(operation);
+    await loader.show(operation);
   },
-  end() {
+  async end() {
     if (!this.startTime) return;
     const duration = (performance.now() - this.startTime).toFixed(2);
     console.log(`⚡ ${this.operation}: ${duration}ms`);
     this.startTime = null;
-    loader.hide();
+    await loader.hide();
   },
 };
 
@@ -22,7 +22,6 @@ const perf = {
 const loader = {
   overlay: null,
   init() {
-    // Create loader elements if they don't exist
     if (!this.overlay) {
       this.overlay = document.createElement("div");
       this.overlay.className = "loader-overlay";
@@ -42,15 +41,19 @@ const loader = {
       document.body.appendChild(this.overlay);
     }
   },
-  show(operation) {
+  async show(operation) {
     this.init();
     const text = this.overlay.querySelector(".loader-text");
     text.textContent = operation;
     this.overlay.classList.add("active");
+    // Force a reflow to ensure the loader is shown
+    this.overlay.offsetHeight;
+    return new Promise((resolve) => setTimeout(resolve, 50));
   },
-  hide() {
+  async hide() {
     if (this.overlay) {
       this.overlay.classList.remove("active");
+      return new Promise((resolve) => setTimeout(resolve, 300)); // Allow time for fade out
     }
   },
 };
@@ -571,7 +574,7 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
   bottomRow.style.flexDirection = "column";
 
   if (unit.type === "basic") {
-    console.log(`Rendering basic unit row at level ${level}`);
+    // console.log(`Rendering basic unit row at level ${level}`);
     renderBasicUnitRow(
       bottomRow,
       unit,
@@ -582,7 +585,7 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
       unitIdx
     );
   } else {
-    console.log(`Rendering children for ${unit.type} unit at level ${level}`);
+    // console.log(`Rendering children for ${unit.type} unit at level ${level}`);
     unit.children.forEach((child, idx) => {
       renderUnit(
         bottomRow,
@@ -1030,9 +1033,9 @@ function renderBasicUnitCell(
   parent.appendChild(cell);
 }
 
-// Modify the renderAllL1Tables function to include performance monitoring
-function renderAllL1Tables() {
-  perf.start("Rendering compound table");
+// Modify the renderAllL1Tables function to be async
+async function renderAllL1Tables() {
+  await perf.start("Rendering compound table");
   const root = document.getElementById("compound-table-root");
   root.innerHTML = "";
   window.compoundTableDataList.forEach((data, idx) => {
@@ -1041,95 +1044,94 @@ function renderAllL1Tables() {
     renderUnit(l1Div, data, 0, data, idx, window.compoundTableDataList, idx);
     root.appendChild(l1Div);
   });
-  perf.end();
+  await perf.end();
 }
 
-// Add loader to shot operations
-function addShot(parentUnit) {
-  perf.start("Adding Shot");
-  setTimeout(() => {
-    // Add small delay to ensure loader shows
-    const newShot = {
-      type: "basic",
-      number: getNextNumber(parentUnit.children),
-      content: { content: "", imageData: null, canvasData: null },
-    };
-    parentUnit.children.push(newShot);
-    renderAllL1Tables();
-    perf.end();
-  }, 50);
+// Modify add functions to be async
+async function addShot(parentUnit) {
+  await perf.start("Adding Shot");
+  const newShot = {
+    type: "basic",
+    number: getNextNumber(parentUnit.children),
+    content: { content: "", imageData: null, canvasData: null },
+  };
+  parentUnit.children.push(newShot);
+  await renderAllL1Tables();
+  await perf.end();
 }
 
-function addSequence(parentUnit) {
-  perf.start("Adding Sequence");
-  setTimeout(() => {
-    const newSequence = {
-      type: "compound",
-      number: getNextNumber(parentUnit.children),
-      title: `Sequence ${getNextNumber(parentUnit.children)}`,
-      children: [],
-    };
-    parentUnit.children.push(newSequence);
-    renderAllL1Tables();
-    perf.end();
-  }, 50);
+async function addSequence(parentUnit) {
+  await perf.start("Adding Sequence");
+  const newSequence = {
+    type: "compound",
+    number: getNextNumber(parentUnit.children),
+    title: `Sequence ${getNextNumber(parentUnit.children)}`,
+    children: [],
+  };
+  parentUnit.children.push(newSequence);
+  await renderAllL1Tables();
+  await perf.end();
 }
 
-function addScene(parentUnit) {
-  perf.start("Adding Scene");
-  setTimeout(() => {
-    const newScene = {
-      type: "high",
-      number: getNextNumber(parentUnit.children),
-      title: `Scene ${getNextNumber(parentUnit.children)}`,
-      children: [],
-    };
-    parentUnit.children.push(newScene);
-    renderAllL1Tables();
-    perf.end();
-  }, 50);
+async function addScene(parentUnit) {
+  await perf.start("Adding Scene");
+  const newScene = {
+    type: "high",
+    number: getNextNumber(parentUnit.children),
+    title: `Scene ${getNextNumber(parentUnit.children)}`,
+    children: [],
+  };
+  parentUnit.children.push(newScene);
+  await renderAllL1Tables();
+  await perf.end();
 }
 
-// Initialize loader when DOM is ready
+// Update the button click handlers
 window.addEventListener("DOMContentLoaded", () => {
   loader.init();
-  perf.start("Initial Setup");
   const root = document.getElementById("compound-table-root");
   if (root) {
-    // Create a container for the root and the add button
     const rootContainer = document.createElement("div");
     rootContainer.id = "compound-table-root-container";
     root.parentNode.insertBefore(rootContainer, root);
     rootContainer.appendChild(root);
 
-    // Update Add L1 button text
     const addL1Btn = document.createElement("button");
     addL1Btn.textContent = "Add Act";
-    addL1Btn.onclick = () => {
-      perf.start("Adding Act");
-      setTimeout(() => {
-        if (!Array.isArray(window.compoundTableDataList)) {
-          window.compoundTableDataList = [compoundTableData];
-        }
-        window.compoundTableDataList.push({
-          type: "super",
-          number: getNextNumber(window.compoundTableDataList),
-          title: `ACT ${getNextNumber(window.compoundTableDataList)}`,
-          children: [],
-        });
-        renderAllL1Tables();
-        perf.end();
-      }, 50);
+    addL1Btn.onclick = async () => {
+      await perf.start("Adding Act");
+      if (!Array.isArray(window.compoundTableDataList)) {
+        window.compoundTableDataList = [compoundTableData];
+      }
+      window.compoundTableDataList.push({
+        type: "super",
+        number: getNextNumber(window.compoundTableDataList),
+        title: `ACT ${getNextNumber(window.compoundTableDataList)}`,
+        children: [],
+      });
+      await renderAllL1Tables();
+      await perf.end();
     };
     rootContainer.insertBefore(addL1Btn, root);
 
-    // Support for multiple L1s
     window.compoundTableDataList = [compoundTableData];
     window.renderAllL1Tables = renderAllL1Tables;
     renderAllL1Tables();
   }
-  perf.end();
 });
+
+// Update the CSS for loader
+const style = document.createElement("style");
+style.textContent = `
+  .loader-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .loader-overlay.active {
+    opacity: 1;
+  }
+`;
+document.head.appendChild(style);
 
 // Add performance monitoring to script initialization
 function initializeFromScript(scriptData) {
