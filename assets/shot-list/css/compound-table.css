@@ -353,9 +353,9 @@
 }
 
 /* Hide file input */
-input[type="file"] {
+/* input[type="file"] {
   display: none;
-}
+} */
 
 /* Show script upload input */
 .script-upload-container input[type="file"] {
