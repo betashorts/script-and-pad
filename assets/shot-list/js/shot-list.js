@@ -145,6 +145,48 @@ async function processDocx(file) {
   }
 }
 
+function convertToCompoundTableFormat(scriptData) {
+  // Convert the script data into compound table format
+  const acts = Object.entries(scriptData).map(
+    ([actTitle, scenes], actIndex) => {
+      return {
+        type: "super",
+        number: actIndex + 1,
+        title: actTitle,
+        children: Object.entries(scenes).map(
+          ([sceneTitle, content], sceneIndex) => {
+            return {
+              type: "high",
+              number: sceneIndex + 1,
+              title: sceneTitle,
+              children: [
+                {
+                  type: "compound",
+                  number: 1,
+                  title: "Sequence 1",
+                  children: [
+                    {
+                      type: "basic",
+                      number: 1,
+                      content: {
+                        content: content.join("\n"),
+                        imageData: null,
+                        canvasData: null,
+                      },
+                    },
+                  ],
+                },
+              ],
+            };
+          }
+        ),
+      };
+    }
+  );
+
+  return acts;
+}
+
 async function processFile() {
   const fileInput = document.getElementById("scriptFile");
   const file = fileInput.files[0];
@@ -169,6 +211,19 @@ async function processFile() {
       throw new Error(
         "Unsupported file type. Please upload a PDF, DOCX, or DOC file."
       );
+    }
+
+    // Convert the processed data to compound table format
+    const compoundTableData = convertToCompoundTableFormat(result);
+
+    // Initialize the compound table with the data
+    window.compoundTableDataList = compoundTableData;
+    window.renderAllL1Tables();
+
+    // Switch to compound table view
+    const tabCompoundTable = document.getElementById("tab-compound-table");
+    if (tabCompoundTable) {
+      tabCompoundTable.click();
     }
 
     showJsonOutput(result);
