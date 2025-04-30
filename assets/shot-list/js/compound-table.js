@@ -1,5 +1,5 @@
 // Debug version 17
-console.log("Compound Table deployed - version 30");
+console.log("Compound Table deployed - version 31");
 
 // Compound Table Data Structure Example
 let compoundTableData = {
@@ -258,15 +258,19 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
   // Update the label based on level
   const label = document.createElement("span");
   let levelText;
+  let isEditable = false;
+
   switch (level) {
     case 0:
       levelText = unit.title || `ACT ${unit.number}`;
       break;
     case 1:
       levelText = unit.title || `Scene ${unit.number}`;
+      isEditable = true; // Make scene headings editable
       break;
     case 2:
       levelText = unit.title || `Sequence ${unit.number}`;
+      isEditable = true; // Make sequences editable
       break;
     case 3:
       levelText = `Shot ${unit.number}`;
@@ -274,7 +278,32 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
     default:
       levelText = `Level ${level + 1} ${unit.number}`;
   }
-  label.textContent = levelText;
+
+  if (isEditable) {
+    // Create editable title span
+    const titleSpan = document.createElement("span");
+    titleSpan.contentEditable = true;
+    titleSpan.className = "editable-title";
+    titleSpan.textContent = levelText;
+
+    // Save changes when user finishes editing
+    titleSpan.addEventListener("blur", () => {
+      unit.title = titleSpan.textContent.trim();
+    });
+
+    // Handle Enter key to save and lose focus
+    titleSpan.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        titleSpan.blur();
+      }
+    });
+
+    label.appendChild(titleSpan);
+  } else {
+    label.textContent = levelText;
+  }
+
   topRow.appendChild(label);
 
   // Initialize drag and drop if we have a parent array

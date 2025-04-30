@@ -448,3 +448,22 @@
     gap: 8px;
   }
 }
+
+.editable-title {
+  padding: 2px 6px;
+  border-radius: 4px;
+  min-width: 50px;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.editable-title:hover {
+  background: rgba(74, 144, 226, 0.1);
+}
+
+.editable-title:focus {
+  background: #fff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+  border-radius: 4px;
+}
