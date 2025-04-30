@@ -1121,6 +1121,9 @@ window.addEventListener("DOMContentLoaded", () => {
       saveCompoundTableToLocal();
     }
   }
+
+  // Create floating save button
+  createFloatingSaveButton();
 });
 
 // Update the CSS for loader
@@ -1222,4 +1225,3 @@ function createFloatingSaveButton() {
   };
   document.body.appendChild(btn);
 }
-createFloatingSaveButton();
