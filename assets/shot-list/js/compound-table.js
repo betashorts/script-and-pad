@@ -1,39 +1,20 @@
 // Debug version 17
-console.log("Compound Table deployed - version 35");
+console.log("Compound Table deployed - version 34");
 
 // Performance monitoring utility
 const perf = {
   startTime: null,
-  async start(operation, button) {
+  async start(operation) {
     this.startTime = performance.now();
     this.operation = operation;
-    if (button) {
-      this.addLoadingState(button);
-    }
+    await loader.show(operation);
   },
   async end() {
     if (!this.startTime) return;
     const duration = (performance.now() - this.startTime).toFixed(2);
     console.log(`⚡ ${this.operation}: ${duration}ms`);
     this.startTime = null;
-  },
-  addLoadingState(button) {
-    // Create spinner if it doesn't exist
-    let spinner = button.querySelector(".button-spinner");
-    if (!spinner) {
-      spinner = document.createElement("div");
-      spinner.className = "button-spinner";
-      button.appendChild(spinner);
-    }
-    button.classList.add("loading");
-  },
-  removeLoadingState(button) {
-    if (!button) return;
-    button.classList.remove("loading");
-    const spinner = button.querySelector(".button-spinner");
-    if (spinner) {
-      spinner.remove();
-    }
+    await loader.hide();
   },
 };
 
@@ -1066,59 +1047,48 @@ async function renderAllL1Tables() {
   await perf.end();
 }
 
-// Modify add functions to handle button loading states
-async function addShot(parentUnit, button) {
-  try {
-    await perf.start("Adding Shot", button);
-    const newShot = {
-      type: "basic",
-      number: getNextNumber(parentUnit.children),
-      content: { content: "", imageData: null, canvasData: null },
-    };
-    parentUnit.children.push(newShot);
-    await renderAllL1Tables();
-  } finally {
-    await perf.end();
-    perf.removeLoadingState(button);
-  }
+// Modify add functions to be async
+async function addShot(parentUnit) {
+  await perf.start("Adding Shot");
+  const newShot = {
+    type: "basic",
+    number: getNextNumber(parentUnit.children),
+    content: { content: "", imageData: null, canvasData: null },
+  };
+  parentUnit.children.push(newShot);
+  await renderAllL1Tables();
+  await perf.end();
 }
 
-async function addSequence(parentUnit, button) {
-  try {
-    await perf.start("Adding Sequence", button);
-    const newSequence = {
-      type: "compound",
-      number: getNextNumber(parentUnit.children),
-      title: `Sequence ${getNextNumber(parentUnit.children)}`,
-      children: [],
-    };
-    parentUnit.children.push(newSequence);
-    await renderAllL1Tables();
-  } finally {
-    await perf.end();
-    perf.removeLoadingState(button);
-  }
+async function addSequence(parentUnit) {
+  await perf.start("Adding Sequence");
+  const newSequence = {
+    type: "compound",
+    number: getNextNumber(parentUnit.children),
+    title: `Sequence ${getNextNumber(parentUnit.children)}`,
+    children: [],
+  };
+  parentUnit.children.push(newSequence);
+  await renderAllL1Tables();
+  await perf.end();
 }
 
-async function addScene(parentUnit, button) {
-  try {
-    await perf.start("Adding Scene", button);
-    const newScene = {
-      type: "high",
-      number: getNextNumber(parentUnit.children),
-      title: `Scene ${getNextNumber(parentUnit.children)}`,
-      children: [],
-    };
-    parentUnit.children.push(newScene);
-    await renderAllL1Tables();
-  } finally {
-    await perf.end();
-    perf.removeLoadingState(button);
-  }
+async function addScene(parentUnit) {
+  await perf.start("Adding Scene");
+  const newScene = {
+    type: "high",
+    number: getNextNumber(parentUnit.children),
+    title: `Scene ${getNextNumber(parentUnit.children)}`,
+    children: [],
+  };
+  parentUnit.children.push(newScene);
+  await renderAllL1Tables();
+  await perf.end();
 }
 
 // Update the button click handlers
 window.addEventListener("DOMContentLoaded", () => {
+  loader.init();
   const root = document.getElementById("compound-table-root");
   if (root) {
     const rootContainer = document.createElement("div");
@@ -1129,22 +1099,18 @@ window.addEventListener("DOMContentLoaded", () => {
     const addL1Btn = document.createElement("button");
     addL1Btn.textContent = "Add Act";
     addL1Btn.onclick = async () => {
-      try {
-        await perf.start("Adding Act", addL1Btn);
-        if (!Array.isArray(window.compoundTableDataList)) {
-          window.compoundTableDataList = [compoundTableData];
-        }
-        window.compoundTableDataList.push({
-          type: "super",
-          number: getNextNumber(window.compoundTableDataList),
-          title: `ACT ${getNextNumber(window.compoundTableDataList)}`,
-          children: [],
-        });
-        await renderAllL1Tables();
-      } finally {
-        await perf.end();
-        perf.removeLoadingState(addL1Btn);
+      await perf.start("Adding Act");
+      if (!Array.isArray(window.compoundTableDataList)) {
+        window.compoundTableDataList = [compoundTableData];
       }
+      window.compoundTableDataList.push({
+        type: "super",
+        number: getNextNumber(window.compoundTableDataList),
+        title: `ACT ${getNextNumber(window.compoundTableDataList)}`,
+        children: [],
+      });
+      await renderAllL1Tables();
+      await perf.end();
     };
     rootContainer.insertBefore(addL1Btn, root);
 
