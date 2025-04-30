@@ -1045,6 +1045,7 @@ async function renderAllL1Tables() {
     root.appendChild(l1Div);
   });
   await perf.end();
+  saveCompoundTableToLocal();
 }
 
 // Modify add functions to be async
@@ -1114,9 +1115,11 @@ window.addEventListener("DOMContentLoaded", () => {
     };
     rootContainer.insertBefore(addL1Btn, root);
 
-    window.compoundTableDataList = [compoundTableData];
-    window.renderAllL1Tables = renderAllL1Tables;
-    renderAllL1Tables();
+    if (!loadCompoundTableFromLocal()) {
+      window.compoundTableDataList = [compoundTableData];
+      window.renderAllL1Tables();
+      saveCompoundTableToLocal();
+    }
   }
 });
 
@@ -1179,3 +1182,28 @@ window.addEventListener("scriptUploaded", function (e) {
 
 // Export the initialize function for direct calls
 window.initializeCompoundTableFromScript = initializeFromScript;
+
+function saveCompoundTableToLocal() {
+  try {
+    localStorage.setItem(
+      "compoundTableDataList",
+      JSON.stringify(window.compoundTableDataList)
+    );
+  } catch (e) {
+    console.error("Failed to save compound table data:", e);
+  }
+}
+
+function loadCompoundTableFromLocal() {
+  const data = localStorage.getItem("compoundTableDataList");
+  if (data) {
+    try {
+      window.compoundTableDataList = JSON.parse(data);
+      window.renderAllL1Tables();
+      return true;
+    } catch (e) {
+      console.error("Failed to load compound table data:", e);
+    }
+  }
+  return false;
+}
