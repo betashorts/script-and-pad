@@ -1,5 +1,5 @@
 // Debug version 17
-console.log("Compound Table deployed - version 32");
+console.log("Compound Table deployed - version 33");
 
 // Performance monitoring utility
 const perf = {
