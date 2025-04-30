@@ -1003,11 +1003,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     window.renderAllL1Tables = renderAllL1Tables;
     renderAllL1Tables();
-
-    // Insert container before the compound table root
-    if (root && root.parentNode) {
-      root.parentNode.insertBefore(uploadContainer, root);
-    }
   }
 });
 
