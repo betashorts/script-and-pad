@@ -7,12 +7,51 @@ const perf = {
   start(operation) {
     this.startTime = performance.now();
     this.operation = operation;
+    loader.show(operation);
   },
   end() {
     if (!this.startTime) return;
     const duration = (performance.now() - this.startTime).toFixed(2);
     console.log(`⚡ ${this.operation}: ${duration}ms`);
     this.startTime = null;
+    loader.hide();
+  },
+};
+
+// Loader utility
+const loader = {
+  overlay: null,
+  init() {
+    // Create loader elements if they don't exist
+    if (!this.overlay) {
+      this.overlay = document.createElement("div");
+      this.overlay.className = "loader-overlay";
+
+      const container = document.createElement("div");
+      container.className = "loader-container";
+
+      const spinner = document.createElement("div");
+      spinner.className = "loader";
+
+      const text = document.createElement("div");
+      text.className = "loader-text";
+
+      container.appendChild(spinner);
+      container.appendChild(text);
+      this.overlay.appendChild(container);
+      document.body.appendChild(this.overlay);
+    }
+  },
+  show(operation) {
+    this.init();
+    const text = this.overlay.querySelector(".loader-text");
+    text.textContent = operation;
+    this.overlay.classList.add("active");
+  },
+  hide() {
+    if (this.overlay) {
+      this.overlay.classList.remove("active");
+    }
   },
 };
 
@@ -1005,22 +1044,56 @@ function renderAllL1Tables() {
   perf.end();
 }
 
-// Add performance monitoring to shot addition
+// Add loader to shot operations
 function addShot(parentUnit) {
-  perf.start("Adding new shot");
-  const newShot = {
-    type: "basic",
-    number: getNextNumber(parentUnit.children),
-    content: { content: "", imageData: null, canvasData: null },
-  };
-  parentUnit.children.push(newShot);
-  renderAllL1Tables();
-  perf.end();
+  perf.start("Adding Shot");
+  setTimeout(() => {
+    // Add small delay to ensure loader shows
+    const newShot = {
+      type: "basic",
+      number: getNextNumber(parentUnit.children),
+      content: { content: "", imageData: null, canvasData: null },
+    };
+    parentUnit.children.push(newShot);
+    renderAllL1Tables();
+    perf.end();
+  }, 50);
 }
 
-// Add performance monitoring to DOMContentLoaded
+function addSequence(parentUnit) {
+  perf.start("Adding Sequence");
+  setTimeout(() => {
+    const newSequence = {
+      type: "compound",
+      number: getNextNumber(parentUnit.children),
+      title: `Sequence ${getNextNumber(parentUnit.children)}`,
+      children: [],
+    };
+    parentUnit.children.push(newSequence);
+    renderAllL1Tables();
+    perf.end();
+  }, 50);
+}
+
+function addScene(parentUnit) {
+  perf.start("Adding Scene");
+  setTimeout(() => {
+    const newScene = {
+      type: "high",
+      number: getNextNumber(parentUnit.children),
+      title: `Scene ${getNextNumber(parentUnit.children)}`,
+      children: [],
+    };
+    parentUnit.children.push(newScene);
+    renderAllL1Tables();
+    perf.end();
+  }, 50);
+}
+
+// Initialize loader when DOM is ready
 window.addEventListener("DOMContentLoaded", () => {
-  perf.start("Initial DOM setup");
+  loader.init();
+  perf.start("Initial Setup");
   const root = document.getElementById("compound-table-root");
   if (root) {
     // Create a container for the root and the add button
@@ -1033,18 +1106,20 @@ window.addEventListener("DOMContentLoaded", () => {
     const addL1Btn = document.createElement("button");
     addL1Btn.textContent = "Add Act";
     addL1Btn.onclick = () => {
-      perf.start("Adding new act");
-      if (!Array.isArray(window.compoundTableDataList)) {
-        window.compoundTableDataList = [compoundTableData];
-      }
-      window.compoundTableDataList.push({
-        type: "super",
-        number: getNextNumber(window.compoundTableDataList),
-        title: `ACT ${getNextNumber(window.compoundTableDataList)}`,
-        children: [],
-      });
-      renderAllL1Tables();
-      perf.end();
+      perf.start("Adding Act");
+      setTimeout(() => {
+        if (!Array.isArray(window.compoundTableDataList)) {
+          window.compoundTableDataList = [compoundTableData];
+        }
+        window.compoundTableDataList.push({
+          type: "super",
+          number: getNextNumber(window.compoundTableDataList),
+          title: `ACT ${getNextNumber(window.compoundTableDataList)}`,
+          children: [],
+        });
+        renderAllL1Tables();
+        perf.end();
+      }, 50);
     };
     rootContainer.insertBefore(addL1Btn, root);
 
