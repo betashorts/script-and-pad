@@ -1,5 +1,20 @@
 // Debug version 17
-console.log("Compound Table deployed - version 31");
+console.log("Compound Table deployed - version 32");
+
+// Performance monitoring utility
+const perf = {
+  startTime: null,
+  start(operation) {
+    this.startTime = performance.now();
+    this.operation = operation;
+  },
+  end() {
+    if (!this.startTime) return;
+    const duration = (performance.now() - this.startTime).toFixed(2);
+    console.log(`⚡ ${this.operation}: ${duration}ms`);
+    this.startTime = null;
+  },
+};
 
 // Compound Table Data Structure Example
 let compoundTableData = {
@@ -236,14 +251,9 @@ function renderCompoundRow(parent, basicUnits, level) {
 }
 
 function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
-  console.log(
-    `Rendering unit: type=${unit.type}, level=${level}, number=${unit.number}`
-  );
-
   const wrapper = document.createElement("div");
   wrapper.className = `compound-level compound-level-${level}`;
   wrapper.dataset.level = unit.type;
-  console.log(`Created wrapper with class: ${wrapper.className}`);
 
   // Top row with number and level prefix
   const topRow = document.createElement("div");
@@ -266,11 +276,11 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
       break;
     case 1:
       levelText = unit.title || `Scene ${unit.number}`;
-      isEditable = true; // Make scene headings editable
+      isEditable = true;
       break;
     case 2:
       levelText = unit.title || `Sequence ${unit.number}`;
-      isEditable = true; // Make sequences editable
+      isEditable = true;
       break;
     case 3:
       levelText = `Shot ${unit.number}`;
@@ -280,18 +290,15 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
   }
 
   if (isEditable) {
-    // Create editable title span
     const titleSpan = document.createElement("span");
     titleSpan.contentEditable = true;
     titleSpan.className = "editable-title";
     titleSpan.textContent = levelText;
 
-    // Save changes when user finishes editing
     titleSpan.addEventListener("blur", () => {
       unit.title = titleSpan.textContent.trim();
     });
 
-    // Handle Enter key to save and lose focus
     titleSpan.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
@@ -984,8 +991,36 @@ function renderBasicUnitCell(
   parent.appendChild(cell);
 }
 
-// Update the root level drag and drop
+// Modify the renderAllL1Tables function to include performance monitoring
+function renderAllL1Tables() {
+  perf.start("Rendering compound table");
+  const root = document.getElementById("compound-table-root");
+  root.innerHTML = "";
+  window.compoundTableDataList.forEach((data, idx) => {
+    const l1Div = document.createElement("div");
+    l1Div.className = "compound-l1-block";
+    renderUnit(l1Div, data, 0, data, idx, window.compoundTableDataList, idx);
+    root.appendChild(l1Div);
+  });
+  perf.end();
+}
+
+// Add performance monitoring to shot addition
+function addShot(parentUnit) {
+  perf.start("Adding new shot");
+  const newShot = {
+    type: "basic",
+    number: getNextNumber(parentUnit.children),
+    content: { content: "", imageData: null, canvasData: null },
+  };
+  parentUnit.children.push(newShot);
+  renderAllL1Tables();
+  perf.end();
+}
+
+// Add performance monitoring to DOMContentLoaded
 window.addEventListener("DOMContentLoaded", () => {
+  perf.start("Initial DOM setup");
   const root = document.getElementById("compound-table-root");
   if (root) {
     // Create a container for the root and the add button
@@ -998,6 +1033,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const addL1Btn = document.createElement("button");
     addL1Btn.textContent = "Add Act";
     addL1Btn.onclick = () => {
+      perf.start("Adding new act");
       if (!Array.isArray(window.compoundTableDataList)) {
         window.compoundTableDataList = [compoundTableData];
       }
@@ -1008,38 +1044,23 @@ window.addEventListener("DOMContentLoaded", () => {
         children: [],
       });
       renderAllL1Tables();
+      perf.end();
     };
     rootContainer.insertBefore(addL1Btn, root);
 
     // Support for multiple L1s
     window.compoundTableDataList = [compoundTableData];
-    function renderAllL1Tables() {
-      root.innerHTML = "";
-      window.compoundTableDataList.forEach((data, idx) => {
-        const l1Div = document.createElement("div");
-        l1Div.className = "compound-l1-block";
-        renderUnit(
-          l1Div,
-          data,
-          0,
-          data,
-          idx,
-          window.compoundTableDataList,
-          idx
-        );
-        root.appendChild(l1Div);
-      });
-    }
     window.renderAllL1Tables = renderAllL1Tables;
     renderAllL1Tables();
   }
+  perf.end();
 });
 
-// Function to initialize compound table from script data
+// Add performance monitoring to script initialization
 function initializeFromScript(scriptData) {
   if (!scriptData || !scriptData.acts) return;
 
-  // Convert script data to compound table format
+  perf.start("Initializing from script");
   window.compoundTableDataList = scriptData.acts.map((act, actIndex) => {
     return {
       type: "super",
@@ -1069,8 +1090,8 @@ function initializeFromScript(scriptData) {
     };
   });
 
-  // Render the table
-  window.renderAllL1Tables();
+  renderAllL1Tables();
+  perf.end();
 }
 
 // Listen for script upload event
