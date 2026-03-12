@@ -15,11 +15,21 @@ body {
 
 /* Header */
 .navbar {
-  background-color: #ffffff;
+  background-color: #ffffff !important;
   padding: 0.75rem 1.5rem;
-  color: #111827;
+  color: #111827 !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid #e5e7eb;
+}
+
+/* ensure links inside navbar are always dark */
+.navbar .navbar-links a,
+.navbar .navbar-brand {
+  color: #111827 !important;
+}
+
+.navbar .navbar-links a:hover {
+  color: #ffd700 !important;
 }
 
 .navbar-container {
