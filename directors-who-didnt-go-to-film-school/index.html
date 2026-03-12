@@ -4,6 +4,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Charter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="Directors Who Didn''t Go to Film School">
@@ -125,20 +128,485 @@
 </header>
 
     <main>
-        <article class="blog-post">
-    
-    
-    
-    
-    <div class="decorations">
-        <img class="dec-left" src="/assets/creatives/icon-templates.svg" alt="decorative graphic" />
-        <img class="dec-right" src="/assets/creatives/blog-thumb-writing.svg" alt="decorative graphic" />
+        <style>
+/* ═══════════════════════════════════════════════════════════
+   SCRIPT & PAD — Cinematic Post Layout
+   Prefix: bp-   Overrides: navbar dark, body bg navy
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --c-navy:     #0d1b2a;
+  --c-navy2:    #162032;
+  --c-navy3:    #1e2f45;
+  --c-gold:     #c9a84c;
+  --c-gold2:    #e8c96a;
+  --c-charcoal: #2c3e50;
+  --c-char2:    #3d5166;
+  --c-cream:    #f5f0e8;
+  --c-teal:     #2a7f7f;
+  --c-rust:     #c0533a;
+  --c-skin:     #d4956a;
+  --c-text:     rgba(245,240,232,.90);
+  --c-muted:    rgba(245,240,232,.52);
+  --ease:       cubic-bezier(.25,.46,.45,.94);
+  --fh:         'Playfair Display', Georgia, serif;
+  --fb:         'Lora', Georgia, serif;
+}
+
+/* ── Reset for dark page ──────────────────────────────── */
+main          { background: var(--c-navy); font-family: var(--fb); color: var(--c-text); }
+footer        { display: none; }
+body          { background: var(--c-navy); }
+
+/* ── Dark navbar override ─────────────────────────────── */
+.navbar                          { background: var(--c-navy) !important; border-bottom: 1px solid rgba(201,168,76,.15) !important; }
+.navbar-brand                    { color: var(--c-cream) !important; }
+.brand-main                      { color: var(--c-cream) !important; }
+.brand-tag                       { color: var(--c-muted) !important; }
+.nav-link                        { color: rgba(245,240,232,.72) !important; }
+.nav-link:hover                  { background: rgba(30,47,69,.8) !important; color: var(--c-gold) !important; }
+.nav-link.bp-nav-active          { color: var(--c-gold) !important; }
+.nav-divider                     { background: rgba(201,168,76,.18) !important; }
+.hamburger-line                  { background: var(--c-cream) !important; }
+.navbar-links                    { background: var(--c-navy) !important; }
+.navbar-links li                 { border-bottom-color: rgba(201,168,76,.1) !important; }
+
+/* ── Film strip ───────────────────────────────────────── */
+.bp-strip      { width: 100%; line-height: 0; background: var(--c-navy); }
+.bp-strip svg  { display: block; }
+
+/* ── Post hero ───────────────────────────────────────── */
+.bp-hero {
+  background: var(--c-navy2);
+  position: relative;
+  overflow: hidden;
+}
+.bp-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 60% at 75% 50%, rgba(201,168,76,.09) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 45% at 10% 80%, rgba(42,127,127,.07) 0%, transparent 55%);
+  pointer-events: none;
+}
+.bp-hero-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; gap: 52px;
+  max-width: 1160px; margin: 0 auto;
+  padding: 60px 28px;
+  box-sizing: border-box;
+  position: relative; z-index: 1;
+}
+.bp-cat {
+  display: inline-block;
+  font-family: var(--fb); font-size: .72rem;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--c-gold);
+  border: 1px solid rgba(201,168,76,.32);
+  padding: 4px 13px; border-radius: 100px;
+  margin-bottom: 18px;
+}
+.bp-title {
+  font-family: var(--fh);
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  font-weight: 900; line-height: 1.12;
+  color: var(--c-cream); margin: 0 0 22px;
+}
+.bp-meta {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font-family: var(--fb); font-size: .88rem; color: var(--c-muted);
+}
+.bp-meta time { color: rgba(245,240,232,.68); }
+.bp-meta .bp-dot { opacity: .4; }
+.bp-rt-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(201,168,76,.1); color: var(--c-gold);
+  padding: 3px 10px; border-radius: 100px;
+  font-size: .75rem; letter-spacing: .06em;
+}
+.bp-hero-vis {
+  display: flex; justify-content: center; align-items: center;
+}
+.bp-hero-vis svg {
+  width: 100%; max-width: 400px; height: auto;
+  filter: drop-shadow(0 16px 48px rgba(0,0,0,.45));
+}
+
+/* ── Post body ────────────────────────────────────────── */
+.bp-body {
+  background: var(--c-navy);
+  padding: 68px 28px 80px;
+}
+.bp-content {
+  max-width: 720px; margin: 0 auto;
+  font-family: var(--fb); font-size: 1.125rem;
+  line-height: 1.85; color: var(--c-text);
+}
+
+/* headings */
+.bp-content h2 {
+  font-family: var(--fh); font-size: 1.75rem;
+  font-weight: 700; color: var(--c-cream);
+  margin: 52px 0 18px;
+  padding-left: 18px;
+  border-left: 4px solid var(--c-gold);
+  line-height: 1.3;
+}
+.bp-content h3 {
+  font-family: var(--fh); font-size: 1.25rem;
+  font-weight: 700; color: var(--c-gold2);
+  margin: 34px 0 12px; line-height: 1.35;
+}
+.bp-content h4 {
+  font-family: var(--fb); font-size: 1rem;
+  font-weight: 600; color: var(--c-cream);
+  margin: 24px 0 8px; text-transform: uppercase;
+  letter-spacing: .08em; font-size: .88rem;
+}
+
+/* paragraphs */
+.bp-content p { margin-bottom: 1.65rem; }
+.bp-content > p:first-child {
+  font-size: 1.2rem; line-height: 1.78;
+  color: rgba(245,240,232,.85);
+}
+
+/* lists */
+.bp-content ul {
+  list-style: none; padding: 0; margin: 1.5rem 0;
+}
+.bp-content ul li {
+  position: relative; padding-left: 26px;
+  margin-bottom: 12px; line-height: 1.8;
+}
+.bp-content ul li::before {
+  content: '→';
+  position: absolute; left: 0;
+  color: var(--c-gold); font-weight: 700;
+}
+.bp-content ol {
+  padding-left: 1.5rem; margin: 1.5rem 0;
+}
+.bp-content ol li {
+  margin-bottom: 12px; line-height: 1.8;
+  padding-left: 6px;
+}
+.bp-content ol li::marker {
+  color: var(--c-gold); font-weight: 700; font-family: var(--fh);
+}
+
+/* links */
+.bp-content a {
+  color: var(--c-gold); text-decoration: none;
+  border-bottom: 1px solid rgba(201,168,76,.28);
+  transition: color .2s var(--ease), border-color .2s var(--ease);
+}
+.bp-content a:hover {
+  color: var(--c-gold2); border-bottom-color: var(--c-gold2);
+}
+
+/* blockquotes */
+.bp-content blockquote {
+  margin: 2.2rem 0; padding: 18px 26px;
+  border-left: 4px solid var(--c-gold);
+  background: var(--c-navy2); border-radius: 0 8px 8px 0;
+  font-style: italic; font-size: 1.08rem; color: var(--c-cream);
+}
+.bp-content blockquote p { margin-bottom: 0; }
+
+/* images */
+.bp-content img {
+  width: 100%; height: auto; display: block;
+  border-radius: 12px;
+  border: 1px solid rgba(201,168,76,.14);
+  margin: 2.2rem 0;
+}
+
+/* YouTube / iframe wrapper (applied by JS) */
+.bp-video-wrap {
+  position: relative; aspect-ratio: 16/9;
+  margin: 2.2rem 0; border-radius: 12px; overflow: hidden;
+}
+.bp-video-wrap iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: none; border-radius: 12px; margin: 0;
+}
+/* raw iframe fallback (before JS runs) */
+.bp-content iframe {
+  width: 100%; aspect-ratio: 16/9;
+  border: none; border-radius: 12px;
+  margin: 2.2rem 0; display: block;
+}
+
+/* ── Inline CTA box (injected by JS) ──────────────────── */
+.bp-cta-inline {
+  background: var(--c-navy2);
+  border: 1px solid rgba(201,168,76,.20);
+  border-left: 4px solid var(--c-gold);
+  border-radius: 0 12px 12px 0;
+  padding: 22px 26px;
+  margin: 2.8rem 0;
+  display: flex; align-items: center; gap: 18px;
+}
+.bp-cta-icon { flex-shrink: 0; line-height: 0; }
+.bp-cta-body { flex: 1; }
+.bp-cta-body strong {
+  display: block; font-family: var(--fh);
+  font-size: 1.02rem; font-weight: 700;
+  color: var(--c-cream); margin-bottom: 6px;
+}
+.bp-cta-body p {
+  font-size: .86rem !important;
+  color: var(--c-muted) !important;
+  margin: 0 !important; line-height: 1.6 !important;
+}
+.bp-cta-btn {
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--c-gold); color: var(--c-navy);
+  font-family: var(--fb); font-size: .85rem; font-weight: 600;
+  padding: 10px 20px; border-radius: 6px;
+  text-decoration: none; white-space: nowrap;
+  border-bottom: none !important;
+  transition: background .2s var(--ease), transform .2s var(--ease);
+}
+.bp-cta-btn:hover {
+  background: var(--c-gold2); transform: translateY(-1px);
+  color: var(--c-navy) !important; border-bottom: none !important;
+}
+
+/* ── Related posts ────────────────────────────────────── */
+.bp-related {
+  background: var(--c-navy2);
+  border-top: 1px solid rgba(201,168,76,.12);
+  padding: 68px 0;
+}
+.bp-related-wrap {
+  max-width: 1160px; margin: 0 auto; padding: 0 28px;
+  box-sizing: border-box;
+}
+.bp-rlabel {
+  display: inline-block; font-family: var(--fb);
+  font-size: .72rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--c-gold);
+  margin-bottom: 10px;
+}
+.bp-rh3 {
+  font-family: var(--fh); font-size: 1.7rem;
+  font-weight: 700; color: var(--c-cream); margin: 0 0 32px;
+}
+.bp-related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+.bp-rcard {
+  background: var(--c-navy3); border-radius: 10px;
+  padding: 26px 24px; text-decoration: none;
+  border: 1px solid rgba(201,168,76,.10);
+  display: flex; flex-direction: column; gap: 12px;
+  transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.bp-rcard:hover {
+  transform: translateY(-4px); border-color: rgba(201,168,76,.32);
+  box-shadow: 0 12px 32px rgba(0,0,0,.35);
+}
+.bp-rcard-title {
+  font-family: var(--fh); font-size: 1rem;
+  font-weight: 700; color: var(--c-cream);
+  line-height: 1.4; display: block;
+  transition: color .2s var(--ease);
+}
+.bp-rcard:hover .bp-rcard-title { color: var(--c-gold); }
+.bp-rcard-more {
+  font-family: var(--fb); font-size: .82rem;
+  color: var(--c-gold); display: block;
+  transition: letter-spacing .2s var(--ease);
+}
+.bp-rcard:hover .bp-rcard-more { letter-spacing: .04em; }
+.bp-no-related {
+  font-family: var(--fb); font-size: .9rem; color: var(--c-muted);
+}
+
+/* ── Page footer ──────────────────────────────────────── */
+.bp-foot {
+  background: var(--c-navy);
+  border-top: 1px solid rgba(201,168,76,.12); padding: 38px 0;
+}
+.bp-foot-wrap { max-width: 1160px; margin: 0 auto; padding: 0 28px; box-sizing: border-box; }
+.bp-foot-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+}
+.bp-foot-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.bp-foot-mark {
+  width: 38px; height: 38px; background: var(--c-gold); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fh); font-size: 1.2rem; font-weight: 900;
+  color: var(--c-navy); flex-shrink: 0;
+}
+.bp-foot-name { font-family: var(--fh); font-size: 1rem; font-weight: 700; color: var(--c-cream); }
+.bp-foot-copy { font-family: var(--fb); font-size: .8rem; color: var(--c-muted); }
+.bp-foot-links { display: flex; gap: 22px; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
+.bp-foot-links a {
+  font-family: var(--fb); font-size: .85rem; color: var(--c-muted);
+  text-decoration: none; transition: color .2s var(--ease);
+}
+.bp-foot-links a:hover { color: var(--c-gold); }
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 860px) {
+  .bp-hero-inner { grid-template-columns: 1fr; text-align: center; padding: 48px 24px; }
+  .bp-hero-vis   { display: none; }
+  .bp-body       { padding: 48px 20px 64px; }
+  .bp-content    { font-size: 1.05rem; }
+  .bp-content h2 { font-size: 1.5rem; }
+  .bp-cta-inline { flex-direction: column; align-items: flex-start; }
+  .bp-foot-inner { flex-direction: column; text-align: center; }
+  .bp-foot-links { justify-content: center; }
+}
+@media (max-width: 560px) {
+  .bp-title { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+  .bp-related { padding: 48px 0; }
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ═══════════════════════════════════════════════════
+     FILM STRIP — top
+     ═══════════════════════════════════════════════════ -->
+<div class="bp-strip">
+  <svg viewBox="0 0 1440 32" preserveAspectRatio="none" width="100%" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <pattern id="bp-perf" x="0" y="0" width="38" height="32" patternUnits="userSpaceOnUse">
+        <rect width="38" height="32" fill="#0d1b2a"/>
+        <rect x="7" y="5" width="22" height="22" rx="4" fill="#162032"/>
+      </pattern>
+    </defs>
+    <rect width="1440" height="32" fill="url(#bp-perf)"/>
+  </svg>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     POST HERO
+     ═══════════════════════════════════════════════════ -->
+<header class="bp-hero">
+  <div class="bp-hero-inner">
+
+    <!-- Left: meta + title -->
+    <div class="bp-hero-text">
+      <span class="bp-cat">Film school</span>
+      <h1 class="bp-title">Directors Who Didn''t Go to Film School</h1>
+      <div class="bp-meta">
+        <time datetime="2025-01-07T00:00:00+00:00">January 07, 2025</time>
+        <span class="bp-dot">·</span>
+        <span class="bp-rt-badge">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="8" cy="8" r="6.5" stroke="#c9a84c" stroke-width="1.5"/>
+            <path d="M8 4.5V8L10.5 10" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span id="bp-rt">—</span>
+        </span>
+      </div>
     </div>
 
-    <h1>Directors Who Didn''t Go to Film School</h1>
-    <p class="post-date">January 07, 2025</p>
-    <div class="content">
-        <p>Breaking into the film industry often feels like an impossible dream, especially when the common advice is to attend an expensive film school. Film school is a significant commitment—financially, emotionally, and in terms of time. You might be wondering, “Do I need film school to succeed?” or “Are there directors who made it without going down this traditional path?”</p>
+    <!-- Right: category-based SVG illustration -->
+    <div class="bp-hero-vis">
+
+      
+      <!-- ── DIRECTING: Camera + Director with megaphone ── -->
+      <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Camera on tripod with film director illustration">
+        <rect width="400" height="320" rx="14" fill="#162032"/>
+        <circle cx="260" cy="120" r="130" fill="#2a7f7f" fill-opacity=".06"/>
+        <!-- Film reel (bg, top-right) -->
+        <circle cx="340" cy="78"  r="68"  fill="#1e2f45"/>
+        <circle cx="340" cy="78"  r="68"  fill="none" stroke="#162032" stroke-width="18"/>
+        <g stroke="#162032" stroke-width="6" stroke-linecap="round">
+          <line x1="340" y1="10" x2="340" y2="146"/>
+          <line x1="272" y1="78" x2="408" y2="78"/>
+          <line x1="292" y1="30" x2="388" y2="126"/>
+          <line x1="388" y1="30" x2="292" y2="126"/>
+        </g>
+        <circle cx="340" cy="78" r="18" fill="#162032"/>
+        <circle cx="340" cy="78" r="10" fill="#1e2f45"/>
+        <circle cx="340" cy="78" r="4"  fill="#0d1b2a"/>
+        <circle cx="340" cy="78" r="68" fill="none" stroke="#c9a84c" stroke-width="1" stroke-opacity=".2"/>
+        <!-- Tripod -->
+        <line x1="148" y1="142" x2="104" y2="298" stroke="#3d5166" stroke-width="5" stroke-linecap="round"/>
+        <line x1="148" y1="142" x2="148" y2="298" stroke="#3d5166" stroke-width="5" stroke-linecap="round"/>
+        <line x1="148" y1="142" x2="192" y2="298" stroke="#3d5166" stroke-width="5" stroke-linecap="round"/>
+        <rect x="122"  y="130" width="52" height="8" rx="3" fill="#3d5166"/>
+        <!-- Camera body -->
+        <rect x="112"  y="86"  width="72" height="48" rx="6" fill="#1e2f45"/>
+        <rect x="120"  y="74"  width="24" height="16" rx="3" fill="#1e2f45"/>
+        <!-- Lens -->
+        <circle cx="148" cy="110" r="17" fill="#0d1b2a"/>
+        <circle cx="148" cy="110" r="14" fill="#162032"/>
+        <circle cx="148" cy="110" r="9"  fill="#2a7f7f"/>
+        <circle cx="148" cy="110" r="4"  fill="#0d1b2a"/>
+        <circle cx="142" cy="104" r="2"  fill="#e8c96a" opacity=".55"/>
+        <!-- Viewfinder -->
+        <rect x="170" y="86"  width="12" height="10" rx="2" fill="#3d5166"/>
+        <!-- Record light -->
+        <circle cx="178" cy="106" r="5"   fill="#c0533a"/>
+        <!-- Director character (right) -->
+        <rect x="264" y="188" width="60" height="54" rx="14" fill="#2c3e50"/>
+        <circle cx="294" cy="174" r="22" fill="#d4956a"/>
+        <!-- Beret -->
+        <ellipse cx="294" cy="157" rx="26" ry="9"  fill="#c9a84c"/>
+        <ellipse cx="306" cy="155" rx="12" ry="6"  fill="#c9a84c"/>
+        <!-- Face -->
+        <circle cx="286" cy="173" r="2.8" fill="#2c3e50"/>
+        <circle cx="302" cy="173" r="2.8" fill="#2c3e50"/>
+        <path d="M286 182 Q294 188 302 182" stroke="#2c3e50" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <!-- Arm + megaphone (pointing left) -->
+        <path d="M268 200 Q252 188 236 180" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+        <circle cx="236" cy="180" r="9" fill="#d4956a"/>
+        <rect x="220" y="174" width="20" height="12" rx="4" fill="#e8c96a"/>
+        <polygon points="220,174 220,186 192,192 192,168" fill="#c9a84c"/>
+        <ellipse cx="192" cy="180" rx="5" ry="14" fill="#e8c96a" opacity=".45"/>
+        <!-- Sound waves -->
+        <path d="M188 170 Q174 180 188 190" stroke="#c9a84c" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-opacity=".65"/>
+        <path d="M184 163 Q166 180 184 197" stroke="#c9a84c" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-opacity=".38"/>
+        <!-- Right arm + legs -->
+        <path d="M320 200 Q336 214 340 232" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+        <path d="M282 241 L278 302" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <path d="M306 241 L310 302" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <!-- Stars + dots -->
+        <text x="30"  y="55"  fill="#c9a84c" font-size="15" opacity=".8">★</text>
+        <text x="356" y="200" fill="#c9a84c" font-size="12" opacity=".55">★</text>
+        <text x="28"  y="290" fill="#c9a84c" font-size="10" opacity=".45">★</text>
+        <circle cx="52"  cy="255" r="4" fill="#2a7f7f" opacity=".55"/>
+        <circle cx="386" cy="280" r="3" fill="#c9a84c"  opacity=".5"/>
+        <circle cx="96"  cy="36"  r="4" fill="#c0533a"  opacity=".4"/>
+      </svg>
+
+      
+
+    </div>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════════
+     POST BODY
+     ═══════════════════════════════════════════════════ -->
+<div class="bp-body">
+  <article class="bp-content" id="bp-article">
+    <p>Breaking into the film industry often feels like an impossible dream, especially when the common advice is to attend an expensive film school. Film school is a significant commitment—financially, emotionally, and in terms of time. You might be wondering, “Do I need film school to succeed?” or “Are there directors who made it without going down this traditional path?”</p>
 
 <p>If you’re asking yourself these questions, you’re not alone. Many aspiring filmmakers feel torn between following a conventional route and carving their own path. The good news is, you’re not doomed if film school isn’t in the cards. In fact, some of the most celebrated directors in history never set foot in film school. Let’s explore their journeys and uncover the lessons you can apply to your own filmmaking aspirations.</p>
 
@@ -219,39 +687,142 @@
 <h2>Conclusion</h2>
 <p>Film school is a wonderful opportunity, but it’s not the only one. By following the examples of self-taught directors, leveraging modern tools like <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Screenplay Writer</a>, and focusing on storytelling, you can begin your journey as a filmmaker today. So what’s stopping you? Start writing your script and take that first step toward your dream!</p>
 
-    </div>
-</article>
-<div class="related-posts">
-  <h3>Related Posts</h3>
-  
-  <ul>
-    
-      
-      
-        
-        <li>
-          <a href="/what-to-do-in-cannes/">
-            <span class="related-post-title">What to Do in Cannes</span>
-          </a>
-        </li>
-      
-    
-      
-      
-    
-      
-      
-        
-        <li>
-          <a href="/how-long-is-the-usual-feature-length-film-script/">
-            <span class="related-post-title">How Long Is the Usual Feature Length Film Script?</span>
-          </a>
-        </li>
-      
-    
-    
-  </ul>
+  </article>
 </div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     RELATED POSTS
+     ═══════════════════════════════════════════════════ -->
+<section class="bp-related">
+  <div class="bp-related-wrap">
+    <span class="bp-rlabel">More to Read</span>
+    <h3 class="bp-rh3">Keep Learning</h3>
+    <div class="bp-related-grid">
+      
+      
+        
+        
+          
+          <a href="/what-to-do-in-cannes/" class="bp-rcard">
+            <span class="bp-rcard-title">What to Do in Cannes</span>
+            <span class="bp-rcard-more">Read →</span>
+          </a>
+        
+      
+        
+        
+      
+        
+        
+          
+          <a href="/how-long-is-the-usual-feature-length-film-script/" class="bp-rcard">
+            <span class="bp-rcard-title">How Long Is the Usual Feature Length Film Script?</span>
+            <span class="bp-rcard-more">Read →</span>
+          </a>
+        
+      
+      
+      
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PAGE FOOTER
+     ═══════════════════════════════════════════════════ -->
+<div class="bp-foot">
+  <div class="bp-foot-wrap">
+    <div class="bp-foot-inner">
+      <a href="/" class="bp-foot-brand">
+        <div class="bp-foot-mark">S</div>
+        <span class="bp-foot-name">Script &amp; Pad</span>
+      </a>
+      <p class="bp-foot-copy">© 2025 Script and Pad. All Rights Reserved.</p>
+      <ul class="bp-foot-links">
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+        <li><a href="/support.html">Support</a></li>
+        <li><a href="/blog/">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function () {
+  /* ── 0. Mark Blog nav link as active ──────────────────── */
+  document.querySelectorAll('.nav-link').forEach(function (a) {
+    if (a.getAttribute('href') === '/blog/' || a.getAttribute('href') === '/blog') {
+      a.classList.add('bp-nav-active');
+    }
+  });
+
+  /* ── 1. Read time (updates hero badge) ───────────────── */
+  var article = document.getElementById('bp-article');
+  var rtEl    = document.getElementById('bp-rt');
+  if (article && rtEl) {
+    var words = (article.textContent || '').trim().split(/\s+/).length;
+    var mins  = Math.max(1, Math.ceil(words / 200));
+    rtEl.textContent = mins + ' min read';
+  }
+
+  /* ── 2. Wrap iframes in responsive 16:9 container ────── */
+  if (article) {
+    article.querySelectorAll('iframe').forEach(function (ifr) {
+      if (ifr.closest('.bp-video-wrap')) return;
+      var w = document.createElement('div');
+      w.className = 'bp-video-wrap';
+      ifr.parentNode.insertBefore(w, ifr);
+      w.appendChild(ifr);
+    });
+  }
+
+  /* ── 3. Inject inline CTA after every ~500 words ─────── */
+  if (!article) return;
+
+  var CTA = '<div class="bp-cta-inline">'
+    + '<div class="bp-cta-icon">'
+    + '<svg width="44" height="44" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+    + '<rect x="10" y="4" width="30" height="40" rx="4" fill="#1e2f45"/>'
+    + '<path d="M34 4 L40 10 L34 10Z" fill="#162032"/>'
+    + '<rect x="34" y="4" width="6" height="6" rx="1" fill="#2c3e50"/>'
+    + '<rect x="15" y="15" width="22" height="2.5" rx="1" fill="#3d5166"/>'
+    + '<rect x="15" y="21" width="17" height="2.5" rx="1" fill="#3d5166"/>'
+    + '<rect x="15" y="27" width="20" height="2.5" rx="1" fill="#3d5166"/>'
+    + '<rect x="15" y="33" width="13" height="2.5" rx="1" fill="#3d5166"/>'
+    + '<g transform="translate(34,34) rotate(-40)">'
+    + '<rect x="-3.5" y="-18" width="7" height="24" rx="2.5" fill="#c9a84c"/>'
+    + '<polygon points="-3.5,6 3.5,6 0,14" fill="#e8c96a"/>'
+    + '<rect x="-3.5" y="-22" width="7" height="6" rx="1.5" fill="#3d5166"/>'
+    + '</g>'
+    + '</svg></div>'
+    + '<div class="bp-cta-body">'
+    + '<strong>Write your screenplay — free</strong>'
+    + '<p>Screenplay Writer formats your script right inside Google Docs. No install, no subscription needed.</p>'
+    + '</div>'
+    + '<a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724"'
+    + ' class="bp-cta-btn" target="_blank" rel="noopener">Try it free ↗</a>'
+    + '</div>';
+
+  var els       = Array.from(article.querySelectorAll('p, ul, ol, h2, h3'));
+  var wordCount = 0;
+  var injected  = 0;
+  var MAX       = 2;
+  var THRESHOLD = 500;
+
+  els.forEach(function (el) {
+    if (injected >= MAX) return;
+    wordCount += (el.textContent || '').trim().split(/\s+/).length;
+    if (wordCount >= THRESHOLD * (injected + 1)) {
+      el.insertAdjacentHTML('afterend', CTA);
+      injected++;
+    }
+  });
+}());
+</script>
 
     </main>
 
