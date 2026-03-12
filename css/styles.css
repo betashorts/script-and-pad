@@ -45,7 +45,7 @@ body {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #fff;
+  color: #111827; /* dark text on white background */
   font-size: 1.25rem;
   font-weight: bold;
 }
@@ -69,7 +69,7 @@ body {
 
 .navbar-links a {
   text-decoration: none;
-  color: #fff;
+  color: #111827; /* dark links for visibility */
   font-size: 1rem;
   transition: color 0.3s ease;
 }
