@@ -2,6 +2,7 @@
 layout: post
 title: "What to Do in Cannes"
 date: 2025-01-10
+image: "/assets/blog/images/cannes-film-festival-800.webp"
 meta: |
   <meta name="description" content="Discover the top things to do in Cannes, from strolling the iconic La Croisette to exploring its historic Old Town. Your ultimate guide to enjoying Cannes.">
   <meta name="keywords" content="what to do in Cannes, Cannes travel guide, Cannes attractions, La Croisette, Cannes Old Town, Cannes Film Festival">
@@ -13,7 +14,15 @@ og: >
   url: "https://scriptandpad.com/what-to-do-in-cannes"
   type: "article"
   image: "https://scriptandpad.com/logo.jpg"
-tags: [Cannes travel, what to do in Cannes, French Riviera, Cannes attractions, La Croisette, Le Suquet]
+tags:
+  [
+    Cannes travel,
+    what to do in Cannes,
+    French Riviera,
+    Cannes attractions,
+    La Croisette,
+    Le Suquet,
+  ]
 ---
 
 <p>Cannes is more than just the glitz and glamour of its world-famous film festival. Nestled on the French Riviera, this beautiful city offers a mix of luxury, history, and charm. Whether you’re visiting for business, leisure, or a bit of both, here’s how to make the most of your time in Cannes.</p>

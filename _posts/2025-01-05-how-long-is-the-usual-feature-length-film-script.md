@@ -8,8 +8,16 @@ og: >
   description: "Learn the standard length of a feature-length film script, tips on pacing, scene timing, and formatting. Explore examples from different genres and make writing easier with Screenplay Writer."
   url: "https://scriptandpad.com/how-long-is-the-usual-feature-length-film-script/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
-tags: [feature film, screenplay, writing tips, script formatting, film script examples, Google Docs]
+  image: "/assets/blog/images/short-film-structure-800.webp"
+tags:
+  [
+    feature film,
+    screenplay,
+    writing tips,
+    script formatting,
+    film script examples,
+    Google Docs,
+  ]
 ---
 
 <p>Writing a feature-length film script can feel like a daunting task. But when you understand the structure and pacing that most scripts follow, it becomes easier to tackle. For beginners wondering how long a script should be, the industry norm is <strong>90 to 120 pages</strong>. This range aligns with the typical runtime of feature films, but the genre, pacing, and content can influence the final length.</p>
@@ -105,4 +113,3 @@ tags: [feature film, screenplay, writing tips, script formatting, film script ex
 <p>Start your screenplay journey today with a <strong>7-day free trial</strong>. After that, enjoy the full version for a one-time fee of just <strong>$9.99</strong>. Write smarter, not harder!</p>
 
 <p><a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank"><strong>Get Started with Screenplay Writer</strong></a></p>
-

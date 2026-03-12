@@ -27,6 +27,11 @@ meta: |
             {% for post in filtered_posts %}
             <li class="blog-item" data-category="{% if post.categories contains 'writing' %}writing{% elsif post.categories contains 'tools' %}tools{% elsif post.categories contains 'templates' %}templates{% else %}general{% endif %}">
                 <a href="{{ post.url }}" class="blog-link">
+                    {% if post.image %}
+                    <div class="blog-item-image">
+                        <img src="{{ post.image }}" alt="{{ post.title }} thumbnail" />
+                    </div>
+                    {% endif %}
                     <div class="blog-item-content">
                         <h2 class="blog-post-title">{{ post.title }}</h2>
                         <p class="blog-post-excerpt">
@@ -116,6 +121,39 @@ meta: |
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+/* thumbnail image inside blog listing */
+.blog-item-image {
+    width: 100%;
+    overflow: hidden;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.blog-item-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.blog-item {
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+.blog-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.blog-link:hover {
+    border-left-color: #d1d5db;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateX(2px);
 }
 
 .blog-item {

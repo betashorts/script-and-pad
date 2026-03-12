@@ -49,6 +49,11 @@ meta: |
             <!-- Placeholder items; update as needed -->
             {% for post in site.posts limit:4 %}
             <article class="featured-post">
+                {% if post.image %}
+                <div class="featured-post-image">
+                  <img src="{{ post.image }}" alt="{{ post.title }}" />
+                </div>
+                {% endif %}
                 <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
                 <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
                 <div class="post-meta">
