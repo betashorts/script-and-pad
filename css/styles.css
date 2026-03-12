@@ -256,6 +256,32 @@ body {
   color: #111827;
 }
 
+/* decorative svgs around blog posts */
+.blog-post {
+  position: relative;
+}
+.blog-post .decorations img {
+  position: absolute;
+  width: 120px;
+  opacity: 0.15;
+  pointer-events: none;
+}
+.blog-post .dec-left {
+  left: -60px;
+  top: 20px;
+  transform: rotate(-15deg);
+}
+.blog-post .dec-right {
+  right: -60px;
+  bottom: 20px;
+  transform: rotate(15deg);
+}
+@media (max-width: 768px) {
+  .blog-post .decorations img {
+    display: none;
+  }
+}
+
 .blog-post h2 {
   font-size: 2rem;
   margin-top: 2.5rem;
