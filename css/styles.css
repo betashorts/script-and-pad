@@ -63,20 +63,17 @@ body {
 }
 
 .navbar-links a:hover {
-  color: #ff9800;
+  color: #ffd700;
 }
 
 /* Hero Section */
 .hero {
   text-align: center;
   padding: 4rem 2rem;
-  background: linear-gradient(
-    135deg,
-    #6a11cb,
-    #2575fc
-  ); /* Gradient background */
+  /* more subtle, elegant background matching navigation */
+  background: linear-gradient(180deg, #1e1e2f 0%, #111827 100%) !important;
   color: #fff;
-  border-bottom: 5px solid #ffd700;
+  border-bottom: none;
 }
 
 .hero h1 {
@@ -137,7 +134,9 @@ body {
   padding: 1rem 1.5rem;
   background: #f9f9f9;
   border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .blog-listing .blog-item:hover {
@@ -153,7 +152,7 @@ body {
 }
 
 .blog-listing .blog-item a:hover {
-  color: #6a11cb;
+  color: #ffd700;
   text-decoration: underline;
 }
 
@@ -193,7 +192,7 @@ body {
 }
 
 .blog-post a {
-  color: #6a11cb;
+  color: #ffd700;
   text-decoration: underline;
   font-weight: bold;
 }
@@ -242,7 +241,9 @@ body {
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .related-posts ul li:hover {
@@ -261,7 +262,7 @@ body {
 }
 
 .related-posts ul li a:hover {
-  color: #6a11cb; /* Interactive hover effect */
+  color: #ffd700; /* Interactive hover effect */
   text-decoration: none;
 }
 
@@ -443,142 +444,142 @@ footer {
 }
 /* ===== navbar toggle and branding enhancements ===== */
 .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .navbar-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    transition: all 0.2s ease;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.2s ease;
 }
 
 .hamburger-line {
-    width: 20px;
-    height: 2px;
-    background: #fff;
-    border-radius: 1px;
-    transition: all 0.2s ease;
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  border-radius: 1px;
+  transition: all 0.2s ease;
 }
 
 .navbar-toggle.active .hamburger-line:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
 .navbar-toggle.active .hamburger-line:nth-child(2) {
-    opacity: 0;
+  opacity: 0;
 }
 
 .navbar-toggle.active .hamburger-line:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
+  transform: rotate(-45deg) translate(7px, -6px);
 }
 
 .brand-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
 }
 
 .brand-main {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: -0.025em;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.025em;
 }
 
 .brand-tag {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #d1d5db;
-    letter-spacing: 0.025em;
-    text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #d1d5db;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
 }
 
 /* hero button groups and subtext */
 .hero-buttons {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 2rem 0 1rem 0;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 0 1rem 0;
 }
 
 .hero-subtext {
-    font-size: 0.95rem;
-    opacity: 0.7;
-    margin-top: 2rem;
-    color: #d1d5db;
+  font-size: 0.95rem;
+  opacity: 0.7;
+  margin-top: 2rem;
+  color: #d1d5db;
 }
 
 /* mobile responsive navbar and toggle */
 @media (max-width: 768px) {
-    .navbar-toggle {
-        display: flex;
-    }
+  .navbar-toggle {
+    display: flex;
+  }
 
-    .navbar-links {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        gap: 0;
-        background: #1e1e2f;
-        border-top: 1px solid #e5e7eb;
-        border-bottom: 1px solid #e5e7eb;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-    }
+  .navbar-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: #1e1e2f;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
 
-    .navbar-links.active {
-        max-height: 400px;
-    }
+  .navbar-links.active {
+    max-height: 400px;
+  }
 
-    .navbar-links li {
-        display: block;
-        border-bottom: 1px solid #2a2a46;
-    }
+  .navbar-links li {
+    display: block;
+    border-bottom: 1px solid #2a2a46;
+  }
 
-    .navbar-links li:last-child {
-        border-bottom: none;
-    }
+  .navbar-links li:last-child {
+    border-bottom: none;
+  }
 
-    .nav-link {
-        display: block;
-        padding: 1rem 1.5rem;
-        border-radius: 0;
-    }
+  .nav-link {
+    display: block;
+    padding: 1rem 1.5rem;
+    border-radius: 0;
+  }
 
-    .nav-divider {
-        display: none;
-    }
+  .nav-divider {
+    display: none;
+  }
 
-    .navbar-container {
-        position: relative;
-    }
+  .navbar-container {
+    position: relative;
+  }
 }
 
 /* blog-container rules are already defined inline in blog.html but could be placed here if preferred */
 
 /* Reading progress indicator bar */
 #reading-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 4px;
-    width: 0%;
-    background: #6a11cb;
-    z-index: 1001;
-    transition: width 0.1s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 0%;
+  background: #ffd700;
+  z-index: 1001;
+  transition: width 0.1s ease;
 }
 
 /* Featured posts grid and homepage section styles */

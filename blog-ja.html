@@ -23,7 +23,7 @@ meta: |
         </div>
 
         <ul class="blog-list">
-            {% assign filtered_posts = site.posts | where_exp: "post", "post.lang == 'ja'" %}
+            {% assign filtered_posts = site.posts | where_exp: "post", "post.lang and post.lang != 'en'" %}
             {% for post in filtered_posts %}
             <li class="blog-item" data-category="{% if post.categories contains 'writing' %}writing{% elsif post.categories contains 'tools' %}tools{% elsif post.categories contains 'templates' %}templates{% else %}general{% endif %}">
                 <a href="{{ post.url }}" class="blog-link">
@@ -107,9 +107,9 @@ meta: |
 
 .category-filter:hover,
 .category-filter.active {
-    border-color: #6a11cb;
-    color: #6a11cb;
-    background: #f0f0ff;
+    border-color: #ffd700;
+    color: #ffd700;
+    background: #fff9e6; /* light gold */
 }
 
 .blog-list {
