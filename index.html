@@ -6,14 +6,17 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Script and Pad – Screenplay Writer">
+    <meta property="og:title" content="Script and Pad – Free Tools for Short Filmmakers">
     <meta property="og:description" content="Home of Screenplay Writer and tools for writers.">
     <meta property="og:image" content="https://scriptandpad.com/logo.jpg">
     <meta property="og:url" content="https://scriptandpad.com/">
     <meta property="og:type" content="article">
-    <title>Script and Pad – Screenplay Writer</title>
+    <title>Script and Pad – Free Tools for Short Filmmakers</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <meta name="description" content="Write screenplays directly inside Google Docs with our lightweight, easy-to-use tool from Script and Pad. No downloads, no fuss—just write.">
+    <meta name="description" content="Write screenplays, generate shot lists, and learn filmmaking — free tools built for short film makers. No install, no film school needed.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&amp;family=Lora:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet">
 
 
 
@@ -71,135 +74,839 @@
 </header>
 
     <main>
-        <!-- Hero Section -->
-<section class="hero">
-    <div class="container">
-        <h1>Screenplay Writer – Write Screenplays in Google Docs</h1>
-        <p>Screenplay Writer keeps you inside the familiar Google Docs interface while giving you formatting, export and template tools built specifically for script authors.<br> No software to install, completely free to use.</p>
-        <div class="hero-buttons">
-            <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" class="cta cta-primary" target="_blank" rel="noopener">Open the Tool</a>
-            <a href="/blog/" class="cta cta-secondary">Read the Blog</a>
-        </div>
-        <p class="hero-subtext">A tool from Script and Pad. Build your script. Export to PDF, Fountain, or Final Draft. Writing has never been simpler.</p>
+        <style>
+/* ═══════════════════════════════════════════════════════
+   SCRIPT & PAD — Cinematic Homepage
+   All classes prefixed hp- to avoid conflicts with styles.css
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  --c-navy:     #0d1b2a;
+  --c-navy2:    #162032;
+  --c-navy3:    #1e2f45;
+  --c-gold:     #c9a84c;
+  --c-gold2:    #e8c96a;
+  --c-charcoal: #2c3e50;
+  --c-char2:    #3d5166;
+  --c-cream:    #f5f0e8;
+  --c-teal:     #2a7f7f;
+  --c-rust:     #c0533a;
+  --c-skin:     #d4956a;
+  --c-text:     rgba(245,240,232,.88);
+  --c-muted:    rgba(245,240,232,.54);
+  --ease:       cubic-bezier(.25,.46,.45,.94);
+  --fh:         'Playfair Display', Georgia, serif;
+  --fb:         'Lora', Georgia, serif;
+  --r:          12px;
+}
+
+/* Hide the default layout footer on this page — replaced below */
+footer { display: none; }
+
+main {
+  background: var(--c-navy);
+  font-family: var(--fb);
+  color: var(--c-text);
+}
+
+.hp-wrap {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 28px;
+  box-sizing: border-box;
+}
+
+.hp-label {
+  display: inline-block;
+  font-family: var(--fb);
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: 10px;
+}
+
+.hp-h2 {
+  font-family: var(--fh);
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  color: var(--c-cream);
+  margin: 0;
+}
+
+/* ── Buttons ───────────────────────────────────────────── */
+.hp-btn-gold {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--c-gold); color: var(--c-navy);
+  font-family: var(--fb); font-size: .95rem; font-weight: 600;
+  padding: 14px 30px; border-radius: 7px; text-decoration: none;
+  transition: background .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.hp-btn-gold:hover {
+  background: var(--c-gold2); transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(201,168,76,.35);
+}
+.hp-btn-outline {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: transparent; color: var(--c-cream);
+  font-family: var(--fb); font-size: .95rem; font-weight: 500;
+  padding: 13px 28px; border-radius: 7px;
+  border: 1.5px solid rgba(245,240,232,.28); text-decoration: none;
+  transition: border-color .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+}
+.hp-btn-outline:hover {
+  border-color: var(--c-gold); color: var(--c-gold); transform: translateY(-2px);
+}
+
+/* ══════════════════════════════════════════════════════════
+   1. HERO
+   ══════════════════════════════════════════════════════════ */
+.hp-hero {
+  position: relative;
+  min-height: calc(100vh - 68px);
+  background: var(--c-navy2);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.hp-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 55% 65% at 72% 44%, rgba(201,168,76,.10) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 14% 76%, rgba(42,127,127,.07) 0%, transparent 55%);
+  pointer-events: none; z-index: 0;
+}
+.hp-filmstrip { width: 100%; flex-shrink: 0; line-height: 0; position: relative; z-index: 1; }
+.hp-filmstrip svg { display: block; }
+
+.hp-hero-inner {
+  flex: 1;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; gap: 48px;
+  padding: 64px 28px;
+  max-width: 1160px; width: 100%; margin: 0 auto;
+  box-sizing: border-box; position: relative; z-index: 1;
+}
+.hp-hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--fb); font-size: .78rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--c-gold); margin-bottom: 22px;
+}
+.hp-hero-eyebrow::before {
+  content: ''; display: block; width: 28px; height: 2px; background: var(--c-gold);
+}
+.hp-hero-h1 {
+  font-family: var(--fh);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900; line-height: 1.1;
+  color: var(--c-cream); margin: 0 0 22px;
+}
+.hp-hero-h1 em { font-style: italic; color: var(--c-gold); }
+.hp-hero-sub {
+  font-family: var(--fb); font-size: 1.05rem; line-height: 1.8;
+  color: var(--c-muted); margin-bottom: 38px; max-width: 430px;
+}
+.hp-hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+.hp-hero-visual { display: flex; justify-content: center; align-items: center; }
+.hp-hero-visual svg {
+  width: 100%; max-width: 470px; height: auto;
+  filter: drop-shadow(0 20px 60px rgba(0,0,0,.4));
+}
+
+/* ══════════════════════════════════════════════════════════
+   2. TOOLS
+   ══════════════════════════════════════════════════════════ */
+.hp-tools { background: var(--c-navy); padding: 90px 0; }
+.hp-tools-hd { text-align: center; margin-bottom: 52px; }
+.hp-tools-hd .hp-label { display: block; }
+.hp-tools-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+
+.hp-tool-card {
+  background: var(--c-navy3); border-radius: var(--r);
+  padding: 34px 28px; position: relative; overflow: hidden;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.hp-tool-card::after {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--c-gold), var(--c-gold2));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .3s var(--ease);
+}
+.hp-tool-card:hover { transform: translateY(-7px); box-shadow: 0 18px 48px rgba(0,0,0,.45); }
+.hp-tool-card:hover::after { transform: scaleX(1); }
+.hp-tool-card--dim { opacity: .55; pointer-events: none; }
+
+.hp-tool-icon { margin-bottom: 20px; }
+.hp-tool-badge {
+  display: inline-block; font-family: var(--fb); font-size: .68rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 100px; margin-bottom: 12px;
+}
+.hp-badge-free { background: rgba(42,127,127,.18); color: #3ab5b5; }
+.hp-badge-soon { background: rgba(61,81,102,.5); color: var(--c-muted); }
+.hp-tool-name { font-family: var(--fh); font-size: 1.28rem; font-weight: 700; color: var(--c-cream); margin: 0 0 10px; }
+.hp-tool-desc { font-family: var(--fb); font-size: .9rem; line-height: 1.7; color: var(--c-muted); margin: 0 0 22px; }
+.hp-tool-cta {
+  font-family: var(--fb); font-size: .88rem; font-weight: 600; color: var(--c-gold);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
+  transition: gap .2s var(--ease);
+}
+.hp-tool-cta:hover { gap: 8px; }
+
+/* ══════════════════════════════════════════════════════════
+   3. WHY
+   ══════════════════════════════════════════════════════════ */
+.hp-why { background: var(--c-navy2); padding: 90px 0; }
+.hp-why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.hp-why-h2 {
+  font-family: var(--fh); font-size: clamp(1.9rem, 3vw, 2.6rem);
+  font-weight: 700; color: var(--c-cream); margin: 0 0 20px; line-height: 1.25;
+}
+.hp-why-body { font-family: var(--fb); font-size: 1rem; line-height: 1.85; color: var(--c-muted); }
+.hp-why-body p { margin: 0 0 16px; }
+.hp-why-body p:last-child { margin: 0; }
+
+.hp-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.hp-stat {
+  background: var(--c-navy3); border-radius: var(--r); padding: 30px 24px;
+  border: 1px solid rgba(201,168,76,.10);
+  transition: border-color .25s var(--ease), transform .25s var(--ease);
+}
+.hp-stat:hover { border-color: rgba(201,168,76,.38); transform: translateY(-3px); }
+.hp-stat-num { font-family: var(--fh); font-size: 2.2rem; font-weight: 900; color: var(--c-gold); line-height: 1; margin-bottom: 6px; }
+.hp-stat-lbl { font-family: var(--fb); font-size: .8rem; color: var(--c-muted); text-transform: uppercase; letter-spacing: .08em; }
+
+/* ══════════════════════════════════════════════════════════
+   4. BLOG PREVIEW
+   ══════════════════════════════════════════════════════════ */
+.hp-blog { background: var(--c-navy); padding: 90px 0; }
+.hp-blog-hd {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px; margin-bottom: 44px;
+}
+.hp-blog-hd-sub { font-family: var(--fb); font-size: .9rem; color: var(--c-muted); margin: 6px 0 0; }
+.hp-blog-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+
+.hp-blog-card {
+  background: var(--c-navy3); border-radius: var(--r); overflow: hidden;
+  display: flex; flex-direction: column; text-decoration: none;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.hp-blog-card:hover { transform: translateY(-7px); box-shadow: 0 18px 48px rgba(0,0,0,.45); }
+.hp-blog-thumb { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--c-navy2); line-height: 0; }
+.hp-blog-thumb svg { width: 100%; height: 100%; display: block; }
+.hp-blog-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+.hp-blog-tag { font-family: var(--fb); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--c-gold); margin-bottom: 8px; display: block; }
+.hp-blog-title { font-family: var(--fh); font-size: 1.05rem; font-weight: 700; color: var(--c-cream); margin: 0 0 10px; line-height: 1.4; }
+.hp-blog-excerpt { font-family: var(--fb); font-size: .85rem; line-height: 1.68; color: var(--c-muted); flex: 1; margin-bottom: 18px; }
+.hp-blog-more {
+  font-family: var(--fb); font-size: .85rem; font-weight: 600; color: var(--c-gold);
+  display: inline-flex; align-items: center; gap: 4px; text-decoration: none;
+  transition: gap .2s var(--ease);
+}
+.hp-blog-card:hover .hp-blog-more { gap: 8px; }
+
+/* ══════════════════════════════════════════════════════════
+   5. CTA BANNER
+   ══════════════════════════════════════════════════════════ */
+.hp-cta { background: var(--c-navy2); padding: 90px 0; }
+.hp-cta-card {
+  position: relative; background: var(--c-navy3);
+  border-radius: 20px; padding: 72px 48px;
+  text-align: center; overflow: hidden;
+  border: 1px solid rgba(201,168,76,.14);
+}
+.hp-cta-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 55% 75% at 50% 50%, rgba(201,168,76,.11) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hp-cta-card > * { position: relative; z-index: 1; }
+.hp-cta-h2 {
+  font-family: var(--fh); font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 900; color: var(--c-cream); margin: 0 0 16px; line-height: 1.15;
+}
+.hp-cta-h2 em { font-style: italic; color: var(--c-gold); }
+.hp-cta-sub { font-family: var(--fb); font-size: 1.05rem; color: var(--c-muted); margin-bottom: 38px; }
+.hp-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px; }
+.hp-cta-note { font-family: var(--fb); font-size: .78rem; color: var(--c-muted); letter-spacing: .05em; }
+.hp-cta-note b { color: var(--c-gold); font-weight: 500; }
+
+/* ══════════════════════════════════════════════════════════
+   6. PAGE FOOTER
+   ══════════════════════════════════════════════════════════ */
+.hp-foot {
+  background: var(--c-navy);
+  border-top: 1px solid rgba(201,168,76,.12);
+  padding: 38px 0;
+}
+.hp-foot-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+}
+.hp-foot-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.hp-foot-mark {
+  width: 38px; height: 38px; background: var(--c-gold); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fh); font-size: 1.2rem; font-weight: 900; color: var(--c-navy); flex-shrink: 0;
+}
+.hp-foot-name { font-family: var(--fh); font-size: 1.05rem; font-weight: 700; color: var(--c-cream); }
+.hp-foot-copy { font-family: var(--fb); font-size: .8rem; color: var(--c-muted); }
+.hp-foot-links { display: flex; gap: 22px; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
+.hp-foot-links a { font-family: var(--fb); font-size: .85rem; color: var(--c-muted); text-decoration: none; transition: color .2s var(--ease); }
+.hp-foot-links a:hover { color: var(--c-gold); }
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 880px) {
+  .hp-hero-inner { grid-template-columns: 1fr; text-align: center; padding: 52px 28px; }
+  .hp-hero-eyebrow { justify-content: center; }
+  .hp-hero-sub { max-width: none; margin-left: auto; margin-right: auto; }
+  .hp-hero-ctas { justify-content: center; }
+  .hp-hero-visual { display: none; }
+  .hp-tools-grid { grid-template-columns: 1fr; }
+  .hp-why-grid   { grid-template-columns: 1fr; }
+  .hp-blog-grid  { grid-template-columns: 1fr; }
+  .hp-cta-card   { padding: 44px 24px; }
+  .hp-blog-hd    { flex-direction: column; align-items: flex-start; }
+  .hp-foot-inner { flex-direction: column; text-align: center; }
+  .hp-foot-links { justify-content: center; }
+}
+@media (min-width: 560px) and (max-width: 880px) {
+  .hp-tools-grid { grid-template-columns: repeat(2,1fr); }
+  .hp-blog-grid  { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+
+<!-- ══════════════════════════════════════════════════════
+     1. HERO
+     ══════════════════════════════════════════════════════ -->
+<section class="hp-hero">
+
+  <!-- Film strip — top -->
+  <div class="hp-filmstrip">
+    <svg viewBox="0 0 1440 34" preserveAspectRatio="none" width="100%" height="34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <pattern id="hp-pt" x="0" y="0" width="38" height="34" patternUnits="userSpaceOnUse">
+          <rect width="38" height="34" fill="#0d1b2a"/>
+          <rect x="7" y="5" width="22" height="24" rx="4" fill="#162032"/>
+        </pattern>
+      </defs>
+      <rect width="1440" height="34" fill="url(#hp-pt)"/>
+    </svg>
+  </div>
+
+  <div class="hp-hero-inner">
+    <!-- Left: Text -->
+    <div>
+      <span class="hp-hero-eyebrow">For Short Filmmakers</span>
+      <h1 class="hp-hero-h1">Write. Plan.<br><em>Ship</em> your short film.</h1>
+      <p class="hp-hero-sub">Script and Pad gives you free, no-install tools to write your screenplay, plan every shot, and get your film made — no film school required.</p>
+      <div class="hp-hero-ctas">
+        <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" class="hp-btn-gold" target="_blank" rel="noopener">Write Your Script ↗</a>
+        <a href="/blog/" class="hp-btn-outline">Read the Blog</a>
+      </div>
     </div>
-    <div class="hero-graphic">
-        <img src="/assets/creatives/hero-banner.svg" alt="Illustration" />
+
+    <!-- Right: Director illustration -->
+    <div class="hp-hero-visual">
+      <svg viewBox="0 0 460 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flat illustration of a film director sitting in a chair holding a megaphone">
+        <!-- bg -->
+        <rect width="460" height="420" rx="16" fill="#162032"/>
+        <!-- glows -->
+        <circle cx="295" cy="188" r="172" fill="#c9a84c" fill-opacity=".06"/>
+        <circle cx="155" cy="352" r="115" fill="#2a7f7f" fill-opacity=".06"/>
+
+        <!-- ── Film Reel (background) ── -->
+        <circle cx="318" cy="185" r="108" fill="#1e2f45"/>
+        <circle cx="318" cy="185" r="108" fill="none" stroke="#162032" stroke-width="30"/>
+        <g stroke="#162032" stroke-width="9" stroke-linecap="round">
+          <line x1="318" y1="77"  x2="318" y2="293"/>
+          <line x1="210" y1="185" x2="426" y2="185"/>
+          <line x1="242" y1="109" x2="394" y2="261"/>
+          <line x1="394" y1="109" x2="242" y2="261"/>
+          <line x1="224" y1="147" x2="412" y2="223"/>
+          <line x1="224" y1="223" x2="412" y2="147"/>
+        </g>
+        <circle cx="318" cy="185" r="30" fill="#162032"/>
+        <circle cx="318" cy="185" r="18" fill="#1e2f45"/>
+        <circle cx="318" cy="185" r="7"  fill="#0d1b2a"/>
+        <circle cx="318" cy="185" r="108" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-opacity=".25"/>
+        <circle cx="318" cy="185" r="78"  fill="none" stroke="#0d1b2a" stroke-width="4" stroke-dasharray="6 8"/>
+
+        <!-- ── Director Chair ── -->
+        <rect x="86" y="264" width="128" height="9" rx="4" fill="#c9a84c"/>
+        <rect x="86" y="210" width="128" height="8" rx="4" fill="#c9a84c"/>
+        <line x1="92"  y1="218" x2="72"  y2="382" stroke="#3d5166" stroke-width="8" stroke-linecap="round"/>
+        <line x1="208" y1="218" x2="228" y2="382" stroke="#3d5166" stroke-width="8" stroke-linecap="round"/>
+        <line x1="94"  y1="273" x2="94"  y2="382" stroke="#3d5166" stroke-width="8" stroke-linecap="round"/>
+        <line x1="206" y1="273" x2="206" y2="382" stroke="#3d5166" stroke-width="8" stroke-linecap="round"/>
+        <line x1="74"  y1="312" x2="96"  y2="282" stroke="#2c3e50" stroke-width="5" stroke-linecap="round"/>
+        <line x1="226" y1="312" x2="204" y2="282" stroke="#2c3e50" stroke-width="5" stroke-linecap="round"/>
+        <text x="150" y="220" font-family="monospace" font-size="7.5" fill="#c9a84c" text-anchor="middle" letter-spacing="2" opacity=".9">DIRECTOR</text>
+
+        <!-- ── Character: torso ── -->
+        <rect x="112" y="228" width="76" height="42" rx="15" fill="#2c3e50"/>
+        <!-- head -->
+        <circle cx="150" cy="210" r="24" fill="#d4956a"/>
+        <!-- hair -->
+        <path d="M126 205 Q128 183 150 181 Q172 183 174 205 Q166 190 150 188 Q134 190 126 205Z" fill="#3d2b1f"/>
+        <!-- eyes -->
+        <circle cx="142" cy="208" r="3" fill="#2c3e50"/>
+        <circle cx="158" cy="208" r="3" fill="#2c3e50"/>
+        <!-- smile -->
+        <path d="M142 217 Q150 224 158 217" stroke="#2c3e50" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+        <!-- ── Left arm raised — megaphone pointing left ── -->
+        <path d="M116 242 Q97 226 78 214" stroke="#d4956a" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <path d="M78 214 Q64 217 52 220"  stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+        <circle cx="52" cy="220" r="9" fill="#d4956a"/>
+        <!-- megaphone -->
+        <rect x="36" y="214" width="22" height="12" rx="4" fill="#e8c96a"/>
+        <polygon points="36,214 36,226 6,232 6,208" fill="#c9a84c"/>
+        <ellipse cx="6" cy="220" rx="4" ry="12" fill="#e8c96a" opacity=".55"/>
+        <!-- sound waves -->
+        <path d="M2 211 Q-10 220 2 229"  stroke="#c9a84c" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-opacity=".7"/>
+        <path d="M-2 204 Q-18 220 -2 236" stroke="#c9a84c" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-opacity=".4"/>
+
+        <!-- ── Right arm resting ── -->
+        <path d="M184 242 Q198 254 208 266" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+        <circle cx="208" cy="266" r="8" fill="#d4956a"/>
+
+        <!-- ── Legs hanging ── -->
+        <path d="M132 273 Q124 303 116 334" stroke="#d4956a" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <path d="M168 273 Q176 303 184 334" stroke="#d4956a" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <ellipse cx="116" cy="341" rx="16" ry="9" fill="#2c3e50"/>
+        <ellipse cx="184" cy="341" rx="16" ry="9" fill="#2c3e50"/>
+
+        <!-- ── Floating Clapperboard ── -->
+        <g transform="translate(314,46) rotate(-14)">
+          <rect x="0" y="26" width="98" height="72" rx="5" fill="#1e2f45"/>
+          <rect x="0" y="0"  width="98" height="30" rx="5" fill="#0d1b2a"/>
+          <rect x="0"  y="0" width="16" height="30" fill="#c9a84c"/>
+          <rect x="32" y="0" width="16" height="30" fill="#c9a84c"/>
+          <rect x="64" y="0" width="16" height="30" fill="#c9a84c"/>
+          <rect x="92" y="0" width="6"  height="30" fill="#c9a84c"/>
+          <circle cx="4"  cy="30" r="4" fill="#c9a84c"/>
+          <circle cx="94" cy="30" r="4" fill="#c9a84c"/>
+          <rect x="10" y="40" width="54" height="3" rx="1.5" fill="#3d5166"/>
+          <rect x="10" y="50" width="40" height="3" rx="1.5" fill="#3d5166"/>
+          <rect x="10" y="60" width="62" height="3" rx="1.5" fill="#3d5166"/>
+          <rect x="10" y="70" width="30" height="3" rx="1.5" fill="#3d5166"/>
+        </g>
+
+        <!-- Stars -->
+        <text x="48"  y="88"  fill="#c9a84c" font-size="16" opacity=".9">★</text>
+        <text x="402" y="368" fill="#c9a84c" font-size="20" opacity=".55">★</text>
+        <text x="28"  y="170" fill="#e8c96a" font-size="11" opacity=".5">★</text>
+        <text x="430" y="138" fill="#c9a84c" font-size="14" opacity=".65">★</text>
+        <text x="74"  y="398" fill="#c9a84c" font-size="9"  opacity=".5">★</text>
+        <!-- Dots -->
+        <circle cx="40"  cy="352" r="5.5" fill="#2a7f7f" opacity=".65"/>
+        <circle cx="56"  cy="370" r="3.5" fill="#c9a84c"  opacity=".5"/>
+        <circle cx="432" cy="312" r="4.5" fill="#c0533a"  opacity=".5"/>
+        <circle cx="372" cy="28"  r="4"   fill="#2a7f7f"  opacity=".55"/>
+        <circle cx="28"  cy="292" r="5"   fill="#3d5166"  opacity=".8"/>
+        <circle cx="446" cy="242" r="3.5" fill="#2c3e50"  opacity=".7"/>
+      </svg>
     </div>
+  </div>
+
+  <!-- Film strip — bottom -->
+  <div class="hp-filmstrip">
+    <svg viewBox="0 0 1440 34" preserveAspectRatio="none" width="100%" height="34" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <pattern id="hp-pb" x="0" y="0" width="38" height="34" patternUnits="userSpaceOnUse">
+          <rect width="38" height="34" fill="#0d1b2a"/>
+          <rect x="7" y="5" width="22" height="24" rx="4" fill="#162032"/>
+        </pattern>
+      </defs>
+      <rect width="1440" height="34" fill="url(#hp-pb)"/>
+    </svg>
+  </div>
+
 </section>
 
-<!-- What We Offer -->
-<section class="featured-categories">
-    <div class="container">
-        <h2>Everything You Need to Make Your Short Film</h2>
-        <p>Script and Pad brings together the tools and knowledge that short film makers actually need. Whether you're making your first short or your tenth, we're building the resources to help you do it better.</p>
-        <div class="features-grid">
-            <div class="feature-item">
-                <img src="/assets/creatives/icon-writing.svg" alt="Writing icon" class="feature-icon" />
-                <h3>Write Your Script</h3>
-                <p>Use Screenplay Writer to draft and format your screenplay right in Google Docs.</p>
-            </div>
-            <div class="feature-item">
-                <img src="/assets/creatives/icon-templates.svg" alt="Planning icon" class="feature-icon" />
-                <h3>Plan Your Shots</h3>
-                <p>Generate shot lists, storyboard ideas, and get ready for production.</p>
-            </div>
-            <div class="feature-item">
-                <img src="/assets/creatives/icon-directing.svg" alt="Learning icon" class="feature-icon" />
-                <h3>Learn &amp; Ship</h3>
-                <p>Explore articles and guides from filmmakers who’ve been there, and finish your film with confidence.</p>
-            </div>
-        </div>
+
+<!-- ══════════════════════════════════════════════════════
+     2. TOOLS STRIP
+     ══════════════════════════════════════════════════════ -->
+<section class="hp-tools">
+  <div class="hp-wrap">
+    <div class="hp-tools-hd">
+      <span class="hp-label">Our Tools</span>
+      <h2 class="hp-h2">Everything You Need to Make Your Short Film</h2>
     </div>
+
+    <div class="hp-tools-grid">
+
+      <!-- Screenplay Writer -->
+      <div class="hp-tool-card">
+        <div class="hp-tool-icon">
+          <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="10" y="4" width="30" height="40" rx="4" fill="#1e2f45"/>
+            <path d="M34 4 L40 10 L34 10Z" fill="#162032"/>
+            <rect x="34" y="4" width="6" height="6" rx="1" fill="#2c3e50"/>
+            <rect x="15" y="15" width="22" height="2.5" rx="1" fill="#3d5166"/>
+            <rect x="15" y="21" width="17" height="2.5" rx="1" fill="#3d5166"/>
+            <rect x="15" y="27" width="20" height="2.5" rx="1" fill="#3d5166"/>
+            <rect x="15" y="33" width="13" height="2.5" rx="1" fill="#3d5166"/>
+            <g transform="translate(34,34) rotate(-40)">
+              <rect x="-3.5" y="-18" width="7" height="24" rx="2.5" fill="#c9a84c"/>
+              <polygon points="-3.5,6 3.5,6 0,14" fill="#e8c96a"/>
+              <rect x="-3.5" y="-22" width="7" height="6" rx="1.5" fill="#3d5166"/>
+              <rect x="-1" y="-14" width="2" height="18" rx="1" fill="#e8c96a" opacity=".4"/>
+            </g>
+          </svg>
+        </div>
+        <span class="hp-tool-badge hp-badge-free">Free</span>
+        <h3 class="hp-tool-name">Screenplay Writer</h3>
+        <p class="hp-tool-desc">Write and format professional screenplays right inside Google Docs. No downloads, no subscriptions — just pure storytelling.</p>
+        <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" class="hp-tool-cta" target="_blank" rel="noopener">Open the tool →</a>
+      </div>
+
+      <!-- Shot List Generator -->
+      <div class="hp-tool-card">
+        <div class="hp-tool-icon">
+          <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="8" y="18" width="36" height="26" rx="5" fill="#1e2f45"/>
+            <rect x="14" y="12" width="18" height="9" rx="3" fill="#1e2f45"/>
+            <circle cx="26" cy="31" r="11" fill="#0d1b2a"/>
+            <circle cx="26" cy="31" r="9"  fill="#162032"/>
+            <circle cx="26" cy="31" r="6"  fill="#2a7f7f"/>
+            <circle cx="26" cy="31" r="2.5" fill="#162032"/>
+            <circle cx="22" cy="27" r="1.5" fill="#e8c96a" opacity=".6"/>
+            <rect x="36" y="22" width="6" height="5" rx="1.5" fill="#c9a84c"/>
+            <circle cx="41" cy="18" r="3.5" fill="#c0533a"/>
+            <rect x="8" y="34" width="5" height="10" rx="2" fill="#2c3e50"/>
+          </svg>
+        </div>
+        <span class="hp-tool-badge hp-badge-free">Free</span>
+        <h3 class="hp-tool-name">Shot List Generator</h3>
+        <p class="hp-tool-desc">Plan every shot before you step on set. Build detailed shot lists with camera angles, lens choices, and scene notes.</p>
+        <a href="/shot-list/" class="hp-tool-cta">Try it now →</a>
+      </div>
+
+      <!-- Coming Soon -->
+      <div class="hp-tool-card hp-tool-card--dim">
+        <div class="hp-tool-icon">
+          <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="28" cy="28" r="11" fill="#3d5166"/>
+            <circle cx="28" cy="28" r="5"  fill="#162032"/>
+            <g fill="#3d5166">
+              <rect x="24" y="9"  width="8" height="9" rx="3"/>
+              <rect x="24" y="38" width="8" height="9" rx="3"/>
+              <rect x="9"  y="24" width="9" height="8" rx="3"/>
+              <rect x="38" y="24" width="9" height="8" rx="3"/>
+            </g>
+            <text x="22" y="33" fill="#c9a84c" font-size="13" opacity=".75">★</text>
+          </svg>
+        </div>
+        <span class="hp-tool-badge hp-badge-soon">Coming Soon</span>
+        <h3 class="hp-tool-name">More Tools</h3>
+        <p class="hp-tool-desc">Call sheets, production budgets, and scheduling tools for indie filmmakers are in the works. Stay tuned.</p>
+        <span class="hp-tool-cta" style="opacity:.4;cursor:default;">In development</span>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<!-- Featured Posts Section -->
-<section class="featured-posts" id="featured-posts">
-    <div class="container">
-        <h2>Learn Filmmaking</h2>
-        <p class="subtitle">Practical guides, filmmaker stories, and industry insights — written for people who are actually making films, not just dreaming about it.</p>
-        <div class="posts-grid">
-            <!-- Placeholder items; update as needed -->
-            
-            <article class="featured-post">
-                
-                <div class="featured-post-image">
-                  <img src="/assets/blog/images/cannes-film-festival-800.webp" alt="What to Do in Cannes" />
-                </div>
-                
-                <h3><a href="/what-to-do-in-cannes/">What to Do in Cannes</a></h3>
-                <p class="post-excerpt">Cannes is more than just the glitz and glamour of its world-famous film festival. Nestled on the French Riviera, this beautiful city offers a mix...</p>
-                <div class="post-meta">
-                    <span class="category-tag">General</span>
-                </div>
-                <a href="/what-to-do-in-cannes/" class="read-more">Read More →</a>
-            </article>
-            
-            <article class="featured-post">
-                
-                <h3><a href="/directors-who-didnt-go-to-film-school/">Directors Who Didn''t Go to Film School</a></h3>
-                <p class="post-excerpt">Breaking into the film industry often feels like an impossible dream, especially when the common advice is to attend an expensive film school. Film school...</p>
-                <div class="post-meta">
-                    <span class="category-tag">General</span>
-                </div>
-                <a href="/directors-who-didnt-go-to-film-school/" class="read-more">Read More →</a>
-            </article>
-            
-            <article class="featured-post">
-                
-                <h3><a href="/how-long-is-the-usual-feature-length-film-script/">How Long Is the Usual Feature Length Film Script?</a></h3>
-                <p class="post-excerpt">Writing a feature-length film script can feel like a daunting task. But when you understand the structure and pacing that most scripts follow, it becomes...</p>
-                <div class="post-meta">
-                    <span class="category-tag">General</span>
-                </div>
-                <a href="/how-long-is-the-usual-feature-length-film-script/" class="read-more">Read More →</a>
-            </article>
-            
+
+<!-- ══════════════════════════════════════════════════════
+     3. WHY SECTION
+     ══════════════════════════════════════════════════════ -->
+<section class="hp-why">
+  <div class="hp-wrap">
+    <div class="hp-why-grid">
+
+      <!-- Left: copy -->
+      <div>
+        <span class="hp-label">Why Script &amp; Pad</span>
+        <h2 class="hp-why-h2">Short films are where great filmmakers begin.</h2>
+        <div class="hp-why-body">
+          <p>Short films are where filmmakers learn their craft, take risks, and discover their voice. But for too long, the tools and knowledge needed to make great shorts have been gated behind expensive software and film school tuition.</p>
+          <p>Script and Pad exists to change that. We build free, accessible tools — and pair them with honest, practical guides — so that anyone with a story to tell can actually make their film.</p>
+          <p>Whether it's your first short or your tenth, we've got you.</p>
         </div>
-        <div class="view-all">
-            <a href="/blog" class="cta cta-secondary">Browse All Articles</a>
+      </div>
+
+      <!-- Right: stats -->
+      <div class="hp-stats">
+        <div class="hp-stat">
+          <div class="hp-stat-num">Free</div>
+          <div class="hp-stat-lbl">Always &amp; forever</div>
         </div>
+        <div class="hp-stat">
+          <div class="hp-stat-num">3+</div>
+          <div class="hp-stat-lbl">Tools &amp; counting</div>
+        </div>
+        <div class="hp-stat">
+          <div class="hp-stat-num">0</div>
+          <div class="hp-stat-lbl">Film school required</div>
+        </div>
+        <div class="hp-stat">
+          <div class="hp-stat-num">∞</div>
+          <div class="hp-stat-lbl">Stories to tell</div>
+        </div>
+      </div>
+
     </div>
+  </div>
 </section>
 
-<!-- Our Tools -->
-<section class="our-tools">
-    <div class="container">
-        <h2>Our Tools</h2>
-        <div class="tool-list">
-            <div class="tool-item">
-                <h3>Screenplay Writer</h3>
-                <p>Write and format scripts directly in Google Docs. Free to use, no install needed. <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank" rel="noopener">Open the tool</a></p>
-            </div>
-            <div class="tool-item">
-                <h3>Shot List Generator</h3>
-                <p>Plan every shot before you step on set. <a href="/shot-list/">Try it now</a></p>
-            </div>
-            <div class="tool-item">
-                <h3>More Coming Soon</h3>
-                <p>We're building tools for call sheets, budgeting, and production planning. Stay tuned.</p>
-            </div>
+
+<!-- ══════════════════════════════════════════════════════
+     4. BLOG PREVIEW
+     ══════════════════════════════════════════════════════ -->
+<section class="hp-blog">
+  <div class="hp-wrap">
+
+    <div class="hp-blog-hd">
+      <div>
+        <span class="hp-label">From the Blog</span>
+        <h2 class="hp-h2">Learn from the Field</h2>
+        <p class="hp-blog-hd-sub">Guides, stories, and insights for filmmakers who are actually making films.</p>
+      </div>
+      <a href="/blog/" class="hp-btn-outline">Browse All Articles</a>
+    </div>
+
+    <div class="hp-blog-grid">
+
+      <!-- Card 1: Cannes -->
+      <a href="/what-to-do-in-cannes/" class="hp-blog-card">
+        <div class="hp-blog-thumb">
+          <svg viewBox="0 0 360 202" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="360" height="202" fill="#162032"/>
+            <circle cx="180" cy="100" r="140" fill="#c9a84c" fill-opacity=".08"/>
+            <!-- Trophy -->
+            <rect x="164" y="130" width="52" height="10" rx="4" fill="#c9a84c"/>
+            <rect x="172" y="116" width="36" height="18" rx="2" fill="#c9a84c"/>
+            <path d="M148 74 Q148 120 190 120 Q232 120 212 74Z" fill="none" stroke="#c9a84c" stroke-width="6"/>
+            <line x1="148" y1="74" x2="212" y2="74" stroke="#c9a84c" stroke-width="6" stroke-linecap="round"/>
+            <path d="M148 84 Q132 84 132 98 Q132 112 150 112" stroke="#c9a84c" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M212 84 Q228 84 228 98 Q228 112 210 112" stroke="#c9a84c" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <text x="173" y="105" fill="#162032" font-size="18">★</text>
+            <!-- Character left -->
+            <rect x="58" y="120" width="46" height="42" rx="11" fill="#2c3e50"/>
+            <circle cx="81" cy="108" r="18" fill="#d4956a"/>
+            <path d="M63 102 Q65 86 81 84 Q97 86 99 102 Q92 92 81 90 Q70 92 63 102Z" fill="#5d3a1a"/>
+            <path d="M62 128 Q48 112 38 98" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M104 128 Q118 112 128 98" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <circle cx="38" cy="98" r="7" fill="#d4956a"/>
+            <circle cx="128" cy="98" r="7" fill="#d4956a"/>
+            <path d="M73 161 L69 188" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M89 161 L93 188" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <!-- Character right -->
+            <rect x="256" y="120" width="46" height="42" rx="11" fill="#c0533a"/>
+            <circle cx="279" cy="108" r="18" fill="#d4956a"/>
+            <path d="M261 102 Q263 86 279 84 Q295 86 297 102 Q290 92 279 90 Q268 92 261 102Z" fill="#3d2b1f"/>
+            <path d="M260 128 Q246 112 236 98" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M302 128 Q316 112 326 98" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <circle cx="236" cy="98" r="7" fill="#d4956a"/>
+            <circle cx="326" cy="98" r="7" fill="#d4956a"/>
+            <path d="M271 161 L267 188" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M287 161 L291 188" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <!-- Confetti -->
+            <circle cx="36"  cy="36"  r="5" fill="#c9a84c"/>
+            <circle cx="80"  cy="22"  r="3" fill="#c0533a"/>
+            <circle cx="145" cy="16"  r="4" fill="#2a7f7f"/>
+            <circle cx="225" cy="18"  r="3" fill="#c9a84c"/>
+            <circle cx="286" cy="28"  r="5" fill="#c0533a"/>
+            <circle cx="338" cy="20"  r="3" fill="#2a7f7f"/>
+            <rect x="46"  y="58" width="9" height="6" rx="1.5" fill="#c9a84c" transform="rotate(-22 46 58)"/>
+            <rect x="296" y="52" width="9" height="6" rx="1.5" fill="#c0533a" transform="rotate(16 296 52)"/>
+            <rect x="165" y="26" width="7" height="5" rx="1"   fill="#e8c96a" transform="rotate(38 165 26)"/>
+            <circle cx="322" cy="76" r="4" fill="#e8c96a"/>
+            <text x="154" y="50" fill="#c9a84c" font-size="12" opacity=".7">★</text>
+          </svg>
         </div>
+        <div class="hp-blog-body">
+          <span class="hp-blog-tag">Festival Guide</span>
+          <h3 class="hp-blog-title">What to Do in Cannes</h3>
+          <p class="hp-blog-excerpt">From La Croisette to the Palais — how to make the most of the world's most famous film festival, whether you're there to network or just soak it in.</p>
+          <span class="hp-blog-more">Read More →</span>
+        </div>
+      </a>
+
+      <!-- Card 2: Film School -->
+      <a href="/directors-who-didnt-go-to-film-school/" class="hp-blog-card">
+        <div class="hp-blog-thumb">
+          <svg viewBox="0 0 360 202" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="360" height="202" fill="#162032"/>
+            <circle cx="190" cy="95" r="120" fill="#2a7f7f" fill-opacity=".07"/>
+            <!-- Tripod -->
+            <line x1="172" y1="118" x2="130" y2="188" stroke="#3d5166" stroke-width="5" stroke-linecap="round"/>
+            <line x1="172" y1="118" x2="172" y2="188" stroke="#3d5166" stroke-width="5" stroke-linecap="round"/>
+            <line x1="172" y1="118" x2="214" y2="188" stroke="#3d5166" stroke-width="5" stroke-linecap="round"/>
+            <rect x="148" y="106" width="48" height="8" rx="3" fill="#3d5166"/>
+            <!-- Camera -->
+            <rect x="144" y="72" width="58" height="38" rx="5" fill="#1e2f45"/>
+            <rect x="150" y="63" width="20" height="13" rx="3" fill="#1e2f45"/>
+            <circle cx="173" cy="91" r="14" fill="#0d1b2a"/>
+            <circle cx="173" cy="91" r="11" fill="#162032"/>
+            <circle cx="173" cy="91" r="7"  fill="#2a7f7f"/>
+            <circle cx="173" cy="91" r="3"  fill="#0d1b2a"/>
+            <circle cx="168" cy="86" r="2"  fill="#e8c96a" opacity=".5"/>
+            <rect x="188" y="72" width="12" height="9" rx="2" fill="#3d5166"/>
+            <circle cx="196" cy="88" r="4.5" fill="#c0533a"/>
+            <!-- Director with beret -->
+            <rect x="262" y="118" width="52" height="50" rx="13" fill="#2c3e50"/>
+            <circle cx="288" cy="104" r="20" fill="#d4956a"/>
+            <ellipse cx="288" cy="90"  rx="23" ry="8"  fill="#c9a84c"/>
+            <ellipse cx="298" cy="88"  rx="10" ry="5"  fill="#c9a84c"/>
+            <circle cx="281" cy="103" r="2.5" fill="#2c3e50"/>
+            <circle cx="295" cy="103" r="2.5" fill="#2c3e50"/>
+            <path d="M281 111 Q288 116 295 111" stroke="#2c3e50" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- arm + megaphone -->
+            <path d="M266 130 Q252 118 238 110" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+            <circle cx="238" cy="110" r="8" fill="#d4956a"/>
+            <polygon points="238,110 210,97 210,123" fill="#c9a84c"/>
+            <rect x="228" y="106" width="15" height="8" rx="2.5" fill="#e8c96a"/>
+            <path d="M207 98 Q196 105 196 110 Q196 115 207 122" stroke="#c9a84c" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity=".7"/>
+            <path d="M310 130 Q324 142 328 157" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+            <path d="M278 167 L274 196" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M298 167 L302 196" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <!-- Decor -->
+            <text x="36"  y="54"  fill="#c9a84c" font-size="14" opacity=".8">★</text>
+            <text x="330" y="172" fill="#c9a84c" font-size="11" opacity=".6">★</text>
+            <circle cx="56"  cy="172" r="4" fill="#2a7f7f" opacity=".5"/>
+            <circle cx="348" cy="48"  r="3" fill="#c9a84c"  opacity=".5"/>
+            <circle cx="104" cy="28"  r="4" fill="#c0533a"  opacity=".4"/>
+          </svg>
+        </div>
+        <div class="hp-blog-body">
+          <span class="hp-blog-tag">Filmmaker Stories</span>
+          <h3 class="hp-blog-title">Directors Who Didn't Go to Film School</h3>
+          <p class="hp-blog-excerpt">Nolan. Tarantino. Fincher. Some of the greatest directors never set foot in a film school. Here's what they did instead — and what you can learn from it.</p>
+          <span class="hp-blog-more">Read More →</span>
+        </div>
+      </a>
+
+      <!-- Card 3: Script Length -->
+      <a href="/how-long-is-the-usual-feature-length-film-script/" class="hp-blog-card">
+        <div class="hp-blog-thumb">
+          <svg viewBox="0 0 360 202" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="360" height="202" fill="#162032"/>
+            <circle cx="155" cy="100" r="120" fill="#c9a84c" fill-opacity=".07"/>
+            <!-- Typewriter -->
+            <rect x="44"  y="102" width="190" height="80" rx="8" fill="#1e2f45"/>
+            <rect x="54"  y="87"  width="170" height="22" rx="5" fill="#2c3e50"/>
+            <!-- paper -->
+            <rect x="78"  y="66"  width="122" height="28" rx="4" fill="#f5f0e8"/>
+            <rect x="86"  y="72"  width="55"  height="2" rx="1" fill="#3d5166" opacity=".35"/>
+            <rect x="86"  y="78"  width="75"  height="2" rx="1" fill="#3d5166" opacity=".35"/>
+            <rect x="86"  y="84"  width="40"  height="2" rx="1" fill="#3d5166" opacity=".35"/>
+            <!-- keys row 1 -->
+            <g fill="#3d5166">
+              <rect x="56"  y="116" width="16" height="12" rx="3"/>
+              <rect x="77"  y="116" width="16" height="12" rx="3"/>
+              <rect x="98"  y="116" width="16" height="12" rx="3"/>
+              <rect x="119" y="116" width="16" height="12" rx="3"/>
+              <rect x="140" y="116" width="16" height="12" rx="3"/>
+              <rect x="161" y="116" width="16" height="12" rx="3"/>
+              <rect x="182" y="116" width="16" height="12" rx="3"/>
+              <rect x="203" y="116" width="16" height="12" rx="3"/>
+              <!-- row 2 -->
+              <rect x="62"  y="133" width="16" height="12" rx="3"/>
+              <rect x="83"  y="133" width="16" height="12" rx="3"/>
+              <rect x="104" y="133" width="16" height="12" rx="3"/>
+              <rect x="125" y="133" width="16" height="12" rx="3"/>
+              <rect x="146" y="133" width="16" height="12" rx="3"/>
+              <rect x="167" y="133" width="16" height="12" rx="3"/>
+              <rect x="188" y="133" width="16" height="12" rx="3"/>
+              <!-- spacebar -->
+              <rect x="78"  y="150" width="120" height="12" rx="3"/>
+            </g>
+            <rect x="209" y="133" width="16" height="12" rx="3" fill="#c9a84c" opacity=".75"/>
+            <rect x="232" y="88"  width="8"  height="30" rx="3" fill="#3d5166"/>
+            <!-- Writer character -->
+            <rect x="278" y="164" width="68" height="8" rx="3" fill="#2c3e50"/>
+            <line x1="284" y1="172" x2="278" y2="200" stroke="#3d5166" stroke-width="5" stroke-linecap="round"/>
+            <line x1="340" y1="172" x2="346" y2="200" stroke="#3d5166" stroke-width="5" stroke-linecap="round"/>
+            <rect x="282" y="118" width="54" height="50" rx="13" fill="#c0533a"/>
+            <circle cx="309" cy="104" r="20" fill="#d4956a"/>
+            <path d="M289 98 Q291 80 309 78 Q327 80 329 98 Q322 86 309 84 Q296 86 289 98Z" fill="#5d3a1a"/>
+            <circle cx="320" cy="83" r="9" fill="#5d3a1a"/>
+            <circle cx="302" cy="103" r="2.5" fill="#2c3e50"/>
+            <circle cx="316" cy="103" r="2.5" fill="#2c3e50"/>
+            <path d="M302 111 Q309 116 316 111" stroke="#2c3e50" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- writing arm -->
+            <path d="M286 130 Q267 140 252 152" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+            <circle cx="252" cy="152" r="8" fill="#d4956a"/>
+            <g transform="translate(244,146) rotate(-38)">
+              <rect x="-3" y="-18" width="6" height="23" rx="2" fill="#c9a84c"/>
+              <polygon points="-3,5 3,5 0,12" fill="#e8c96a"/>
+              <rect x="-3" y="-22" width="6" height="6" rx="1.5" fill="#3d5166"/>
+            </g>
+            <path d="M332 130 Q345 142 348 162" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+            <path d="M295 167 L291 196" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M323 167 L327 196" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <!-- Floating script -->
+            <rect x="22" y="80" width="26" height="34" rx="3" fill="#1e2f45" transform="rotate(-12 22 80)"/>
+            <rect x="16" y="86" width="18" height="2" rx="1" fill="#3d5166" transform="rotate(-12 16 86)"/>
+            <rect x="16" y="92" width="13" height="2" rx="1" fill="#3d5166" transform="rotate(-12 16 92)"/>
+            <!-- Decor -->
+            <text x="22"  y="48"  fill="#c9a84c" font-size="16" opacity=".8">★</text>
+            <text x="340" y="188" fill="#c9a84c" font-size="12" opacity=".6">★</text>
+            <circle cx="344" cy="44" r="4" fill="#c9a84c" opacity=".5"/>
+            <circle cx="28"  cy="162" r="3" fill="#2a7f7f" opacity=".6"/>
+          </svg>
+        </div>
+        <div class="hp-blog-body">
+          <span class="hp-blog-tag">Craft &amp; Technique</span>
+          <h3 class="hp-blog-title">How Long Is a Feature-Length Film Script?</h3>
+          <p class="hp-blog-excerpt">The one-page-per-minute rule, what counts as a "feature," and everything short filmmakers need to know about script length before they start writing.</p>
+          <span class="hp-blog-more">Read More →</span>
+        </div>
+      </a>
+
     </div>
+  </div>
 </section>
 
-<!-- Why We Build It -->
-<section class="why-us">
-    <div class="container">
-        <h2>Why Short Films Matter</h2>
-        <p>Short films are where filmmakers learn their craft, take risks, and find their voice. We built Script and Pad because the tools and knowledge to make great short films should be accessible to everyone — not just people with expensive software or film school degrees. We're building an ecosystem: tools that work, content that teaches, and a growing library of resources for independent filmmakers at every stage.</p>
+
+<!-- ══════════════════════════════════════════════════════
+     5. CTA BANNER
+     ══════════════════════════════════════════════════════ -->
+<section class="hp-cta">
+  <div class="hp-wrap">
+    <div class="hp-cta-card">
+      <span class="hp-label">Ready when you are</span>
+      <h2 class="hp-cta-h2">Your film doesn't<br>make itself. <em>Let's go.</em></h2>
+      <p class="hp-cta-sub">From your first script to your final cut — Script and Pad has the tools and guides to help you ship your short film.</p>
+      <div class="hp-cta-btns">
+        <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" class="hp-btn-gold" target="_blank" rel="noopener">Write Your Script ↗</a>
+        <a href="/blog/" class="hp-btn-outline">Explore the Blog</a>
+      </div>
+      <p class="hp-cta-note"><b>Free</b> &nbsp;·&nbsp; <b>No credit card</b> &nbsp;·&nbsp; <b>No install needed</b></p>
     </div>
+  </div>
 </section>
 
-<!-- Call to Action Section -->
-<section class="cta-section">
-    <div class="container">
-        <h2>Start Making Your Film Today</h2>
-        <p>From your first script to your final cut — Script and Pad has the tools and guides to help you get there.</p>
-        <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" class="cta cta-primary" target="_blank" rel="noopener">Write Your Script</a>
-        <a href="/blog/" class="cta cta-secondary">Explore the Blog</a>
-        <p>More tools coming soon — shot lists, call sheets, and more.</p>
+
+<!-- ══════════════════════════════════════════════════════
+     6. FOOTER
+     ══════════════════════════════════════════════════════ -->
+<div class="hp-foot">
+  <div class="hp-wrap">
+    <div class="hp-foot-inner">
+      <a href="/" class="hp-foot-brand">
+        <div class="hp-foot-mark">S</div>
+        <span class="hp-foot-name">Script &amp; Pad</span>
+      </a>
+      <p class="hp-foot-copy">© 2025 Script and Pad. All Rights Reserved.</p>
+      <ul class="hp-foot-links">
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+        <li><a href="/support.html">Support</a></li>
+        <li><a href="/blog/">Blog</a></li>
+      </ul>
     </div>
-</section>
+  </div>
+</div>
 
     </main>
 
