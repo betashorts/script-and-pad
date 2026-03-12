@@ -243,17 +243,20 @@ body {
   padding: 3rem 2rem;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  font-size: 1.1rem;
-  line-height: 1.75;
-  color: #444;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #333;
+  border-left: 6px solid #ffd700; /* gold accent strip */
+  position: relative;
 }
 
 .blog-post h1 {
-  font-size: 2.75rem;
+  font-size: 3rem;
   margin-bottom: 1.5rem;
-  font-weight: 700;
-  color: #111827;
+  font-weight: 800;
+  color: #3b82f6; /* blue accent matching site links */
+  font-family: "Georgia", "Times New Roman", serif;
 }
 
 /* decorative svgs around blog posts */
@@ -286,6 +289,17 @@ body {
   font-size: 2rem;
   margin-top: 2.5rem;
   margin-bottom: 1rem;
+  color: #1e293b;
+  font-family: "Georgia", serif;
+  position: relative;
+}
+.blog-post h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: #ffd700;
+  margin-top: 0.5rem;
 }
 
 .blog-post h3 {
@@ -297,17 +311,27 @@ body {
 .blog-post p {
   font-size: 1.125rem;
   margin-bottom: 1.75rem;
-  color: #555;
-  line-height: 1.8;
+  color: #444;
+  line-height: 1.85;
+}
+
+.blog-post .post-date {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .blog-post blockquote {
   margin: 2rem 0;
   padding-left: 1.5rem;
-  border-left: 4px solid #e5e7eb;
-  color: #555;
+  border-left: 4px solid #ffd700;
+  color: #333;
   font-style: italic;
   font-size: 1.25rem;
+  background: #fffbea;
+  border-radius: 4px;
 }
 
 .blog-post ul,
@@ -318,13 +342,13 @@ body {
 }
 
 .blog-post a {
-  color: #ffd700;
+  color: #3b82f6;
   text-decoration: underline;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .blog-post a:hover {
-  color: #c69c00;
+  color: #1e40af;
 }
 
 .blog-post ul {
@@ -339,13 +363,13 @@ body {
 }
 
 .blog-post a {
-  color: #ffd700;
+  color: #3b82f6;
   text-decoration: underline;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .blog-post a:hover {
-  color: #2575fc;
+  color: #1e40af;
 }
 
 .reading-time {

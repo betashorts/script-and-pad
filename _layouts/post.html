@@ -3,7 +3,7 @@ layout: default
 ---
 <article class="blog-post">
     {% comment %} decorative svgs for feel-good theme; choose random icons on each page load {% endcomment %}
-    {% assign svgs = "/assets/creatives/icon-writing.svg,/assets/creatives/icon-directing.svg,/assets/creatives/icon-templates.svg" | split: "," %}
+    {% assign svgs = "/assets/creatives/icon-writing.svg,/assets/creatives/icon-directing.svg,/assets/creatives/icon-templates.svg,/assets/creatives/blog-thumb-writing.svg,/assets/creatives/blog-thumb-directing.svg,/assets/creatives/blog-thumb-festivals.svg" | split: "," %}
     {% assign left_svg = svgs | sample %}
     {% assign right_svg = svgs | sample %}
     <div class="decorations">
@@ -12,7 +12,7 @@ layout: default
     </div>
 
     <h1>{{ page.title }}</h1>
-    <p>{{ page.date | date: "%B %d, %Y" }}</p>
+    <p class="post-date">{{ page.date | date: "%B %d, %Y" }}</p>
     <div class="content">
         {{ content }}
     </div>
