@@ -1,17 +1,233 @@
 ---
 layout: default
 title: "Blog - Screenplay Writer"
+meta: |
+  <meta name="description" content="Articles and tutorials about screenplay writing, tools, and productivity.">
 ---
-<div class="blog-listing">
-    <h1 class="blog-title">Blog</h1>
-    <ul class="blog-list">
-        {% for post in site.posts %}
-        <li class="blog-item">
-            <a href="{{ post.url }}" class="blog-link">
-                <h2 class="blog-post-title">{{ post.title }}</h2>
-            </a>
-            <p class="blog-meta">{{ post.date | date: "%B %d, %Y" }}</p>
-        </li>
-        {% endfor %}
-    </ul>
+
+<div class="blog-container">
+    <div class="blog-header">
+        <h1 class="blog-title">Articles & Tips</h1>
+        <p class="blog-subtitle">Guides, updates, and thoughts on writing and productivity for script authors</p>
+    </div>
+
+    <div class="blog-content">
+        <!-- Category Filter (Optional) -->
+        <div class="blog-categories">
+            <a href="#all" class="category-filter active" onclick="filterByCategory('all')">All Posts</a>
+            <a href="#writing" class="category-filter" onclick="filterByCategory('writing')">Writing</a>
+            <a href="#tools" class="category-filter" onclick="filterByCategory('tools')">Tools</a>
+            <a href="#templates" class="category-filter" onclick="filterByCategory('templates')">Templates</a>
+        </div>
+
+        <ul class="blog-list">
+            {% assign filtered_posts = site.posts | where: "lang", "en" %}
+            {% for post in filtered_posts %}
+            <li class="blog-item" data-category="{% if post.categories contains 'writing' %}writing{% elsif post.categories contains 'tools' %}tools{% elsif post.categories contains 'templates' %}templates{% else %}general{% endif %}">
+                <a href="{{ post.url }}" class="blog-link">
+                    <div class="blog-item-content">
+                        <h2 class="blog-post-title">{{ post.title }}</h2>
+                        <p class="blog-post-excerpt">
+                            {% if post.excerpt %}
+                                {{ post.excerpt | strip_html | truncatewords: 25 }}
+                            {% else %}
+                                {{ post.content | strip_html | truncatewords: 25 }}
+                            {% endif %}
+                        </p>
+                        <div class="blog-item-meta">
+                            <span class="blog-meta-date">{{ post.date | date: "%B %d, %Y" }}</span>
+                            <span class="blog-meta-category">
+                                {% if post.categories contains 'writing' %}
+                                    Writing
+                                {% elsif post.categories contains 'tools' %}
+                                    Tools
+                                {% elsif post.categories contains 'templates' %}
+                                    Templates
+                                {% else %}
+                                    General
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
+
+<style>
+.blog-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+}
+
+.blog-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.blog-title {
+    font-size: 2.75rem;
+    color: #1e1e2f;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-family: "Georgia", "Times New Roman", serif;
+}
+
+.blog-subtitle {
+    font-size: 1.125rem;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: "Charter", "Times New Roman", serif;
+}
+
+.blog-categories {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+    justify-content: center;
+}
+
+.category-filter {
+    padding: 0.5rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.category-filter:hover,
+.category-filter.active {
+    border-color: #6a11cb;
+    color: #6a11cb;
+    background: #f0f0ff;
+}
+
+.blog-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.blog-item {
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.blog-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 1.5rem;
+    background: #ffffff;
+    border-radius: 8px;
+    border-left: 4px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.blog-link:hover {
+    border-left-color: #d1d5db;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateX(2px);
+}
+
+.blog-item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.blog-post-title {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #1e1e2f;
+    font-weight: 600;
+    line-height: 1.3;
+    font-family: "Georgia", "Times New Roman", serif;
+}
+
+.blog-post-excerpt {
+    margin: 0;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.blog-item-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.blog-meta-date {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.blog-meta-category {
+    display: inline-block;
+    background: #f3f4f6;
+    color: #374151;
+    padding: 0.25rem 0.75rem;
+    border-radius: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-family: "Georgia", "Times New Roman", serif;
+}
+
+@media (max-width: 768px) {
+    .blog-title {
+        font-size: 2rem;
+    }
+
+    .blog-link {
+        padding: 1.25rem;
+    }
+
+    .blog-post-title {
+        font-size: 1.2rem;
+    }
+
+    .blog-categories {
+        gap: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .category-filter {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+</style>
+
+<script>
+function filterByCategory(category) {
+    const items = document.querySelectorAll('.blog-item');
+    const filters = document.querySelectorAll('.category-filter');
+
+    // Update active filter
+    filters.forEach(f => f.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // Filter items
+    items.forEach(item => {
+        if (category === 'all') {
+            item.style.display = 'block';
+        } else {
+            item.style.display = item.dataset.category === category ? 'block' : 'none';
+        }
+    });
+}
+</script>

@@ -1,19 +1,68 @@
 ---
 layout: default
-title: "Screenplay Writer - Welcome"
-meta: '<meta name="description" content="Easy-to-use screenplay writing tool for writers working in Google Docs.">'
+title: "Screenplay Writer - Easy Google‑Docs Script Tool"
+meta: |
+  <meta name="description" content="Write screenplays directly inside Google Docs with our lightweight, easy-to-use tool. No downloads, no fuss—just write.">
 ---
+
+<!-- Hero Section -->
 <section class="hero">
     <div class="container">
-        <h1>Welcome to Screenplay Writer</h1>
-        <p>We provide easy-to-use screenplay writing tool for writers, so that they can work on their scripts while not moving away from Google Docs Environment. Explore our Terms of Service and Privacy Policy below.</p>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <a href="/terms" class="cta">View Terms of Service</a>
-        <a href="/privacy" class="cta">View Privacy Policy</a>
-        <a href="/support" class="cta">Support</a>
+        <h1>Write Screenplays in Google Docs</h1>
+        <p>Screenplay Writer keeps you inside the familiar Google Docs interface while giving you formatting, export and template tools built specifically for script authors.<br> No software to install, completely free to use.</p>
+        <div class="hero-buttons">
+            <a href="/game/" class="cta cta-primary">Open the Tool</a>
+            <a href="/blog/" class="cta cta-secondary">Read the Blog</a>
+        </div>
+        <p class="hero-subtext">Build your script. Export to PDF, Fountain, or Final Draft. Writing has never been simpler.</p>
+    </div>
+</section>
+
+<!-- What We Offer -->
+<section class="featured-categories">
+    <div class="container">
+        <h2>What You’ll Find Here</h2>
+        <p>A blend of writing advice, tool updates, and practical resources for anyone working on a screenplay. Whether you're just getting started or looking to polish a draft, there’s something for every writer.</p>
+        <p>Need templates? <a href="/shot-list/">Check out the shot‑list generator</a>, or <a href="/blog/">browse our full archive of posts</a>.</p>
+    </div>
+</section>
+
+<!-- Featured Posts Section -->
+<section class="featured-posts" id="featured-posts">
+    <div class="container">
+        <h2>Popular Articles</h2>
+        <div class="posts-grid">
+            <!-- Placeholder items; update as needed -->
+            {% for post in site.posts limit:4 %}
+            <article class="featured-post">
+                <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
+                <div class="post-meta">
+                    <span class="category-tag">{% if post.categories.size > 0 %}{{ post.categories[0] | capitalize }}{% else %}General{% endif %}</span>
+                </div>
+                <a href="{{ post.url }}" class="read-more">Read More →</a>
+            </article>
+            {% endfor %}
+        </div>
+        <div class="view-all">
+            <a href="/blog" class="cta cta-secondary">Browse All Articles</a>
+        </div>
+    </div>
+</section>
+
+<!-- Why We Build It -->
+<section class="why-us">
+    <div class="container">
+        <h2>Why We Built This</h2>
+        <p>Everyone deserves a clean, distraction‑free way to write scripts without paying for expensive software. We created Screenplay Writer to be small, fast, and focused solely on writers.</p>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to Start Writing?</h2>
+        <p>Jump into the editor or catch up on our latest tips.</p>
+        <a href="/game/" class="cta cta-primary">Open the Tool</a>
     </div>
 </section>

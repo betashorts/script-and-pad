@@ -1,4 +1,5 @@
 /* General styles */
+@import url("https://fonts.googleapis.com/css2?family=Charter:wght@400;500;600;700&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +7,7 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Charter", "Roboto", sans-serif;
   background-color: #f9f9f9; /* Light gray background */
   color: #333; /* Dark text for readability */
   line-height: 1.8;
@@ -199,6 +200,12 @@ body {
 
 .blog-post a:hover {
   color: #2575fc;
+}
+
+.reading-time {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
 }
 
 /* Updated Related Posts Styling */
@@ -433,4 +440,321 @@ footer {
 .shot-list-container .success {
   background-color: #e8f5e9;
   color: #2e7d32;
+}
+/* ===== navbar toggle and branding enhancements ===== */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.navbar-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.hamburger-line {
+    width: 20px;
+    height: 2px;
+    background: #fff;
+    border-radius: 1px;
+    transition: all 0.2s ease;
+}
+
+.navbar-toggle.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.navbar-toggle.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-toggle.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.brand-main {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.025em;
+}
+
+.brand-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #d1d5db;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+}
+
+/* hero button groups and subtext */
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 2rem 0 1rem 0;
+}
+
+.hero-subtext {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    margin-top: 2rem;
+    color: #d1d5db;
+}
+
+/* mobile responsive navbar and toggle */
+@media (max-width: 768px) {
+    .navbar-toggle {
+        display: flex;
+    }
+
+    .navbar-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: #1e1e2f;
+        border-top: 1px solid #e5e7eb;
+        border-bottom: 1px solid #e5e7eb;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .navbar-links.active {
+        max-height: 400px;
+    }
+
+    .navbar-links li {
+        display: block;
+        border-bottom: 1px solid #2a2a46;
+    }
+
+    .navbar-links li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-link {
+        display: block;
+        padding: 1rem 1.5rem;
+        border-radius: 0;
+    }
+
+    .nav-divider {
+        display: none;
+    }
+
+    .navbar-container {
+        position: relative;
+    }
+}
+
+/* blog-container rules are already defined inline in blog.html but could be placed here if preferred */
+
+/* Reading progress indicator bar */
+#reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 0%;
+    background: #6a11cb;
+    z-index: 1001;
+    transition: width 0.1s ease;
+}
+
+/* Featured posts grid and homepage section styles */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 2rem auto;
+}
+
+.featured-post {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  border: 1px solid #e2e8f0;
+}
+
+.featured-post:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  border-color: #cbd5e1;
+}
+
+.featured-post-large {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.featured-post-large h3 {
+  font-size: 1.8rem;
+}
+
+.post-badge {
+  display: inline-block;
+  background: #e5e7eb;
+  color: #374151;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.featured-post h3 {
+  font-size: 1.5rem;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.featured-post h3 a {
+  color: #1e293b;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.featured-post h3 a:hover {
+  color: #3b82f6;
+}
+
+.post-excerpt {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.post-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.category-tag {
+  display: inline-block;
+  background: #e2e8f0;
+  color: #475569;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.read-time {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.read-more {
+  display: inline-block;
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.read-more:hover {
+  color: #1d4ed8;
+  margin-left: 0.5rem;
+}
+
+.view-all {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* Why Us Section */
+.why-us {
+  padding: 4rem 2rem;
+  background: #ffffff;
+}
+
+.why-us h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #111827;
+  font-weight: 700;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Featured categories section (homepage) */
+.featured-categories {
+  padding: 4rem 2rem;
+  background: #ffffff;
+}
+
+.featured-categories h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #111827;
+  font-weight: 700;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+/* Call‑to‑action section styling */
+.cta-section {
+  padding: 4rem 2rem;
+  background: #f9fafb;
+  color: #111827;
+  text-align: center;
+}
+
+.cta-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+.cta-section p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.95;
 }
