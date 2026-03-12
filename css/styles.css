@@ -15,10 +15,11 @@ body {
 
 /* Header */
 .navbar {
-  background-color: #1e1e2f;
+  background-color: #ffffff;
   padding: 0.75rem 1.5rem;
-  color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #111827;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .navbar-container {
@@ -27,6 +28,17 @@ body {
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #111827;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: #ffd700;
 }
 
 .navbar-brand {
@@ -64,6 +76,15 @@ body {
 
 .navbar-links a:hover {
   color: #ffd700;
+}
+
+/* make mobile menu consistent when open */
+.navbar-links {
+  background: #fff;
+}
+
+.navbar-toggle .hamburger-line {
+  background: #111827;
 }
 
 /* Hero Section */
@@ -158,26 +179,67 @@ body {
 
 /* Blog Post Styling */
 .blog-post {
-  margin: 2rem auto;
-  max-width: 800px;
-  padding: 2rem;
+  margin: 3rem auto;
+  max-width: 700px;
+  padding: 3rem 2rem;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: #444;
 }
 
 .blog-post h1 {
+  font-size: 2.75rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.blog-post h2 {
   font-size: 2rem;
+  margin-top: 2.5rem;
   margin-bottom: 1rem;
-  font-weight: bold;
-  color: #1e1e2f;
+}
+
+.blog-post h3 {
+  font-size: 1.75rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
 }
 
 .blog-post p {
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+  margin-bottom: 1.75rem;
   color: #555;
   line-height: 1.8;
+}
+
+.blog-post blockquote {
+  margin: 2rem 0;
+  padding-left: 1.5rem;
+  border-left: 4px solid #e5e7eb;
+  color: #555;
+  font-style: italic;
+  font-size: 1.25rem;
+}
+
+.blog-post ul,
+.blog-post ol {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+  font-size: 1.125rem;
+}
+
+.blog-post a {
+  color: #ffd700;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.blog-post a:hover {
+  color: #c69c00;
 }
 
 .blog-post ul {
@@ -464,7 +526,7 @@ footer {
 .hamburger-line {
   width: 20px;
   height: 2px;
-  background: #fff;
+  background: #111827;
   border-radius: 1px;
   transition: all 0.2s ease;
 }
