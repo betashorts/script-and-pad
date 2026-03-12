@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/css/styles.css">
     {{ page.meta | default: "" }}
 
+{% if page.date %}
 {% raw %}
 <script type="application/ld+json">
 {
@@ -24,7 +25,7 @@
   "image": "https://scriptandpad.com/logo.jpg", 
   "author": {
     "@type": "Person",
-    "name": "Script and Pad"
+  "name": "Script and Pad"
   },
   "publisher": {
     "@type": "Organization",
@@ -45,8 +46,7 @@
 }
 </script>
 {% endraw %}
-
-{% if page.images %}
+{% endif %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
