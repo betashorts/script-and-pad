@@ -87,7 +87,7 @@ tags:
 
 <p>Whether you’re crafting your next big idea or polishing your screenplay, the <strong>Screenplay Writer</strong> add-on for Google Docs can help. With automatic formatting and seamless collaboration features, it’s perfect for writers who want to focus on their craft without worrying about technical details.</p>
 
-<p>Try Screenplay Writer free for 7 days, and take advantage of its powerful tools for just $9.99 as a one-time fee. <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Learn more here</a>.</p>
+<p>Try Screenplay Writer free for 21 days, and take advantage of its powerful tools for just $9.99 as a one-time fee. <a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank">Learn more here</a>.</p>
 
 <a href="https://youtu.be/LH2-UVDpriw" target="_blank" rel="noopener noreferrer">
     <img 

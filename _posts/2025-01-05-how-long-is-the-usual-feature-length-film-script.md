@@ -111,6 +111,6 @@ tags:
         height="315">
 </a>
 
-<p>Start your screenplay journey today with a <strong>7-day free trial</strong>. After that, enjoy the full version for a one-time fee of just <strong>$9.99</strong>. Write smarter, not harder!</p>
+<p>Start your screenplay journey today with a <strong>21-day free trial</strong>. After that, enjoy the full version for a one-time fee of just <strong>$9.99</strong>. Write smarter, not harder!</p>
 
 <p><a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" target="_blank"><strong>Get Started with Screenplay Writer</strong></a></p>
