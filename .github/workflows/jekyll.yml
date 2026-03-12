@@ -8,29 +8,36 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # opt into Node.js 24 for JavaScript actions ahead of the June 2026
+      # switch; set to false later if you encounter problems
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        # upgraded to v4 to avoid Node.js 20 deprecation warning
+        uses: actions/checkout@v4
+        # if you run into Node.js 24 compatibility issues you can opt out with
+        # ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.0'
-    
-    - name: Install dependencies
-      run: |
-        gem install bundler
-        bundle install
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0"
 
-    - name: Build the site
-      run: |
-        bundle exec jekyll clean
-        bundle exec jekyll build --trace
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./_site
-        publish_branch: gh-pages  # Ensures the built files go to gh-pages
+      - name: Build the site
+        run: |
+          bundle exec jekyll clean
+          bundle exec jekyll build --trace
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages # Ensures the built files go to gh-pages
