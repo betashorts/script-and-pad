@@ -1,5 +1,9 @@
 name: Jekyll Build and Deploy
 
+env:
+  # globally opt into Node.js 24 for JavaScript actions
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   push:
     branches:
@@ -17,6 +21,9 @@ jobs:
       - name: Checkout code
         # upgraded to v4 to avoid Node.js 20 deprecation warning
         uses: actions/checkout@v4
+        env:
+          # make sure the variable is available even during the checkout action
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
         # if you run into Node.js 24 compatibility issues you can opt out with
         # ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true
 
