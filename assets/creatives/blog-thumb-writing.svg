@@ -1,0 +1,43 @@
+<svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="380" height="220" fill="#0d1b2a"/>
+          <circle cx="310" cy="50" r="90" fill="#162032" opacity="0.9"/>
+          <circle cx="60" cy="200" r="70" fill="#162032" opacity="0.6"/>
+          <!-- Typewriter -->
+          <rect x="80" y="70" width="160" height="100" rx="12" fill="#2c3e50"/>
+          <rect x="85" y="76" width="150" height="65" rx="8" fill="#1e2f45"/>
+          <!-- Paper -->
+          <rect x="100" y="40" width="120" height="80" rx="4" fill="#f5f0e8"/>
+          <rect x="100" y="38" width="120" height="6" rx="3" fill="#c9a84c" opacity="0.4"/>
+          <!-- Text on paper -->
+          <rect x="108" y="50" width="40" height="4" rx="2" fill="#c9a84c"/>
+          <rect x="108" y="58" width="96" height="3" rx="1.5" fill="#8d8880"/>
+          <rect x="108" y="64" width="80" height="3" rx="1.5" fill="#8d8880"/>
+          <rect x="108" y="70" width="88" height="3" rx="1.5" fill="#8d8880"/>
+          <rect x="108" y="76" width="70" height="3" rx="1.5" fill="#8d8880"/>
+          <rect x="108" y="82" width="84" height="3" rx="1.5" fill="#8d8880"/>
+          <!-- Typewriter keys -->
+          <circle cx="98" cy="152" r="5" fill="#3d5166"/>
+          <circle cx="112" cy="152" r="5" fill="#3d5166"/>
+          <circle cx="126" cy="152" r="5" fill="#3d5166"/>
+          <circle cx="140" cy="152" r="5" fill="#3d5166"/>
+          <circle cx="154" cy="152" r="5" fill="#3d5166"/>
+          <circle cx="168" cy="152" r="5" fill="#c9a84c"/>
+          <circle cx="182" cy="152" r="5" fill="#3d5166"/>
+          <circle cx="196" cy="152" r="5" fill="#3d5166"/>
+          <circle cx="210" cy="152" r="5" fill="#3d5166"/>
+          <circle cx="224" cy="152" r="5" fill="#3d5166"/>
+          <!-- Person beside typewriter -->
+          <circle cx="295" cy="105" r="24" fill="#d4956a"/>
+          <path d="M271 98 Q275 76 295 76 Q315 76 319 98" fill="#2c3e50"/>
+          <circle cx="303" cy="106" r="3.5" fill="#0d1b2a"/>
+          <path d="M287 115 Q295 120 303 115" stroke="#0d1b2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <rect x="275" y="128" width="40" height="46" rx="14" fill="#c9a84c"/>
+          <path d="M275 140 Q255 136 248 150" stroke="#d4956a" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="M315 138 Q335 130 340 140" stroke="#d4956a" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <rect x="279" y="170" width="12" height="32" rx="6" fill="#1e2f45"/>
+          <rect x="295" y="170" width="12" height="32" rx="6" fill="#1e2f45"/>
+          <!-- Gold stars floating -->
+          <text x="48" y="80" font-size="20" fill="#c9a84c" opacity="0.5">★</text>
+          <text x="330" y="170" font-size="16" fill="#c9a84c" opacity="0.4">★</text>
+          <circle cx="350" cy="60" r="6" fill="#2a7f7f" opacity="0.7"/>
+        </svg>

@@ -990,7 +990,8 @@ footer {
 
 .feature-icon {
   width: 48px;
-  margin-bottom: 1rem;
+  display: block;
+  margin: 0 auto 1rem;
 }
 
 /* hero graphic in homepage */
@@ -1004,6 +1005,14 @@ footer {
 }
 }
 
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 .feature-item {
   flex: 1 1 250px;
   background: #f9fafb;
@@ -1011,6 +1020,9 @@ footer {
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .feature-item h3 {

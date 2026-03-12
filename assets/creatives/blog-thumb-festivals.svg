@@ -1,0 +1,59 @@
+<svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="380" height="220" fill="#0f1e14"/>
+          <circle cx="60" cy="60" r="80" fill="#162818" opacity="0.9"/>
+          <circle cx="340" cy="180" r="90" fill="#162818" opacity="0.6"/>
+          <!-- Trophy / award -->
+          <rect x="155" y="55" width="70" height="80" rx="10" fill="#c9a84c" opacity="0.15"/>
+          <rect x="160" y="60" width="60" height="70" rx="8" fill="#c9a84c" opacity="0.2"/>
+          <!-- Cup shape -->
+          <path d="M170 65 Q155 80 158 100 Q160 115 185 120 Q210 115 212 100 Q215 80 200 65 Z" fill="#c9a84c"/>
+          <!-- Cup shine -->
+          <path d="M175 72 Q173 85 177 95" stroke="#e8c96a" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+          <!-- Cup base -->
+          <rect x="178" y="120" width="14" height="18" rx="2" fill="#c9a84c"/>
+          <rect x="168" y="135" width="34" height="8" rx="3" fill="#c9a84c"/>
+          <!-- Handles -->
+          <path d="M170 80 Q152 80 152 95 Q152 108 170 108" stroke="#c9a84c" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path d="M200 80 Q218 80 218 95 Q218 108 200 108" stroke="#c9a84c" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <!-- Star on cup -->
+          <text x="185" y="100" font-size="22" fill="#0d1b2a" text-anchor="middle">★</text>
+
+          <!-- Two people cheering -->
+          <!-- Person left -->
+          <circle cx="88" cy="130" r="20" fill="#d4956a"/>
+          <path d="M68 123 Q72 105 88 105 Q104 105 108 123" fill="#2a7f7f"/>
+          <circle cx="95" cy="131" r="3" fill="#0d1b2a"/>
+          <path d="M80 140 Q88 146 96 140" stroke="#0d1b2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <rect x="72" y="148" width="32" height="40" rx="12" fill="#2a7f7f"/>
+          <path d="M72 156 Q52 145 46 153" stroke="#d4956a" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M104 154 Q122 142 128 150" stroke="#d4956a" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <!-- Raised arm -->
+          <path d="M72 155 Q58 138 55 130" stroke="#d4956a" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <!-- Confetti -->
+          <rect x="42" y="95" width="8" height="5" rx="2" fill="#c9a84c" transform="rotate(25 42 95)"/>
+          <rect x="58" y="80" width="6" height="4" rx="1" fill="#c0533a" transform="rotate(-15 58 80)"/>
+          <rect x="30" y="110" width="7" height="4" rx="1" fill="#2a7f7f" transform="rotate(40 30 110)"/>
+
+          <!-- Person right -->
+          <circle cx="295" cy="130" r="20" fill="#d4956a"/>
+          <path d="M275 123 Q279 105 295 105 Q311 105 315 123" fill="#c9a84c"/>
+          <circle cx="302" cy="131" r="3" fill="#0d1b2a"/>
+          <path d="M287 140 Q295 146 303 140" stroke="#0d1b2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <rect x="279" y="148" width="32" height="40" rx="12" fill="#c9a84c"/>
+          <path d="M311 155 Q328 142 334 150" stroke="#d4956a" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <!-- Raised arm right person -->
+          <path d="M311 154 Q326 138 330 130" stroke="#d4956a" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <!-- Confetti right -->
+          <rect x="335" y="95" width="8" height="5" rx="2" fill="#c9a84c" transform="rotate(-25 335 95)"/>
+          <rect x="350" y="115" width="6" height="4" rx="1" fill="#c0533a" transform="rotate(20 350 115)"/>
+          <rect x="320" y="80" width="7" height="4" rx="1" fill="#2a7f7f" transform="rotate(-40 320 80)"/>
+
+          <!-- Spotlight on trophy -->
+          <polygon points="185,0 120,175 250,175" fill="url(#trophylight)" opacity="0.08"/>
+          <defs>
+            <linearGradient id="trophylight" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%" stop-color="#c9a84c"/>
+              <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+        </svg>
