@@ -1,0 +1,165 @@
+<svg viewBox="0 0 460 380" xmlns="http://www.w3.org/2000/svg" width="460" height="380">
+          <!-- Background depth layers -->
+          <rect width="460" height="380" fill="#162032"/>
+          <circle cx="380" cy="80" r="120" fill="#1e2f45" opacity="0.8"/>
+          <circle cx="80" cy="340" r="100" fill="#1e2f45" opacity="0.5"/>
+          <circle cx="230" cy="190" r="200" fill="url(#heroGlow)" opacity="0.3"/>
+          <defs>
+            <radialGradient id="heroGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- Film strip top decoration -->
+          <rect x="0" y="0" width="460" height="28" fill="#0d1b2a"/>
+          <rect x="0" y="24" width="460" height="4" fill="#1e2f45"/>
+          <!-- Perforations -->
+          <rect x="8"  y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="32" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="56" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="80" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="104" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="128" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="152" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="176" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="200" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="224" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="248" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="272" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="296" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="320" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="344" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="368" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="392" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="416" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="440" y="5" width="16" height="14" rx="2" fill="#1e2f45"/>
+
+          <!-- Film strip bottom -->
+          <rect x="0" y="352" width="460" height="28" fill="#0d1b2a"/>
+          <rect x="0" y="352" width="460" height="4" fill="#1e2f45"/>
+          <rect x="8"  y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="32" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="56" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="80" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="104" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="128" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="152" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="176" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="200" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="224" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="248" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="272" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="296" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="320" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="344" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="368" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="392" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+          <rect x="416" y="359" width="16" height="14" rx="2" fill="#1e2f45"/>
+
+          <!-- Giant film reel background -->
+          <circle cx="340" cy="200" r="130" fill="none" stroke="#1e2f45" stroke-width="18"/>
+          <circle cx="340" cy="200" r="95" fill="none" stroke="#1e2f45" stroke-width="6"/>
+          <circle cx="340" cy="200" r="28" fill="#1e2f45"/>
+          <circle cx="340" cy="200" r="10" fill="#0d1b2a"/>
+          <!-- Spokes -->
+          <line x1="340" y1="172" x2="340" y2="88" stroke="#1e2f45" stroke-width="8"/>
+          <line x1="340" y1="228" x2="340" y2="312" stroke="#1e2f45" stroke-width="8"/>
+          <line x1="368" y1="176" x2="432" y2="140" stroke="#1e2f45" stroke-width="8"/>
+          <line x1="312" y1="224" x2="248" y2="260" stroke="#1e2f45" stroke-width="8"/>
+          <line x1="368" y1="224" x2="432" y2="260" stroke="#1e2f45" stroke-width="8"/>
+          <line x1="312" y1="176" x2="248" y2="140" stroke="#1e2f45" stroke-width="8"/>
+
+          <!-- Director's chair -->
+          <line x1="155" y1="310" x2="140" y2="360" stroke="#c9a84c" stroke-width="5" stroke-linecap="round"/>
+          <line x1="215" y1="310" x2="230" y2="360" stroke="#c9a84c" stroke-width="5" stroke-linecap="round"/>
+          <line x1="155" y1="310" x2="215" y2="310" stroke="#c9a84c" stroke-width="5" stroke-linecap="round"/>
+          <line x1="148" y1="285" x2="222" y2="285" stroke="#c9a84c" stroke-width="14" stroke-linecap="round"/>
+          <rect x="148" y="220" width="74" height="68" rx="4" fill="#2c3e50"/>
+          <!-- Chair fabric stripes -->
+          <line x1="165" y1="220" x2="165" y2="288" stroke="#c9a84c" stroke-width="2" opacity="0.4"/>
+          <line x1="185" y1="220" x2="185" y2="288" stroke="#c9a84c" stroke-width="2" opacity="0.4"/>
+          <line x1="205" y1="220" x2="205" y2="288" stroke="#c9a84c" stroke-width="2" opacity="0.4"/>
+          <!-- DIRECTOR text on chair -->
+          <text x="185" y="260" font-size="8" fill="#c9a84c" text-anchor="middle" font-weight="bold" letter-spacing="1" opacity="0.7">DIRECTOR</text>
+
+          <!-- Person on chair (director) -->
+          <!-- Head -->
+          <circle cx="185" cy="182" r="26" fill="#d4956a"/>
+          <!-- Hair / beret -->
+          <ellipse cx="185" cy="163" rx="22" ry="12" fill="#2c3e50"/>
+          <ellipse cx="185" cy="158" rx="18" ry="8" fill="#3d5166"/>
+          <!-- Face -->
+          <circle cx="193" cy="183" r="3.5" fill="#0d1b2a"/>
+          <circle cx="194" cy="182" r="1.2" fill="#fff"/>
+          <path d="M179 191 Q185 197 191 191" stroke="#0d1b2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Megaphone/hand -->
+          <path d="M185 208 Q162 195 155 200" stroke="#d4956a" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <!-- Megaphone -->
+          <polygon points="148,194 148,208 130,218 130,184" fill="#c9a84c"/>
+          <rect x="148" y="194" width="10" height="14" rx="2" fill="#e8c96a"/>
+          <!-- Sound lines -->
+          <path d="M120 188 Q112 201 120 214" stroke="#c9a84c" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+          <path d="M112 182 Q100 201 112 220" stroke="#c9a84c" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+          <!-- Body on chair -->
+          <rect x="162" y="206" width="46" height="52" rx="16" fill="#2a7f7f"/>
+          <!-- Other arm - raised with script -->
+          <path d="M208 215 Q228 205 232 215" stroke="#d4956a" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <!-- Script in hand -->
+          <rect x="225" y="200" width="34" height="44" rx="4" fill="#f5f0e8"/>
+          <rect x="229" y="206" width="22" height="3" rx="1.5" fill="#c9a84c"/>
+          <rect x="229" y="213" width="26" height="2" rx="1" fill="#ccc"/>
+          <rect x="229" y="218" width="20" height="2" rx="1" fill="#ccc"/>
+          <rect x="229" y="223" width="24" height="2" rx="1" fill="#ccc"/>
+          <rect x="229" y="228" width="18" height="2" rx="1" fill="#ccc"/>
+          <rect x="229" y="233" width="22" height="2" rx="1" fill="#ccc"/>
+          <!-- Legs -->
+          <rect x="167" y="254" width="14" height="38" rx="7" fill="#1e2f45"/>
+          <rect x="187" y="254" width="14" height="38" rx="7" fill="#1e2f45"/>
+          <!-- Shoes -->
+          <ellipse cx="174" cy="294" rx="12" ry="6" fill="#0d1b2a"/>
+          <ellipse cx="194" cy="294" rx="12" ry="6" fill="#0d1b2a"/>
+
+          <!-- Clapperboard floating top right area -->
+          <rect x="295" y="55" width="72" height="56" rx="7" fill="#f5f0e8"/>
+          <rect x="295" y="55" width="72" height="18" rx="6" fill="#0d1b2a"/>
+          <!-- Clapper stripes -->
+          <line x1="303" y1="55" x2="299" y2="73" stroke="#c9a84c" stroke-width="4"/>
+          <line x1="315" y1="55" x2="311" y2="73" stroke="#c9a84c" stroke-width="4"/>
+          <line x1="327" y1="55" x2="323" y2="73" stroke="#c9a84c" stroke-width="4"/>
+          <line x1="339" y1="55" x2="335" y2="73" stroke="#c9a84c" stroke-width="4"/>
+          <line x1="351" y1="55" x2="347" y2="73" stroke="#c9a84c" stroke-width="4"/>
+          <line x1="363" y1="55" x2="359" y2="73" stroke="#c9a84c" stroke-width="4"/>
+          <!-- Board body lines -->
+          <rect x="302" y="80" width="56" height="3" rx="1.5" fill="#ddd"/>
+          <rect x="302" y="88" width="46" height="3" rx="1.5" fill="#ddd"/>
+          <rect x="302" y="96" width="50" height="3" rx="1.5" fill="#ddd"/>
+
+          <!-- Camera on tripod right -->
+          <rect x="365" y="295" width="60" height="38" rx="8" fill="#c9a84c"/>
+          <circle cx="387" cy="314" rx="12" r="12" fill="#0d1b2a"/>
+          <circle cx="387" cy="314" r="7" fill="#162032"/>
+          <circle cx="387" cy="314" r="3" fill="#c9a84c"/>
+          <rect x="415" y="302" width="14" height="10" rx="3" fill="#e8c96a"/>
+          <rect x="375" y="287" width="28" height="10" rx="3" fill="#e8c96a"/>
+          <!-- Tripod -->
+          <line x1="395" y1="333" x2="370" y2="375" stroke="#c9a84c" stroke-width="4" stroke-linecap="round"/>
+          <line x1="395" y1="333" x2="395" y2="380" stroke="#c9a84c" stroke-width="4" stroke-linecap="round"/>
+          <line x1="395" y1="333" x2="420" y2="375" stroke="#c9a84c" stroke-width="4" stroke-linecap="round"/>
+
+          <!-- Gold star accent elements -->
+          <text x="88" y="80" font-size="22" fill="#c9a84c" opacity="0.5">★</text>
+          <text x="420" y="175" font-size="16" fill="#c9a84c" opacity="0.4">★</text>
+          <circle cx="96" cy="310" r="7" fill="#c9a84c" opacity="0.3"/>
+          <circle cx="272" cy="72" r="5" fill="#c9a84c" opacity="0.4"/>
+          <circle cx="440" cy="310" r="4" fill="#2a7f7f" opacity="0.6"/>
+
+          <!-- Spotlight cone from top -->
+          <polygon points="185,28 100,230 270,230" fill="url(#spotlight)" opacity="0.12"/>
+          <defs>
+            <linearGradient id="spotlight" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%" stop-color="#c9a84c" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+</svg>
