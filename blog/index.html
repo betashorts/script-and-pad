@@ -93,6 +93,11 @@
             
             <li class="blog-item" data-category="general">
                 <a href="/what-to-do-in-cannes/" class="blog-link">
+                    
+                    <div class="blog-item-image">
+                        <img src="/assets/blog/images/cannes-film-festival-800.webp" alt="What to Do in Cannes thumbnail" />
+                    </div>
+                    
                     <div class="blog-item-content">
                         <h2 class="blog-post-title">What to Do in Cannes</h2>
                         <p class="blog-post-excerpt">
@@ -114,6 +119,7 @@
             
             <li class="blog-item" data-category="general">
                 <a href="/directors-who-didnt-go-to-film-school/" class="blog-link">
+                    
                     <div class="blog-item-content">
                         <h2 class="blog-post-title">Directors Who Didn''t Go to Film School</h2>
                         <p class="blog-post-excerpt">
@@ -135,6 +141,7 @@
             
             <li class="blog-item" data-category="general">
                 <a href="/how-long-is-the-usual-feature-length-film-script/" class="blog-link">
+                    
                     <div class="blog-item-content">
                         <h2 class="blog-post-title">How Long Is the Usual Feature Length Film Script?</h2>
                         <p class="blog-post-excerpt">
@@ -216,6 +223,39 @@
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+/* thumbnail image inside blog listing */
+.blog-item-image {
+    width: 100%;
+    overflow: hidden;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.blog-item-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.blog-item {
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+.blog-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.blog-link:hover {
+    border-left-color: #d1d5db;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateX(2px);
 }
 
 .blog-item {
