@@ -2,6 +2,15 @@
 layout: default
 ---
 <article class="blog-post">
+    {% comment %} decorative svgs for feel-good theme; choose random icons on each page load {% endcomment %}
+    {% assign svgs = "/assets/creatives/icon-writing.svg,/assets/creatives/icon-directing.svg,/assets/creatives/icon-templates.svg" | split: "," %}
+    {% assign left_svg = svgs | sample %}
+    {% assign right_svg = svgs | sample %}
+    <div class="decorations">
+        <img class="dec-left" src="{{ left_svg }}" alt="decorative graphic" />
+        <img class="dec-right" src="{{ right_svg }}" alt="decorative graphic" />
+    </div>
+
     <h1>{{ page.title }}</h1>
     <p>{{ page.date | date: "%B %d, %Y" }}</p>
     <div class="content">
