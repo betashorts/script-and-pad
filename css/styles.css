@@ -988,13 +988,20 @@ footer {
   line-height: 1.6;
 }
 
-/* grid of three feature boxes below the intro paragraph */
-.features-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
+.feature-icon {
+  width: 48px;
+  margin-bottom: 1rem;
+}
+
+/* hero graphic in homepage */
+.hero-graphic {
+  text-align: center;
   margin-top: 2rem;
+}
+.hero-graphic img {
+  max-width: 100%;
+  height: auto;
+}
 }
 
 .feature-item {

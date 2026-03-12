@@ -1,0 +1,15 @@
+<svg viewBox="0 0 72 72" width="72" height="72" xmlns="http://www.w3.org/2000/svg">
+          <rect width="72" height="72" rx="18" fill="#1e2f45"/>
+          <!-- Camera body -->
+          <rect x="12" y="26" width="48" height="30" rx="7" fill="#2c3e50"/>
+          <rect x="14" y="28" width="44" height="26" rx="5" fill="#3d5166"/>
+          <!-- Lens -->
+          <circle cx="36" cy="41" r="10" fill="#0d1b2a"/>
+          <circle cx="36" cy="41" r="7" fill="#162032"/>
+          <circle cx="36" cy="41" r="3.5" fill="#c9a84c"/>
+          <circle cx="38" cy="39" r="1.5" fill="#fff" opacity="0.6"/>
+          <!-- Top bump -->
+          <rect x="26" y="18" width="20" height="10" rx="4" fill="#3d5166"/>
+          <!-- Flash -->
+          <rect x="52" y="30" width="6" height="6" rx="2" fill="#c9a84c" opacity="0.8"/>
+        </svg>

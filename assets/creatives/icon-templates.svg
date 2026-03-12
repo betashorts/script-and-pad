@@ -1,0 +1,14 @@
+<svg viewBox="0 0 72 72" width="72" height="72" xmlns="http://www.w3.org/2000/svg">
+          <rect width="72" height="72" rx="18" fill="#1e2f45"/>
+          <!-- Shot list grid -->
+          <rect x="12" y="12" width="48" height="48" rx="7" fill="#2c3e50"/>
+          <rect x="16" y="16" width="40" height="10" rx="3" fill="#c9a84c" opacity="0.3"/>
+          <rect x="19" y="19" width="24" height="4" rx="2" fill="#c9a84c" opacity="0.9"/>
+          <!-- Rows -->
+          <rect x="16" y="30" width="40" height="7" rx="2" fill="#3d5166"/>
+          <rect x="16" y="41" width="40" height="7" rx="2" fill="#3d5166"/>
+          <rect x="16" y="52" width="40" height="5" rx="2" fill="#3d5166" opacity="0.6"/>
+          <!-- Check marks -->
+          <path d="M20 33.5 L22 36 L26 31" stroke="#c9a84c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M20 44.5 L22 47 L26 42" stroke="#c9a84c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
