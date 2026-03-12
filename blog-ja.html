@@ -1,29 +1,29 @@
 ---
 layout: default
-title: "Blog - Script and Pad"
+title: "ブログ - Script and Pad"
 meta: |
-  <meta name="description" content="Articles and tutorials about screenplay writing, tools, and productivity from Script and Pad.">
+  <meta name="description" content="スクリーンプレイ作成に関する記事とチュートリアル。"
 ---
 
-<p class="language-switch"><a href="/blog-ja/">日本語版の記事へ</a></p>
+<p class="language-switch"><a href="/blog/">Back to English posts</a></p>
 
 <div class="blog-container">
     <div class="blog-header">
-        <h1 class="blog-title">Articles & Tips</h1>
-        <p class="blog-subtitle">Guides, updates, and thoughts on writing and productivity for script authors</p>
+        <h1 class="blog-title">記事 & ヒント</h1>
+        <p class="blog-subtitle">脚本執筆とツールに関するガイドや更新</p>
     </div>
 
     <div class="blog-content">
         <!-- Category Filter (Optional) -->
         <div class="blog-categories">
-            <a href="#all" class="category-filter active" onclick="filterByCategory('all')">All Posts</a>
-            <a href="#writing" class="category-filter" onclick="filterByCategory('writing')">Writing</a>
-            <a href="#tools" class="category-filter" onclick="filterByCategory('tools')">Tools</a>
-            <a href="#templates" class="category-filter" onclick="filterByCategory('templates')">Templates</a>
+            <a href="#all" class="category-filter active" onclick="filterByCategory('all')">すべての記事</a>
+            <a href="#writing" class="category-filter" onclick="filterByCategory('writing')">執筆</a>
+            <a href="#tools" class="category-filter" onclick="filterByCategory('tools')">ツール</a>
+            <a href="#templates" class="category-filter" onclick="filterByCategory('templates')">テンプレート</a>
         </div>
 
         <ul class="blog-list">
-            {% assign filtered_posts = site.posts | where_exp: "post", "post.lang == 'en' or post.lang == nil" %}
+            {% assign filtered_posts = site.posts | where_exp: "post", "post.lang == 'ja'" %}
             {% for post in filtered_posts %}
             <li class="blog-item" data-category="{% if post.categories contains 'writing' %}writing{% elsif post.categories contains 'tools' %}tools{% elsif post.categories contains 'templates' %}templates{% else %}general{% endif %}">
                 <a href="{{ post.url }}" class="blog-link">
@@ -212,33 +212,15 @@ meta: |
         font-size: 0.9rem;
     }
 }
+
 .language-switch {
     text-align: center;
     margin: 1rem 0;
     font-size: 0.95rem;
 }
+
 .language-switch a {
     color: #3b82f6;
     text-decoration: underline;
 }
 </style>
-
-<script>
-function filterByCategory(category) {
-    const items = document.querySelectorAll('.blog-item');
-    const filters = document.querySelectorAll('.category-filter');
-
-    // Update active filter
-    filters.forEach(f => f.classList.remove('active'));
-    event.target.classList.add('active');
-
-    // Filter items
-    items.forEach(item => {
-        if (category === 'all') {
-            item.style.display = 'block';
-        } else {
-            item.style.display = item.dataset.category === category ? 'block' : 'none';
-        }
-    });
-}
-</script>
