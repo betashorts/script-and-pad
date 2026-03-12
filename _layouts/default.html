@@ -15,11 +15,12 @@
     <link rel="stylesheet" href="/css/styles.css">
     {{ page.meta | default: "" }}
 
+{% raw %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "headline": "{{ page.title }}",
+  "headline": "{% endraw %}{{ page.title }}{% raw %}",
   "image": "https://scriptandpad.com/logo.jpg", 
   "author": {
     "@type": "Person",
@@ -38,11 +39,12 @@
     "query-input": "required name=search_term_string"
   }
   },
-  "datePublished": "{{ page.date | date: '%Y-%m-%d' }}",
-  "dateModified": "{{ page.date | date: '%Y-%m-%d' }}",
-  "description": "{{ page.meta_description | default: site.description }}"
+  "datePublished": "{% endraw %}{{ page.date | date: '%Y-%m-%d' }}{% raw %}",
+  "dateModified": "{% endraw %}{{ page.date | date: '%Y-%m-%d' }}{% raw %}",
+  "description": "{% endraw %}{{ page.meta_description | default: site.description }}{% raw %}"
 }
 </script>
+{% endraw %}
 
 {% if page.images %}
 <script type="application/ld+json">
