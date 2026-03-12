@@ -911,10 +911,49 @@ footer {
 .featured-categories h2 {
   text-align: center;
   font-size: 2.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   color: #111827;
   font-weight: 700;
   font-family: "Georgia", "Times New Roman", serif;
+}
+
+.featured-categories p {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* grid of three feature boxes below the intro paragraph */
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.feature-item {
+  flex: 1 1 250px;
+  background: #f9fafb;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.feature-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #111827;
+}
+
+.feature-item p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
 }
 
 /* Call‑to‑action section styling */
