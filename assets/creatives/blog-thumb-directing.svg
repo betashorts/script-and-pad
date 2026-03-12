@@ -1,0 +1,29 @@
+<svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="380" height="220" fill="#0f1e14"/>
+          <circle cx="330" cy="60" r="90" fill="#162818" opacity="0.8"/>
+          <circle cx="50" cy="170" r="80" fill="#162818" opacity="0.6"/>
+          <!-- Megaphone -->
+          <path d="M130 100 L240 120 L240 80 L130 100 Z" fill="#c9a84c"/>
+          <rect x="120" y="95" width="20" height="50" rx="5" fill="#c9a84c"/>
+          <path d="M240 80 L310 60 L310 140 L240 120 Z" fill="#c9a84c" opacity="0.2"/>
+          <!-- Sound lines -->
+          <path d="M310 80 Q340 90 360 70" stroke="#e8c96a" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M310 120 Q340 130 360 110" stroke="#e8c96a" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <!-- Director chair -->
+          <rect x="70" y="120" width="100" height="80" fill="#c0533a" rx="6"/>
+          <rect x="70" y="110" width="100" height="20" fill="#c5534a" rx="6"/>
+          <path d="M90 120 L90 200" stroke="#0d1b2a" stroke-width="6"/>
+          <path d="M160 120 L160 200" stroke="#0d1b2a" stroke-width="6"/>
+          <text x="120" y="150" font-size="40" fill="#0d1b2a" text-anchor="middle">🎬</text>
+          <!-- Film strip bottom -->
+          <rect x="0" y="200" width="380" height="20" fill="#162818"/>
+          <rect x="20" y="202" width="15" height="16" fill="#0f1e14"/>
+          <rect x="60" y="202" width="15" height="16" fill="#0f1e14"/>
+          <rect x="100" y="202" width="15" height="16" fill="#0f1e14"/>
+          <rect x="140" y="202" width="15" height="16" fill="#0f1e14"/>
+          <rect x="180" y="202" width="15" height="16" fill="#0f1e14"/>
+          <rect x="220" y="202" width="15" height="16" fill="#0f1e14"/>
+          <rect x="260" y="202" width="15" height="16" fill="#0f1e14"/>
+          <rect x="300" y="202" width="15" height="16" fill="#0f1e14"/>
+          <rect x="340" y="202" width="15" height="16" fill="#0f1e14"/>
+        </svg>

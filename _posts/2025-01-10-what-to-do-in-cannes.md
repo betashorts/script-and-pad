@@ -3,6 +3,7 @@ layout: post
 title: "What to Do in Cannes"
 date: 2025-01-10
 image: "/assets/blog/images/cannes-film-festival-800.webp"
+thumb: "/assets/creatives/blog-thumb-festivals.svg"
 meta: |
   <meta name="description" content="Discover the top things to do in Cannes, from strolling the iconic La Croisette to exploring its historic Old Town. Your ultimate guide to enjoying Cannes.">
   <meta name="keywords" content="what to do in Cannes, Cannes travel guide, Cannes attractions, La Croisette, Cannes Old Town, Cannes Film Festival">

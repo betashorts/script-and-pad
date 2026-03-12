@@ -9,6 +9,7 @@ og: >
   url: "https://scriptandpad.com/how-long-is-the-usual-feature-length-film-script/"
   type: "article"
   image: "/assets/blog/images/short-film-structure-800.webp"
+thumb: "/assets/creatives/blog-thumb-writing.svg"
 tags:
   [
     feature film,

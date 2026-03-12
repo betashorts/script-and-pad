@@ -22,6 +22,7 @@ og: >
   url: "https://scriptandpad.com/directors-who-didnt-go-to-film-school"
   type: "article"
   image: "/assets/blog/images/directors-no-film-school-800.webp"
+thumb: "/assets/creatives/blog-thumb-directing.svg"
 tags:
   [
     film school,
