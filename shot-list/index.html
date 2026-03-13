@@ -1,61 +1,365 @@
 ---
 layout: default
-title: Script Shot List Generator
+title: "Shot List Generator — Script & Pad"
+meta: |
+  <meta name="description" content="Generate a structured shot list from your screenplay. Upload a PDF or DOCX script and organize shots by act, scene, and sequence with our free visual compound table tool.">
+  <meta name="keywords" content="shot list generator, screenplay shot list, film shot list, script to shot list, compound table filmmaker">
 ---
 
-<div class="shot-list-container">
-    <div class="upload-container">
-        <h1>Script Shot List Generator</h1>
-        <p>Upload a script file (.pdf, .docx, or .doc) to generate a structured shot list.</p>
-        
-        <div class="file-input">
-            <input type="file" id="scriptFile" accept=".pdf,.docx,.doc">
-            <button onclick="processFile()">Upload and Process</button>
-        </div>
+<link rel="stylesheet" href="/assets/shot-list/css/compound-table.css">
 
-        <div id="status" class="status-message"></div>
-        <div id="jsonOutput" class="json-output" style="display: none;"></div>
+<style>
+  footer { display: none; }
+  body   { background: #0d1b2a; }
+
+  /* ── Page shell ──────────────────────────────────────────── */
+  .sl-page {
+    background: #0d1b2a;
+    color: #e8e0d0;
+    font-family: 'Lora', Georgia, serif;
+    min-height: calc(100vh - 64px);
+  }
+
+  /* ── Film strip ──────────────────────────────────────────── */
+  .sl-strip { display: block; width: 100%; height: 22px; }
+
+  /* ── Header band ─────────────────────────────────────────── */
+  .sl-header {
+    background: #0d1b2a;
+    padding: 32px 32px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .sl-pretag {
+    display: inline-block;
+    font-size: .66rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    color: #c9a84c;
+    margin-bottom: 10px;
+  }
+
+  .sl-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    font-weight: 900;
+    color: #f5f0e8;
+    margin: 0 0 8px;
+    line-height: 1.15;
+  }
+
+  .sl-title span { color: #c9a84c; font-style: italic; }
+
+  .sl-sub {
+    font-size: .9rem;
+    color: rgba(245,240,232,.5);
+    margin: 0 0 28px;
+    max-width: 600px;
+  }
+
+  /* ── Upload panel ────────────────────────────────────────── */
+  .sl-upload-panel {
+    background: #162032;
+    border: 1px solid rgba(201,168,76,.18);
+    border-radius: 12px;
+    padding: 28px 28px 22px;
+    margin-bottom: 4px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    box-sizing: border-box;
+  }
+
+  .sl-upload-inner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .sl-file-zone {
+    flex: 1;
+    min-width: 220px;
+    border: 2px dashed rgba(201,168,76,.35);
+    border-radius: 8px;
+    padding: 18px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+    position: relative;
+    background: rgba(201,168,76,.04);
+  }
+
+  .sl-file-zone:hover,
+  .sl-file-zone.drag-active {
+    border-color: #c9a84c;
+    background: rgba(201,168,76,.08);
+  }
+
+  .sl-file-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .sl-file-icon { font-size: 1.6rem; margin-bottom: 6px; }
+
+  .sl-file-label {
+    font-size: .82rem;
+    color: rgba(245,240,232,.6);
+    line-height: 1.5;
+  }
+
+  .sl-file-label strong { color: #c9a84c; display: block; font-size: .9rem; margin-bottom: 2px; }
+
+  .sl-file-types {
+    font-size: .68rem;
+    color: rgba(245,240,232,.35);
+    margin-top: 6px;
+    font-family: 'Courier New', monospace;
+  }
+
+  .sl-upload-btn {
+    padding: 12px 26px;
+    background: #c9a84c;
+    color: #0d1b2a;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Lora', Georgia, serif;
+    font-size: .88rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .18s, box-shadow .18s;
+    flex-shrink: 0;
+  }
+
+  .sl-upload-btn:hover {
+    background: #d4b060;
+    box-shadow: 0 0 14px rgba(201,168,76,.4);
+  }
+
+  /* ── Status / output ─────────────────────────────────────── */
+  .sl-status-bar {
+    max-width: 1200px;
+    margin: 10px auto 0;
+    padding: 0 32px;
+    box-sizing: border-box;
+  }
+
+  .status-message {
+    font-size: .82rem;
+    padding: 8px 12px;
+    border-radius: 5px;
+    min-height: 20px;
+  }
+
+  .status-message.success {
+    color: #48bb78;
+    background: rgba(72,187,120,.08);
+    border: 1px solid rgba(72,187,120,.25);
+  }
+
+  .status-message.error {
+    color: #f56565;
+    background: rgba(245,101,101,.08);
+    border: 1px solid rgba(245,101,101,.25);
+  }
+
+  .json-output {
+    font-family: 'Courier New', monospace;
+    font-size: .72rem;
+    background: #0a131e;
+    color: #8a9ab0;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(201,168,76,.1);
+    max-height: 180px;
+    overflow: auto;
+    margin-top: 8px;
+    white-space: pre-wrap;
+  }
+
+  /* ── Tab switcher ────────────────────────────────────────── */
+  .sl-tabs {
+    display: flex;
+    gap: 0;
+    max-width: 1200px;
+    margin: 22px auto 0;
+    padding: 0 32px;
+    box-sizing: border-box;
+    border-bottom: 2px solid rgba(201,168,76,.15);
+  }
+
+  .sl-tabs button {
+    padding: 10px 22px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    font-family: 'Lora', Georgia, serif;
+    font-size: .84rem;
+    font-weight: 600;
+    color: rgba(245,240,232,.45);
+    cursor: pointer;
+    transition: color .18s, border-color .18s;
+    letter-spacing: .02em;
+  }
+
+  .sl-tabs button:hover { color: rgba(245,240,232,.75); }
+
+  .sl-tabs button.sl-tab-active {
+    color: #c9a84c;
+    border-bottom-color: #c9a84c;
+  }
+
+  /* ── Content sections ────────────────────────────────────── */
+  .sl-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 32px 48px;
+    box-sizing: border-box;
+  }
+
+  /* ── Scrollbar (cinematic) ───────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #0d1b2a; }
+  ::-webkit-scrollbar-thumb { background: rgba(201,168,76,.35); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,.65); }
+  * { scrollbar-width: thin; scrollbar-color: rgba(201,168,76,.35) #0d1b2a; }
+
+  /* ── Footer ──────────────────────────────────────────────── */
+  .sl-foot {
+    background: #0a131e;
+    text-align: center;
+    padding: 18px;
+    font-size: .76rem;
+    color: #4a5a6a;
+    border-top: 1px solid rgba(201,168,76,.1);
+    font-family: 'Lora', Georgia, serif;
+  }
+
+  /* ── Responsive ──────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .sl-header  { padding: 22px 16px 0; }
+    .sl-status-bar { padding: 0 16px; }
+    .sl-tabs    { padding: 0 16px; }
+    .sl-section { padding: 18px 16px 36px; }
+    .sl-upload-panel { border-radius: 0; border-left: none; border-right: none; padding: 20px 16px; }
+    .sl-upload-inner { flex-direction: column; }
+    .sl-upload-btn   { width: 100%; text-align: center; }
+    .sl-tabs button  { padding: 10px 14px; font-size: .78rem; }
+  }
+</style>
+
+<!-- Film Strip -->
+<svg class="sl-strip" viewBox="0 0 1440 22" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <pattern id="sl-fs" x="0" y="0" width="32" height="22" patternUnits="userSpaceOnUse">
+      <rect width="32" height="22" fill="#0a131e"/>
+      <rect x="6" y="4" width="20" height="14" rx="3" fill="#131f2e"/>
+    </pattern>
+  </defs>
+  <rect width="1440" height="22" fill="url(#sl-fs)"/>
+</svg>
+
+<div class="sl-page">
+
+  <!-- Header -->
+  <div class="sl-header">
+    <span class="sl-pretag">🎬 Production Tool</span>
+    <h1 class="sl-title">Shot List <span>Generator</span></h1>
+    <p class="sl-sub">Upload your script — PDF or DOCX — and build a hierarchical visual shot list organized by Act, Scene, and Sequence.</p>
+  </div>
+
+  <!-- Upload Panel -->
+  <div class="sl-upload-panel" style="max-width:1200px;margin:0 auto 0;padding:28px 32px 22px;box-sizing:border-box;">
+    <div class="sl-upload-inner">
+      <div class="sl-file-zone" id="sl-drop-zone">
+        <input type="file" id="scriptFile" accept=".pdf,.docx,.doc">
+        <div class="sl-file-icon">📄</div>
+        <div class="sl-file-label">
+          <strong>Drop your script here</strong>
+          or click to browse
+        </div>
+        <div class="sl-file-types">.pdf &nbsp;·&nbsp; .docx &nbsp;·&nbsp; .doc</div>
+      </div>
+      <button class="sl-upload-btn" onclick="processFile()">Generate Shot List ↗</button>
     </div>
+  </div>
+
+  <!-- Status -->
+  <div class="sl-status-bar">
+    <div id="status" class="status-message"></div>
+    <div id="jsonOutput" class="json-output" style="display:none;"></div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="sl-tabs">
+    <button id="tab-shot-list" class="sl-tab-active">Shot List</button>
+    <button id="tab-compound-table">Compound Table</button>
+  </div>
+
+  <!-- Shot List Section -->
+  <div id="shot-list-section" class="sl-section">
+    <!-- populated by shot-list.js -->
+  </div>
+
+  <!-- Compound Table Section -->
+  <div id="compound-table-section" class="sl-section" style="display:none;">
+    <div id="compound-table-root"></div>
+  </div>
+
 </div>
+
+<footer class="sl-foot">© 2024 Script and Pad · Build better shot lists</footer>
 
 <!-- PDF.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 </script>
 
 <!-- DOCX Processing -->
 <script src="https://unpkg.com/mammoth@1.6.0/mammoth.browser.min.js"></script>
 
-<!-- Main script -->
+<!-- Main Scripts -->
 <script src="/assets/shot-list/js/shot-list.js"></script>
-
-<link rel="stylesheet" href="/assets/shot-list/css/compound-table.css">
-
-<div class="tab-switcher">
-  <button id="tab-shot-list">Shot List</button>
-  <button id="tab-compound-table">Compound Table</button>
-</div>
-<div id="shot-list-section">
-  <!-- Existing shot list UI here -->
-</div>
-<div id="compound-table-section" style="display:none;">
-  <h2>Compound Table</h2>
-  <div id="compound-table-root"></div>
-</div>
 <script src="/assets/shot-list/js/compound-table.js"></script>
+
 <script>
-// Tab switching logic
-const tabShotList = document.getElementById('tab-shot-list');
-const tabCompoundTable = document.getElementById('tab-compound-table');
-const shotListSection = document.getElementById('shot-list-section');
-const compoundTableSection = document.getElementById('compound-table-section');
-tabShotList.onclick = () => {
-  shotListSection.style.display = '';
-  compoundTableSection.style.display = 'none';
-};
-tabCompoundTable.onclick = () => {
-  shotListSection.style.display = 'none';
-  compoundTableSection.style.display = '';
-};
-</script> 
+  // Tab switching
+  const tabShotList       = document.getElementById('tab-shot-list');
+  const tabCompoundTable  = document.getElementById('tab-compound-table');
+  const shotListSection   = document.getElementById('shot-list-section');
+  const compoundSection   = document.getElementById('compound-table-section');
+
+  function activateTab(active, inactive, show, hide) {
+    active.classList.add('sl-tab-active');
+    inactive.classList.remove('sl-tab-active');
+    show.style.display = '';
+    hide.style.display = 'none';
+  }
+
+  tabShotList.onclick      = () => activateTab(tabShotList, tabCompoundTable, shotListSection, compoundSection);
+  tabCompoundTable.onclick = () => activateTab(tabCompoundTable, tabShotList, compoundSection, shotListSection);
+
+  // Drag-and-drop styling for upload zone
+  const dropZone = document.getElementById('sl-drop-zone');
+  if (dropZone) {
+    ['dragenter','dragover'].forEach(ev =>
+      dropZone.addEventListener(ev, e => { e.preventDefault(); dropZone.classList.add('drag-active'); })
+    );
+    ['dragleave','drop'].forEach(ev =>
+      dropZone.addEventListener(ev, () => dropZone.classList.remove('drag-active'))
+    );
+  }
+</script>

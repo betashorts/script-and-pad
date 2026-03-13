@@ -466,38 +466,117 @@
   font-family: var(--gm-font-body);
 }
 
+/* ── Scrollbar (cinematic) ────────────────────────────────── */
+::-webkit-scrollbar          { width: 6px; height: 6px; }
+::-webkit-scrollbar-track    { background: var(--gm-navy); }
+::-webkit-scrollbar-thumb    { background: rgba(201,168,76,0.35); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.65); }
+*                            { scrollbar-width: thin; scrollbar-color: rgba(201,168,76,0.35) #0d1b2a; }
+
 /* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .gm-wrap {
+    grid-template-columns: 240px 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .gm-wrap {
     grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
   }
 
+  /* Sidebar: horizontal scrollable strip on mobile */
   .gm-sidebar {
     position: static;
-    max-height: 200px;
+    max-height: none;
     border-right: none;
     border-bottom: 1px solid rgba(201,168,76,0.2);
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .gm-main { padding: 18px 16px; }
+  .gm-sidebar-head {
+    display: none; /* hide on mobile — space is tight */
+  }
 
-  :root { --gm-cell: 36px; }
+  .gm-cat-label {
+    padding: 10px 14px 4px;
+    font-size: 0.6rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-end;
+    writing-mode: initial;
+  }
+
+  .beat-item {
+    display: inline-block;
+    padding: 8px 14px;
+    white-space: nowrap;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    font-size: 0.78rem;
+    flex-shrink: 0;
+  }
+
+  .beat-item:hover,
+  .beat-item.active {
+    border-left-color: transparent;
+    border-bottom-color: var(--gm-gold);
+    background: var(--gm-gold-dim);
+  }
+
+  .beat-item .gm-bpm-tag { display: none; }
+
+  .gm-main { padding: 16px 14px; }
+
+  :root { --gm-cell: 34px; }
 
   #piano-roll {
-    grid-template-columns: 90px repeat(16, var(--gm-cell));
+    grid-template-columns: 84px repeat(16, var(--gm-cell));
   }
 
-  .instrument-label { font-size: 0.62rem; }
+  .instrument-label { font-size: 0.6rem; }
+
+  .gm-page-title { font-size: 1.45rem; }
+
+  .gm-session-bar { gap: 8px; }
+  .gm-stat-pill   { padding: 4px 10px; font-size: 0.72rem; }
+
+  .gm-beat-info { gap: 8px; }
+
+  /* Controls: wrap tightly on small screens */
+  .gm-controls { gap: 6px; }
+  .btn { padding: 8px 13px; font-size: 0.78rem; }
+
+  /* Result panel */
+  .gm-result { padding: 14px 16px; }
+  .gm-result-score { font-size: 1.7rem; }
 }
 
-@media (max-width: 480px) {
-  :root { --gm-cell: 28px; }
+@media (max-width: 520px) {
+  :root { --gm-cell: 26px; }
 
   #piano-roll {
-    grid-template-columns: 72px repeat(16, var(--gm-cell));
+    grid-template-columns: 64px repeat(16, var(--gm-cell));
   }
 
-  .instrument-label { font-size: 0.55rem; }
-  .gm-controls { gap: 6px; }
-  .btn { padding: 8px 12px; font-size: 0.76rem; }
+  .gm-step-num  { font-size: 0.52rem; }
+  .instrument-label { font-size: 0.52rem; padding: 0 4px; }
+
+  .gm-controls  { gap: 5px; }
+  .btn { padding: 7px 10px; font-size: 0.72rem; }
+
+  /* Stack primary controls first, secondary below */
+  #playReference, #checkAccuracy { order: 1; }
+  #playUser                      { order: 2; }
+  #toggleSolution, #clearPattern, #loopToggle { order: 3; flex-basis: calc(33% - 5px); text-align: center; }
+
+  .gm-roll-wrap { padding: 10px 8px; }
+  .gm-result-score { font-size: 1.4rem; }
 }
