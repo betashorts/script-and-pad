@@ -1,46 +1,128 @@
 ---
 layout: default
-title: Drum Loop Game
+title: "Drum Beat Ear Training Game — Script & Pad"
+meta: |
+  <meta name="description" content="Train your ear and master drum patterns with this free interactive game. Listen to real MIDI drum beats and recreate them step by step on a 16-step sequencer.">
+  <meta name="keywords" content="drum ear training, drum beat game, rhythm game, MIDI drum patterns, music theory game">
 ---
 
 <link rel="stylesheet" href="/assets/game/css/game.css">
 
-<div class="game-container">
-  <div class="sidebar">
-    <h2>Drum Beats</h2>
+<style>
+  footer { display: none; }
+  body { background: #0d1b2a; }
+</style>
+
+<!-- Film Strip -->
+<svg viewBox="0 0 1440 22" preserveAspectRatio="none" width="100%" height="22" style="display:block;">
+  <defs>
+    <pattern id="gm-fs" x="0" y="0" width="32" height="22" patternUnits="userSpaceOnUse">
+      <rect width="32" height="22" fill="#0a131e"/>
+      <rect x="6" y="4" width="20" height="14" rx="3" fill="#131f2e"/>
+    </pattern>
+  </defs>
+  <rect width="1440" height="22" fill="url(#gm-fs)"/>
+</svg>
+
+<div class="gm-wrap">
+
+  <!-- Sidebar -->
+  <aside class="gm-sidebar">
+    <div class="gm-sidebar-head">
+      <h2>Beat Library</h2>
+      <p>22 patterns · 2 categories</p>
+    </div>
     <div id="beat-list"></div>
-  </div>
-  
-  <div class="main-content">
-    <h1>Recreate This Drum Beat</h1>
-    <div class="beat-info">
-      <h2 id="current-beat-name">Basic Rock Beat</h2>
-      <div id="current-beat-bpm">100 BPM</div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="gm-main">
+
+    <!-- Title -->
+    <h1 class="gm-page-title">Drum Beat <span>Ear Training</span></h1>
+    <p class="gm-page-sub">Listen · Recreate · Score. Master rhythm one beat at a time.</p>
+
+    <!-- Session Stats (session-only, no localStorage) -->
+    <div class="gm-session-bar">
+      <div class="gm-stat-pill">
+        <span>🎯</span> Score <strong id="gm-session-score">0</strong>
+      </div>
+      <div class="gm-stat-pill">
+        <span>🔥</span> Streak <strong id="gm-session-streak">0</strong>
+      </div>
+      <div class="gm-stat-pill">
+        <span>🏆</span> Best <strong id="gm-session-best">—</strong>
+      </div>
     </div>
 
-    <div id="piano-roll"></div>
+    <!-- How To Play Accordion -->
+    <details class="gm-how-to">
+      <summary>How to play</summary>
+      <div class="gm-how-body">
+        <ol>
+          <li><strong>Pick a beat</strong> from the sidebar — start with Easy ones.</li>
+          <li>Click <strong>▶ Listen to Beat</strong> to hear the reference drum pattern.</li>
+          <li>Click the <strong>grid cells</strong> to place your drum hits — gold = active.</li>
+          <li>Click <strong>▷ Play Mine</strong> to hear how your version sounds.</li>
+          <li>Hit <strong>✓ Check Accuracy</strong> to score your attempt and earn stars.</li>
+          <li>Use <strong>◉ Reveal Solution</strong> to peek at the correct pattern.</li>
+        </ol>
+      </div>
+    </details>
 
-    <div class="controls">
-      <button id="playReference" class="btn">Play Reference Beat</button>
-      <button id="playUser" class="btn">Play Your Version</button>
-      <button id="checkAccuracy" class="btn">Check Accuracy</button>
-      <button id="toggleSolution" class="btn">Show/Hide Solution</button>
+    <!-- Beat Info Row -->
+    <div class="gm-beat-info">
+      <h2 class="gm-beat-name" id="current-beat-name">Loading…</h2>
+      <span class="gm-beat-bpm" id="current-beat-bpm">— BPM</span>
+      <span class="gm-badge gm-badge-easy" id="gm-difficulty">Easy</span>
     </div>
 
-    <div id="status" class="status">Ready to play!</div>
-
-    <div id="debug-info" class="debug-info">
-      <div>BPM: <span id="debug-bpm">-</span></div>
-      <div>Time Signature: <span id="debug-time-signature">-</span></div>
-      <div>Bars: <span id="debug-bars">-</span></div>
-      <div>Duration: <span id="debug-duration">-</span>s</div>
-      <div>MIDI Notes: <span id="debug-midi-notes">-</span></div>
+    <!-- Piano Roll -->
+    <div class="gm-roll-wrap">
+      <div id="piano-roll"></div>
     </div>
-  </div>
+
+    <!-- Controls -->
+    <div class="gm-controls">
+      <button id="playReference" class="btn gm-btn-primary">▶ Listen to Beat</button>
+      <button id="playUser"      class="btn gm-btn-secondary">▷ Play Mine</button>
+      <button id="checkAccuracy" class="btn gm-btn-secondary">✓ Check Accuracy</button>
+      <button id="toggleSolution" class="btn gm-btn-ghost">◉ Reveal Solution</button>
+      <button id="clearPattern"  class="btn gm-btn-danger">✕ Clear</button>
+      <button id="loopToggle"    class="btn gm-btn-ghost">↺ Loop: Off</button>
+    </div>
+
+    <!-- Status line -->
+    <div id="status">Click anywhere to enable audio, then choose a beat.</div>
+
+    <!-- Result Panel -->
+    <div class="gm-result" id="gm-result">
+      <p class="gm-result-score" id="gm-result-pct">—</p>
+      <p class="gm-result-label" id="gm-result-notes">— / — notes correct</p>
+      <div class="gm-stars" id="gm-stars">
+        <span class="gm-star" data-s="1">★</span>
+        <span class="gm-star" data-s="2">★</span>
+        <span class="gm-star" data-s="3">★</span>
+      </div>
+      <p class="gm-result-msg" id="gm-result-msg"></p>
+    </div>
+
+    <!-- Debug Info -->
+    <div class="gm-debug" id="debug-info">
+      <div>BPM: <span id="debug-bpm">—</span></div>
+      <div>Time Sig: <span id="debug-time-signature">—</span></div>
+      <div>Bars: <span id="debug-bars">—</span></div>
+      <div>Duration: <span id="debug-duration">—</span>s</div>
+      <div>MIDI Notes: <span id="debug-midi-notes">—</span></div>
+    </div>
+
+  </main>
 </div>
 
-<!-- JavaScript Dependencies -->
+<footer class="gm-foot">© 2024 Script and Pad · Train your ear · Master the rhythm</footer>
+
+<!-- Dependencies -->
 <script src="https://unpkg.com/@tonejs/midi"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
 <!-- Game Logic -->
 <script src="/assets/game/js/game.js" type="module" defer></script>

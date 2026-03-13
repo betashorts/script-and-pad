@@ -243,7 +243,55 @@ main {
 .hp-blog-card:hover .hp-blog-more { gap: 8px; }
 
 /* ══════════════════════════════════════════════════════════
-   5. CTA BANNER
+   5. GAME TEASER
+   ══════════════════════════════════════════════════════════ */
+.hp-game { background: var(--c-navy2); padding: 90px 0; }
+.hp-game-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+  align-items: center;
+}
+.hp-game-tag { display: inline-block; font-family: var(--fb); font-size: .68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .14em; color: var(--c-gold); margin-bottom: 14px; }
+.hp-game-h2 { font-family: var(--fh); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900;
+  color: var(--c-cream); margin: 0 0 16px; line-height: 1.2; }
+.hp-game-h2 em { font-style: italic; color: var(--c-gold); }
+.hp-game-body { font-family: var(--fb); font-size: .95rem; line-height: 1.75; color: var(--c-muted); margin: 0 0 28px; }
+.hp-game-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+.hp-game-pill { font-family: var(--fb); font-size: .76rem; padding: 5px 14px;
+  border-radius: 20px; border: 1px solid rgba(201,168,76,.3); color: var(--c-muted); }
+.hp-game-visual { position: relative; }
+.hp-game-vis-wrap {
+  background: var(--c-navy3); border-radius: 14px; padding: 22px 18px;
+  border: 1px solid rgba(201,168,76,.15);
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
+.hp-game-label { font-family: var(--fb); font-size: .68rem; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--c-gold); margin-bottom: 10px; }
+.hp-game-grid {
+  display: grid; grid-template-columns: 70px repeat(16, 1fr); gap: 3px; margin-bottom: 10px;
+}
+.hp-game-inst { font-family: 'Courier New', monospace; font-size: .62rem; color: var(--c-muted);
+  display: flex; align-items: center; height: 20px; }
+.hp-game-cell { height: 20px; border-radius: 3px; background: #1e2d40; }
+.hp-game-cell.on  { background: var(--c-gold); }
+.hp-game-cell.dim { background: rgba(201,168,76,.25); }
+.hp-game-cell.b4  { border-left: 1px solid rgba(201,168,76,.3); }
+.hp-game-footer { display: flex; gap: 6px; margin-top: 10px; align-items: center; }
+.hp-game-btn-sm {
+  font-family: var(--fb); font-size: .7rem; font-weight: 600; padding: 5px 12px;
+  border-radius: 4px; border: none; cursor: default;
+}
+.hp-game-btn-sm.gold { background: var(--c-gold); color: var(--c-navy); }
+.hp-game-btn-sm.ghost { background: var(--c-navy2); color: var(--c-muted); border: 1px solid rgba(201,168,76,.2); }
+.hp-game-stars { display: flex; gap: 3px; margin-left: auto; }
+.hp-game-stars span { font-size: .9rem; color: var(--c-gold); }
+.hp-game-stars span.dim { color: rgba(201,168,76,.2); }
+@media (max-width: 768px) {
+  .hp-game-inner { grid-template-columns: 1fr; gap: 36px; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   6. CTA BANNER
    ══════════════════════════════════════════════════════════ */
 .hp-cta { background: var(--c-navy2); padding: 90px 0; }
 .hp-cta-card {
@@ -804,7 +852,106 @@ main {
 
 
 <!-- ══════════════════════════════════════════════════════
-     5. CTA BANNER
+     5. GAME TEASER
+     ══════════════════════════════════════════════════════ -->
+<section class="hp-game">
+  <div class="hp-wrap">
+    <div class="hp-game-inner">
+
+      <!-- Text Side -->
+      <div>
+        <span class="hp-game-tag">🎬 Ear Training Game</span>
+        <h2 class="hp-game-h2">Train Your Ear.<br><em>Feel the Rhythm.</em></h2>
+        <p class="hp-game-body">Real filmmakers understand timing — on screen and on set. Our free drum beat ear training game lets you listen to real MIDI drum patterns and recreate them step by step. No musical background needed.</p>
+        <div class="hp-game-pills">
+          <span class="hp-game-pill">🎵 22 MIDI patterns</span>
+          <span class="hp-game-pill">📈 Easy → Hard</span>
+          <span class="hp-game-pill">⭐ Star ratings</span>
+          <span class="hp-game-pill">🆓 Free to play</span>
+        </div>
+        <a href="/game/" class="hp-btn-gold">Play the Rhythm Game →</a>
+      </div>
+
+      <!-- Visual Side: mini sequencer preview -->
+      <div class="hp-game-visual">
+        <div class="hp-game-vis-wrap">
+          <div class="hp-game-label">Basic Backbeat Foundation · 85 BPM · Easy</div>
+
+          <!-- Mini sequencer grid (decorative) -->
+          <div class="hp-game-grid" aria-hidden="true">
+            <!-- Kick row -->
+            <div class="hp-game-inst">Kick</div>
+            <div class="hp-game-cell on b4"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell on b4"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell on"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell on b4"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell on b4"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell on"></div>
+            <div class="hp-game-cell"></div>
+            <!-- Snare row -->
+            <div class="hp-game-inst">Snare</div>
+            <div class="hp-game-cell b4"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell on b4"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell b4"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell on b4"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell"></div>
+            <div class="hp-game-cell"></div>
+            <!-- Hi-Hat row -->
+            <div class="hp-game-inst">Hi-Hat</div>
+            <div class="hp-game-cell on b4"></div>
+            <div class="hp-game-cell on"></div>
+            <div class="hp-game-cell on"></div>
+            <div class="hp-game-cell on"></div>
+            <div class="hp-game-cell on b4"></div>
+            <div class="hp-game-cell on"></div>
+            <div class="hp-game-cell on"></div>
+            <div class="hp-game-cell on"></div>
+            <div class="hp-game-cell on b4"></div>
+            <div class="hp-game-cell on"></div>
+            <div class="hp-game-cell on"></div>
+            <div class="hp-game-cell on"></div>
+            <div class="hp-game-cell on b4"></div>
+            <div class="hp-game-cell on"></div>
+            <div class="hp-game-cell on"></div>
+            <div class="hp-game-cell on"></div>
+          </div>
+
+          <div class="hp-game-footer">
+            <div class="hp-game-btn-sm gold">▶ Listen</div>
+            <div class="hp-game-btn-sm ghost">✓ Check</div>
+            <div class="hp-game-stars">
+              <span>★</span><span>★</span><span>★</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════
+     6. CTA BANNER
      ══════════════════════════════════════════════════════ -->
 <section class="hp-cta">
   <div class="hp-wrap">

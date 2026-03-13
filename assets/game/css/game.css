@@ -1,175 +1,503 @@
+/* ========================================
+   DRUM BEAT GAME — Cinematic Theme
+   All game-specific classes prefixed: gm-
+======================================== */
 :root {
-  --primary-color: #4a90e2;
-  --primary-color-dark: #357abd;
-  --surface-color: #2a2a2a;
-  --surface-secondary: #3a3a3a;
-  --surface-hover: #454545;
-  --text-color: #ffffff;
-  --text-secondary: #b0b0b0;
-  --grid-cell-size: 40px;
-  --heading-font: "Poppins", sans-serif;
-  --body-font: "Inter", sans-serif;
+  --gm-navy:    #0d1b2a;
+  --gm-navy-2:  #162032;
+  --gm-navy-3:  #1e2d40;
+  --gm-gold:    #c9a84c;
+  --gm-gold-dim: rgba(201,168,76,0.15);
+  --gm-gold-glow: rgba(201,168,76,0.4);
+  --gm-charcoal: #2c3e50;
+  --gm-cream:   #f5f0e8;
+  --gm-text:    #e8e0d0;
+  --gm-text-dim: #8a9ab0;
+  --gm-cell:    44px;
+  --gm-font-head: 'Playfair Display', serif;
+  --gm-font-body: 'Lora', serif;
+  --gm-font-mono: 'Courier New', monospace;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: var(--body-font);
-  background: #1a1a1a;
-  color: var(--text-color);
-}
-
-.container {
+/* ── Layout ──────────────────────────────────────────────── */
+.gm-wrap {
   display: grid;
-  grid-template-columns: 250px 1fr;
-  min-height: 100vh;
+  grid-template-columns: 280px 1fr;
+  min-height: calc(100vh - 64px);
+  background: var(--gm-navy);
+  color: var(--gm-text);
+  font-family: var(--gm-font-body);
 }
 
-.sidebar {
-  background: var(--surface-color);
-  padding: 20px;
-  border-right: 1px solid var(--surface-secondary);
-  max-height: 100vh;
+.gm-sidebar {
+  background: var(--gm-navy-2);
+  border-right: 1px solid rgba(201,168,76,0.2);
   overflow-y: auto;
+  max-height: calc(100vh - 64px);
+  position: sticky;
+  top: 64px;
 }
 
-.main-content {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+.gm-sidebar-head {
+  padding: 20px 20px 12px;
+  border-bottom: 1px solid rgba(201,168,76,0.15);
 }
 
-/* Piano Roll Styles */
-#piano-roll {
-  display: grid;
-  grid-template-columns: 150px repeat(16, var(--grid-cell-size));
-  gap: 2px;
-  margin: 20px 0;
-  background: var(--surface-color);
-  padding: 20px;
-  border-radius: 8px;
-  overflow-x: auto;
+.gm-sidebar-head h2 {
+  font-family: var(--gm-font-head);
+  color: var(--gm-gold);
+  font-size: 1.05rem;
+  margin: 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.instrument-label {
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  font-size: 0.9em;
-  color: var(--text-color);
-  background: var(--surface-secondary);
-  border-radius: 4px;
-  height: var(--grid-cell-size);
+.gm-sidebar-head p {
+  margin: 4px 0 0;
+  font-size: 0.72rem;
+  color: var(--gm-text-dim);
 }
 
-.grid-cell {
-  width: var(--grid-cell-size);
-  height: var(--grid-cell-size);
-  background: var(--surface-secondary);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+/* ── Category Labels ──────────────────────────────────────── */
+.gm-cat-label {
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gm-gold);
+  padding: 16px 20px 6px;
+  opacity: 0.75;
 }
 
-.grid-cell:hover {
-  background: var(--surface-hover);
-}
-
-.grid-cell.active {
-  background: var(--primary-color);
-}
-
-.grid-cell.beat-marker {
-  border-left: 2px solid var(--text-secondary);
-}
-
-.grid-cell.show-solution.reference {
-  background: rgba(74, 144, 226, 0.3);
-}
-
-/* Beat List Styles */
+/* ── Beat Items ───────────────────────────────────────────── */
 .beat-item {
-  padding: 10px;
-  margin: 5px 0;
-  background: var(--surface-secondary);
-  border-radius: 4px;
+  padding: 10px 20px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  transition: all 0.18s;
+  font-size: 0.83rem;
+  color: var(--gm-text-dim);
+  line-height: 1.3;
 }
 
 .beat-item:hover {
-  background: var(--surface-hover);
+  background: var(--gm-gold-dim);
+  color: var(--gm-cream);
+  border-left-color: var(--gm-gold);
 }
 
-/* Controls Styles */
-.controls {
+.beat-item.active {
+  background: var(--gm-gold-dim);
+  color: var(--gm-gold);
+  border-left-color: var(--gm-gold);
+  font-weight: 600;
+}
+
+.beat-item .gm-bpm-tag {
+  font-size: 0.68rem;
+  color: var(--gm-text-dim);
+  display: block;
+  margin-top: 2px;
+  font-family: var(--gm-font-mono);
+}
+
+/* ── Main Content ─────────────────────────────────────────── */
+.gm-main {
+  padding: 28px 32px;
+  max-width: 900px;
+}
+
+/* ── Page Title ───────────────────────────────────────────── */
+.gm-page-title {
+  font-family: var(--gm-font-head);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--gm-cream);
+  margin: 0 0 4px;
+  line-height: 1.1;
+}
+
+.gm-page-title span { color: var(--gm-gold); }
+
+.gm-page-sub {
+  font-size: 0.88rem;
+  color: var(--gm-text-dim);
+  margin: 0 0 20px;
+}
+
+/* ── Session Stats Strip ──────────────────────────────────── */
+.gm-session-bar {
   display: flex;
-  gap: 10px;
-  margin: 20px 0;
+  gap: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.gm-stat-pill {
+  background: var(--gm-navy-2);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 0.76rem;
+  color: var(--gm-text-dim);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gm-stat-pill strong {
+  color: var(--gm-gold);
+  font-size: 0.92rem;
+  font-family: var(--gm-font-mono);
+}
+
+/* ── How To Play Accordion ────────────────────────────────── */
+.gm-how-to {
+  margin-bottom: 18px;
+}
+
+.gm-how-to summary {
+  cursor: pointer;
+  font-size: 0.81rem;
+  color: var(--gm-gold);
+  padding: 8px 12px;
+  background: var(--gm-gold-dim);
+  border-radius: 6px;
+  border: 1px solid rgba(201,168,76,0.25);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+
+.gm-how-to summary::-webkit-details-marker { display: none; }
+.gm-how-to summary::before { content: '▶'; font-size: 0.58rem; transition: transform 0.2s; }
+.gm-how-to[open] summary::before { transform: rotate(90deg); }
+
+.gm-how-body {
+  padding: 12px 16px;
+  font-size: 0.81rem;
+  color: var(--gm-text-dim);
+  line-height: 1.75;
+  border: 1px solid rgba(201,168,76,0.15);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  background: rgba(22,32,50,0.5);
+}
+
+.gm-how-body ol { margin: 0; padding-left: 18px; }
+.gm-how-body li { margin-bottom: 4px; }
+.gm-how-body li strong { color: var(--gm-gold); }
+
+/* ── Beat Info Row ────────────────────────────────────────── */
+.gm-beat-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.gm-beat-name {
+  font-family: var(--gm-font-head);
+  font-size: 1.25rem;
+  color: var(--gm-cream);
+  margin: 0;
+}
+
+.gm-beat-bpm {
+  font-size: 0.78rem;
+  color: var(--gm-text-dim);
+  font-family: var(--gm-font-mono);
+  background: var(--gm-navy-3);
+  padding: 3px 9px;
+  border-radius: 4px;
+}
+
+/* ── Difficulty Badge ─────────────────────────────────────── */
+.gm-badge {
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.gm-badge-easy   { background: rgba(72,187,120,0.15); color: #48bb78; border: 1px solid #48bb78; }
+.gm-badge-medium { background: rgba(237,137,54,0.15);  color: #ed8936; border: 1px solid #ed8936; }
+.gm-badge-hard   { background: rgba(245,101,101,0.15); color: #f56565; border: 1px solid #f56565; }
+
+/* ── Piano Roll Wrapper ───────────────────────────────────── */
+.gm-roll-wrap {
+  background: var(--gm-navy-2);
+  border-radius: 10px;
+  padding: 14px;
+  overflow-x: auto;
+  margin-bottom: 16px;
+  border: 1px solid rgba(201,168,76,0.12);
+}
+
+#piano-roll {
+  display: grid;
+  grid-template-columns: 118px repeat(16, var(--gm-cell));
+  gap: 3px;
+  min-width: max-content;
+}
+
+/* Step number header */
+.gm-step-num-label { width: 118px; height: 18px; }
+
+.gm-step-num {
+  width: var(--gm-cell);
+  height: 18px;
+  text-align: center;
+  font-size: 0.6rem;
+  color: var(--gm-text-dim);
+  font-family: var(--gm-font-mono);
+  line-height: 18px;
+}
+
+.gm-step-num.gm-beat-start {
+  color: var(--gm-gold);
+  font-weight: 700;
+}
+
+/* Instrument label */
+.instrument-label {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 0.72rem;
+  color: var(--gm-text);
+  background: var(--gm-navy-3);
+  border-radius: 4px;
+  height: var(--gm-cell);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--gm-font-mono);
+}
+
+/* Grid cell */
+.grid-cell {
+  width: var(--gm-cell);
+  height: var(--gm-cell);
+  background: var(--gm-navy-3);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.1s, box-shadow 0.1s;
+}
+
+.grid-cell:hover { background: var(--gm-charcoal); }
+
+.grid-cell.active {
+  background: var(--gm-gold);
+  box-shadow: 0 0 8px var(--gm-gold-glow);
+}
+
+.grid-cell.beat-marker {
+  border-left: 2px solid rgba(201,168,76,0.25);
+}
+
+/* Playhead column */
+.grid-cell.gm-playhead {
+  outline: 1px solid rgba(201,168,76,0.5);
+  background: rgba(201,168,76,0.08);
+}
+
+.grid-cell.active.gm-playhead {
+  box-shadow: 0 0 18px var(--gm-gold-glow);
+}
+
+/* Solution overlay */
+.grid-cell.show-solution.reference {
+  background: rgba(201,168,76,0.22);
+}
+
+.grid-cell.active.show-solution.reference {
+  background: var(--gm-gold);
+}
+
+/* ── Controls ─────────────────────────────────────────────── */
+.gm-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
 }
 
 .btn {
-  padding: 10px 20px;
-  background: var(--primary-color);
-  color: white;
+  padding: 9px 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  font-family: var(--body-font);
-  transition: all 0.2s ease;
-}
-
-.btn:hover {
-  background: var(--primary-color-dark);
-}
-
-/* Status and Debug Info */
-.status {
-  margin: 20px 0;
-  padding: 10px;
-  background: var(--surface-color);
-  border-radius: 4px;
-}
-
-.debug-info {
-  margin: 20px 0;
-  padding: 10px;
-  background: var(--surface-color);
-  border-radius: 4px;
-  font-size: 0.9em;
-  color: var(--text-secondary);
-}
-
-.debug-info div {
-  margin: 5px 0;
-}
-
-/* Beat Info */
-.beat-info {
-  margin: 20px 0;
-}
-
-.beat-info h2 {
-  margin: 0;
-  color: var(--text-color);
-  font-family: var(--heading-font);
-}
-
-#current-beat-bpm {
-  color: var(--text-secondary);
-  margin-top: 5px;
-}
-
-.beat-category {
-  font-size: 1.1em;
-  color: #fff;
-  margin: 20px 0 10px;
-  padding: 0 15px;
+  font-family: var(--gm-font-body);
+  font-size: 0.82rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  transition: all 0.18s;
+  letter-spacing: 0.2px;
 }
 
-.beat-category:first-child {
-  margin-top: 0;
+.gm-btn-primary {
+  background: var(--gm-gold);
+  color: #0d1b2a;
+}
+
+.gm-btn-primary:hover {
+  background: #d4b060;
+  box-shadow: 0 0 14px var(--gm-gold-glow);
+}
+
+.gm-btn-secondary {
+  background: var(--gm-navy-3);
+  color: var(--gm-cream);
+  border: 1px solid rgba(201,168,76,0.3);
+}
+
+.gm-btn-secondary:hover {
+  border-color: var(--gm-gold);
+  color: var(--gm-gold);
+}
+
+.gm-btn-ghost {
+  background: transparent;
+  color: var(--gm-text-dim);
+  border: 1px solid rgba(138,154,176,0.3);
+}
+
+.gm-btn-ghost:hover {
+  color: var(--gm-cream);
+  border-color: rgba(138,154,176,0.6);
+}
+
+.gm-btn-danger {
+  background: transparent;
+  color: #f56565;
+  border: 1px solid rgba(245,101,101,0.35);
+  font-size: 0.78rem;
+}
+
+.gm-btn-danger:hover { background: rgba(245,101,101,0.1); }
+
+.btn.gm-loop-on {
+  background: rgba(201,168,76,0.18);
+  border-color: var(--gm-gold);
+  color: var(--gm-gold);
+}
+
+/* ── Status ───────────────────────────────────────────────── */
+#status {
+  font-size: 0.83rem;
+  color: var(--gm-text-dim);
+  padding: 6px 0;
+  min-height: 22px;
+}
+
+/* ── Result Panel ─────────────────────────────────────────── */
+.gm-result {
+  background: var(--gm-navy-2);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-top: 14px;
+  display: none;
+}
+
+.gm-result.visible { display: block; }
+
+.gm-result-score {
+  font-family: var(--gm-font-head);
+  font-size: 2.2rem;
+  color: var(--gm-gold);
+  margin: 0;
+  line-height: 1;
+}
+
+.gm-result-label {
+  font-size: 0.78rem;
+  color: var(--gm-text-dim);
+  margin: 3px 0 10px;
+}
+
+.gm-stars {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.gm-star {
+  font-size: 1.6rem;
+  color: rgba(201,168,76,0.2);
+  transition: color 0.25s;
+}
+
+.gm-star.lit { color: var(--gm-gold); }
+
+.gm-result-msg {
+  font-size: 0.84rem;
+  color: var(--gm-text-dim);
+  margin: 0;
+}
+
+/* ── Debug Info ───────────────────────────────────────────── */
+.gm-debug {
+  margin-top: 22px;
+  padding: 10px 14px;
+  background: var(--gm-navy-2);
+  border-radius: 6px;
+  font-size: 0.7rem;
+  color: var(--gm-text-dim);
+  font-family: var(--gm-font-mono);
+  border: 1px solid rgba(201,168,76,0.07);
+}
+
+.gm-debug div { margin: 3px 0; }
+
+/* ── Footer ───────────────────────────────────────────────── */
+.gm-foot {
+  background: #0a131e;
+  text-align: center;
+  padding: 18px;
+  font-size: 0.76rem;
+  color: #4a5a6a;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  font-family: var(--gm-font-body);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .gm-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .gm-sidebar {
+    position: static;
+    max-height: 200px;
+    border-right: none;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .gm-main { padding: 18px 16px; }
+
+  :root { --gm-cell: 36px; }
+
+  #piano-roll {
+    grid-template-columns: 90px repeat(16, var(--gm-cell));
+  }
+
+  .instrument-label { font-size: 0.62rem; }
+}
+
+@media (max-width: 480px) {
+  :root { --gm-cell: 28px; }
+
+  #piano-roll {
+    grid-template-columns: 72px repeat(16, var(--gm-cell));
+  }
+
+  .instrument-label { font-size: 0.55rem; }
+  .gm-controls { gap: 6px; }
+  .btn { padding: 8px 12px; font-size: 0.76rem; }
 }
