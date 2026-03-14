@@ -12,47 +12,55 @@ function showJsonOutput(json) {
 
 function processText(text) {
   const lines = text.split("\n");
-  const result = {};
-  let currentAct = "ACT 0";
-  let currentScene = "scene_0_act_0";
-
-  result[currentAct] = {
-    [currentScene]: [],
-  };
+  let currentAct = "ACT I";
+  let currentSceneKey = null;
+  const result = { "ACT I": {} };
+  let currentRawLines = [];
 
   for (const line of lines) {
     const trimmedLine = line.trim();
     if (!trimmedLine) continue;
 
-    // Check for ACT headers
-    const actMatch = trimmedLine.match(/^ACT\s+(I|II|III|IV|V)$/i);
+    // Check for ACT headers (ACT I, ACT II, ACT III, ACT IV, ACT V, etc.)
+    const actMatch = trimmedLine.match(/^ACT\s+(I{1,3}|IV|V|VI{0,3})$/i);
     if (actMatch) {
-      currentAct = `ACT ${actMatch[1]}`;
-      currentScene = `scene_0_act_${actMatch[1]}`;
-      result[currentAct] = {
-        [currentScene]: [],
-      };
-      continue;
-    }
-
-    // Check for scene headers
-    const sceneMatch = trimmedLine.match(/^\d+\.\s*(INT\.?|EXT\.?)/i);
-    if (sceneMatch) {
-      currentScene = trimmedLine;
-      if (!result[currentAct][currentScene]) {
-        result[currentAct][currentScene] = [];
+      if (currentSceneKey) {
+        result[currentAct][currentSceneKey].rawLines = [...currentRawLines];
       }
+      currentAct = `ACT ${actMatch[1].toUpperCase()}`;
+      result[currentAct] = {};
+      currentSceneKey = null;
+      currentRawLines = [];
       continue;
     }
 
-    // Add line to current scene
-    if (!result[currentAct][currentScene]) {
-      result[currentAct][currentScene] = [];
+    // Check for scene headers: numbered ("1. INT...") or unnumbered ("INT. ..." / "EXT. ...")
+    if (
+      /^\d+\.\s*(INT\.?|EXT\.?)/i.test(trimmedLine) ||
+      /^(INT\.?|EXT\.?)\s+/i.test(trimmedLine)
+    ) {
+      if (currentSceneKey) {
+        result[currentAct][currentSceneKey].rawLines = [...currentRawLines];
+      }
+      currentSceneKey = trimmedLine;
+      result[currentAct][currentSceneKey] = { rawLines: [] };
+      currentRawLines = [];
+      continue;
     }
-    result[currentAct][currentScene].push(trimmedLine);
+
+    // Body line — accumulate into current scene
+    if (currentSceneKey !== null) {
+      currentRawLines.push(trimmedLine);
+    }
+  }
+
+  // Flush the last scene
+  if (currentSceneKey) {
+    result[currentAct][currentSceneKey].rawLines = [...currentRawLines];
   }
 
   return result;
+  // Shape: { "ACT I": { "1. EXT. ROADSIDE - EVENING": { rawLines: [...] } } }
 }
 
 function groupItemsIntoLines(items, yTolerance = 2) {
@@ -145,46 +153,34 @@ async function processDocx(file) {
   }
 }
 
-function convertToCompoundTableFormat(scriptData) {
-  // Convert the script data into compound table format
-  const acts = Object.entries(scriptData).map(
-    ([actTitle, scenes], actIndex) => {
-      return {
-        type: "super",
-        number: actIndex + 1,
-        title: actTitle,
-        children: Object.entries(scenes).map(
-          ([sceneTitle, content], sceneIndex) => {
-            return {
-              type: "high",
-              number: sceneIndex + 1,
-              title: sceneTitle,
-              children: content.map((contentLine, contentIndex) => {
-                return {
-                  type: "compound",
-                  number: contentIndex + 1,
-                  title: contentLine.trim(),
-                  children: [
-                    {
-                      type: "basic",
-                      number: 1,
-                      content: {
-                        content: "", // Empty content since we're using the line as title
-                        imageData: null,
-                        canvasData: null,
-                      },
-                    },
-                  ],
-                };
-              }),
-            };
-          }
-        ),
-      };
-    }
-  );
-
-  return acts;
+function convertToCompoundTableFormat(result) {
+  // Map new result shape { "ACT I": { "scene heading": { rawLines: [] } } }
+  // to compound table node array
+  return Object.entries(result).map(([actLabel, scenes], actIndex) => ({
+    type: "super",
+    number: actIndex + 1,
+    title: actLabel,
+    children: Object.entries(scenes).map(([sceneKey, sceneData], sceneIndex) => ({
+      type: "high",
+      number: sceneIndex + 1,
+      title: sceneKey,
+      rawLines: sceneData.rawLines || [],  // preserved for script preview panel
+      children: [
+        {
+          type: "compound",
+          number: 1,
+          title: "Sequence 1",
+          children: [
+            {
+              type: "basic",
+              number: 1,
+              content: { content: "", imageData: null, canvasData: null },
+            },
+          ],
+        },
+      ],
+    })),
+  }));
 }
 
 async function processFile() {
@@ -197,19 +193,32 @@ async function processFile() {
   }
 
   const fileType = file.name.split(".").pop().toLowerCase();
-  let result;
 
   try {
     updateStatus("Processing file...");
     console.log(`Processing file of type: ${fileType}`);
 
+    // ── JSON re-upload: restore a previously exported shot list ──────────
+    if (fileType === "json") {
+      const text = await file.text();
+      const parsed = JSON.parse(text);
+      window.compoundTableDataList = parsed;
+      window.renderAllL1Tables();
+      const tabCompoundTable = document.getElementById("tab-compound-table");
+      if (tabCompoundTable) tabCompoundTable.click();
+      updateStatus("Shot list restored successfully!");
+      return;
+    }
+
+    // ── PDF / DOCX ────────────────────────────────────────────────────────
+    let result;
     if (fileType === "pdf") {
       result = await processPdf(file);
     } else if (fileType === "docx" || fileType === "doc") {
       result = await processDocx(file);
     } else {
       throw new Error(
-        "Unsupported file type. Please upload a PDF, DOCX, or DOC file."
+        "Unsupported file type. Please upload a PDF, DOCX, DOC, or JSON file."
       );
     }
 
