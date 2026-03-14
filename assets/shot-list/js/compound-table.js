@@ -128,6 +128,28 @@ const SHOT_TYPES = {
   ],
 };
 
+const ANGLES = [
+  "Eye Level","Low Angle","High Angle","Dutch Angle",
+  "Overhead","Worm's Eye","POV",
+];
+const MOVEMENTS = [
+  "Static","Pan","Tilt","Dolly In","Dolly Out",
+  "Track Left","Track Right","Handheld","Steadicam",
+  "Crane Up","Crane Down","Zoom In","Zoom Out","Arc",
+];
+const LENSES = [
+  "Ultra Wide (14-20mm)","Wide (24mm)","Standard (35mm)",
+  "Normal (50mm)","Portrait (85mm)","Telephoto (135mm+)",
+];
+const FRAME_RATES = ["24fps","25fps","48fps","60fps","120fps"];
+const EQUIPMENT_OPTIONS = [
+  "Tripod","Handheld","Steadicam","Gimbal","Dolly","Crane/Jib","Drone","Monopod",
+];
+const SOUND_OPTIONS = [
+  "Dialogue","Ambient Only","Voice Over","SFX","Music","Silent",
+];
+const PRIORITY_OPTIONS = ["must-have","nice-to-have"];
+
 // Utility to generate incremental numbers
 function getNextNumber(arr) {
   return arr.length ? Math.max(...arr.map((x) => x.number)) + 1 : 1;
@@ -306,6 +328,35 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
   dragHandle.className = "drag-handle";
   dragHandle.textContent = "⋮⋮";
   topRow.appendChild(dragHandle);
+
+  // ── Scene (level 1): collapse chevron + script preview button ──────────
+  let sceneChevron = null;
+  if (level === 1) {
+    sceneChevron = document.createElement("button");
+    sceneChevron.textContent = "▶";
+    sceneChevron.title = "Expand / Collapse scene";
+    sceneChevron.style.cssText =
+      "background:transparent;border:none;color:rgba(201,168,76,0.7);font-size:0.7rem;" +
+      "cursor:pointer;padding:2px 6px 2px 0;transition:transform 0.2s;flex-shrink:0;";
+    topRow.appendChild(sceneChevron);
+
+    const previewBtn = document.createElement("button");
+    const hasLines = unit.rawLines && unit.rawLines.length > 0;
+    previewBtn.textContent = "📄 Script";
+    previewBtn.title = hasLines ? "View scene script" : "No script text available";
+    previewBtn.disabled = !hasLines;
+    previewBtn.style.cssText =
+      "font-size:0.68rem;padding:2px 8px;border:1px solid rgba(201,168,76,0.35);" +
+      "border-radius:4px;background:transparent;color:#c9a84c;cursor:" +
+      (hasLines ? "pointer" : "default") + ";opacity:" + (hasLines ? "1" : "0.35") + ";";
+    if (hasLines) {
+      previewBtn.onclick = (e) => {
+        e.stopPropagation();
+        openScenePreview(unit.rawLines, unit.title);
+      };
+    }
+    topRow.appendChild(previewBtn);
+  }
 
   // Update the label based on level
   const label = document.createElement("span");
@@ -570,8 +621,24 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
   // Bottom row
   const bottomRow = document.createElement("div");
   bottomRow.className = "compound-bottom-row";
-  bottomRow.style.display = "flex";
   bottomRow.style.flexDirection = "column";
+
+  // Scene collapse: default collapsed except very first scene in first act
+  if (level === 1) {
+    const isFirstScene = (l1Idx === 0 && unitIdx === 0);
+    bottomRow.style.display = isFirstScene ? "block" : "none";
+    if (sceneChevron) {
+      sceneChevron.style.transform = isFirstScene ? "rotate(90deg)" : "";
+      sceneChevron.onclick = (e) => {
+        e.stopPropagation();
+        const isOpen = bottomRow.style.display !== "none";
+        bottomRow.style.display = isOpen ? "none" : "block";
+        sceneChevron.style.transform = isOpen ? "" : "rotate(90deg)";
+      };
+    }
+  } else {
+    bottomRow.style.display = "flex";
+  }
 
   if (unit.type === "basic") {
     // console.log(`Rendering basic unit row at level ${level}`);
@@ -887,60 +954,97 @@ function renderBasicUnitCell(
     col.canvasData = null;
   };
 
-  // Create shot details container
+  // ── Shot field grid (2-column) ───────────────────────────────────────
   const shotDetailsContainer = document.createElement("div");
-  shotDetailsContainer.className = "shot-details-container";
+  shotDetailsContainer.style.cssText =
+    "display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;";
 
-  // Add shot size dropdown
+  const FIELD_LABEL_STYLE =
+    "display:block;font-size:0.65rem;text-transform:uppercase;" +
+    "letter-spacing:0.08em;color:rgba(232,224,208,0.45);margin-bottom:3px;";
+
+  // Helper: simple <select> field
+  function makeSelectField(labelText, optionsArr, fieldKey) {
+    const wrap = document.createElement("div");
+    const lbl = document.createElement("label");
+    lbl.textContent = labelText;
+    lbl.style.cssText = FIELD_LABEL_STYLE;
+    const sel = document.createElement("select");
+    sel.className = "shot-dropdown";
+    const def = document.createElement("option");
+    def.value = ""; def.textContent = labelText; def.disabled = true; def.selected = !col[fieldKey];
+    sel.appendChild(def);
+    optionsArr.forEach((opt) => {
+      const o = document.createElement("option");
+      o.value = opt; o.textContent = opt;
+      sel.appendChild(o);
+    });
+    if (col[fieldKey]) sel.value = col[fieldKey];
+    sel.onchange = () => { col[fieldKey] = sel.value; };
+    wrap.appendChild(lbl); wrap.appendChild(sel);
+    return wrap;
+  }
+
+  // Helper: plain text <input> field
+  function makeInputField(labelText, fieldKey, placeholder) {
+    const wrap = document.createElement("div");
+    const lbl = document.createElement("label");
+    lbl.textContent = labelText;
+    lbl.style.cssText = FIELD_LABEL_STYLE;
+    const inp = document.createElement("input");
+    inp.type = "text";
+    inp.className = "custom-shot-input";
+    inp.placeholder = placeholder || labelText;
+    inp.value = col[fieldKey] || "";
+    inp.oninput = () => { col[fieldKey] = inp.value; };
+    wrap.appendChild(lbl); wrap.appendChild(inp);
+    return wrap;
+  }
+
+  // Row 1: Shot Size (existing autocomplete) + Angle
   const shotSizeDropdown = createAutocompleteDropdown(
-    SHOT_SIZES,
-    "Select Shot Size",
-    "Enter custom shot size..."
+    SHOT_SIZES, "Select Shot Size", "Enter custom shot size..."
   );
   shotSizeDropdown.className = "shot-size-dropdown";
+  const shotSizeWrap = document.createElement("div");
+  const shotSizeLbl = document.createElement("label");
+  shotSizeLbl.textContent = "Shot Size";
+  shotSizeLbl.style.cssText = FIELD_LABEL_STYLE;
+  shotSizeWrap.appendChild(shotSizeLbl);
+  shotSizeWrap.appendChild(shotSizeDropdown);
+  shotDetailsContainer.appendChild(shotSizeWrap);
 
-  // Add shot type dropdown
-  const shotTypeDropdown = createAutocompleteDropdown(
-    SHOT_TYPES,
-    "Select Shot Type",
-    "Enter custom shot type..."
-  );
-  shotTypeDropdown.className = "shot-type-dropdown";
+  shotDetailsContainer.appendChild(makeSelectField("Angle", ANGLES, "angle"));
 
-  // Add dropdowns to shot details container
-  shotDetailsContainer.appendChild(shotSizeDropdown);
-  shotDetailsContainer.appendChild(shotTypeDropdown);
+  // Row 2: Movement + Lens
+  shotDetailsContainer.appendChild(makeSelectField("Movement", MOVEMENTS, "movement"));
+  shotDetailsContainer.appendChild(makeSelectField("Lens", LENSES, "lens"));
 
-  // Save shot details
+  // Row 3: Frame Rate + Equipment
+  shotDetailsContainer.appendChild(makeSelectField("Frame Rate", FRAME_RATES, "frameRate"));
+  shotDetailsContainer.appendChild(makeSelectField("Equipment", EQUIPMENT_OPTIONS, "equipment"));
+
+  // Row 4: Subject + Sound
+  shotDetailsContainer.appendChild(makeInputField("Subject", "subject", "Person or object"));
+  shotDetailsContainer.appendChild(makeSelectField("Sound", SOUND_OPTIONS, "sound"));
+
+  // Row 5: Priority + VFX Note
+  shotDetailsContainer.appendChild(makeSelectField("Priority", PRIORITY_OPTIONS, "priority"));
+  shotDetailsContainer.appendChild(makeInputField("VFX Note", "vfxNote", "None"));
+
+  // Restore + save for shotSize (autocomplete)
   const saveShots = () => {
     const sizeSelect = shotSizeDropdown.querySelector("select");
-    const sizeInput = shotSizeDropdown.querySelector("input");
-    const typeSelect = shotTypeDropdown.querySelector("select");
-    const typeInput = shotTypeDropdown.querySelector("input");
-
-    col.shotSize =
-      sizeSelect.style.display !== "none" ? sizeSelect.value : sizeInput.value;
-    col.shotType =
-      typeSelect.style.display !== "none" ? typeSelect.value : typeInput.value;
+    const sizeInput  = shotSizeDropdown.querySelector("input");
+    col.shotSize = sizeSelect.style.display !== "none" ? sizeSelect.value : sizeInput.value;
   };
-
-  // Add change listeners
-  shotSizeDropdown
-    .querySelectorAll("select, input")
-    .forEach((el) => el.addEventListener("change", saveShots));
-  shotTypeDropdown
-    .querySelectorAll("select, input")
-    .forEach((el) => el.addEventListener("change", saveShots));
-
-  // Restore previous values if they exist
+  shotSizeDropdown.querySelectorAll("select, input").forEach((el) =>
+    el.addEventListener("change", saveShots)
+  );
   if (col.shotSize) {
     const sizeSelect = shotSizeDropdown.querySelector("select");
-    const sizeInput = shotSizeDropdown.querySelector("input");
-    if (
-      [].slice
-        .call(sizeSelect.options)
-        .some((opt) => opt.value === col.shotSize)
-    ) {
+    const sizeInput  = shotSizeDropdown.querySelector("input");
+    if ([].slice.call(sizeSelect.options).some((o) => o.value === col.shotSize)) {
       sizeSelect.value = col.shotSize;
     } else {
       sizeSelect.value = "custom";
@@ -950,24 +1054,7 @@ function renderBasicUnitCell(
     }
   }
 
-  if (col.shotType) {
-    const typeSelect = shotTypeDropdown.querySelector("select");
-    const typeInput = shotTypeDropdown.querySelector("input");
-    if (
-      [].slice
-        .call(typeSelect.options)
-        .some((opt) => opt.value === col.shotType)
-    ) {
-      typeSelect.value = col.shotType;
-    } else {
-      typeSelect.value = "custom";
-      typeSelect.style.display = "none";
-      typeInput.style.display = "block";
-      typeInput.value = col.shotType;
-    }
-  }
-
-  // Add all elements to the container
+  // Add all tools
   toolsContainer.appendChild(uploadBtn);
   toolsContainer.appendChild(drawBtn);
   toolsContainer.appendChild(clearBtn);
@@ -975,13 +1062,18 @@ function renderBasicUnitCell(
 
   contentContainer.appendChild(toolsContainer);
 
-  // Text editor div
+  // Description (full-width text area)
+  const descWrap = document.createElement("div");
+  descWrap.style.cssText = "grid-column:1/-1;";
+  const descLbl = document.createElement("label");
+  descLbl.textContent = "Description";
+  descLbl.style.cssText = FIELD_LABEL_STYLE;
+  descWrap.appendChild(descLbl);
+
   const textEditor = document.createElement("div");
   textEditor.className = "basic-unit-text";
   textEditor.contentEditable = true;
   textEditor.innerHTML = col.content || "";
-
-  // Placeholder for text
   textEditor.setAttribute("placeholder", "Enter description...");
 
   // Image container
@@ -1023,14 +1115,115 @@ function renderBasicUnitCell(
     col.content = e.target.innerHTML;
   };
 
+  // Director/DP Note textarea (full-width)
+  const dpNoteEditor = document.createElement("div");
+  dpNoteEditor.className = "basic-unit-text";
+  dpNoteEditor.contentEditable = true;
+  dpNoteEditor.innerHTML = col.dpNote || "";
+  dpNoteEditor.setAttribute("placeholder", "Director or DP instruction...");
+  dpNoteEditor.oninput = (e) => { col.dpNote = e.target.innerHTML; };
+  const dpNoteWrap = document.createElement("div");
+  const dpNoteLbl = document.createElement("label");
+  dpNoteLbl.textContent = "Director / DP Note";
+  dpNoteLbl.style.cssText = FIELD_LABEL_STYLE;
+  dpNoteWrap.appendChild(dpNoteLbl);
+  dpNoteWrap.appendChild(dpNoteEditor);
+
+  descWrap.appendChild(textEditor);   // textEditor lives inside the Description label wrapper
+
   contentContainer.appendChild(shotDetailsContainer);
-  contentContainer.appendChild(textEditor);
+  contentContainer.appendChild(descWrap);
+  contentContainer.appendChild(dpNoteWrap);
   contentContainer.appendChild(imageContainer);
   contentContainer.appendChild(canvas);
 
   bottom.appendChild(contentContainer);
   cell.appendChild(bottom);
   parent.appendChild(cell);
+}
+
+// ── Scene Script Preview Panel ─────────────────────────────────────────
+let _previewPanel = null;
+let _previewOpenTitle = null;
+
+function openScenePreview(rawLines, sceneTitle) {
+  // Toggle if same scene clicked again
+  if (_previewPanel && _previewOpenTitle === sceneTitle) {
+    _previewPanel.style.transform = "translateX(100%)";
+    _previewOpenTitle = null;
+    const section = document.getElementById("compound-table-root");
+    if (section) section.style.paddingRight = "";
+    return;
+  }
+
+  // Create panel once
+  if (!_previewPanel) {
+    _previewPanel = document.createElement("div");
+    _previewPanel.id = "scene-preview-panel";
+    _previewPanel.style.cssText =
+      "position:fixed;right:0;top:64px;bottom:0;width:320px;" +
+      "transform:translateX(100%);transition:transform 0.25s ease;" +
+      "background:#0d1b2a;border-left:1px solid rgba(201,168,76,0.25);" +
+      "z-index:500;display:flex;flex-direction:column;";
+
+    const header = document.createElement("div");
+    header.style.cssText =
+      "background:#162032;padding:12px 16px;display:flex;" +
+      "justify-content:space-between;align-items:center;flex-shrink:0;";
+
+    const titleEl = document.createElement("span");
+    titleEl.id = "scene-preview-title";
+    titleEl.style.cssText =
+      "color:#c9a84c;font-family:'Lora',serif;font-size:0.82rem;" +
+      "white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px;";
+
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "×";
+    closeBtn.style.cssText =
+      "background:none;border:none;color:#c9a84c;font-size:1.3rem;" +
+      "cursor:pointer;line-height:1;padding:0 0 0 8px;flex-shrink:0;";
+    closeBtn.onclick = () => {
+      _previewPanel.style.transform = "translateX(100%)";
+      _previewOpenTitle = null;
+      const section = document.getElementById("compound-table-root");
+      if (section) section.style.paddingRight = "";
+    };
+
+    header.appendChild(titleEl);
+    header.appendChild(closeBtn);
+
+    const body = document.createElement("div");
+    body.id = "scene-preview-body";
+    body.style.cssText =
+      "flex:1;overflow-y:auto;padding:16px;";
+
+    const pre = document.createElement("pre");
+    pre.id = "scene-preview-pre";
+    pre.style.cssText =
+      "white-space:pre-wrap;word-break:break-word;" +
+      "font-family:'Courier New',monospace;font-size:0.75rem;" +
+      "line-height:1.7;color:rgba(245,240,232,0.75);user-select:text;cursor:text;margin:0;";
+
+    body.appendChild(pre);
+    _previewPanel.appendChild(header);
+    _previewPanel.appendChild(body);
+    document.body.appendChild(_previewPanel);
+  }
+
+  // Populate and open
+  document.getElementById("scene-preview-title").textContent = sceneTitle;
+  document.getElementById("scene-preview-pre").textContent =
+    rawLines.join("\n");
+
+  _previewOpenTitle = sceneTitle;
+  _previewPanel.style.transform = "translateX(0)";
+
+  // Nudge the table left to make room
+  const section = document.getElementById("compound-table-root");
+  if (section) {
+    section.style.transition = "padding-right 0.25s ease";
+    section.style.paddingRight = "330px";
+  }
 }
 
 // Modify the renderAllL1Tables function to be async
@@ -1124,6 +1317,40 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // Create floating save button
   createFloatingSaveButton();
+
+  // ── Export JSON button ───────────────────────────────────────────────
+  if (!document.getElementById("floating-export-btn")) {
+    const exportBtn = document.createElement("button");
+    exportBtn.id = "floating-export-btn";
+    exportBtn.innerHTML = "⬇ Export JSON";
+    exportBtn.title = "Export shot list as JSON";
+    exportBtn.style.cssText =
+      "position:fixed;bottom:24px;right:130px;" +
+      "padding:11px 18px;background:transparent;" +
+      "border:1px solid rgba(201,168,76,0.5);color:#c9a84c;" +
+      "border-radius:7px;font-size:0.88rem;font-weight:700;" +
+      "cursor:pointer;z-index:1000;font-family:'Lora',serif;" +
+      "transition:background 0.2s,box-shadow 0.2s;";
+    exportBtn.onmouseover = () => {
+      exportBtn.style.background = "rgba(201,168,76,0.1)";
+      exportBtn.style.boxShadow = "0 0 12px rgba(201,168,76,0.3)";
+    };
+    exportBtn.onmouseout = () => {
+      exportBtn.style.background = "transparent";
+      exportBtn.style.boxShadow = "";
+    };
+    exportBtn.onclick = () => {
+      const dataStr = JSON.stringify(window.compoundTableDataList, null, 2);
+      const blob = new Blob([dataStr], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "shot-list.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    };
+    document.body.appendChild(exportBtn);
+  }
 });
 
 // Update the CSS for loader
@@ -1141,37 +1368,43 @@ document.head.appendChild(style);
 
 // Add performance monitoring to script initialization
 function initializeFromScript(scriptData) {
-  if (!scriptData || !scriptData.acts) return;
+  if (!scriptData) return;
 
   perf.start("Initializing from script");
-  window.compoundTableDataList = scriptData.acts.map((act, actIndex) => {
-    return {
-      type: "super",
-      number: actIndex + 1,
-      title: act.title || `ACT ${actIndex + 1}`,
-      children: act.sceneHeadings.map((scene, sceneIndex) => {
-        return {
-          type: "high",
-          number: sceneIndex + 1,
-          title: scene.title || `Scene ${sceneIndex + 1}`,
-          children: scene.components.map((component, compIndex) => {
-            return {
-              type: "compound",
-              number: compIndex + 1,
-              title: component.text || `Sequence ${compIndex + 1}`,
-              children: [
-                {
-                  type: "basic",
-                  number: 1,
-                  content: { content: "", imageData: null, canvasData: null },
-                },
-              ],
-            };
-          }),
-        };
-      }),
-    };
-  });
+
+  // Accept new shape: direct array of act nodes from convertToCompoundTableFormat()
+  if (Array.isArray(scriptData)) {
+    window.compoundTableDataList = scriptData;
+    renderAllL1Tables();
+    perf.end();
+    return;
+  }
+
+  // Legacy shape: { acts: [...] }
+  if (!scriptData.acts) { perf.end(); return; }
+  window.compoundTableDataList = scriptData.acts.map((act, actIndex) => ({
+    type: "super",
+    number: actIndex + 1,
+    title: act.title || `ACT ${actIndex + 1}`,
+    children: (act.sceneHeadings || []).map((scene, sceneIndex) => ({
+      type: "high",
+      number: sceneIndex + 1,
+      title: scene.title || `Scene ${sceneIndex + 1}`,
+      rawLines: scene.rawLines || [],
+      children: (scene.components || [{ text: "Sequence 1" }]).map((component, compIndex) => ({
+        type: "compound",
+        number: compIndex + 1,
+        title: component.text || `Sequence ${compIndex + 1}`,
+        children: [
+          {
+            type: "basic",
+            number: 1,
+            content: { content: "", imageData: null, canvasData: null },
+          },
+        ],
+      })),
+    })),
+  }));
 
   renderAllL1Tables();
   perf.end();

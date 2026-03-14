@@ -598,6 +598,34 @@
   100% { transform: scale(1); }
 }
 
+/* ── Floating Export Button ───────────────────────────────── */
+#floating-export-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 130px;
+  padding: 11px 18px;
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.5);
+  color: var(--ct-gold);
+  border-radius: 7px;
+  font-size: .88rem;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 1000;
+  font-family: var(--ct-font);
+  transition: background .2s, box-shadow .2s;
+}
+
+#floating-export-btn:hover {
+  background: rgba(201,168,76,.1);
+  box-shadow: 0 0 12px rgba(201,168,76,.3);
+}
+
+/* ── Scene Preview Panel scrollbar ───────────────────────── */
+#scene-preview-panel ::-webkit-scrollbar { width: 4px; }
+#scene-preview-panel ::-webkit-scrollbar-track { background: #0a131e; }
+#scene-preview-panel ::-webkit-scrollbar-thumb { background: rgba(201,168,76,.3); border-radius: 2px; }
+
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 900px) {
   .compound-level[class*="level-3"] {
