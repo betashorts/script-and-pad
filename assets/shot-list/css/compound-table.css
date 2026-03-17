@@ -663,3 +663,21 @@
     font-size: .82rem;
   }
 }
+
+@media (max-width: 768px) {
+  .compound-level[class*="level-3"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+  .compound-level[class*="level-2"] > .compound-bottom-row {
+    flex-direction: column !important;
+    padding: 8px !important;
+  }
+  .shot-details-container {
+    flex-direction: column !important;
+    gap: 6px !important;
+  }
+  .basic-unit-tools {
+    flex-wrap: wrap;
+  }
+}

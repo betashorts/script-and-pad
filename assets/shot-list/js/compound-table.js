@@ -1290,6 +1290,51 @@ window.addEventListener("DOMContentLoaded", () => {
     root.parentNode.insertBefore(rootContainer, root);
     rootContainer.appendChild(root);
 
+    // ── Hierarchy legend ─────────────────────────────────────────────────
+    const legend = document.createElement('div');
+    legend.id = 'ct-legend';
+    legend.innerHTML = `
+      <button id="ct-legend-toggle"
+        style="background:none;border:none;cursor:pointer;
+        color:rgba(201,168,76,.6);font-size:.74rem;font-family:'Lora',Georgia,serif;
+        padding:8px 0;letter-spacing:.05em;display:flex;align-items:center;gap:6px;">
+        ▶ How this works
+      </button>
+      <div id="ct-legend-body" style="display:none;padding:12px 0 4px;
+        gap:10px;flex-wrap:wrap;">
+        <span class="ct-legend-pill" style="background:rgba(201,168,76,.1);
+          border:1px solid rgba(201,168,76,.2);border-radius:5px;padding:5px 12px;
+          font-size:.74rem;color:rgba(245,240,232,.7);font-family:'Lora',Georgia,serif;">
+          <strong style="color:#c9a84c;">Act</strong> — Story act (Act I, II, III)
+        </span>
+        <span class="ct-legend-pill" style="background:rgba(201,168,76,.1);
+          border:1px solid rgba(201,168,76,.2);border-radius:5px;padding:5px 12px;
+          font-size:.74rem;color:rgba(245,240,232,.7);font-family:'Lora',Georgia,serif;">
+          <strong style="color:#c9a84c;">Scene</strong> — Each INT./EXT. location heading
+        </span>
+        <span class="ct-legend-pill" style="background:rgba(201,168,76,.1);
+          border:1px solid rgba(201,168,76,.2);border-radius:5px;padding:5px 12px;
+          font-size:.74rem;color:rgba(245,240,232,.7);font-family:'Lora',Georgia,serif;">
+          <strong style="color:#c9a84c;">Sequence</strong> — A group of related shots in a scene
+        </span>
+        <span class="ct-legend-pill" style="background:rgba(201,168,76,.1);
+          border:1px solid rgba(201,168,76,.2);border-radius:5px;padding:5px 12px;
+          font-size:.74rem;color:rgba(245,240,232,.7);font-family:'Lora',Georgia,serif;">
+          <strong style="color:#c9a84c;">Shot</strong> — Single camera position with all specs
+        </span>
+      </div>`;
+    rootContainer.insertBefore(legend, root);
+
+    const legendToggle = document.getElementById('ct-legend-toggle');
+    const legendBody = document.getElementById('ct-legend-body');
+    if (legendToggle && legendBody) {
+      legendToggle.addEventListener('click', () => {
+        const isOpen = legendBody.style.display === 'flex';
+        legendBody.style.display = isOpen ? 'none' : 'flex';
+        legendToggle.textContent = (isOpen ? '▶' : '▼') + ' How this works';
+      });
+    }
+
     const addL1Btn = document.createElement("button");
     addL1Btn.textContent = "Add Act";
     addL1Btn.onclick = async () => {
@@ -1309,9 +1354,16 @@ window.addEventListener("DOMContentLoaded", () => {
     rootContainer.insertBefore(addL1Btn, root);
 
     if (!loadCompoundTableFromLocal()) {
-      window.compoundTableDataList = [compoundTableData];
-      window.renderAllL1Tables();
-      saveCompoundTableToLocal();
+      // No saved data — show empty state instead of placeholder data
+      root.innerHTML = `
+        <div style="text-align:center;padding:60px 20px;">
+          <p style="font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;
+             color:#f5f0e8;margin:0 0 10px;">No shot list yet</p>
+          <p style="font-size:.82rem;color:rgba(245,240,232,.4);
+             font-family:'Lora',Georgia,serif;max-width:320px;margin:0 auto;">
+             Upload your script on the Shot List tab to get started.
+          </p>
+        </div>`;
     }
   }
 

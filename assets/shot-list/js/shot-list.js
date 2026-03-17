@@ -5,9 +5,8 @@ function updateStatus(message, isError = false) {
 }
 
 function showJsonOutput(json) {
-  const outputDiv = document.getElementById("jsonOutput");
-  outputDiv.textContent = JSON.stringify(json, null, 2);
-  outputDiv.style.display = "block";
+  // Debug output disabled in production
+  console.log('Parsed script data:', json);
 }
 
 function processText(text) {
@@ -206,6 +205,8 @@ async function processFile() {
       window.renderAllL1Tables();
       const tabCompoundTable = document.getElementById("tab-compound-table");
       if (tabCompoundTable) tabCompoundTable.click();
+      const emptyStateJson = document.getElementById('sl-empty-state');
+      if (emptyStateJson) emptyStateJson.style.display = 'none';
       updateStatus("Shot list restored successfully!");
       return;
     }
@@ -236,6 +237,8 @@ async function processFile() {
     }
 
     showJsonOutput(result);
+    const emptyState = document.getElementById('sl-empty-state');
+    if (emptyState) emptyState.style.display = 'none';
     updateStatus("File processed successfully!");
   } catch (error) {
     console.error("Processing error:", error);
