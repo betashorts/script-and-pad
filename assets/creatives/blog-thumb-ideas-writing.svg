@@ -1,0 +1,81 @@
+<svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lightbulb made of film frames with excited character illustration">
+  <rect width="380" height="200" fill="#162032"/>
+  <!-- Depth circles -->
+  <circle cx="170" cy="100" r="130" fill="#1e2f45" fill-opacity="0.55"/>
+  <circle cx="330" cy="40" r="65" fill="#253652" fill-opacity="0.5"/>
+  <!-- Radial glow behind bulb -->
+  <circle cx="178" cy="88" r="80" fill="#c9a84c" fill-opacity="0.06"/>
+
+  <!-- Lightbulb outline -->
+  <!-- Bulb globe (upper rounded part) -->
+  <path d="M130 95 Q130 42 178 42 Q226 42 226 95 Q226 118 210 132 L146 132 Q130 118 130 95Z" fill="#1e2f45" stroke="#c9a84c" stroke-width="2.5" stroke-opacity="0.6"/>
+  <!-- Base segments -->
+  <rect x="152" y="132" width="52" height="9" rx="2" fill="#253652" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.5"/>
+  <rect x="155" y="143" width="46" height="8" rx="2" fill="#253652" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.4"/>
+  <rect x="159" y="153" width="38" height="7" rx="2" fill="#2c3e50" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.35"/>
+
+  <!-- Film frames inside bulb -->
+  <g clip-path="url(#bulb-clip)">
+    <!-- Row 1 -->
+    <rect x="138" y="55" width="20" height="14" rx="2" fill="#c9a84c" opacity="0.25"/>
+    <rect x="141" y="57" width="14" height="10" rx="1" fill="#0d1b2a" opacity="0.6"/>
+    <rect x="162" y="52" width="20" height="14" rx="2" fill="#c9a84c" opacity="0.22"/>
+    <rect x="165" y="54" width="14" height="10" rx="1" fill="#0d1b2a" opacity="0.6"/>
+    <rect x="186" y="55" width="20" height="14" rx="2" fill="#c9a84c" opacity="0.25"/>
+    <rect x="189" y="57" width="14" height="10" rx="1" fill="#0d1b2a" opacity="0.6"/>
+    <!-- Row 2 -->
+    <rect x="136" y="75" width="20" height="14" rx="2" fill="#c9a84c" opacity="0.2"/>
+    <rect x="139" y="77" width="14" height="10" rx="1" fill="#0d1b2a" opacity="0.6"/>
+    <rect x="160" y="72" width="20" height="14" rx="2" fill="#c9a84c" opacity="0.2"/>
+    <rect x="163" y="74" width="14" height="10" rx="1" fill="#0d1b2a" opacity="0.6"/>
+    <rect x="184" y="75" width="20" height="14" rx="2" fill="#c9a84c" opacity="0.2"/>
+    <rect x="187" y="77" width="14" height="10" rx="1" fill="#0d1b2a" opacity="0.6"/>
+    <!-- Row 3 -->
+    <rect x="140" y="95" width="20" height="14" rx="2" fill="#c9a84c" opacity="0.18"/>
+    <rect x="143" y="97" width="14" height="10" rx="1" fill="#0d1b2a" opacity="0.6"/>
+    <rect x="164" y="92" width="20" height="14" rx="2" fill="#c9a84c" opacity="0.18"/>
+    <rect x="167" y="94" width="14" height="10" rx="1" fill="#0d1b2a" opacity="0.6"/>
+    <rect x="186" y="95" width="20" height="14" rx="2" fill="#c9a84c" opacity="0.18"/>
+    <rect x="189" y="97" width="14" height="10" rx="1" fill="#0d1b2a" opacity="0.6"/>
+  </g>
+  <defs>
+    <clipPath id="bulb-clip">
+      <path d="M133 95 Q133 45 178 45 Q223 45 223 95 Q223 118 207 131 L149 131 Q133 118 133 95Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- "50 IDEAS" badge (top-right of bulb) -->
+  <rect x="238" y="38" width="72" height="34" rx="8" fill="#c9a84c"/>
+  <text x="274" y="55" fill="#0d1b2a" font-size="10" font-family="Georgia, serif" font-weight="900" text-anchor="middle">50</text>
+  <text x="274" y="66" fill="#0d1b2a" font-size="7" font-family="Georgia, serif" font-weight="700" text-anchor="middle" letter-spacing="1">IDEAS</text>
+
+  <!-- Excited character (right side) -->
+  <!-- Body -->
+  <rect x="286" y="118" width="46" height="50" rx="12" fill="#2a7f7f"/>
+  <!-- Head -->
+  <circle cx="309" cy="106" r="17" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M292 101 Q295 87 309 85 Q323 87 326 101 Q320 92 309 90 Q298 92 292 101Z" fill="#253652"/>
+  <!-- Excited eyes (wide open) -->
+  <circle cx="303" cy="106" r="2.5" fill="#2c3e50"/>
+  <circle cx="315" cy="106" r="2.5" fill="#2c3e50"/>
+  <!-- Big smile -->
+  <path d="M301 113 Q309 120 317 113" stroke="#2c3e50" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Arms raised in excitement -->
+  <path d="M290 125 Q270 108 256 96" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <circle cx="256" cy="96" r="7" fill="#d4956a"/>
+  <path d="M328 125 Q348 108 360 96" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <circle cx="360" cy="96" r="7" fill="#d4956a"/>
+  <!-- Legs -->
+  <path d="M299 168 L296 198" stroke="#d4956a" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M319 168 L322 198" stroke="#d4956a" stroke-width="9" fill="none" stroke-linecap="round"/>
+
+  <!-- Floating stars -->
+  <text x="16" y="42" fill="#c9a84c" font-size="14" opacity="0.45">★</text>
+  <text x="340" y="190" fill="#c9a84c" font-size="12" opacity="0.42">★</text>
+  <!-- Sparkle dots around bulb -->
+  <circle cx="108" cy="60" r="3" fill="#c9a84c" opacity="0.5"/>
+  <circle cx="108" cy="130" r="2.5" fill="#e8c96a" opacity="0.4"/>
+  <circle cx="248" cy="130" r="3" fill="#c9a84c" opacity="0.45"/>
+  <circle cx="22" cy="168" r="3" fill="#2a7f7f" opacity="0.5"/>
+</svg>

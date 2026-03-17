@@ -1,0 +1,78 @@
+<svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Filmmaker holding smartphone as camera with makeshift lighting rig illustration">
+  <rect width="380" height="200" fill="#0d1b2a"/>
+  <!-- Depth circles -->
+  <circle cx="200" cy="105" r="130" fill="#162032" fill-opacity="0.6"/>
+  <circle cx="60" cy="50" r="70" fill="#1e2f45" fill-opacity="0.45"/>
+  <!-- Radial glow (warm rust-gold for the lighting theme) -->
+  <circle cx="105" cy="95" r="80" fill="#c9a84c" fill-opacity="0.06"/>
+
+  <!-- Makeshift lighting rig: stack of books + lamp (left side) -->
+  <!-- Books stack -->
+  <rect x="22" y="148" width="60" height="10" rx="2" fill="#2a7f7f"/>
+  <rect x="24" y="138" width="56" height="11" rx="2" fill="#c0533a"/>
+  <rect x="20" y="128" width="64" height="11" rx="2" fill="#253652"/>
+  <rect x="26" y="118" width="52" height="11" rx="2" fill="#2a7f7f" opacity="0.7"/>
+  <rect x="22" y="108" width="60" height="11" rx="2" fill="#3d5166"/>
+  <!-- Lamp base (on top of books) -->
+  <rect x="44" y="92" width="16" height="18" rx="2" fill="#3d5166"/>
+  <!-- Lamp shade -->
+  <polygon points="36,92 68,92 60,62 44,62" fill="#c9a84c"/>
+  <!-- Light beam from lamp -->
+  <polygon points="44,92 60,92 80,158 24,158" fill="#c9a84c" fill-opacity="0.06"/>
+  <!-- Lamp bulb glow -->
+  <circle cx="52" cy="78" r="8" fill="#e8c96a" fill-opacity="0.35"/>
+  <circle cx="52" cy="78" r="4" fill="#e8c96a" fill-opacity="0.6"/>
+
+  <!-- Main filmmaker character (center, holding phone horizontally) -->
+  <!-- Body (energetic lean forward) -->
+  <rect x="174" y="108" width="52" height="56" rx="14" fill="#2c3e50" transform="rotate(-5 200 136)"/>
+  <!-- Head -->
+  <circle cx="204" cy="95" r="20" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M184 88 Q188 72 204 70 Q220 72 224 88 Q218 78 204 76 Q190 78 184 88Z" fill="#5d3a1a"/>
+  <!-- Excited expression (one eye squinted through viewfinder) -->
+  <circle cx="197" cy="95" r="2.5" fill="#2c3e50"/>
+  <!-- Squint line for right eye (looking through phone) -->
+  <line x1="208" y1="94" x2="216" y2="94" stroke="#2c3e50" stroke-width="2" stroke-linecap="round"/>
+  <line x1="208" y1="97" x2="216" y2="97" stroke="#2c3e50" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Grin -->
+  <path d="M196 104 Q204 110 212 104" stroke="#2c3e50" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Phone held horizontally (both arms extended forward) -->
+  <!-- Left arm -->
+  <path d="M178 120 Q160 118 146 116" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <circle cx="146" cy="116" r="8" fill="#d4956a"/>
+  <!-- Right arm -->
+  <path d="M222 120 Q240 118 254 116" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <circle cx="254" cy="116" r="8" fill="#d4956a"/>
+  <!-- Phone body (held between hands) -->
+  <rect x="140" y="108" width="120" height="16" rx="4" fill="#1e2f45" stroke="#3d5166" stroke-width="1.5"/>
+  <!-- Phone screen (recording) -->
+  <rect x="144" y="111" width="108" height="10" rx="2" fill="#0d1b2a"/>
+  <!-- Recording scene on screen (small landscape scene) -->
+  <rect x="146" y="112" width="48" height="8" rx="1" fill="#162032"/>
+  <circle cx="170" cy="116" r="3" fill="#2a7f7f" opacity="0.5"/>
+  <!-- REC indicator -->
+  <circle cx="230" cy="115" r="3" fill="#c0533a"/>
+  <text x="236" y="118" fill="#c0533a" font-size="5" font-family="monospace" font-weight="bold">REC</text>
+
+  <!-- Legs (slightly apart, stable stance) -->
+  <path d="M193" y="162" fill="none" stroke="#d4956a" stroke-width="10" stroke-linecap="round"/>
+  <line x1="193" y1="162" x2="188" y2="198" stroke="#d4956a" stroke-width="10" stroke-linecap="round"/>
+  <line x1="215" y1="162" x2="220" y2="198" stroke="#d4956a" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Scene being recorded (right background) -->
+  <rect x="282" y="84" width="72" height="56" rx="4" fill="#1e2f45" opacity="0.5"/>
+  <rect x="282" y="84" width="72" height="8" rx="4" fill="#253652" opacity="0.6"/>
+  <!-- Small subject in scene -->
+  <circle cx="318" cy="118" r="8" fill="#d4956a" opacity="0.4"/>
+  <rect x="312" y="126" width="12" height="14" rx="3" fill="#2a7f7f" opacity="0.35"/>
+
+  <!-- Gold stars -->
+  <text x="16" y="40" fill="#c9a84c" font-size="14" opacity="0.45">★</text>
+  <text x="348" y="178" fill="#c9a84c" font-size="12" opacity="0.42">★</text>
+  <!-- Accent dots -->
+  <circle cx="356" cy="34" r="3" fill="#c9a84c" opacity="0.4"/>
+  <circle cx="22" cy="185" r="3" fill="#2a7f7f" opacity="0.5"/>
+  <circle cx="350" cy="60" r="3" fill="#c0533a" opacity="0.35"/>
+</svg>
