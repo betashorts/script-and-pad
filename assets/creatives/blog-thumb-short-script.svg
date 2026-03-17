@@ -1,0 +1,88 @@
+<svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Writer at desk with script pages illustration">
+  <rect width="380" height="200" fill="#0d1b2a"/>
+  <!-- Depth circles -->
+  <circle cx="150" cy="100" r="130" fill="#162032" fill-opacity="0.65"/>
+  <circle cx="310" cy="50" r="70" fill="#1e2f45" fill-opacity="0.5"/>
+  <!-- Radial glow -->
+  <circle cx="200" cy="95" r="95" fill="#c9a84c" fill-opacity="0.05"/>
+  <!-- Spotlight polygon top-center -->
+  <polygon points="200,0 140,200 260,200" fill="#c9a84c" fill-opacity="0.04"/>
+
+  <!-- Script pages fanning (center-right) -->
+  <!-- Page 3 (back, rotated right) -->
+  <rect x="228" y="38" width="62" height="82" rx="3" fill="#1e2f45" transform="rotate(14 259 79)"/>
+  <!-- Page 2 (middle) -->
+  <rect x="224" y="34" width="62" height="82" rx="3" fill="#253652" transform="rotate(5 255 75)"/>
+  <!-- Page 1 (front, cream) -->
+  <rect x="220" y="30" width="62" height="82" rx="3" fill="#f5f0e8"/>
+  <!-- "FADE IN:" label in gold -->
+  <text x="228" y="46" fill="#c9a84c" font-size="6.5" font-family="monospace" font-weight="bold">FADE IN:</text>
+  <!-- Content lines on front page -->
+  <rect x="228" y="52" width="40" height="1.8" rx="1" fill="#3d5166" opacity="0.6"/>
+  <rect x="228" y="58" width="44" height="1.8" rx="1" fill="#3d5166" opacity="0.6"/>
+  <rect x="228" y="64" width="34" height="1.8" rx="1" fill="#3d5166" opacity="0.6"/>
+  <rect x="228" y="74" width="28" height="1.8" rx="1" fill="#3d5166" opacity="0.5"/>
+  <rect x="228" y="80" width="42" height="1.8" rx="1" fill="#3d5166" opacity="0.5"/>
+  <rect x="228" y="86" width="38" height="1.8" rx="1" fill="#3d5166" opacity="0.5"/>
+  <rect x="228" y="92" width="32" height="1.8" rx="1" fill="#3d5166" opacity="0.45"/>
+  <rect x="228" y="98" width="44" height="1.8" rx="1" fill="#3d5166" opacity="0.45"/>
+
+  <!-- Typewriter body (left) -->
+  <rect x="32" y="116" width="110" height="58" rx="7" fill="#1e2f45"/>
+  <!-- Top ridge -->
+  <rect x="42" y="100" width="90" height="22" rx="5" fill="#2c3e50"/>
+  <!-- Paper slot + paper -->
+  <rect x="56" y="80" width="62" height="28" rx="4" fill="#f5f0e8"/>
+  <rect x="64" y="86" width="30" height="1.5" rx="1" fill="#3d5166" opacity="0.4"/>
+  <rect x="64" y="92" width="38" height="1.5" rx="1" fill="#3d5166" opacity="0.4"/>
+  <rect x="64" y="98" width="24" height="1.5" rx="1" fill="#3d5166" opacity="0.35"/>
+  <!-- Keys row 1 -->
+  <g fill="#3d5166">
+    <rect x="42" y="130" width="14" height="10" rx="2"/>
+    <rect x="60" y="130" width="14" height="10" rx="2"/>
+    <rect x="78" y="130" width="14" height="10" rx="2"/>
+    <rect x="96" y="130" width="14" height="10" rx="2"/>
+    <rect x="114" y="130" width="14" height="10" rx="2"/>
+    <!-- Keys row 2 -->
+    <rect x="48" y="145" width="14" height="10" rx="2"/>
+    <rect x="66" y="145" width="14" height="10" rx="2"/>
+    <rect x="84" y="145" width="14" height="10" rx="2"/>
+    <rect x="102" y="145" width="14" height="10" rx="2"/>
+    <!-- Spacebar -->
+    <rect x="52" y="160" width="70" height="10" rx="2"/>
+  </g>
+  <!-- Gold accent key -->
+  <rect x="120" y="145" width="14" height="10" rx="2" fill="#c9a84c" opacity="0.75"/>
+
+  <!-- Writer character (seated right of typewriter) -->
+  <!-- Stool -->
+  <rect x="155" y="158" width="48" height="7" rx="3" fill="#2c3e50"/>
+  <line x1="160" y1="165" x2="155" y2="198" stroke="#3d5166" stroke-width="4" stroke-linecap="round"/>
+  <line x1="198" y1="165" x2="202" y2="198" stroke="#3d5166" stroke-width="4" stroke-linecap="round"/>
+  <!-- Body -->
+  <rect x="158" y="118" width="42" height="42" rx="10" fill="#c0533a"/>
+  <!-- Head -->
+  <circle cx="179" cy="106" r="16" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M163 102 Q165 88 179 86 Q193 88 195 102 Q189 93 179 91 Q169 93 163 102Z" fill="#3d2b1f"/>
+  <!-- Eyes + smile -->
+  <circle cx="173" cy="106" r="2" fill="#2c3e50"/>
+  <circle cx="185" cy="106" r="2" fill="#2c3e50"/>
+  <path d="M173 113 Q179 118 185 113" stroke="#2c3e50" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Writing arm (toward typewriter) -->
+  <path d="M162 130 Q144 138 134 144" stroke="#d4956a" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <circle cx="134" cy="144" r="7" fill="#d4956a"/>
+  <!-- Other arm -->
+  <path d="M196 130 Q208 142 210 155" stroke="#d4956a" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <!-- Legs -->
+  <path d="M170 160 L167 198" stroke="#d4956a" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M188 160 L191 198" stroke="#d4956a" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+  <!-- Floating gold stars -->
+  <text x="18" y="38" fill="#c9a84c" font-size="14" opacity="0.45">★</text>
+  <text x="346" y="170" fill="#c9a84c" font-size="12" opacity="0.42">★</text>
+  <!-- Accent dots -->
+  <circle cx="354" cy="32" r="3" fill="#c9a84c" opacity="0.45"/>
+  <circle cx="22" cy="170" r="3" fill="#2a7f7f" opacity="0.5"/>
+  <circle cx="340" cy="190" r="4" fill="#c0533a" opacity="0.35"/>
+</svg>
