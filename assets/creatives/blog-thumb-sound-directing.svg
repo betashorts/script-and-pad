@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#1a1228"/>
+  <!-- Depth circles -->
+  <circle cx="320" cy="170" r="130" fill="#1e2f45" opacity="0.5"/>
+  <circle cx="50" cy="30" r="80" fill="#0d1b2a" opacity="0.7"/>
+  <!-- Glow behind main element -->
+  <circle cx="190" cy="100" r="80" fill="#c9a84c" opacity="0.05"/>
+
+  <!-- Film strip overlaid on waveform area -->
+  <rect x="30" y="88" width="320" height="24" rx="3" fill="#253652" opacity="0.8"/>
+  <!-- Film perforations left -->
+  <rect x="34" y="92" width="8" height="16" rx="2" fill="#0d1b2a"/>
+  <rect x="46" y="92" width="8" height="16" rx="2" fill="#0d1b2a"/>
+  <!-- Film perforations right -->
+  <rect x="322" y="92" width="8" height="16" rx="2" fill="#0d1b2a"/>
+  <rect x="334" y="92" width="8" height="16" rx="2" fill="#0d1b2a"/>
+
+  <!-- Sound wave bars (varying heights) -->
+  <rect x="62" y="98" width="6" height="4" rx="2" fill="#c9a84c" opacity="0.8"/>
+  <rect x="72" y="84" width="6" height="32" rx="2" fill="#c9a84c"/>
+  <rect x="82" y="90" width="6" height="20" rx="2" fill="#2a7f7f"/>
+  <rect x="92" y="80" width="6" height="40" rx="2" fill="#c9a84c"/>
+  <rect x="102" y="92" width="6" height="16" rx="2" fill="#e8c96a"/>
+  <rect x="112" y="76" width="6" height="48" rx="2" fill="#c9a84c"/>
+  <rect x="122" y="88" width="6" height="24" rx="2" fill="#2a7f7f"/>
+  <rect x="132" y="94" width="6" height="12" rx="2" fill="#c9a84c" opacity="0.8"/>
+  <rect x="142" y="82" width="6" height="36" rx="2" fill="#e8c96a"/>
+  <rect x="152" y="70" width="6" height="60" rx="2" fill="#c9a84c"/>
+  <rect x="162" y="86" width="6" height="28" rx="2" fill="#2a7f7f"/>
+  <rect x="172" y="94" width="6" height="12" rx="2" fill="#c9a84c" opacity="0.7"/>
+  <rect x="182" y="78" width="6" height="44" rx="2" fill="#c9a84c"/>
+  <rect x="192" y="88" width="6" height="24" rx="2" fill="#e8c96a"/>
+  <rect x="202" y="66" width="6" height="68" rx="2" fill="#c9a84c"/>
+  <rect x="212" y="90" width="6" height="20" rx="2" fill="#2a7f7f"/>
+  <rect x="222" y="84" width="6" height="32" rx="2" fill="#c9a84c"/>
+  <rect x="232" y="94" width="6" height="12" rx="2" fill="#e8c96a" opacity="0.8"/>
+  <rect x="242" y="80" width="6" height="40" rx="2" fill="#c9a84c"/>
+  <rect x="252" y="88" width="6" height="24" rx="2" fill="#2a7f7f"/>
+  <rect x="262" y="96" width="6" height="8" rx="2" fill="#c9a84c" opacity="0.6"/>
+  <rect x="272" y="84" width="6" height="32" rx="2" fill="#c9a84c"/>
+  <rect x="282" y="90" width="6" height="20" rx="2" fill="#e8c96a"/>
+  <rect x="292" y="94" width="6" height="12" rx="2" fill="#2a7f7f" opacity="0.8"/>
+  <rect x="302" y="86" width="6" height="28" rx="2" fill="#c9a84c"/>
+
+  <!-- Large microphone left side -->
+  <ellipse cx="52" cy="56" rx="16" ry="22" fill="#2c3e50" stroke="#c9a84c" stroke-width="1.5"/>
+  <!-- Mic grille lines -->
+  <line x1="36" y1="48" x2="68" y2="48" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
+  <line x1="36" y1="55" x2="68" y2="55" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
+  <line x1="36" y1="62" x2="68" y2="62" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
+  <!-- Mic stand -->
+  <rect x="49" y="78" width="6" height="24" rx="3" fill="#253652"/>
+  <rect x="38" y="99" width="28" height="4" rx="2" fill="#253652"/>
+
+  <!-- Flat character at mixing desk -->
+  <!-- Body -->
+  <rect x="290" y="128" width="36" height="38" rx="13" fill="#c9a84c"/>
+  <!-- Legs -->
+  <rect x="295" y="162" width="10" height="18" rx="5" fill="#1e2f45"/>
+  <rect x="311" y="162" width="10" height="18" rx="5" fill="#1e2f45"/>
+  <!-- Head -->
+  <circle cx="308" cy="118" r="15" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M293 113 Q308 98 323 113 L323 106 Q308 91 293 106 Z" fill="#253652"/>
+  <!-- Eye -->
+  <circle cx="313" cy="119" r="2.5" fill="#0d1b2a"/>
+  <!-- Headphones -->
+  <path d="M293 110 Q308 96 323 110" stroke="#253652" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <rect x="289" y="110" width="8" height="12" rx="4" fill="#253652"/>
+  <rect x="321" y="110" width="8" height="12" rx="4" fill="#253652"/>
+  <!-- Arms -->
+  <path d="M290 138 Q272 148 258 152" stroke="#d4956a" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <path d="M326 138 Q336 148 340 152" stroke="#d4956a" stroke-width="10" stroke-linecap="round" fill="none"/>
+
+  <!-- Mixing desk -->
+  <rect x="248" y="152" width="108" height="30" rx="5" fill="#253652"/>
+  <!-- Fader knobs -->
+  <circle cx="262" cy="164" r="5" fill="#c9a84c"/>
+  <circle cx="278" cy="160" r="5" fill="#2a7f7f"/>
+  <circle cx="294" cy="167" r="5" fill="#c9a84c"/>
+  <circle cx="310" cy="158" r="5" fill="#e8c96a"/>
+  <circle cx="326" cy="165" r="5" fill="#c9a84c"/>
+  <circle cx="342" cy="162" r="5" fill="#2a7f7f"/>
+
+  <!-- Gold stars -->
+  <text x="16" y="28" font-family="Arial,sans-serif" font-size="16" fill="#c9a84c" opacity="0.45">★</text>
+  <text x="348" y="192" font-family="Arial,sans-serif" font-size="14" fill="#c9a84c" opacity="0.4">★</text>
+</svg>

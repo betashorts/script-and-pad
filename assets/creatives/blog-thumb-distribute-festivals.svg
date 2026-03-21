@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#0f1e14"/>
+  <!-- Depth circles -->
+  <circle cx="190" cy="100" r="140" fill="#162032" opacity="0.5"/>
+  <circle cx="40" cy="30" r="70" fill="#0d1b2a" opacity="0.7"/>
+  <!-- Radial glow behind reel -->
+  <circle cx="190" cy="100" r="56" fill="#c9a84c" opacity="0.05"/>
+
+  <!-- Film reel center -->
+  <!-- Outer ring -->
+  <circle cx="190" cy="100" r="50" fill="#253652"/>
+  <circle cx="190" cy="100" r="46" fill="#162032"/>
+  <!-- Hub -->
+  <circle cx="190" cy="100" r="16" fill="#253652"/>
+  <circle cx="190" cy="100" r="8" fill="#0d1b2a"/>
+  <!-- Spokes -->
+  <line x1="190" y1="84" x2="190" y2="54" stroke="#253652" stroke-width="10"/>
+  <line x1="190" y1="116" x2="190" y2="146" stroke="#253652" stroke-width="10"/>
+  <line x1="176" y1="90" x2="152" y2="72" stroke="#253652" stroke-width="10"/>
+  <line x1="204" y1="110" x2="228" y2="128" stroke="#253652" stroke-width="10"/>
+  <line x1="176" y1="110" x2="152" y2="128" stroke="#253652" stroke-width="10"/>
+  <line x1="204" y1="90" x2="228" y2="72" stroke="#253652" stroke-width="10"/>
+
+  <!-- DISTRIBUTE arc text above reel -->
+  <path id="arc" d="M148,72 A50,50 0 0,1 232,72" fill="none"/>
+  <text font-family="Arial,sans-serif" font-size="9" fill="#c9a84c" font-weight="bold" opacity="0.8">
+    <textPath href="#arc" startOffset="10%">DISTRIBUTE</textPath>
+  </text>
+
+  <!-- Radiating arrows with destination icons -->
+
+  <!-- Arrow up → Cinema marquee -->
+  <line x1="190" y1="50" x2="190" y2="22" stroke="#c9a84c" stroke-width="2" stroke-dasharray="4,3"/>
+  <polygon points="190,14 184,26 196,26" fill="#c9a84c"/>
+  <!-- Cinema icon top -->
+  <rect x="174" y="4" width="32" height="10" rx="2" fill="#c9a84c" opacity="0.8"/>
+  <rect x="178" y="14" width="24" height="2" rx="1" fill="#c9a84c" opacity="0.5"/>
+
+  <!-- Arrow right → Laptop screen -->
+  <line x1="240" y1="100" x2="300" y2="100" stroke="#2a7f7f" stroke-width="2" stroke-dasharray="4,3"/>
+  <polygon points="308,100 296,94 296,106" fill="#2a7f7f"/>
+  <!-- Laptop icon right -->
+  <rect x="310" y="84" width="40" height="28" rx="3" fill="#253652" stroke="#2a7f7f" stroke-width="1.5"/>
+  <rect x="313" y="87" width="34" height="22" rx="2" fill="#1e2f45"/>
+  <rect x="305" y="112" width="50" height="5" rx="2" fill="#2a7f7f" opacity="0.6"/>
+
+  <!-- Arrow bottom-right → Trophy festival -->
+  <line x1="226" y1="132" x2="274" y2="162" stroke="#c9a84c" stroke-width="2" stroke-dasharray="4,3"/>
+  <polygon points="280,166 268,160 274,150" fill="#c9a84c"/>
+  <!-- Trophy icon bottom-right -->
+  <rect x="282" y="156" width="24" height="28" rx="4" fill="#c9a84c" opacity="0.8"/>
+  <rect x="276" y="152" width="36" height="10" rx="5" fill="#e8c96a" opacity="0.9"/>
+  <rect x="288" y="184" width="12" height="6" rx="2" fill="#c9a84c" opacity="0.7"/>
+  <rect x="282" y="188" width="24" height="4" rx="2" fill="#c9a84c"/>
+
+  <!-- Arrow bottom-left → Phone (mobile) -->
+  <line x1="154" y1="132" x2="106" y2="162" stroke="#e8c96a" stroke-width="2" stroke-dasharray="4,3"/>
+  <polygon points="100,166 112,150 118,160" fill="#e8c96a"/>
+  <!-- Phone icon bottom-left -->
+  <rect x="70" y="154" width="22" height="38" rx="5" fill="#253652" stroke="#e8c96a" stroke-width="1.5"/>
+  <rect x="73" y="158" width="16" height="28" rx="2" fill="#1e2f45"/>
+  <circle cx="81" cy="188" r="2" fill="#e8c96a" opacity="0.6"/>
+
+  <!-- Arrow left → Globe/web -->
+  <line x1="140" y1="100" x2="80" y2="100" stroke="#c9a84c" stroke-width="2" stroke-dasharray="4,3"/>
+  <polygon points="72,100 84,94 84,106" fill="#c9a84c"/>
+  <!-- Globe icon left -->
+  <circle cx="52" cy="100" r="18" fill="none" stroke="#c9a84c" stroke-width="1.5" opacity="0.8"/>
+  <ellipse cx="52" cy="100" rx="9" ry="18" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.6"/>
+  <line x1="34" y1="100" x2="70" y2="100" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
+  <line x1="36" y1="90" x2="68" y2="90" stroke="#c9a84c" stroke-width="1" opacity="0.3"/>
+  <line x1="36" y1="110" x2="68" y2="110" stroke="#c9a84c" stroke-width="1" opacity="0.3"/>
+
+  <!-- Golden network lines -->
+  <line x1="80" y1="100" x2="140" y2="100" stroke="#c9a84c" stroke-width="0.8" opacity="0.2"/>
+
+  <!-- Filmmaker character center (confident pose) -->
+  <!-- Body -->
+  <rect x="178" y="102" width="24" height="28" rx="10" fill="#2a7f7f"/>
+  <!-- Legs -->
+  <rect x="181" y="126" width="8" height="14" rx="4" fill="#1e2f45"/>
+  <rect x="193" y="126" width="8" height="14" rx="4" fill="#1e2f45"/>
+  <!-- Head -->
+  <circle cx="190" cy="94" r="12" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M178 89 Q190 77 202 89 L202 83 Q190 71 178 83 Z" fill="#253652"/>
+  <!-- Eye -->
+  <circle cx="194" cy="95" r="2" fill="#0d1b2a"/>
+  <!-- Arms confident (hands on hips / out) -->
+  <path d="M178 110 Q168 116 162 120" stroke="#d4956a" stroke-width="9" stroke-linecap="round" fill="none"/>
+  <path d="M202 110 Q212 116 218 120" stroke="#d4956a" stroke-width="9" stroke-linecap="round" fill="none"/>
+
+  <!-- Gold stars -->
+  <text x="16" y="28" font-family="Arial,sans-serif" font-size="16" fill="#c9a84c" opacity="0.45">★</text>
+  <text x="350" y="192" font-family="Arial,sans-serif" font-size="14" fill="#c9a84c" opacity="0.4">★</text>
+</svg>
