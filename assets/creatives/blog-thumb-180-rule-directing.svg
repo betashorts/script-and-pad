@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#0d1b2a"/>
+
+  <!-- Depth circles -->
+  <circle cx="190" cy="110" r="110" fill="#162032" opacity="0.7"/>
+  <circle cx="50" cy="30" r="60" fill="#253652" opacity="0.5"/>
+
+  <!-- Radial glow -->
+  <circle cx="190" cy="115" r="85" fill="#c9a84c" opacity="0.05"/>
+
+  <!-- Gold stars -->
+  <text x="20" y="180" font-size="18" fill="#c9a84c" opacity="0.45">★</text>
+  <text x="350" y="165" font-size="14" fill="#e8c96a" opacity="0.4">★</text>
+
+  <!-- Spotlight ellipse top -->
+  <ellipse cx="190" cy="10" rx="120" ry="40" fill="#c9a84c" opacity="0.06"/>
+
+  <!-- Floor plan: two characters facing each other -->
+  <!-- Character A (left) - top down view: circle head + simple body -->
+  <circle cx="100" cy="118" r="14" fill="#d4956a"/>
+  <rect x="88" y="130" width="24" height="18" rx="8" fill="#c9a84c"/>
+
+  <!-- Character B (right) - top down view -->
+  <circle cx="280" cy="118" r="14" fill="#d4956a"/>
+  <rect x="268" y="130" width="24" height="18" rx="8" fill="#2a7f7f"/>
+
+  <!-- Axis line between them (dotted) -->
+  <line x1="100" y1="118" x2="280" y2="118" stroke="#f5f0e8" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.5"/>
+
+  <!-- 180° arc (gold dotted semicircle) below the axis -->
+  <path d="M 60,118 A 130,80 0 0 1 320,118" fill="none" stroke="#c9a84c" stroke-width="2.5" stroke-dasharray="8,5" opacity="0.9"/>
+
+  <!-- Correct camera 1 (bottom left of arc) -->
+  <g transform="translate(72,158)">
+    <rect x="-12" y="-8" width="24" height="16" rx="3" fill="#253652" stroke="#c9a84c" stroke-width="1.5"/>
+    <circle cx="6" cy="0" r="5" fill="#0d1b2a" stroke="#c9a84c" stroke-width="1"/>
+    <rect x="-18" y="-4" width="6" height="8" rx="2" fill="#253652"/>
+  </g>
+
+  <!-- Correct camera 2 (bottom right of arc) -->
+  <g transform="translate(308,158)">
+    <rect x="-12" y="-8" width="24" height="16" rx="3" fill="#253652" stroke="#c9a84c" stroke-width="1.5"/>
+    <circle cx="6" cy="0" r="5" fill="#0d1b2a" stroke="#c9a84c" stroke-width="1"/>
+    <rect x="-18" y="-4" width="6" height="8" rx="2" fill="#253652"/>
+  </g>
+
+  <!-- WRONG camera above axis with X -->
+  <g transform="translate(190,72)">
+    <rect x="-12" y="-8" width="24" height="16" rx="3" fill="#c0533a" opacity="0.85"/>
+    <circle cx="6" cy="0" r="5" fill="#0d1b2a" stroke="#c0533a" stroke-width="1"/>
+    <rect x="-18" y="-4" width="6" height="8" rx="2" fill="#c0533a" opacity="0.85"/>
+    <!-- X cross -->
+    <line x1="-16" y1="-14" x2="18" y2="18" stroke="#f5f0e8" stroke-width="2.5" opacity="0.9"/>
+    <line x1="18" y1="-14" x2="-16" y2="18" stroke="#f5f0e8" stroke-width="2.5" opacity="0.9"/>
+  </g>
+
+  <!-- 180° text label -->
+  <text x="168" y="148" font-size="22" fill="#c9a84c" opacity="0.9" font-family="sans-serif" font-weight="bold">180°</text>
+
+  <!-- Small filmmaker with clipboard -->
+  <circle cx="355" cy="88" r="9" fill="#d4956a"/>
+  <rect x="348" y="98" width="14" height="18" rx="6" fill="#253652"/>
+  <rect x="350" y="104" width="10" height="13" rx="2" fill="#f5f0e8" opacity="0.7"/>
+  <line x1="348" y1="102" x2="340" y2="112" stroke="#d4956a" stroke-width="6" stroke-linecap="round"/>
+</svg>
