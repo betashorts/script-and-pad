@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#1e2f45"/>
+
+  <!-- Depth circles -->
+  <circle cx="80" cy="160" r="90" fill="#162032" opacity="0.7"/>
+  <circle cx="310" cy="40" r="70" fill="#253652" opacity="0.6"/>
+
+  <!-- Radial glow -->
+  <circle cx="190" cy="100" r="80" fill="#c9a84c" opacity="0.05"/>
+
+  <!-- Spotlight polygon from top center -->
+  <polygon points="190,0 140,200 240,200" fill="#c9a84c" opacity="0.06"/>
+
+  <!-- Gold stars -->
+  <text x="340" y="30" font-size="16" fill="#c9a84c" opacity="0.45">★</text>
+  <text x="30" y="50" font-size="14" fill="#e8c96a" opacity="0.4">★</text>
+
+  <!-- Small clapperboard top-right -->
+  <rect x="310" y="12" width="44" height="32" rx="3" fill="#0d1b2a"/>
+  <rect x="310" y="12" width="44" height="10" rx="3" fill="#253652"/>
+  <line x1="322" y1="12" x2="318" y2="22" stroke="#c9a84c" stroke-width="2"/>
+  <line x1="332" y1="12" x2="328" y2="22" stroke="#c9a84c" stroke-width="2"/>
+  <line x1="342" y1="12" x2="338" y2="22" stroke="#c9a84c" stroke-width="2"/>
+  <line x1="352" y1="12" x2="348" y2="22" stroke="#c9a84c" stroke-width="2"/>
+
+  <!-- Left character (gold body) -->
+  <!-- Head -->
+  <circle cx="105" cy="115" r="16" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M90,108 Q105,96 120,108 Q118,100 105,97 Q92,100 90,108Z" fill="#253652"/>
+  <!-- Eye -->
+  <circle cx="110" cy="115" r="2.5" fill="#0d1b2a"/>
+  <!-- Body -->
+  <rect x="91" y="132" width="28" height="36" rx="14" fill="#c9a84c"/>
+  <!-- Arms -->
+  <path d="M91,140 Q78,148 80,160" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <path d="M119,140 Q132,148 130,160" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <!-- Legs -->
+  <rect x="94" y="165" width="10" height="22" rx="6" fill="#1e2f45"/>
+  <rect x="108" y="165" width="10" height="22" rx="6" fill="#1e2f45"/>
+
+  <!-- Right character (teal body) -->
+  <!-- Head -->
+  <circle cx="275" cy="115" r="16" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M260,108 Q275,96 290,108 Q288,100 275,97 Q262,100 260,108Z" fill="#253652"/>
+  <!-- Eye -->
+  <circle cx="270" cy="115" r="2.5" fill="#0d1b2a"/>
+  <!-- Body -->
+  <rect x="261" y="132" width="28" height="36" rx="14" fill="#2a7f7f"/>
+  <!-- Arms -->
+  <path d="M261,140 Q248,148 250,160" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <path d="M289,140 Q302,148 300,160" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <!-- Legs -->
+  <rect x="264" y="165" width="10" height="22" rx="6" fill="#1e2f45"/>
+  <rect x="278" y="165" width="10" height="22" rx="6" fill="#1e2f45"/>
+
+  <!-- Left speech bubble -->
+  <rect x="58" y="62" width="80" height="40" rx="8" fill="#f5f0e8" opacity="0.95"/>
+  <polygon points="90,102 100,102 95,114" fill="#f5f0e8" opacity="0.95"/>
+  <!-- Text lines in bubble -->
+  <rect x="66" y="70" width="52" height="5" rx="2" fill="#2c3e50" opacity="0.5"/>
+  <rect x="66" y="80" width="40" height="5" rx="2" fill="#2c3e50" opacity="0.4"/>
+  <rect x="66" y="90" width="48" height="5" rx="2" fill="#2c3e50" opacity="0.35"/>
+
+  <!-- Right speech bubble (thought cloud / subtext) -->
+  <rect x="242" y="50" width="90" height="44" rx="10" fill="#253652" opacity="0.95"/>
+  <!-- Cloud bumps on top -->
+  <circle cx="257" cy="50" r="8" fill="#253652" opacity="0.95"/>
+  <circle cx="272" cy="46" r="10" fill="#253652" opacity="0.95"/>
+  <circle cx="290" cy="44" r="11" fill="#253652" opacity="0.95"/>
+  <circle cx="308" cy="46" r="9" fill="#253652" opacity="0.95"/>
+  <circle cx="322" cy="50" r="7" fill="#253652" opacity="0.95"/>
+  <!-- Thought dots -->
+  <circle cx="278" cy="97" r="3" fill="#253652" opacity="0.8"/>
+  <circle cx="272" cy="104" r="2" fill="#253652" opacity="0.7"/>
+  <circle cx="267" cy="110" r="1.5" fill="#253652" opacity="0.6"/>
+  <!-- Subtext lines inside cloud bubble -->
+  <rect x="252" y="58" width="60" height="5" rx="2" fill="#c9a84c" opacity="0.6"/>
+  <rect x="252" y="68" width="72" height="5" rx="2" fill="#f5f0e8" opacity="0.4"/>
+  <rect x="252" y="78" width="50" height="5" rx="2" fill="#f5f0e8" opacity="0.35"/>
+  <!-- SUBTEXT label -->
+  <text x="264" y="92" font-size="8" fill="#e8c96a" opacity="0.8" font-family="sans-serif">SUBTEXT</text>
+</svg>
