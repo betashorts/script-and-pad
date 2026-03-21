@@ -3,7 +3,7 @@ layout: post
 title: "How to Self-Distribute Your Short Film: From Festival to Online"
 date: 2026-03-14 00:00:00 +0000
 thumb: "/assets/creatives/blog-thumb-distribute-festivals.svg"
-meta: '<meta name="description" content="Learn how to distribute a short film yourself — from the festival window strategy through FilmFreeway, curated platforms, YouTube, Vimeo, and beyond. A complete filmmaker's guide."><meta name="keywords" content="how to distribute a short film, short film distribution, film festivals, FilmFreeway, Omeleto, short film online, Vimeo, YouTube filmmaking"><meta name="author" content="Script and Pad"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/how-to-distribute-a-short-film/">'
+meta: '<meta name="description" content="Learn how to distribute a short film yourself — from the festival window strategy through FilmFreeway, curated platforms, YouTube, Vimeo, and beyond. A complete filmmakers guide."><meta name="keywords" content="how to distribute a short film, short film distribution, film festivals, FilmFreeway, Omeleto, short film online, Vimeo, YouTube filmmaking"><meta name="author" content="Script and Pad"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/how-to-distribute-a-short-film/">'
 og: >
   title: "How to Self-Distribute Your Short Film: From Festival to Online"
   description: "The short film distribution ladder — festival window, FilmFreeway strategy, curated platforms, YouTube and Vimeo, and using your short as a calling card."
