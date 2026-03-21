@@ -9,7 +9,7 @@ og: >
   description: "The complete guide to shot sizes, camera angles, and movements — what each one communicates and how to use them to tell better stories."
   url: "https://scriptandpad.com/camera-angles-and-shots-explained/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Directing]
 tags:
   [

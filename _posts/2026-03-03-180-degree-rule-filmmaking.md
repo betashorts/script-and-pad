@@ -9,7 +9,7 @@ og: >
   description: "What the invisible line is, why it exists, when to break it deliberately, and how to plan it in your shot list."
   url: "https://scriptandpad.com/180-degree-rule-filmmaking/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Directing]
 tags:
   [

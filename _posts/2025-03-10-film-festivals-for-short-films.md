@@ -9,7 +9,7 @@ og: >
   description: "A practical guide to the film festival landscape for short filmmakers — Tier 1 and Tier 2 festivals, free platforms, synopsis writing, and first-timer mistakes."
   url: "https://scriptandpad.com/film-festivals-for-short-films/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Festivals]
 tags:
   [

@@ -9,7 +9,7 @@ og: >
   description: "The interface explained, your first edit, colour grading basics, and export settings for YouTube, Vimeo, and festival submissions — a short film focused DaVinci Resolve guide."
   url: "https://scriptandpad.com/davinci-resolve-short-film-editing/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Tools]
 tags:
   [

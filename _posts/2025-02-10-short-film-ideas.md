@@ -9,7 +9,7 @@ og: >
   description: "50 short film ideas broken into categories — single-location, dialogue-only, no-dialogue, phone-shootable, and emotion-based concepts."
   url: "https://scriptandpad.com/short-film-ideas/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Writing]
 tags:
   [

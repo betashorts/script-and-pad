@@ -9,7 +9,7 @@ og: >
   description: "A clear, practical explanation of what a shot list is, what goes in each row, and why it's the most useful production document you'll carry on set."
   url: "https://scriptandpad.com/what-is-a-shot-list/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Tools]
 tags:
   [

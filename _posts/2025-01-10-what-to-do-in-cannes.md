@@ -14,7 +14,7 @@ og: >
   description: "Explore the best things to do in Cannes, from the luxury of La Croisette to the charm of Le Suquet. Plan your perfect trip with our guide."
   url: "https://scriptandpad.com/what-to-do-in-cannes"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 tags:
   [
     Cannes travel,

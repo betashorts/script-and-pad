@@ -9,7 +9,7 @@ og: >
   description: "The short film distribution ladder — festival window, FilmFreeway strategy, curated platforms, YouTube and Vimeo, and using your short as a calling card."
   url: "https://scriptandpad.com/how-to-distribute-a-short-film/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Festivals]
 tags:
   [

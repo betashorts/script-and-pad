@@ -9,7 +9,7 @@ og: >
   description: "Comparing the top free screenwriting tools: Screenplay Writer, Fade In, WriterDuet, Highland 2, Trelby, and Arc Studio — pros, cons, and who each one is for."
   url: "https://scriptandpad.com/best-free-screenwriting-software-2025/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Tools]
 tags:
   [

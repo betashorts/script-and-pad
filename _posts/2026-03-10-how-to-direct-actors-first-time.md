@@ -9,7 +9,7 @@ og: >
   description: "Practical techniques for giving notes, using action-based direction, and getting the performance you need from actors on your first short film."
   url: "https://scriptandpad.com/how-to-direct-actors-first-time/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Directing]
 tags:
   [

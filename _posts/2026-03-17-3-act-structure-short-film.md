@@ -9,7 +9,7 @@ og: >
   description: "How the 3 act structure works in a short film — with timing breakdowns for 5, 10, and 15-minute films and a practical structure guide for short film writers."
   url: "https://scriptandpad.com/3-act-structure-short-film/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Writing]
 tags:
   [

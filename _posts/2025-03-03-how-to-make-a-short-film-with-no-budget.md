@@ -9,7 +9,7 @@ og: >
   description: "A practical, no-nonsense guide to making a short film when your budget is zero — covering equipment, locations, cast, sound, editing, and distribution."
   url: "https://scriptandpad.com/how-to-make-a-short-film-with-no-budget/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Directing]
 tags:
   [

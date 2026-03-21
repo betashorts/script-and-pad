@@ -9,7 +9,7 @@ og: >
   description: "A practical, honest guide to writing your first short film script — structure, formatting, common mistakes, and how to start today."
   url: "https://scriptandpad.com/how-to-write-a-short-film-script/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Writing]
 tags:
   [

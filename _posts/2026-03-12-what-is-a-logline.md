@@ -9,7 +9,7 @@ og: >
   description: "The anatomy of a strong logline, 6 real examples analysed, the 5 most common mistakes, and where to use your logline once it is written."
   url: "https://scriptandpad.com/what-is-a-logline/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Writing]
 tags:
   [

@@ -9,7 +9,7 @@ og: >
   description: "The official definition is 40 minutes. The festival sweet spot is 5–12. Here's why that gap matters and how to get your short film to the right length."
   url: "https://scriptandpad.com/how-long-should-a-short-film-be/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Writing]
 tags:
   [

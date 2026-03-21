@@ -9,7 +9,7 @@ og: >
   description: "The 4 audio layers, on-set recording, post-production dialogue cleaning, and final mix standards explained for short filmmakers."
   url: "https://scriptandpad.com/sound-design-short-films/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Directing]
 tags:
   [

@@ -9,7 +9,7 @@ og: >
   description: "Settings, stabilisation, sound, lighting, and editing — the complete practical guide for mobile short filmmakers in 2026."
   url: "https://scriptandpad.com/how-to-make-a-short-film-on-your-phone/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Directing]
 tags:
   [

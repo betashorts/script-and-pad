@@ -9,7 +9,7 @@ og: >
   description: "Structure, five formats that work, what to leave out, and three one-page script examples analysed — the complete guide to micro short filmmaking."
   url: "https://scriptandpad.com/how-to-write-a-one-page-short-film/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Writing]
 tags:
   [

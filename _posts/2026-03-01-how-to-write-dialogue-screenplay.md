@@ -9,7 +9,7 @@ og: >
   description: "Master subtext, character voice, and the techniques professionals use to make every line count."
   url: "https://scriptandpad.com/how-to-write-dialogue-screenplay/"
   type: "article"
-  image: "https://scriptandpad.com/logo.jpg"
+  image: "https://scriptandpad.com/logo.png"
 categories: [Writing]
 tags:
   [

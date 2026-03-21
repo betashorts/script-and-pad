@@ -5,7 +5,7 @@ theme: minima
 permalink: /:title/
 markdown: kramdown
 author: "Script and Pad"
-default_image: "https://scriptandpad.com/logo.jpg"
+default_image: "https://scriptandpad.com/logo.png"
 plugins:
   - jekyll-sitemap
   - jekyll-redirect-from
