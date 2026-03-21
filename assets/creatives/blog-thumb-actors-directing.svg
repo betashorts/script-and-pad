@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#0f1e14"/>
+  <!-- Depth circles -->
+  <circle cx="320" cy="160" r="130" fill="#162032" opacity="0.6"/>
+  <circle cx="50" cy="40" r="90" fill="#0d1b2a" opacity="0.7"/>
+  <!-- Spotlight cone from top center -->
+  <polygon points="190,0 130,200 250,200" fill="#c9a84c" opacity="0.06"/>
+  <!-- Radial glow -->
+  <circle cx="190" cy="120" r="70" fill="#c9a84c" opacity="0.05"/>
+
+  <!-- Director character (left, navy beret) -->
+  <!-- Director's chair -->
+  <rect x="58" y="140" width="54" height="6" rx="3" fill="#253652"/>
+  <rect x="62" y="146" width="46" height="28" rx="4" fill="#1e2f45"/>
+  <rect x="66" y="136" width="38" height="8" rx="3" fill="#253652"/>
+  <!-- Chair legs -->
+  <rect x="62" y="174" width="8" height="16" rx="4" fill="#253652"/>
+  <rect x="100" y="174" width="8" height="16" rx="4" fill="#253652"/>
+  <!-- DIRECTOR text on chair back -->
+  <text x="85" y="165" font-family="Arial,sans-serif" font-size="6" fill="#c9a84c" text-anchor="middle" font-weight="bold">DIRECTOR</text>
+
+  <!-- Director body (seated) -->
+  <rect x="70" y="120" width="30" height="28" rx="12" fill="#1e2f45"/>
+  <!-- Director head -->
+  <circle cx="85" cy="110" r="14" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M71 106 Q85 92 99 106 L99 100 Q85 86 71 100 Z" fill="#253652"/>
+  <!-- Beret -->
+  <ellipse cx="85" cy="98" rx="14" ry="5" fill="#0d1b2a"/>
+  <circle cx="85" cy="95" r="10" fill="#162032"/>
+  <circle cx="90" cy="93" r="2" fill="#c9a84c" opacity="0.6"/>
+  <!-- Eye -->
+  <circle cx="90" cy="111" r="2" fill="#0d1b2a"/>
+  <!-- Megaphone arm -->
+  <path d="M100 125 Q124 118 140 114" stroke="#d4956a" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <!-- Other arm -->
+  <path d="M70 125 Q56 130 50 138" stroke="#d4956a" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <!-- Clipboard in hand -->
+  <rect x="38" y="128" width="16" height="20" rx="2" fill="#f5f0e8"/>
+  <rect x="43" y="125" width="6" height="5" rx="1" fill="#253652"/>
+  <rect x="40" y="133" width="12" height="2" rx="1" fill="#c9a84c" opacity="0.7"/>
+  <rect x="40" y="137" width="10" height="2" rx="1" fill="#253652" opacity="0.5"/>
+  <rect x="40" y="141" width="11" height="2" rx="1" fill="#253652" opacity="0.5"/>
+
+  <!-- Megaphone -->
+  <polygon points="140,106 140,122 168,130 168,98" fill="#c9a84c"/>
+  <rect x="138" y="106" width="6" height="16" rx="2" fill="#e8c96a"/>
+  <!-- Sound lines from megaphone -->
+  <path d="M170 110 Q178 108 182 106" stroke="#c9a84c" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+  <path d="M170 114 Q182 114 188 114" stroke="#c9a84c" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+  <path d="M170 118 Q178 120 182 122" stroke="#c9a84c" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
+
+  <!-- Actor character (right, rust body, expressive pose) -->
+  <!-- Body -->
+  <rect x="238" y="100" width="34" height="50" rx="14" fill="#c0533a"/>
+  <!-- Legs -->
+  <rect x="242" y="146" width="10" height="28" rx="5" fill="#1e2f45"/>
+  <rect x="258" y="146" width="10" height="28" rx="5" fill="#1e2f45"/>
+  <!-- Head -->
+  <circle cx="255" cy="88" r="16" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M239 82 Q255 66 271 82 L271 74 Q255 58 239 74 Z" fill="#1e2f45"/>
+  <!-- Eye -->
+  <circle cx="261" cy="88" r="2.5" fill="#0d1b2a"/>
+  <!-- Expressive arms (outstretched, performing) -->
+  <path d="M238 112 Q214 100 200 88" stroke="#d4956a" stroke-width="11" stroke-linecap="round" fill="none"/>
+  <path d="M272 112 Q296 100 312 92" stroke="#d4956a" stroke-width="11" stroke-linecap="round" fill="none"/>
+  <!-- Hands open gesture -->
+  <circle cx="200" cy="88" r="7" fill="#d4956a"/>
+  <circle cx="312" cy="92" r="7" fill="#d4956a"/>
+
+  <!-- Clapperboard top right -->
+  <rect x="316" y="18" width="44" height="34" rx="3" fill="#f5f0e8"/>
+  <rect x="316" y="18" width="44" height="11" rx="2" fill="#0d1b2a"/>
+  <line x1="320" y1="18" x2="316" y2="29" stroke="#c9a84c" stroke-width="2"/>
+  <line x1="327" y1="18" x2="323" y2="29" stroke="#c9a84c" stroke-width="2"/>
+  <line x1="334" y1="18" x2="330" y2="29" stroke="#c9a84c" stroke-width="2"/>
+  <line x1="341" y1="18" x2="337" y2="29" stroke="#c9a84c" stroke-width="2"/>
+  <line x1="348" y1="18" x2="344" y2="29" stroke="#c9a84c" stroke-width="2"/>
+  <rect x="320" y="31" width="36" height="3" rx="1" fill="#253652"/>
+  <rect x="320" y="37" width="30" height="3" rx="1" fill="#e8e0d0"/>
+  <rect x="320" y="43" width="26" height="3" rx="1" fill="#253652"/>
+
+  <!-- Gold stars -->
+  <text x="16" y="28" font-family="Arial,sans-serif" font-size="16" fill="#c9a84c" opacity="0.45">★</text>
+  <text x="346" y="192" font-family="Arial,sans-serif" font-size="14" fill="#c9a84c" opacity="0.4">★</text>
+</svg>

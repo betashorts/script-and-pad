@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#253652"/>
+  <!-- Depth circles -->
+  <circle cx="320" cy="160" r="120" fill="#1e2f45" opacity="0.6"/>
+  <circle cx="40" cy="40" r="85" fill="#0d1b2a" opacity="0.7"/>
+  <!-- Radial glow behind bubble -->
+  <circle cx="190" cy="80" r="90" fill="#c9a84c" opacity="0.05"/>
+
+  <!-- Large speech bubble shape -->
+  <rect x="60" y="16" width="264" height="100" rx="16" fill="#f5f0e8"/>
+  <!-- Bubble tail -->
+  <polygon points="130,116 110,148 158,116" fill="#f5f0e8"/>
+
+  <!-- Logline anatomy inside bubble -->
+  <!-- "CHARACTER" label and gold bar -->
+  <rect x="74" y="30" width="72" height="18" rx="4" fill="#c9a84c"/>
+  <text x="110" y="43" font-family="Arial,sans-serif" font-size="9" fill="#0d1b2a" text-anchor="middle" font-weight="bold">CHARACTER</text>
+  <!-- "wants GOAL" -->
+  <text x="153" y="43" font-family="Arial,sans-serif" font-size="8" fill="#253652">wants</text>
+  <rect x="180" y="30" width="52" height="18" rx="4" fill="#2a7f7f"/>
+  <text x="206" y="43" font-family="Arial,sans-serif" font-size="9" fill="#f5f0e8" text-anchor="middle" font-weight="bold">GOAL</text>
+  <text x="236" y="43" font-family="Arial,sans-serif" font-size="8" fill="#253652">but</text>
+  <rect x="252" y="30" width="60" height="18" rx="4" fill="#c0533a"/>
+  <text x="282" y="43" font-family="Arial,sans-serif" font-size="9" fill="#f5f0e8" text-anchor="middle" font-weight="bold">OBSTACLE</text>
+
+  <!-- Second line -->
+  <text x="74" y="68" font-family="Arial,sans-serif" font-size="8" fill="#253652">or lose</text>
+  <rect x="108" y="56" width="56" height="18" rx="4" fill="#162032"/>
+  <text x="136" y="69" font-family="Arial,sans-serif" font-size="9" fill="#c9a84c" text-anchor="middle" font-weight="bold">STAKES</text>
+  <text x="168" y="68" font-family="Arial,sans-serif" font-size="8" fill="#253652">forever.</text>
+
+  <!-- Irony note -->
+  <rect x="74" y="84" width="240" height="20" rx="4" fill="#e8c96a" opacity="0.4"/>
+  <text x="194" y="98" font-family="Arial,sans-serif" font-size="8" fill="#162032" text-anchor="middle">The best loglines have a contradiction — the hook.</text>
+
+  <!-- Writer character below bubble -->
+  <!-- Body -->
+  <rect x="86" y="158" width="30" height="32" rx="12" fill="#2a7f7f"/>
+  <!-- Legs -->
+  <rect x="90" y="186" width="9" height="10" rx="4" fill="#1e2f45"/>
+  <rect x="104" y="186" width="9" height="10" rx="4" fill="#1e2f45"/>
+  <!-- Head -->
+  <circle cx="101" cy="150" r="14" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M87 145 Q101 131 115 145 L115 138 Q101 124 87 138 Z" fill="#162032"/>
+  <!-- Eye (looking up at bubble) -->
+  <circle cx="106" cy="148" r="2.5" fill="#0d1b2a"/>
+  <!-- Arm with pen -->
+  <path d="M116 165 Q132 158 146 152" stroke="#d4956a" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <!-- Pen -->
+  <rect x="144" y="146" width="4" height="16" rx="2" fill="#f5f0e8" transform="rotate(-30 146 154)"/>
+  <polygon points="144,158 140,166 148,166" fill="#c9a84c" transform="rotate(-30 144 162)"/>
+  <!-- Other arm -->
+  <path d="M86 165 Q72 168 62 172" stroke="#d4956a" stroke-width="10" stroke-linecap="round" fill="none"/>
+
+  <!-- Stacked script pages background right -->
+  <rect x="290" y="100" width="52" height="68" rx="4" fill="#f5f0e8" opacity="0.6" transform="rotate(8 316 134)"/>
+  <rect x="294" y="104" width="52" height="68" rx="4" fill="#f5f0e8" opacity="0.8" transform="rotate(3 320 138)"/>
+  <rect x="298" y="108" width="52" height="68" rx="4" fill="#f5f0e8"/>
+  <!-- Script lines on top page -->
+  <rect x="304" y="116" width="38" height="5" rx="2" fill="#c9a84c" opacity="0.7"/>
+  <rect x="304" y="125" width="34" height="3" rx="1" fill="#253652" opacity="0.3"/>
+  <rect x="304" y="131" width="36" height="3" rx="1" fill="#253652" opacity="0.3"/>
+  <rect x="304" y="137" width="30" height="3" rx="1" fill="#253652" opacity="0.3"/>
+  <rect x="304" y="143" width="35" height="3" rx="1" fill="#253652" opacity="0.3"/>
+  <rect x="304" y="149" width="28" height="3" rx="1" fill="#253652" opacity="0.3"/>
+
+  <!-- Floating pen/quill -->
+  <rect x="232" y="148" width="5" height="28" rx="2" fill="#c9a84c" transform="rotate(-45 234 162)"/>
+  <polygon points="232,148 226,136 238,142" fill="#e8c96a" transform="rotate(-45 232 142)"/>
+
+  <!-- Gold stars -->
+  <text x="16" y="28" font-family="Arial,sans-serif" font-size="16" fill="#c9a84c" opacity="0.45">★</text>
+  <text x="350" y="190" font-family="Arial,sans-serif" font-size="14" fill="#c9a84c" opacity="0.4">★</text>
+</svg>

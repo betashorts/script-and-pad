@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#0d1b2a"/>
+  <!-- Depth circles -->
+  <circle cx="340" cy="170" r="130" fill="#162032" opacity="0.6"/>
+  <circle cx="40" cy="30" r="90" fill="#0d1b2a" opacity="0.8"/>
+  <!-- Glow at midpoint peak -->
+  <circle cx="190" cy="70" r="60" fill="#c9a84c" opacity="0.05"/>
+
+  <!-- Story arc curve above the bar -->
+  <!-- Arc path: starts low left, rises to midpoint peak, dips, then resolves slightly higher right -->
+  <path d="M40,140 Q100,40 190,50 Q260,58 300,90 Q320,105 340,130" stroke="#c9a84c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Timeline bar -->
+  <!-- Act 1 (teal, ~20%) -->
+  <rect x="30" y="138" width="72" height="22" rx="4" fill="#2a7f7f"/>
+  <!-- Act 2 (gold, ~60%) -->
+  <rect x="102" y="138" width="216" height="22" rx="4" fill="#c9a84c"/>
+  <!-- Act 3 (rust, ~20%) -->
+  <rect x="318" y="138" width="32" height="22" rx="4" fill="#c0533a"/>
+
+  <!-- Act labels -->
+  <text x="66" y="153" font-family="Arial,sans-serif" font-size="9" fill="#f5f0e8" text-anchor="middle" font-weight="bold">ACT 1</text>
+  <text x="210" y="153" font-family="Arial,sans-serif" font-size="9" fill="#0d1b2a" text-anchor="middle" font-weight="bold">ACT 2</text>
+  <text x="334" y="153" font-family="Arial,sans-serif" font-size="8" fill="#f5f0e8" text-anchor="middle" font-weight="bold">ACT 3</text>
+
+  <!-- Sub-labels below the bar -->
+  <text x="66" y="174" font-family="Arial,sans-serif" font-size="8" fill="#2a7f7f" text-anchor="middle">Setup</text>
+  <text x="210" y="174" font-family="Arial,sans-serif" font-size="8" fill="#c9a84c" text-anchor="middle">Confrontation</text>
+  <text x="334" y="174" font-family="Arial,sans-serif" font-size="8" fill="#c0533a" text-anchor="middle">Resolution</text>
+
+  <!-- Vertical dotted dividers -->
+  <line x1="102" y1="130" x2="102" y2="165" stroke="#f5f0e8" stroke-width="1" stroke-dasharray="3,2" opacity="0.4"/>
+  <line x1="318" y1="130" x2="318" y2="165" stroke="#f5f0e8" stroke-width="1" stroke-dasharray="3,2" opacity="0.4"/>
+
+  <!-- Small flat character at midpoint peak of arc -->
+  <!-- Body -->
+  <rect x="182" y="28" width="16" height="22" rx="7" fill="#c9a84c"/>
+  <!-- Head -->
+  <circle cx="190" cy="22" r="9" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M181 18 Q190 10 199 18 L199 13 Q190 5 181 13 Z" fill="#253652"/>
+  <!-- Eye -->
+  <circle cx="193" cy="22" r="1.8" fill="#0d1b2a"/>
+  <!-- Arms raised (celebrating) -->
+  <path d="M182 34 Q172 24 166 18" stroke="#d4956a" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M198 34 Q208 24 214 18" stroke="#d4956a" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <!-- Legs -->
+  <rect x="184" y="48" width="6" height="12" rx="3" fill="#1e2f45"/>
+  <rect x="192" y="48" width="6" height="12" rx="3" fill="#1e2f45"/>
+
+  <!-- Inciting incident marker (Act 1/2 boundary) -->
+  <circle cx="102" cy="120" r="5" fill="#2a7f7f"/>
+  <text x="102" y="114" font-family="Arial,sans-serif" font-size="7" fill="#2a7f7f" text-anchor="middle">INCITING</text>
+
+  <!-- Midpoint marker -->
+  <circle cx="210" cy="58" r="5" fill="#e8c96a"/>
+  <text x="210" y="52" font-family="Arial,sans-serif" font-size="7" fill="#e8c96a" text-anchor="middle">MIDPOINT</text>
+
+  <!-- Lowest point marker (before Act 3) -->
+  <circle cx="294" cy="96" r="5" fill="#c0533a"/>
+  <text x="294" y="90" font-family="Arial,sans-serif" font-size="7" fill="#c0533a" text-anchor="middle">LOWEST</text>
+
+  <!-- Script pages stack background right (small) -->
+  <rect x="12" y="182" width="30" height="10" rx="2" fill="#253652" opacity="0.5"/>
+
+  <!-- Gold stars -->
+  <text x="16" y="28" font-family="Arial,sans-serif" font-size="16" fill="#c9a84c" opacity="0.45">★</text>
+  <text x="350" y="192" font-family="Arial,sans-serif" font-size="14" fill="#c9a84c" opacity="0.4">★</text>
+</svg>
