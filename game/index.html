@@ -111,36 +111,16 @@
     <h1 class="gm-page-title">Drum Beat <span>Ear Training</span></h1>
     <p class="gm-page-sub">Listen · Recreate · Score. Master rhythm one beat at a time.</p>
 
-    <!-- Session Stats (session-only, no localStorage) -->
-    <div class="gm-session-bar">
-      <div class="gm-stat-pill">
-        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="10" cy="10" r="8" stroke="#c9a84c" stroke-width="1.5"/><circle cx="10" cy="10" r="5" stroke="#c9a84c" stroke-width="1.5"/><circle cx="10" cy="10" r="2" fill="#c9a84c"/></svg>
-        Decoded <strong id="gm-session-score">0</strong>
-      </div>
-      <div class="gm-stat-pill">
-        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 2 C10 2 14 6 14 10 C14 13 12 15 10 18 C8 15 6 13 6 10 C6 6 10 2 10 2Z" fill="#c0533a" opacity="0.8"/><path d="M10 8 C10 8 12 10 12 12 C12 13.5 11 14.5 10 16 C9 14.5 8 13.5 8 12 C8 10 10 8 10 8Z" fill="#e8c96a"/></svg>
-        On a Run <strong id="gm-session-streak">0</strong>
-      </div>
-      <div class="gm-stat-pill">
-        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="7" height="7" rx="1.5" stroke="#c9a84c" stroke-width="1.5"/><rect x="11" y="2" width="7" height="7" rx="1.5" stroke="#c9a84c" stroke-width="1.5"/><rect x="2" y="11" width="7" height="7" rx="1.5" stroke="#c9a84c" stroke-width="1.5"/><rect x="11" y="11" width="7" height="7" rx="1.5" stroke="#c9a84c" stroke-width="1.5"/></svg>
-        Patterns <strong id="gm-session-best">0</strong>
-      </div>
-    </div>
 
-    <!-- How To Play Accordion -->
-    <details class="gm-how-to">
-      <summary>How to play</summary>
-      <div class="gm-how-body">
-        <ol>
-          <li><strong>Pick a beat</strong> from the sidebar — start with Easy ones.</li>
-          <li>Click <strong>▶ Listen to Beat</strong> to hear the reference drum pattern.</li>
-          <li>Click the <strong>grid cells</strong> to place your drum hits — gold = active.</li>
-          <li>Click <strong>▷ Play Mine</strong> to hear how your version sounds.</li>
-          <li>Hit <strong>✓ Check Accuracy</strong> to score your attempt and earn stars.</li>
-          <li>Use <strong>◉ Reveal Solution</strong> to peek at the correct pattern.</li>
-        </ol>
-      </div>
-    </details>
+    <!-- How To Play Link -->
+    <a href="/game/how-to-play/" class="gm-how-to-link">
+      <svg viewBox="0 0 16 16" width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M8 7 C8 6 9.5 5.5 9.5 7.2 C9.5 8.2 8 8.8 8 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="8" cy="11.5" r="0.7" fill="currentColor"/>
+      </svg>
+      How to play Beat Lab
+    </a>
 
     <!-- Beat Info Row -->
     <div class="gm-beat-info">
@@ -169,6 +149,23 @@
 
     <!-- Piano Roll -->
     <div class="gm-roll-wrap" style="position:relative;">
+      <!-- Top-right icon buttons -->
+      <div class="gm-grid-toolbar">
+        <button id="loopToggle" class="gm-icon-btn" title="Toggle Loop" aria-label="Toggle loop">
+          <svg viewBox="0 0 18 18" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 9 C3 5.7 5.7 3 9 3 C11.2 3 13.1 4.1 14.2 5.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M15 9 C15 12.3 12.3 15 9 15 C6.8 15 4.9 13.9 3.8 12.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <polyline points="12.5,4 14.5,6 16.5,4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="5.5,14 3.5,12 1.5,14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button id="clearPattern" class="gm-icon-btn" title="Clear pattern" aria-label="Clear pattern">
+          <svg viewBox="0 0 18 18" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="4" y1="4" x2="14" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="14" y1="4" x2="4" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
       <!-- Count-In Overlay -->
       <div class="gm-countin" id="gm-countin">
         <span class="gm-countin-num" id="gm-countin-num">1</span>
@@ -185,8 +182,6 @@
       </div>
       <div class="gm-controls-secondary">
         <button id="toggleSolution" class="btn gm-btn-util">◉ Reveal Solution</button>
-        <button id="clearPattern"   class="btn gm-btn-util">✕ Clear</button>
-        <button id="loopToggle"     class="btn gm-btn-util">↺ Loop: Off</button>
       </div>
     </div>
 
@@ -205,14 +200,6 @@
       <p class="gm-result-msg" id="gm-result-msg"></p>
     </div>
 
-    <!-- Debug Info -->
-    <div class="gm-debug" id="debug-info">
-      <div>BPM: <span id="debug-bpm">—</span></div>
-      <div>Time Sig: <span id="debug-time-signature">—</span></div>
-      <div>Bars: <span id="debug-bars">—</span></div>
-      <div>Duration: <span id="debug-duration">—</span>s</div>
-      <div>MIDI Notes: <span id="debug-midi-notes">—</span></div>
-    </div>
 
   </main>
 </div>
