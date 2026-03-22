@@ -708,43 +708,53 @@
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 5px;
+  height: 6px;
   border-radius: 3px;
-  background: var(--gm-navy-3);
   outline: none;
   cursor: pointer;
-  display: block;
+  /* The fill is driven by --fill-pct, set by JS on every input event */
+  background: linear-gradient(
+    to right,
+    #c9a84c 0%,
+    #c9a84c var(--fill-pct, 100%),
+    #253652 var(--fill-pct, 100%),
+    #253652 100%
+  );
 }
-
 .gm-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: var(--gm-gold);
+  background: #c9a84c;
   cursor: pointer;
-  box-shadow: 0 0 6px rgba(201,168,76,0.5);
+  border: 2px solid #0d1b2a;
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
   transition: box-shadow 0.15s;
+  position: relative;
+  z-index: 2;
 }
-
 .gm-slider::-webkit-slider-thumb:hover {
-  box-shadow: 0 0 12px rgba(201,168,76,0.8);
+  box-shadow: 0 0 0 5px rgba(201,168,76,0.3);
 }
-
 .gm-slider::-moz-range-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: var(--gm-gold);
+  background: #c9a84c;
   cursor: pointer;
-  border: none;
-  box-shadow: 0 0 6px rgba(201,168,76,0.5);
+  border: 2px solid #0d1b2a;
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
 }
-
 .gm-slider::-webkit-slider-runnable-track {
-  background: linear-gradient(to right, rgba(201,168,76,0.5) 0%, var(--gm-navy-3) 0%);
-  height: 5px;
+  background: transparent;
+  height: 6px;
+  border-radius: 3px;
+}
+.gm-slider::-moz-range-track {
+  background: transparent;
+  height: 6px;
   border-radius: 3px;
 }
 
@@ -952,68 +962,6 @@
 .gm-badge-hard   { background: rgba(192,83,58,0.2);   color: #c0533a; border: 1px solid #c0533a; letter-spacing: 1px; text-transform: uppercase; }
 
 /* ── FIX: Slider — CSS variable keeps thumb + track in sync ─ */
-/*
-  JS sets --gm-fill on the element via style.setProperty().
-  CSS custom properties cascade to pseudo-elements, so
-  both the input background (Firefox) and the WebKit track
-  pseudo-element (Chrome/Safari) read the same value.
-*/
-.gm-slider {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 5px;
-  border-radius: 3px;
-  outline: none;
-  cursor: pointer;
-  display: block;
-  /* Firefox uses the input element's background as the track */
-  background: linear-gradient(
-    to right,
-    #c9a84c var(--gm-fill, 100%),
-    #1e2d40 var(--gm-fill, 100%)
-  );
-}
-
-/* Chrome/Safari: track is a separate pseudo-element */
-.gm-slider::-webkit-slider-runnable-track {
-  height: 5px;
-  border-radius: 3px;
-  background: linear-gradient(
-    to right,
-    #c9a84c var(--gm-fill, 100%),
-    #1e2d40 var(--gm-fill, 100%)
-  );
-}
-
-.gm-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #c9a84c;
-  cursor: pointer;
-  border: none;
-  /* Vertically centre the thumb on the track */
-  margin-top: -6.5px;
-}
-
-.gm-slider::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #c9a84c;
-  cursor: pointer;
-  border: none;
-}
-
-/* Firefox filled track portion */
-.gm-slider::-moz-range-progress {
-  background: #c9a84c;
-  height: 5px;
-  border-radius: 3px;
-}
 
 /* ── FIX: Clickable step number headers ─────────────────── */
 .gm-step-num {
