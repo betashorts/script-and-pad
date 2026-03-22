@@ -908,15 +908,16 @@
 
 /* ── FIX: Playhead — grid-col-active column highlight ────── */
 .grid-cell.grid-col-active {
-  background-color: rgba(201, 168, 76, 0.18) !important;
+  background-color: rgba(201, 168, 76, 0.22) !important;
   border-top: 2px solid #c9a84c !important;
+  transition: background-color 0ms, border-top 0ms; /* instant — no lag on playhead */
 }
 
-/* Active (user-clicked) cells remain visible through playhead */
+/* Active (user-placed) cells still glow gold through the highlight */
 .grid-cell.active.grid-col-active {
   background-color: #c9a84c !important;
   border-top: 2px solid #e8c96a !important;
-  box-shadow: 0 0 14px rgba(201,168,76,0.6) !important;
+  box-shadow: 0 0 16px rgba(201,168,76,0.7) !important;
 }
 
 /* ── FIX: Count-In overlay z-index ───────────────────────── */
@@ -950,18 +951,39 @@
 .gm-badge-medium { background: rgba(201,168,76,0.2);  color: #c9a84c; border: 1px solid #c9a84c; letter-spacing: 1px; text-transform: uppercase; }
 .gm-badge-hard   { background: rgba(192,83,58,0.2);   color: #c0533a; border: 1px solid #c0533a; letter-spacing: 1px; text-transform: uppercase; }
 
-/* ── FIX: Slider — remove default, pure JS-driven gradient ─ */
+/* ── FIX: Slider — CSS variable keeps thumb + track in sync ─ */
+/*
+  JS sets --gm-fill on the element via style.setProperty().
+  CSS custom properties cascade to pseudo-elements, so
+  both the input background (Firefox) and the WebKit track
+  pseudo-element (Chrome/Safari) read the same value.
+*/
 .gm-slider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
   height: 5px;
   border-radius: 3px;
-  /* background set by JS updateSliderTrack() */
-  background: var(--gm-navy-3);
   outline: none;
   cursor: pointer;
   display: block;
+  /* Firefox uses the input element's background as the track */
+  background: linear-gradient(
+    to right,
+    #c9a84c var(--gm-fill, 100%),
+    #1e2d40 var(--gm-fill, 100%)
+  );
+}
+
+/* Chrome/Safari: track is a separate pseudo-element */
+.gm-slider::-webkit-slider-runnable-track {
+  height: 5px;
+  border-radius: 3px;
+  background: linear-gradient(
+    to right,
+    #c9a84c var(--gm-fill, 100%),
+    #1e2d40 var(--gm-fill, 100%)
+  );
 }
 
 .gm-slider::-webkit-slider-thumb {
@@ -973,7 +995,8 @@
   background: #c9a84c;
   cursor: pointer;
   border: none;
-  box-shadow: none;
+  /* Vertically centre the thumb on the track */
+  margin-top: -6.5px;
 }
 
 .gm-slider::-moz-range-thumb {
@@ -985,11 +1008,30 @@
   border: none;
 }
 
-/* Remove the webkit track gradient since JS handles it */
-.gm-slider::-webkit-slider-runnable-track {
-  background: transparent;
+/* Firefox filled track portion */
+.gm-slider::-moz-range-progress {
+  background: #c9a84c;
   height: 5px;
   border-radius: 3px;
+}
+
+/* ── FIX: Clickable step number headers ─────────────────── */
+.gm-step-num {
+  cursor: pointer;
+  border-radius: 3px;
+  transition: color 0.1s, background 0.1s;
+}
+
+.gm-step-num:hover {
+  color: var(--gm-gold) !important;
+  opacity: 1;
+}
+
+/* Active step number highlight (playhead or cue position) */
+.gm-step-num.grid-col-active {
+  color: #c9a84c !important;
+  font-weight: 700;
+  opacity: 1;
 }
 
 /* ── FIX: Stat pill SVG alignment ────────────────────────── */
