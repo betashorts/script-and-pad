@@ -1,0 +1,132 @@
+<svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#0d1b2a"/>
+  <!-- Depth circles -->
+  <circle cx="360" cy="180" r="140" fill="#0a1520" opacity="0.5"/>
+  <circle cx="18" cy="18" r="90" fill="#0a1520" opacity="0.45"/>
+  <!-- Spotlight -->
+  <polygon points="100,0 220,0 310,200 20,200" fill="#c9a84c" opacity="0.05"/>
+  <!-- Radial glow -->
+  <circle cx="250" cy="95" r="120" fill="#c9a84c" opacity="0.04"/>
+
+  <!-- Browser window (left) -->
+  <rect x="16" y="30" width="130" height="110" rx="8" fill="#162032" stroke="rgba(201,168,76,0.2)" stroke-width="1.2"/>
+  <!-- Browser chrome bar -->
+  <rect x="16" y="30" width="130" height="20" rx="8" fill="#1e2f45"/>
+  <rect x="16" y="42" width="130" height="8" fill="#1e2f45"/>
+  <!-- Browser dots -->
+  <circle cx="26" cy="40" r="3.5" fill="#c0533a" opacity="0.7"/>
+  <circle cx="36" cy="40" r="3.5" fill="#c9a84c" opacity="0.7"/>
+  <circle cx="46" cy="40" r="3.5" fill="#2a7f7f" opacity="0.7"/>
+  <!-- Address bar -->
+  <rect x="56" y="35" width="84" height="10" rx="4" fill="#253652"/>
+  <rect x="60" y="38" width="50" height="4" rx="1" fill="rgba(245,240,232,0.25)"/>
+  <!-- Browser content: mini shot list -->
+  <rect x="22" y="54" width="118" height="10" rx="2" fill="#c9a84c" opacity="0.9"/>
+  <rect x="26" y="57" width="30" height="4" rx="1" fill="rgba(22,32,50,0.6)"/>
+  <rect x="60" y="57" width="22" height="4" rx="1" fill="rgba(22,32,50,0.6)"/>
+  <rect x="90" y="57" width="44" height="4" rx="1" fill="rgba(22,32,50,0.6)"/>
+  <!-- Row 1 in browser -->
+  <rect x="22" y="65" width="118" height="16" fill="#1e2f45"/>
+  <rect x="26" y="68" width="14" height="10" rx="2" fill="#253652" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+  <path d="M28 73 Q30 68 34 72 Q37 67 40 71" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity="0.6"/>
+  <rect x="44" y="69" width="22" height="4" rx="1" fill="rgba(245,240,232,0.45)"/>
+  <rect x="70" y="69" width="16" height="4" rx="1" fill="rgba(245,240,232,0.38)"/>
+  <rect x="90" y="69" width="44" height="4" rx="1" fill="rgba(245,240,232,0.38)"/>
+  <!-- Row 2 in browser -->
+  <rect x="22" y="82" width="118" height="16" fill="#213449"/>
+  <rect x="26" y="85" width="14" height="10" rx="2" fill="#253652" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+  <rect x="44" y="86" width="18" height="4" rx="1" fill="rgba(245,240,232,0.42)"/>
+  <rect x="66" y="86" width="20" height="4" rx="1" fill="rgba(245,240,232,0.35)"/>
+  <!-- Row 3 in browser -->
+  <rect x="22" y="99" width="118" height="16" fill="#1e2f45"/>
+  <rect x="26" y="102" width="14" height="10" rx="2" fill="#253652" stroke="rgba(201,168,76,0.25)" stroke-width="0.8"/>
+  <rect x="44" y="103" width="26" height="4" rx="1" fill="rgba(245,240,232,0.4)"/>
+  <rect x="74" y="103" width="14" height="4" rx="1" fill="rgba(245,240,232,0.32)"/>
+  <!-- Export button in browser -->
+  <rect x="30" y="120" width="80" height="14" rx="5" fill="#c9a84c"/>
+  <text x="70" y="130" font-size="8" font-family="Lora, Georgia, serif" font-weight="bold" fill="#0d1b2a" text-anchor="middle">Export PDF</text>
+
+  <!-- Arrow from browser to PDF -->
+  <path d="M153 95 Q175 95 192 95" stroke="#c9a84c" stroke-width="2.2" fill="none" opacity="0.75"/>
+  <polygon points="192,91 202,95 192,99" fill="#c9a84c" opacity="0.75"/>
+
+  <!-- PDF document mockup (portrait) -->
+  <rect x="205" y="22" width="90" height="126" rx="6" fill="#f5f0e8" stroke="rgba(22,32,50,0.15)" stroke-width="1.2"/>
+  <!-- PDF badge (red top-right) -->
+  <rect x="272" y="22" width="23" height="20" rx="4" fill="#c0533a"/>
+  <text x="283" y="36" font-size="8" font-family="Georgia, serif" font-weight="bold" fill="#f5f0e8" text-anchor="middle">PDF</text>
+  <!-- Document title -->
+  <rect x="212" y="28" width="54" height="6" rx="2" fill="rgba(22,32,50,0.2)"/>
+  <!-- "SHOT LIST" text -->
+  <text x="237" y="34" font-size="6.5" font-family="Georgia, serif" font-weight="bold" fill="rgba(22,32,50,0.4)" text-anchor="middle">SHOT LIST</text>
+  <!-- Gold header row in PDF -->
+  <rect x="212" y="42" width="76" height="10" rx="1.5" fill="#c9a84c"/>
+  <rect x="215" y="45" width="10" height="4" rx="1" fill="rgba(22,32,50,0.55)"/>
+  <rect x="229" y="45" width="16" height="4" rx="1" fill="rgba(22,32,50,0.55)"/>
+  <rect x="250" y="45" width="12" height="4" rx="1" fill="rgba(22,32,50,0.55)"/>
+  <rect x="267" y="45" width="18" height="4" rx="1" fill="rgba(22,32,50,0.55)"/>
+  <!-- Row 1 with embedded storyboard thumbnail -->
+  <rect x="212" y="53" width="76" height="20" fill="#e8e2d8"/>
+  <!-- Thumbnail in image column -->
+  <rect x="215" y="55" width="16" height="16" rx="2" fill="#253652" stroke="rgba(201,168,76,0.5)" stroke-width="0.8"/>
+  <rect x="216" y="56" width="14" height="14" rx="1" fill="#1e2f45"/>
+  <path d="M217 66 Q219 61 222 63 Q225 59 229 64" stroke="#c9a84c" stroke-width="0.7" fill="none" opacity="0.7"/>
+  <circle cx="225" cy="59" r="2" fill="#d4956a" opacity="0.7"/>
+  <!-- Shot data in row -->
+  <rect x="234" y="56" width="18" height="3.5" rx="1" fill="rgba(22,32,50,0.3)"/>
+  <rect x="256" y="56" width="14" height="3.5" rx="1" fill="rgba(22,32,50,0.28)"/>
+  <rect x="234" y="62" width="26" height="3" rx="1" fill="rgba(22,32,50,0.2)"/>
+  <rect x="264" y="62" width="18" height="3" rx="1" fill="rgba(22,32,50,0.18)"/>
+  <!-- Row 2 -->
+  <rect x="212" y="74" width="76" height="18" fill="#f0eae0"/>
+  <rect x="215" y="76" width="16" height="14" rx="2" fill="#253652" stroke="rgba(201,168,76,0.4)" stroke-width="0.8"/>
+  <rect x="216" y="77" width="14" height="12" rx="1" fill="#1e2f45" opacity="0.8"/>
+  <rect x="234" y="77" width="22" height="3.5" rx="1" fill="rgba(22,32,50,0.28)"/>
+  <rect x="260" y="77" width="16" height="3.5" rx="1" fill="rgba(22,32,50,0.25)"/>
+  <rect x="234" y="84" width="14" height="3" rx="1" fill="rgba(22,32,50,0.18)"/>
+  <!-- Row 3 -->
+  <rect x="212" y="93" width="76" height="18" fill="#e8e2d8"/>
+  <rect x="215" y="95" width="16" height="14" rx="2" fill="#253652" stroke="rgba(201,168,76,0.35)" stroke-width="0.8"/>
+  <rect x="234" y="96" width="20" height="3.5" rx="1" fill="rgba(22,32,50,0.28)"/>
+  <rect x="258" y="96" width="24" height="3.5" rx="1" fill="rgba(22,32,50,0.25)"/>
+  <!-- Fade row -->
+  <rect x="212" y="112" width="76" height="14" fill="#f0eae0" opacity="0.5"/>
+  <rect x="234" y="115" width="30" height="3" rx="1" fill="rgba(22,32,50,0.15)"/>
+
+  <!-- Download arrow below PDF -->
+  <rect x="238" y="155" width="26" height="26" rx="8" fill="#c9a84c" opacity="0.9"/>
+  <!-- Down arrow icon -->
+  <path d="M251 161 L251 172" stroke="#0d1b2a" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M245 169 L251 176 L257 169" stroke="#0d1b2a" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="251" y="192" font-size="7.5" font-family="Lora, Georgia, serif" fill="rgba(245,240,232,0.5)" text-anchor="middle">Download</text>
+
+  <!-- Filmmaker character left side -->
+  <!-- Hair -->
+  <ellipse cx="336" cy="130" rx="20" ry="13" fill="#3d2b1f"/>
+  <!-- Head -->
+  <circle cx="336" cy="134" r="18" fill="#d4956a"/>
+  <!-- Hair front -->
+  <path d="M319 129 Q323 118 336 120 Q349 118 353 129" fill="#3d2b1f"/>
+  <!-- Eyes -->
+  <circle cx="330" cy="132" r="2.2" fill="#2c1a0e"/>
+  <circle cx="342" cy="132" r="2.2" fill="#2c1a0e"/>
+  <!-- Looking left (toward PDF) -->
+  <circle cx="329" cy="132" r="1" fill="#1a0e06"/>
+  <circle cx="341" cy="132" r="1" fill="#1a0e06"/>
+  <!-- Mouth -->
+  <path d="M331 140 Q336 144 341 140" stroke="#bf7050" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+  <!-- Body -->
+  <rect x="320" y="151" width="32" height="38" rx="12" fill="#2a7f7f"/>
+  <!-- Left arm pointing at PDF -->
+  <path d="M320 162 Q302 158 285 155" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Right arm -->
+  <path d="M352 162 Q362 157 368 150" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Legs -->
+  <rect x="324" y="187" width="11" height="13" rx="5" fill="#1e2f45"/>
+  <rect x="339" y="187" width="11" height="13" rx="5" fill="#1e2f45"/>
+
+  <!-- Gold stars -->
+  <text x="310" y="50" font-size="22" fill="#c9a84c" opacity="0.44" font-family="serif">★</text>
+  <text x="14" y="185" font-size="14" fill="#c9a84c" opacity="0.4" font-family="serif">★</text>
+</svg>
