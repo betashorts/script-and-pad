@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Charter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="How to Use the Shot List Generator — Script & Pad">
+    <meta property="og:description" content="Home of Screenplay Writer and tools for writers.">
+    <meta property="og:image" content="https://scriptandpad.com/logo.png">
+    <meta property="og:url" content="https://scriptandpad.com/shot-list/how-to-use/">
+    <meta property="og:type" content="article">
+    <title>How to Use the Shot List Generator — Script & Pad</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <meta name="description" content="A complete guide to using the Script & Pad Shot List Generator. Learn how to upload a script, build a hierarchical shot list, add shots, and export to PDF or DOCX.">
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    
+  ]
+}
+</script>
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M5L6M6HPR2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-M5L6M6HPR2');
+</script>
+</head>
+<body>
+<div id="reading-progress"></div>
+<header>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">
+                <img src="/logo.png" alt="Script and Pad Logo" class="navbar-logo" />
+                <div class="brand-text">
+                    <span class="brand-main">Script & Pad</span>
+                    <span class="brand-tag">Screenplay Writer tool</span>
+                </div>
+            </a>
+            <!-- Hamburger Menu Button (Mobile) -->
+            <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="navbar-links" id="navbar-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="https://workspace.google.com/marketplace/app/screenplay_writer/417536167724" class="nav-link" target="_blank" rel="noopener">Screenplay Writer</a></li>
+                <li><a href="/shot-list/" class="nav-link">Shot List</a></li>
+                <li><a href="/blog/" class="nav-link">Blog</a></li>
+                <li class="nav-divider"></li>
+                <!-- language link removed; only English posts -->
+                <li class="nav-divider"></li>
+                <li><a href="/privacy.html" class="nav-link">Privacy</a></li>
+                <li><a href="/terms.html" class="nav-link">Terms</a></li>
+                <li><a href="/support.html" class="nav-link">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+    <main>
+        <style>
+  footer { display: none; }
+  body { background: #0d1b2a; }
+
+  :root {
+    --c-navy:  #0d1b2a;
+    --c-navy2: #162032;
+    --c-navy3: #1e2f45;
+    --c-gold:  #c9a84c;
+    --c-gold2: #e8c96a;
+    --c-cream: #f5f0e8;
+    --c-teal:  #2a7f7f;
+    --c-rust:  #c0533a;
+    --c-muted: rgba(245,240,232,0.52);
+    --fh: 'Playfair Display', Georgia, serif;
+    --fb: 'Lora', Georgia, serif;
+  }
+
+  /* Dark navbar */
+  .navbar { background: var(--c-navy) !important; border-bottom: 1px solid rgba(201,168,76,.15) !important; }
+  .brand-main { color: var(--c-cream) !important; }
+  .brand-tag  { color: var(--c-muted) !important; }
+  .nav-link   { color: rgba(245,240,232,.72) !important; }
+  .nav-link:hover { background: rgba(30,47,69,.8) !important; color: var(--c-gold) !important; }
+  .hamburger-line { background: var(--c-cream) !important; }
+  .navbar-links   { background: var(--c-navy) !important; }
+
+  main { background: var(--c-navy); font-family: var(--fb); color: var(--c-cream); }
+
+  /* Film strip top */
+  .htu-strip { width: 100%; line-height: 0; background: var(--c-navy); }
+  .htu-strip svg { display: block; }
+
+  /* Page hero */
+  .htu-hero {
+    background: var(--c-navy2);
+    padding: 64px 28px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .htu-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(201,168,76,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .htu-back {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--fb); font-size: 0.82rem;
+    color: var(--c-muted); text-decoration: none;
+    margin-bottom: 28px;
+    transition: color 0.2s;
+  }
+  .htu-back:hover { color: var(--c-gold); }
+  .htu-label {
+    display: inline-block; font-family: var(--fb); font-size: 0.72rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--c-gold); border: 1px solid rgba(201,168,76,0.3);
+    padding: 4px 14px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .htu-title {
+    font-family: var(--fh); font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900; color: var(--c-cream); margin: 0 0 16px;
+    line-height: 1.1;
+  }
+  .htu-title em { color: var(--c-gold); font-style: italic; }
+  .htu-sub {
+    font-family: var(--fb); font-size: 1.05rem; color: var(--c-muted);
+    max-width: 540px; margin: 0 auto 28px; line-height: 1.7;
+  }
+  .htu-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--c-gold); color: var(--c-navy);
+    font-family: var(--fb); font-size: 0.9rem; font-weight: 700;
+    padding: 12px 26px; border-radius: 8px; text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .htu-cta:hover { background: var(--c-gold2); transform: translateY(-2px); }
+
+  /* Main content */
+  .htu-main {
+    max-width: 860px; margin: 0 auto;
+    padding: 72px 28px 80px;
+  }
+
+  /* Section */
+  .htu-section { margin-bottom: 72px; }
+  .htu-section-num {
+    font-family: var(--fb); font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-gold);
+    opacity: 0.6; margin-bottom: 6px; display: block;
+  }
+  .htu-section-title {
+    font-family: var(--fh); font-size: 1.8rem; font-weight: 800;
+    color: var(--c-cream); margin: 0 0 28px; line-height: 1.2;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+  }
+
+  /* Feature cards */
+  .htu-cards { display: flex; flex-direction: column; gap: 16px; }
+  .htu-card {
+    background: var(--c-navy2); border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 14px; padding: 24px 28px;
+    display: grid; grid-template-columns: 48px 1fr; gap: 20px; align-items: start;
+  }
+  .htu-card-icon {
+    width: 48px; height: 48px; border-radius: 10px;
+    background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: var(--c-gold); font-size: 1.4rem;
+  }
+  .htu-card-body h3 {
+    font-family: var(--fh); font-size: 1.1rem; font-weight: 700;
+    color: var(--c-cream); margin: 0 0 8px;
+  }
+  .htu-card-body p {
+    font-family: var(--fb); font-size: 0.92rem; color: var(--c-muted);
+    line-height: 1.7; margin: 0;
+  }
+  .htu-card-body .htu-tag {
+    display: inline-block; font-family: var(--fb); font-size: 0.68rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    background: rgba(201,168,76,0.1); color: var(--c-gold);
+    padding: 2px 8px; border-radius: 4px; margin-bottom: 8px;
+  }
+
+  /* Step flow */
+  .htu-steps { display: flex; flex-direction: column; gap: 0; }
+  .htu-step {
+    display: grid; grid-template-columns: 40px 1fr; gap: 16px;
+    align-items: start; position: relative; padding-bottom: 28px;
+  }
+  .htu-step:last-child { padding-bottom: 0; }
+  .htu-step-num {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--c-gold); color: var(--c-navy);
+    font-family: var(--fh); font-size: 1rem; font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; position: relative; z-index: 1;
+  }
+  .htu-step:not(:last-child) .htu-step-num::after {
+    content: '';
+    position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
+    width: 2px; height: calc(100% + 28px - 40px);
+    background: rgba(201,168,76,0.2);
+  }
+  .htu-step-body { padding-top: 8px; }
+  .htu-step-body h3 {
+    font-family: var(--fh); font-size: 1.05rem; font-weight: 700;
+    color: var(--c-cream); margin: 0 0 8px;
+  }
+  .htu-step-body p {
+    font-family: var(--fb); font-size: 0.9rem; color: var(--c-muted);
+    line-height: 1.7; margin: 0;
+  }
+
+  /* Hierarchy diagram */
+  .htu-hierarchy {
+    background: var(--c-navy2); border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 14px; padding: 28px; margin: 28px 0;
+  }
+  .htu-hier-label {
+    font-family: var(--fb); font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--c-gold); margin-bottom: 20px; display: block;
+  }
+  .htu-hier-row {
+    display: flex; align-items: center; gap: 0; margin-bottom: 0;
+  }
+  .htu-hier-node {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 8px; padding: 10px 16px;
+    font-family: var(--fb); font-size: 0.85rem;
+  }
+  .htu-hier-node-icon { font-size: 1.1rem; }
+  .htu-hier-node-text { }
+  .htu-hier-node-text strong { color: var(--c-cream); display: block; font-size: 0.88rem; }
+  .htu-hier-node-text span { color: var(--c-muted); font-size: 0.75rem; }
+  .htu-hier-arrow {
+    color: rgba(201,168,76,0.35); font-size: 1.2rem;
+    padding: 0 10px; flex-shrink: 0;
+  }
+
+  /* Fields table */
+  .htu-fields {
+    display: flex; flex-direction: column; gap: 2px;
+    background: var(--c-navy2); border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 14px; overflow: hidden;
+  }
+  .htu-field-row {
+    display: grid; grid-template-columns: 160px 1fr; gap: 0;
+    border-bottom: 1px solid rgba(201,168,76,0.06);
+  }
+  .htu-field-row:last-child { border-bottom: none; }
+  .htu-field-name {
+    background: rgba(201,168,76,0.05); padding: 14px 18px;
+    font-family: var(--fb); font-size: 0.82rem; font-weight: 700;
+    color: var(--c-gold); border-right: 1px solid rgba(201,168,76,0.08);
+    display: flex; align-items: center;
+  }
+  .htu-field-desc {
+    padding: 14px 18px;
+    font-family: var(--fb); font-size: 0.85rem; color: var(--c-muted); line-height: 1.6;
+  }
+  .htu-field-desc em {
+    font-style: normal; color: rgba(245,240,232,0.75); font-family: 'Courier New', monospace;
+    font-size: 0.78rem; background: rgba(255,255,255,0.04);
+    padding: 1px 5px; border-radius: 3px;
+  }
+
+  /* Tip callout */
+  .htu-tip {
+    background: rgba(42,127,127,0.08); border: 1px solid rgba(42,127,127,0.25);
+    border-left: 4px solid var(--c-teal); border-radius: 0 10px 10px 0;
+    padding: 16px 20px; margin: 24px 0;
+    font-family: var(--fb); font-size: 0.88rem; color: rgba(245,240,232,0.7);
+    line-height: 1.6;
+  }
+  .htu-tip strong { color: #3ab5b5; }
+
+  /* Warning callout */
+  .htu-warn {
+    background: rgba(192,83,58,0.07); border: 1px solid rgba(192,83,58,0.25);
+    border-left: 4px solid var(--c-rust); border-radius: 0 10px 10px 0;
+    padding: 16px 20px; margin: 24px 0;
+    font-family: var(--fb); font-size: 0.88rem; color: rgba(245,240,232,0.7);
+    line-height: 1.6;
+  }
+  .htu-warn strong { color: #e07860; }
+
+  /* Export cards row */
+  .htu-export-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px;
+  }
+  .htu-export-card {
+    background: var(--c-navy2); border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 14px; padding: 24px;
+  }
+  .htu-export-card h3 {
+    font-family: var(--fh); font-size: 1.05rem; font-weight: 700;
+    color: var(--c-cream); margin: 0 0 10px; display: flex; align-items: center; gap: 10px;
+  }
+  .htu-export-card h3 span {
+    font-size: 1.4rem;
+  }
+  .htu-export-card p {
+    font-family: var(--fb); font-size: 0.88rem; color: var(--c-muted); line-height: 1.7; margin: 0;
+  }
+  .htu-export-card ul {
+    font-family: var(--fb); font-size: 0.85rem; color: var(--c-muted);
+    line-height: 1.7; margin: 10px 0 0; padding-left: 18px;
+  }
+  .htu-export-card ul li { margin-bottom: 4px; }
+
+  /* Footer */
+  .htu-foot {
+    background: var(--c-navy); border-top: 1px solid rgba(201,168,76,.12); padding: 38px 0;
+  }
+  .htu-foot-wrap { max-width: 860px; margin: 0 auto; padding: 0 28px; }
+  .htu-foot-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap;
+  }
+  .htu-foot-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .htu-foot-mark {
+    width: 32px; height: 32px; background: var(--c-gold); border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--fh); font-size: 1rem; font-weight: 900; color: var(--c-navy);
+  }
+  .htu-foot-name { font-family: var(--fh); font-size: 0.95rem; font-weight: 700; color: var(--c-cream); }
+  .htu-foot-copy { font-family: var(--fb); font-size: 0.78rem; color: var(--c-muted); }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #0d1b2a; }
+  ::-webkit-scrollbar-thumb { background: rgba(201,168,76,.35); border-radius: 3px; }
+
+  @media (max-width: 640px) {
+    .htu-hero { padding: 48px 20px 44px; }
+    .htu-main { padding: 48px 20px 60px; }
+    .htu-card { grid-template-columns: 1fr; gap: 12px; }
+    .htu-field-row { grid-template-columns: 1fr; }
+    .htu-field-name { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.08); }
+    .htu-hier-row { flex-direction: column; align-items: flex-start; }
+    .htu-hier-arrow { transform: rotate(90deg); padding: 4px 0; }
+    .htu-export-row { grid-template-columns: 1fr; }
+    .htu-foot-inner { flex-direction: column; text-align: center; }
+  }
+</style>
+
+<!-- Film Strip -->
+<div class="htu-strip">
+  <svg viewBox="0 0 1440 22" preserveAspectRatio="none" width="100%" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <pattern id="htu-perf" x="0" y="0" width="32" height="22" patternUnits="userSpaceOnUse">
+        <rect width="32" height="22" fill="#0d1b2a"/>
+        <rect x="6" y="4" width="20" height="14" rx="3" fill="#162032"/>
+      </pattern>
+    </defs>
+    <rect width="1440" height="22" fill="url(#htu-perf)"/>
+  </svg>
+</div>
+
+<!-- Hero -->
+<div class="htu-hero">
+  <div style="position:relative;z-index:1;">
+    <a href="/shot-list/" class="htu-back">← Back to Shot List Generator</a><br>
+    <span class="htu-label">Shot List Generator · Guide</span>
+    <h1 class="htu-title">How to Use the<br><em>Shot List Generator</em></h1>
+    <p class="htu-sub">Upload your screenplay, build a hierarchical shot list organized by Act, Scene, and Sequence, then export a professional PDF or Word document for your crew.</p>
+    <a href="/shot-list/" class="htu-cta">Open the Generator →</a>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="htu-main">
+
+  <!-- Section 1: Core Workflow -->
+  <div class="htu-section">
+    <span class="htu-section-num">01 —</span>
+    <h2 class="htu-section-title">The Core Workflow</h2>
+    <div class="htu-steps">
+      <div class="htu-step">
+        <div class="htu-step-num">1</div>
+        <div class="htu-step-body">
+          <h3>Upload your script</h3>
+          <p>Drag and drop your screenplay onto the upload zone, or click it to browse. The tool accepts <strong style="color:var(--c-cream);">PDF</strong> and <strong style="color:var(--c-cream);">DOCX / DOC</strong> files. If you've already started a shot list in a previous session, you can reload it by uploading a <strong style="color:var(--c-cream);">JSON</strong> file saved from the tool.</p>
+        </div>
+      </div>
+      <div class="htu-step">
+        <div class="htu-step-num">2</div>
+        <div class="htu-step-body">
+          <h3>Click "Generate Shot List"</h3>
+          <p>The parser reads your script and detects <strong style="color:var(--c-cream);">ACT</strong> headings and <strong style="color:var(--c-cream);">INT. / EXT.</strong> scene headings automatically. Each scene becomes a row in the <em style="color:var(--c-gold);">Shot List</em> overview tab. Standard screenplay formatting (Final Draft, Highland, Fade In) works best.</p>
+        </div>
+      </div>
+      <div class="htu-step">
+        <div class="htu-step-num">3</div>
+        <div class="htu-step-body">
+          <h3>Switch to "Build Shot List" and add shots</h3>
+          <p>The <em style="color:var(--c-gold);">Build Shot List</em> tab is your editor. The hierarchy of Acts → Scenes is pre-populated from your script. Inside each Scene you add Sequences, and inside each Sequence you add individual Shots. Fill in the fields for each shot — size, angle, movement, lens, and more.</p>
+        </div>
+      </div>
+      <div class="htu-step">
+        <div class="htu-step-num">4</div>
+        <div class="htu-step-body">
+          <h3>Export when ready</h3>
+          <p>Use the export buttons in the Build tab to save your work. <strong style="color:var(--c-cream);">Export PDF</strong> produces a colour-coded landscape table ready to print and hand to your AD. <strong style="color:var(--c-cream);">Export DOCX</strong> produces an editable Word document. <strong style="color:var(--c-cream);">Save JSON</strong> lets you save progress and reload it in a future session.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: The 4-Level Hierarchy -->
+  <div class="htu-section">
+    <span class="htu-section-num">02 —</span>
+    <h2 class="htu-section-title">The 4-Level Hierarchy</h2>
+    <p style="font-family:var(--fb);font-size:0.95rem;color:var(--c-muted);line-height:1.7;margin:0 0 24px;">Every shot list is structured as a four-level tree. The top two levels are parsed from your script; the bottom two are built by you in the editor.</p>
+
+    <div class="htu-hierarchy">
+      <span class="htu-hier-label">Structure overview</span>
+      <div class="htu-hier-row">
+        <div class="htu-hier-node">
+          <span class="htu-hier-node-icon">🎭</span>
+          <div class="htu-hier-node-text">
+            <strong>Act</strong>
+            <span>e.g. ACT I, ACT II</span>
+          </div>
+        </div>
+        <div class="htu-hier-arrow">→</div>
+        <div class="htu-hier-node">
+          <span class="htu-hier-node-icon">🎬</span>
+          <div class="htu-hier-node-text">
+            <strong>Scene</strong>
+            <span>INT. / EXT. headings</span>
+          </div>
+        </div>
+        <div class="htu-hier-arrow">→</div>
+        <div class="htu-hier-node">
+          <span class="htu-hier-node-icon">🎞</span>
+          <div class="htu-hier-node-text">
+            <strong>Sequence</strong>
+            <span>A group of related shots</span>
+          </div>
+        </div>
+        <div class="htu-hier-arrow">→</div>
+        <div class="htu-hier-node">
+          <span class="htu-hier-node-icon">📷</span>
+          <div class="htu-hier-node-text">
+            <strong>Shot</strong>
+            <span>Individual camera setup</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="htu-cards">
+      <div class="htu-card">
+        <div class="htu-card-icon">🎭</div>
+        <div class="htu-card-body">
+          <span class="htu-tag">Level 1</span>
+          <h3>Act</h3>
+          <p>The top-level container. Acts are detected from lines reading exactly <strong style="color:var(--c-cream);">ACT I</strong>, <strong style="color:var(--c-cream);">ACT II</strong>, <strong style="color:var(--c-cream);">ACT III</strong>, etc. in your script. If no ACT heading is found, all scenes are placed under a default "ACT I". You can rename Acts in the editor.</p>
+        </div>
+      </div>
+      <div class="htu-card">
+        <div class="htu-card-icon">🎬</div>
+        <div class="htu-card-body">
+          <span class="htu-tag">Level 2</span>
+          <h3>Scene</h3>
+          <p>Scenes map directly to sluglines in your screenplay — any line beginning with <strong style="color:var(--c-cream);">INT.</strong> or <strong style="color:var(--c-cream);">EXT.</strong> (with or without a leading scene number). The full slugline becomes the scene title. You can rename or add scenes manually.</p>
+        </div>
+      </div>
+      <div class="htu-card">
+        <div class="htu-card-icon">🎞</div>
+        <div class="htu-card-body">
+          <span class="htu-tag">Level 3 — you create these</span>
+          <h3>Sequence</h3>
+          <p>A sequence is a logical grouping of shots within a scene — for example, "Arrival", "Confrontation", "Escape". Use the <strong style="color:var(--c-cream);">+ Add Sequence</strong> button inside any Scene to create one. Sequences can be dragged to reorder them within the same scene.</p>
+        </div>
+      </div>
+      <div class="htu-card">
+        <div class="htu-card-icon">📷</div>
+        <div class="htu-card-body">
+          <span class="htu-tag">Level 4 — you create these</span>
+          <h3>Shot</h3>
+          <p>A single camera setup. Use <strong style="color:var(--c-cream);">+ Add Shot</strong> inside a Sequence to create one. Each shot has fields for size, angle, movement, lens, subject, sound design, priority, VFX notes, description, and a director's note. You can also attach a reference image to any shot.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Shot Fields Reference -->
+  <div class="htu-section">
+    <span class="htu-section-num">03 —</span>
+    <h2 class="htu-section-title">Shot Fields Reference</h2>
+    <p style="font-family:var(--fb);font-size:0.95rem;color:var(--c-muted);line-height:1.7;margin:0 0 24px;">Each shot has 11 fields plus an optional image attachment. All fields are optional — fill in what's useful for your production.</p>
+
+    <div class="htu-fields">
+      <div class="htu-field-row">
+        <div class="htu-field-name">Shot Size</div>
+        <div class="htu-field-desc">The framing distance — from <em>Extreme Close-up (ECU)</em> through <em>Medium Shot</em>, <em>Full Shot</em>, to <em>Extreme Long Shot</em>. Select from the dropdown or type a custom value.</div>
+      </div>
+      <div class="htu-field-row">
+        <div class="htu-field-name">Angle</div>
+        <div class="htu-field-desc">Camera height and tilt: <em>Eye Level</em>, <em>Low Angle</em>, <em>High Angle</em>, <em>Dutch Angle</em>, <em>Overhead</em>, <em>Worm's Eye</em>, or <em>POV</em>.</div>
+      </div>
+      <div class="htu-field-row">
+        <div class="htu-field-name">Movement</div>
+        <div class="htu-field-desc">Camera motion: <em>Static</em>, <em>Pan</em>, <em>Tilt</em>, <em>Dolly In / Out</em>, <em>Track Left / Right</em>, <em>Handheld</em>, <em>Steadicam</em>, <em>Crane Up / Down</em>, <em>Zoom In / Out</em>, or <em>Arc</em>.</div>
+      </div>
+      <div class="htu-field-row">
+        <div class="htu-field-name">Lens</div>
+        <div class="htu-field-desc">Focal length: <em>Ultra Wide (14–20mm)</em>, <em>Wide (24mm)</em>, <em>Standard (35mm)</em>, <em>Normal (50mm)</em>, <em>Portrait (85mm)</em>, or <em>Telephoto (135mm+)</em>.</div>
+      </div>
+      <div class="htu-field-row">
+        <div class="htu-field-name">Subject</div>
+        <div class="htu-field-desc">Who or what is in frame. Free-text — type character names, props, or a brief description of the composition.</div>
+      </div>
+      <div class="htu-field-row">
+        <div class="htu-field-name">Sound</div>
+        <div class="htu-field-desc">Primary audio intent: <em>Dialogue</em>, <em>Ambient Only</em>, <em>Voice Over</em>, <em>SFX</em>, <em>Music</em>, or <em>Silent</em>.</div>
+      </div>
+      <div class="htu-field-row">
+        <div class="htu-field-name">Priority</div>
+        <div class="htu-field-desc">Flag each shot as <em>must-have</em> or <em>nice-to-have</em>. Useful for scheduling: if you run short on time, you can identify which shots are safe to defer.</div>
+      </div>
+      <div class="htu-field-row">
+        <div class="htu-field-name">VFX Note</div>
+        <div class="htu-field-desc">Any visual effects requirement for the shot — green screen, wire removal, CGI extension, etc. Appears in the export so the VFX team can identify shots at a glance.</div>
+      </div>
+      <div class="htu-field-row">
+        <div class="htu-field-name">Description</div>
+        <div class="htu-field-desc">A free-text field for your shot description — what happens in the shot, the action, the intention. This is the main note visible in the printed table.</div>
+      </div>
+      <div class="htu-field-row">
+        <div class="htu-field-name">DR Note</div>
+        <div class="htu-field-desc">Director's private note. Thoughts on performance, mood, blocking, or anything you want to remember for the shoot. Included in exports.</div>
+      </div>
+      <div class="htu-field-row">
+        <div class="htu-field-name">Image</div>
+        <div class="htu-field-desc">Attach a reference image — a storyboard frame, location photo, or mood reference. Images are embedded into the DOCX export. Use clear, well-cropped references for best print results.</div>
+      </div>
+    </div>
+
+    <div class="htu-tip">
+      <strong>Tip:</strong> You don't need to fill every field. Start with Shot Size, Angle, and Description. Add Movement and Lens when you're planning more precisely, and use Priority to triage your shooting schedule.
+    </div>
+  </div>
+
+  <!-- Section 4: Editing & Reordering -->
+  <div class="htu-section">
+    <span class="htu-section-num">04 —</span>
+    <h2 class="htu-section-title">Editing &amp; Reordering</h2>
+    <div class="htu-cards">
+      <div class="htu-card">
+        <div class="htu-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 7h14M4 11h14M4 15h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="htu-card-body">
+          <h3>Drag to reorder</h3>
+          <p>Every Shot, Sequence, Scene, and Act has a drag handle on its left edge. Grab it and drag up or down to reorder. You can only drag items within the same level — shots within a sequence, sequences within a scene, and so on. Shot numbers update automatically after every reorder.</p>
+        </div>
+      </div>
+      <div class="htu-card">
+        <div class="htu-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 4v14M4 11h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div class="htu-card-body">
+          <h3>Adding items</h3>
+          <p>Each level has an <strong style="color:var(--c-cream);">+ Add</strong> button at the bottom of its container. Click <em>+ Add Sequence</em> inside a Scene to add a new sequence, and <em>+ Add Shot</em> inside a Sequence to add a new shot. New items are numbered automatically and placed at the end.</p>
+        </div>
+      </div>
+      <div class="htu-card">
+        <div class="htu-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 11h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 7 L4 11 L8 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="htu-card-body">
+          <h3>Collapsing levels</h3>
+          <p>Click the title bar of any Act, Scene, or Sequence to collapse or expand it. Collapsing acts and scenes gives you a clean overview of the full structure when your shot list grows long.</p>
+        </div>
+      </div>
+      <div class="htu-card">
+        <div class="htu-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M7 5l-3 3 3 3M15 17l3-3-3-3M9 8h8M5 14h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="htu-card-body">
+          <h3>Editing titles</h3>
+          <p>Act, Scene, and Sequence titles are editable inline — click the title text to activate the input, type your new name, and click away to save. Scene numbers stay fixed; only the title text changes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5: Saving & Exporting -->
+  <div class="htu-section">
+    <span class="htu-section-num">05 —</span>
+    <h2 class="htu-section-title">Saving &amp; Exporting</h2>
+
+    <div class="htu-warn">
+      <strong>Important:</strong> The Shot List Generator does not autosave to the cloud. Your work exists only in the browser. Always export a JSON file at the end of each session — uploading it next time will restore exactly where you left off.
+    </div>
+
+    <div class="htu-export-row">
+      <div class="htu-export-card">
+        <h3><span>📄</span> Save as JSON</h3>
+        <p>Saves the complete shot list data as a <strong style="color:var(--c-cream);">.json</strong> file to your computer. To restore it, upload the JSON file using the same upload zone as your script.</p>
+        <ul>
+          <li>Preserves all shots, fields, and images</li>
+          <li>Fast to load — no re-parsing needed</li>
+          <li>Use as a regular backup during long sessions</li>
+        </ul>
+      </div>
+      <div class="htu-export-card">
+        <h3><span>🖨</span> Export PDF</h3>
+        <p>Generates a colour-coded landscape A4 table. Act and scene header rows appear in dark navy with gold text; shot rows alternate for readability.</p>
+        <ul>
+          <li>All 12 columns included</li>
+          <li>Print-ready at A4 landscape</li>
+          <li>No internet required after page load</li>
+        </ul>
+      </div>
+      <div class="htu-export-card" style="grid-column:1/-1;">
+        <h3><span>📝</span> Export DOCX</h3>
+        <p>Generates an editable Microsoft Word document with the same table layout. Reference images attached to shots are embedded directly in the Word file — useful for sharing with ADs, producers, or department heads who need to annotate the document.</p>
+        <ul>
+          <li>Embedded reference images per shot</li>
+          <li>Editable in Word, Google Docs, or LibreOffice</li>
+          <li>Landscape A4, matching the PDF layout</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 6: Tips -->
+  <div class="htu-section">
+    <span class="htu-section-num">06 —</span>
+    <h2 class="htu-section-title">Tips for Best Results</h2>
+    <div class="htu-cards">
+      <div class="htu-card">
+        <div class="htu-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3a8 8 0 1 0 0 16A8 8 0 0 0 11 3z" stroke="currentColor" stroke-width="1.5"/><path d="M11 10v5M11 7.5v.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div class="htu-card-body">
+          <h3>Use standard screenplay formatting</h3>
+          <p>The parser looks for sluglines beginning with <strong style="color:var(--c-cream);">INT.</strong> or <strong style="color:var(--c-cream);">EXT.</strong> and act markers reading exactly <strong style="color:var(--c-cream);">ACT I</strong>, <strong style="color:var(--c-cream);">ACT II</strong>, etc. Scripts exported from Final Draft, Highland 2, or Fade In in PDF or DOCX format parse best. Avoid scripts with heavy custom formatting or non-standard sluglines.</p>
+        </div>
+      </div>
+      <div class="htu-card">
+        <div class="htu-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="12" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="12" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="12" y="12" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <div class="htu-card-body">
+          <h3>Group shots into short sequences</h3>
+          <p>Keep sequences to 3–6 shots each. Shorter sequences are easier to reorder on the day and make the printed shot list more scannable for your crew. A good rule: one sequence per narrative beat within a scene.</p>
+        </div>
+      </div>
+      <div class="htu-card">
+        <div class="htu-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 4v3M11 15v3M4 11H7M15 11h3M6.3 6.3l2.1 2.1M13.6 13.6l2.1 2.1M6.3 15.7l2.1-2.1M13.6 8.4l2.1-2.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="htu-card-body">
+          <h3>Use Priority to build a shooting schedule</h3>
+          <p>Mark every shot as <strong style="color:var(--c-cream);">must-have</strong> or <strong style="color:var(--c-cream);">nice-to-have</strong> before your shoot day. In the PDF and DOCX export, this column is clearly visible — your 1st AD can quickly identify which shots to cut if you fall behind schedule.</p>
+        </div>
+      </div>
+      <div class="htu-card">
+        <div class="htu-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 17l4-4 4 4 4-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="htu-card-body">
+          <h3>Save JSON frequently</h3>
+          <p>The tool runs entirely in your browser with no server backup. Export a JSON file after every significant editing session. Keep dated copies (e.g. <em style="color:var(--c-cream);">shotlist-v3-2025-03-22.json</em>) so you can roll back if needed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="text-align:center;padding:40px 0 0;">
+    <p style="font-family:var(--fb);font-size:1rem;color:var(--c-muted);margin-bottom:24px;">Ready to build your shot list?</p>
+    <a href="/shot-list/" class="htu-cta">Open the Shot List Generator →</a>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="htu-foot">
+  <div class="htu-foot-wrap">
+    <div class="htu-foot-inner">
+      <a href="/" class="htu-foot-brand">
+        <div class="htu-foot-mark">S</div>
+        <span class="htu-foot-name">Script &amp; Pad</span>
+      </a>
+      <p class="htu-foot-copy">© 2025 Script and Pad. All Rights Reserved.</p>
+    </div>
+  </div>
+</div>
+
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>© 2024 Script and Pad. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const navbarToggle = document.getElementById('navbar-toggle');
+        const navbarLinks = document.getElementById('navbar-links');
+
+        if (navbarToggle) {
+            navbarToggle.addEventListener('click', () => {
+                navbarLinks.classList.toggle('active');
+                navbarToggle.classList.toggle('active');
+            });
+
+            // Close menu when a link is clicked
+            const navLinks = navbarLinks.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navbarLinks.classList.remove('active');
+                    navbarToggle.classList.remove('active');
+                });
+            });
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.navbar') && navbarLinks && navbarLinks.classList.contains('active')) {
+                navbarLinks.classList.remove('active');
+                navbarToggle.classList.remove('active');
+            }
+        });
+
+        // Reading progress bar for articles
+        function updateReadingProgress() {
+            const bar = document.getElementById('reading-progress');
+            if (!bar) return;
+            const post = document.querySelector('article, .blog-post');
+            if (!post) {
+                bar.style.width = '0%';
+                return;
+            }
+            const totalHeight = post.scrollHeight - window.innerHeight;
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            const offset = post.getBoundingClientRect().top + window.pageYOffset;
+            const progress = totalHeight > 0 ? ((scrollY - offset) / totalHeight) * 100 : 0;
+            bar.style.width = Math.min(Math.max(progress, 0), 100) + '%';
+        }
+        window.addEventListener('scroll', updateReadingProgress);
+        window.addEventListener('resize', updateReadingProgress);
+
+        // reading time estimator for posts
+        function insertReadingTime() {
+            const postContent = document.querySelector('.blog-post .content');
+            if (!postContent) return;
+            const text = postContent.innerText || postContent.textContent || '';
+            const words = text.trim().split(/\s+/).length;
+            const minutes = Math.ceil(words / 200);
+            const rt = document.createElement('p');
+            rt.className = 'reading-time';
+            rt.textContent = minutes + ' min read';
+            // insert after date paragraph if exists
+            const datePara = document.querySelector('.blog-post > p');
+            if (datePara) datePara.after(rt);
+            else postContent.prepend(rt);
+        }
+        window.addEventListener('DOMContentLoaded', insertReadingTime);
+    </script>
+</body>
+</html>
