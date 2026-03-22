@@ -111,9 +111,9 @@ let currentStep = -1;
 let playheadInterval = null;
 
 // Session state (no localStorage — resets on page refresh)
-let sessionScore = 0;
-let sessionStreak = 0;
-let sessionBest = null;
+let sessionDecoded  = 0;   // beats decoded at >=70% accuracy this session
+let sessionStreak   = 0;   // consecutive successful decodes
+let sessionPatterns = 0;   // total Check Accuracy attempts this session
 
 // ── Utility ────────────────────────────────────────────────────
 
@@ -156,9 +156,9 @@ function updateSessionUI() {
   const scoreEl  = document.getElementById("gm-session-score");
   const streakEl = document.getElementById("gm-session-streak");
   const bestEl   = document.getElementById("gm-session-best");
-  if (scoreEl)  scoreEl.textContent  = sessionScore;
+  if (scoreEl)  scoreEl.textContent  = sessionDecoded;
   if (streakEl) streakEl.textContent = sessionStreak;
-  if (bestEl)   bestEl.textContent   = sessionBest !== null ? sessionBest.toFixed(0) + "%" : "—";
+  if (bestEl)   bestEl.textContent   = sessionPatterns;
 }
 
 // ── Result Panel ───────────────────────────────────────────────
@@ -181,18 +181,22 @@ function showResult(accuracy, correct, total) {
   });
 
   const messages = {
-    3: "🎬 Perfect take! Scene, print!",
-    2: "👏 Great rhythm — nearly there!",
-    1: "🎵 Good start — keep rehearsing.",
-    0: "🎙 Listen again and feel the groove.",
+    3: "Pattern fully decoded — perfect.",
+    2: "Nearly there — one more listen should close the gaps.",
+    1: "Good start — keep listening and filling in what you hear.",
+    0: "Listen again and focus on one instrument at a time.",
   };
   msg.textContent = messages[starCount];
 
   // Update session stats
   if (total > 0) {
-    sessionScore += Math.round(accuracy) * (starCount + 1);
-    sessionStreak = accuracy >= 70 ? sessionStreak + 1 : 0;
-    if (sessionBest === null || accuracy > sessionBest) sessionBest = accuracy;
+    sessionPatterns++;
+    if (accuracy >= 70) {
+      sessionDecoded++;
+      sessionStreak++;
+    } else {
+      sessionStreak = 0;
+    }
     updateSessionUI();
   }
 }
@@ -397,10 +401,16 @@ function updatePianoRollUI() {
 }
 
 function updatePlayheadUI() {
-  document.querySelectorAll(".grid-cell").forEach((cell) => {
-    const step = parseInt(cell.dataset.step);
-    cell.classList.toggle("gm-playhead", step === currentStep && isPlaying);
+  // Clear previous column highlight
+  document.querySelectorAll(".grid-col-active").forEach((el) => {
+    el.classList.remove("grid-col-active");
   });
+  // Highlight current step column
+  if (isPlaying && currentStep >= 0) {
+    document.querySelectorAll(`.grid-cell[data-step="${currentStep}"]`).forEach((cell) => {
+      cell.classList.add("grid-col-active");
+    });
+  }
 }
 
 // ── Playhead ───────────────────────────────────────────────────
@@ -626,15 +636,19 @@ function updateBeatMeta(beatName) {
 
 // ── NEW: Tempo Slider Reset ───────────────────────────────────
 
+function updateSliderTrack(slider) {
+  const pct = parseInt(slider.value);
+  slider.style.background = `linear-gradient(to right, #c9a84c ${pct}%, var(--gm-navy-3) ${pct}%)`;
+}
+
 function resetTempoSlider() {
-  const slider   = document.getElementById("gm-tempo-slider");
-  const labelEl  = document.getElementById("gm-tempo-label");
-  const bpmEl    = document.getElementById("gm-tempo-bpm");
+  const slider  = document.getElementById("gm-tempo-slider");
+  const labelEl = document.getElementById("gm-tempo-label");
   if (!slider) return;
   slider.value = 100;
   tempoMultiplier = 1.0;
-  if (bpmEl)   bpmEl.textContent  = `${BPM} BPM`;
-  if (labelEl) labelEl.textContent = "🎯 Full speed";
+  updateSliderTrack(slider);
+  if (labelEl) labelEl.textContent = `Hearing at full speed — ${BPM} BPM`;
 }
 
 // ── NEW: Count-In Before Playback ────────────────────────────
@@ -781,19 +795,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // NEW: Tempo slider wiring
-    const tempoSlider = document.getElementById("gm-tempo-slider");
+    const tempoSlider  = document.getElementById("gm-tempo-slider");
     const tempoLabelEl = document.getElementById("gm-tempo-label");
-    const tempoBpmEl   = document.getElementById("gm-tempo-bpm");
 
     if (tempoSlider) {
       tempoSlider.addEventListener("input", () => {
         const pct = parseInt(tempoSlider.value);
         tempoMultiplier = pct / 100;
         const actualBpm = Math.round(BPM * tempoMultiplier);
-        if (tempoBpmEl)   tempoBpmEl.textContent   = `${actualBpm} BPM`;
-        if (tempoLabelEl) tempoLabelEl.textContent  = pct < 100
-          ? "🐢 Slow mode — build up to full speed"
-          : "🎯 Full speed";
+        updateSliderTrack(tempoSlider);
+        if (tempoLabelEl) tempoLabelEl.textContent = pct < 100
+          ? `Slowed to ${actualBpm} BPM — slow it down to decode the pattern`
+          : `Hearing at full speed — ${BPM} BPM`;
       });
     }
 
