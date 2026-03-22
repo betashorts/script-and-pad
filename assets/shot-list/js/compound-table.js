@@ -839,7 +839,7 @@ function renderBasicUnitCell(
 
   // File upload button
   const uploadBtn = document.createElement("button");
-  uploadBtn.innerHTML = `<svg viewBox="0 0 18 18" width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="1.4"/><rect x="6" y="2" width="6" height="4" rx="1.5" stroke="currentColor" stroke-width="1.4"/><circle cx="9" cy="10" r="2.5" stroke="currentColor" stroke-width="1.4"/><circle cx="9" cy="10" r="1" fill="currentColor"/></svg>`;
+  uploadBtn.innerHTML = "&#128247;"; // Camera emoji
   uploadBtn.title = "Upload Image";
   uploadBtn.className = "upload-btn";
 
@@ -930,7 +930,7 @@ function renderBasicUnitCell(
 
   // Drawing toggle button
   const drawBtn = document.createElement("button");
-  drawBtn.innerHTML = `<svg viewBox="0 0 18 18" width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.5 2.5 L15.5 5.5 L6 15 L3 15 L3 12 Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="10" y1="4.5" x2="13" y2="7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+  drawBtn.innerHTML = "&#9999;&#65039;"; // Pencil emoji
   drawBtn.title = "Toggle Drawing Mode";
   drawBtn.className = "draw-btn";
   let isCanvasVisible = canvas.style.display === "block";
@@ -942,7 +942,7 @@ function renderBasicUnitCell(
 
   // Clear button
   const clearBtn = document.createElement("button");
-  clearBtn.innerHTML = `<svg viewBox="0 0 18 18" width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="3" y1="5" x2="15" y2="5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M7 5 L7 3 L11 3 L11 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 5 L5.8 15 L12.2 15 L13 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="9" y1="7.5" x2="9" y2="12.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="7" y1="7.5" x2="7.3" y2="12.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="11" y1="7.5" x2="10.7" y2="12.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`;
+  clearBtn.innerHTML = "&#128465;"; // Trash emoji
   clearBtn.title = "Clear Content";
   clearBtn.className = "clear-btn";
   clearBtn.onclick = () => {

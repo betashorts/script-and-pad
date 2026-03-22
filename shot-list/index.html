@@ -81,124 +81,94 @@
   footer { display: none; }
   body   { background: #0d1b2a; }
 
-  /* ── Design tokens ───────────────────────────────────────── */
-  :root {
-    --sl-navy:    #0d1b2a;
-    --sl-navy2:   #162032;
-    --sl-navy3:   #1e2f45;
-    --sl-navy4:   #253652;
-    --sl-gold:    #c9a84c;
-    --sl-gold-lt: #e8c96a;
-    --sl-teal:    #2a7f7f;
-    --sl-rust:    #c0533a;
-    --sl-cream:   #f5f0e8;
-    --sl-muted:   rgba(245,240,232,0.52);
-    --sl-border:  rgba(201,168,76,0.15);
-    --sl-fh:      'Playfair Display', Georgia, serif;
-    --sl-fb:      'Lora', Georgia, serif;
-  }
-
-  /* ── Dark navbar override ───────────────────────────────── */
-  .navbar             { background: #0d1b2a !important; border-bottom: 1px solid rgba(201,168,76,.15) !important; }
-  .brand-main         { color: #f5f0e8 !important; }
-  .brand-tag          { color: rgba(245,240,232,0.52) !important; }
-  .nav-link           { color: rgba(245,240,232,.72) !important; }
-  .nav-link:hover     { background: rgba(30,47,69,.8) !important; color: #c9a84c !important; }
-  .hamburger-line     { background: #f5f0e8 !important; }
-  .navbar-links       { background: #0d1b2a !important; }
-  .navbar-links a[href="/shot-list/"] { color: #c9a84c; }
-
   /* ── Page shell ──────────────────────────────────────────── */
   .sl-page {
-    background: var(--sl-navy);
-    color: var(--sl-cream);
-    font-family: var(--sl-fb);
+    background: #0d1b2a;
+    color: #e8e0d0;
+    font-family: 'Lora', Georgia, serif;
     min-height: calc(100vh - 64px);
   }
 
   /* ── Film strip ──────────────────────────────────────────── */
   .sl-strip { display: block; width: 100%; height: 22px; }
 
-  /* ── Hero ────────────────────────────────────────────────── */
-  .sl-hero {
-    background: var(--sl-navy2);
-    padding-bottom: 48px;
-  }
-  .sl-hero-strip {
-    width: 100%;
-    height: 28px;
-    overflow: hidden;
-    line-height: 0;
-  }
-  .sl-hero-inner {
-    max-width: 1100px;
+  /* ── Header band ─────────────────────────────────────────── */
+  .sl-header {
+    background: #0d1b2a;
+    padding: 32px 32px 0;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 52px 32px 0;
     box-sizing: border-box;
   }
-  .sl-eyebrow {
+
+  .sl-pretag {
     display: inline-block;
-    font-family: var(--sl-fb);
-    font-size: .68rem;
+    font-size: .66rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: .18em;
-    color: var(--sl-gold);
-    margin-bottom: 14px;
+    letter-spacing: .14em;
+    color: #c9a84c;
+    margin-bottom: 10px;
   }
-  .sl-hero-h1 {
-    font-family: var(--sl-fh);
-    font-size: clamp(2rem, 4vw, 3rem);
+
+  .sl-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
     font-weight: 900;
-    color: var(--sl-cream);
-    margin: 0 0 16px;
-    line-height: 1.1;
+    color: #f5f0e8;
+    margin: 0 0 8px;
+    line-height: 1.15;
   }
-  .sl-hero-sub {
-    font-family: var(--sl-fb);
-    font-size: 1.06rem;
-    color: var(--sl-muted);
-    line-height: 1.7;
-    max-width: 600px;
+
+  .sl-title span { color: #c9a84c; font-style: italic; }
+
+  .sl-sub {
+    font-size: .9rem;
+    color: rgba(245,240,232,.5);
     margin: 0 0 28px;
-  }
-  .sl-pills {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .sl-pill {
-    background: var(--sl-navy3);
-    border: 1px solid var(--sl-gold);
-    color: var(--sl-gold);
-    font-family: var(--sl-fb);
-    font-size: .81rem;
-    border-radius: 20px;
-    padding: 6px 16px;
+    max-width: 600px;
   }
 
   /* ── Upload panel ────────────────────────────────────────── */
   .sl-upload-panel {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 40px 32px 0;
+    background: #162032;
+    border: 1px solid rgba(201,168,76,.18);
+    border-radius: 12px;
+    padding: 28px 28px 22px;
+    margin-bottom: 4px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
     box-sizing: border-box;
   }
+
+  .sl-upload-inner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
   .sl-file-zone {
-    position: relative;
-    border: 2px dashed rgba(201,168,76,0.35);
-    border-radius: 16px;
-    padding: 48px 32px 36px;
+    flex: 1;
+    min-width: 220px;
+    border: 2px dashed rgba(201,168,76,.35);
+    border-radius: 8px;
+    padding: 18px 20px;
     text-align: center;
     cursor: pointer;
     transition: border-color .2s, background .2s;
-    background: rgba(201,168,76,0.03);
+    position: relative;
+    background: rgba(201,168,76,.04);
   }
+
   .sl-file-zone:hover,
   .sl-file-zone.drag-active {
-    border-color: var(--sl-gold);
-    background: rgba(201,168,76,0.06);
+    border-color: #c9a84c;
+    background: rgba(201,168,76,.08);
   }
+
   .sl-file-zone input[type="file"] {
     position: absolute;
     inset: 0;
@@ -206,85 +176,72 @@
     cursor: pointer;
     width: 100%;
     height: 100%;
-    z-index: 1;
   }
-  .sl-file-icon { margin-bottom: 18px; line-height: 0; }
-  .sl-file-heading {
-    font-family: var(--sl-fh);
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--sl-cream);
-    margin: 0 0 8px;
+
+  .sl-file-icon { font-size: 1.6rem; margin-bottom: 6px; }
+
+  .sl-file-label {
+    font-size: .82rem;
+    color: rgba(245,240,232,.6);
+    line-height: 1.5;
   }
-  .sl-file-sub {
-    font-family: var(--sl-fb);
-    font-size: .88rem;
-    color: var(--sl-muted);
-    margin: 0 0 16px;
-  }
-  .sl-badge-row {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .sl-badge {
-    background: var(--sl-navy3);
-    border: 1px solid rgba(201,168,76,0.4);
-    color: var(--sl-gold);
+
+  .sl-file-label strong { color: #c9a84c; display: block; font-size: .9rem; margin-bottom: 2px; }
+
+  .sl-file-types {
+    font-size: .68rem;
+    color: rgba(245,240,232,.35);
+    margin-top: 6px;
     font-family: 'Courier New', monospace;
-    font-size: .69rem;
-    letter-spacing: .12em;
-    padding: 3px 8px;
-    border-radius: 4px;
   }
-  .sl-upload-cta {
-    text-align: center;
-    margin-top: 22px;
-  }
+
   .sl-upload-btn {
-    display: inline-block;
-    padding: 13px 28px;
-    background: var(--sl-gold);
-    color: var(--sl-navy);
+    padding: 12px 26px;
+    background: #c9a84c;
+    color: #0d1b2a;
     border: none;
-    border-radius: 8px;
-    font-family: var(--sl-fh);
-    font-size: .94rem;
+    border-radius: 6px;
+    font-family: 'Lora', Georgia, serif;
+    font-size: .88rem;
     font-weight: 700;
     cursor: pointer;
-    transition: background .2s, transform .2s, box-shadow .2s;
+    white-space: nowrap;
+    transition: background .18s, box-shadow .18s;
+    flex-shrink: 0;
   }
+
   .sl-upload-btn:hover {
-    background: var(--sl-gold-lt);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(201,168,76,0.35);
+    background: #d4b060;
+    box-shadow: 0 0 14px rgba(201,168,76,.4);
   }
 
   /* ── Status / output ─────────────────────────────────────── */
   .sl-status-bar {
-    max-width: 1100px;
-    margin: 14px auto 0;
+    max-width: 1200px;
+    margin: 10px auto 0;
     padding: 0 32px;
     box-sizing: border-box;
   }
+
   .status-message {
     font-size: .82rem;
     padding: 8px 12px;
     border-radius: 5px;
     min-height: 20px;
-    font-family: var(--sl-fb);
   }
+
   .status-message.success {
     color: #48bb78;
     background: rgba(72,187,120,.08);
     border: 1px solid rgba(72,187,120,.25);
   }
+
   .status-message.error {
     color: #f56565;
     background: rgba(245,101,101,.08);
     border: 1px solid rgba(245,101,101,.25);
   }
+
   .json-output {
     font-family: 'Courier New', monospace;
     font-size: .72rem;
@@ -302,135 +259,129 @@
   /* ── Tab switcher ────────────────────────────────────────── */
   .sl-tabs {
     display: flex;
-    max-width: 100%;
-    margin: 24px 0 0;
-    padding: 0 calc((100% - 1100px) / 2 + 32px);
+    gap: 0;
+    max-width: 1200px;
+    margin: 22px auto 0;
+    padding: 0 32px;
     box-sizing: border-box;
-    border-bottom: 1px solid var(--sl-border);
-    background: var(--sl-navy);
-    position: static;
-    top: auto;
-    z-index: auto;
+    border-bottom: 2px solid rgba(201,168,76,.15);
   }
+
   .sl-tabs button {
-    padding: 14px 20px;
+    padding: 10px 22px;
     background: transparent;
     border: none;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    font-family: var(--sl-fb);
-    font-size: .88rem;
-    font-weight: 500;
-    color: var(--sl-muted);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    font-family: 'Lora', Georgia, serif;
+    font-size: .84rem;
+    font-weight: 600;
+    color: rgba(245,240,232,.45);
     cursor: pointer;
     transition: color .18s, border-color .18s;
+    letter-spacing: .02em;
   }
-  .sl-tabs button span {
-    font-size: .69rem;
-    opacity: 0.5;
-    font-weight: 400;
-    margin-left: 4px;
-  }
+
   .sl-tabs button:hover { color: rgba(245,240,232,.75); }
+
   .sl-tabs button.sl-tab-active {
-    color: var(--sl-gold);
-    border-bottom-color: var(--sl-gold);
-    font-weight: 600;
+    color: #c9a84c;
+    border-bottom-color: #c9a84c;
   }
 
   /* ── Content sections ────────────────────────────────────── */
   .sl-section {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 28px 32px 100px;
+    padding: 24px 32px 48px;
     box-sizing: border-box;
   }
 
-  /* ── Empty state ─────────────────────────────────────────── */
-  .sl-empty-state {
-    background: var(--sl-navy2);
-    border: 1px solid var(--sl-border);
-    border-radius: 14px;
-    padding: 64px 40px;
-    text-align: center;
-  }
-  .sl-empty-icon { margin-bottom: 20px; line-height: 0; }
-  .sl-empty-h {
-    font-family: var(--sl-fh);
-    font-size: 1.5rem;
-    color: var(--sl-cream);
-    margin: 0 0 12px;
-  }
-  .sl-empty-sub {
-    font-family: var(--sl-fb);
-    font-size: .94rem;
-    color: var(--sl-muted);
-    max-width: 420px;
-    margin: 0 auto 28px;
-    line-height: 1.65;
-  }
-  .sl-empty-link {
-    display: inline-block;
-    font-family: var(--sl-fh);
-    font-size: .94rem;
-    color: var(--sl-gold);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(201,168,76,.3);
-    padding-bottom: 1px;
-    transition: border-color .2s, color .2s;
-  }
-  .sl-empty-link:hover {
-    color: var(--sl-gold-lt);
-    border-color: var(--sl-gold-lt);
-  }
-
-  /* ── Scrollbar ───────────────────────────────────────────── */
+  /* ── Scrollbar (cinematic) ───────────────────────────────── */
   ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: var(--sl-navy); }
+  ::-webkit-scrollbar-track { background: #0d1b2a; }
   ::-webkit-scrollbar-thumb { background: rgba(201,168,76,.35); border-radius: 3px; }
   ::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,.65); }
-  * { scrollbar-width: thin; scrollbar-color: rgba(201,168,76,.35) var(--sl-navy); }
+  * { scrollbar-width: thin; scrollbar-color: rgba(201,168,76,.35) #0d1b2a; }
 
   /* ── Footer ──────────────────────────────────────────────── */
-  .hp-foot {
-    background: #0d1b2a;
-    border-top: 1px solid rgba(201,168,76,.12);
-    padding: 38px 0;
+  .sl-foot {
+    background: #0a131e;
+    text-align: center;
+    padding: 18px;
+    font-size: .76rem;
+    color: #4a5a6a;
+    border-top: 1px solid rgba(201,168,76,.1);
+    font-family: 'Lora', Georgia, serif;
   }
-  .hp-wrap { max-width: 1160px; margin: 0 auto; padding: 0 28px; box-sizing: border-box; }
-  .hp-foot-inner {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 24px; flex-wrap: wrap;
-  }
-  .hp-foot-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .hp-foot-mark {
-    width: 38px; height: 38px; background: #c9a84c; border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', Georgia, serif; font-size: 1.2rem;
-    font-weight: 900; color: #0d1b2a; flex-shrink: 0;
-  }
-  .hp-foot-name { font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem; font-weight: 700; color: #f5f0e8; }
-  .hp-foot-copy { font-family: 'Lora', Georgia, serif; font-size: .8rem; color: rgba(245,240,232,.52); }
-  .hp-foot-links { display: flex; gap: 22px; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
-  .hp-foot-links a { font-family: 'Lora', Georgia, serif; font-size: .85rem; color: rgba(245,240,232,.52); text-decoration: none; transition: color .2s; }
-  .hp-foot-links a:hover { color: #c9a84c; }
 
   /* ── Responsive ──────────────────────────────────────────── */
   @media (max-width: 640px) {
-    .sl-hero-inner   { padding: 36px 16px 0; }
-    .sl-upload-panel { padding: 24px 16px 0; }
-    .sl-file-zone    { padding: 32px 16px 24px; }
-    .sl-status-bar   { padding: 0 16px; }
-    .sl-tabs         { padding: 0 16px; }
-    .sl-section      { padding: 18px 16px 100px; }
-    .sl-empty-state  { padding: 40px 20px; }
-    .hp-foot-inner   { flex-direction: column; text-align: center; }
-    .hp-foot-links   { justify-content: center; }
-    .sl-pills        { gap: 8px; }
+    .sl-header  { padding: 22px 16px 0; }
+    .sl-status-bar { padding: 0 16px; }
+    .sl-tabs    { padding: 0 16px; }
+    .sl-section { padding: 18px 16px 36px; }
+    .sl-upload-panel { border-radius: 0; border-left: none; border-right: none; padding: 20px 16px; }
+    .sl-upload-inner { flex-direction: column; }
+    .sl-upload-btn   { width: 100%; text-align: center; }
+    .sl-tabs button  { padding: 10px 14px; font-size: .78rem; }
+  }
+
+  /* ── Steps row ───────────────────────────────────────────── */
+  .sl-steps {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 1200px;
+    margin: 20px auto 0;
+    padding: 0 32px;
+    box-sizing: border-box;
+  }
+  .sl-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    background: rgba(201,168,76,.06);
+    border: 1px solid rgba(201,168,76,.14);
+    border-radius: 8px;
+    padding: 12px 16px;
+  }
+  .sl-step-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #c9a84c;
+    color: #0d1b2a;
+    font-weight: 700;
+    font-size: .8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Lora', Georgia, serif;
+  }
+  .sl-step-label {
+    font-size: .78rem;
+    color: rgba(245,240,232,.7);
+    line-height: 1.5;
+    font-family: 'Lora', Georgia, serif;
+  }
+  .sl-step-label small {
+    color: rgba(245,240,232,.4);
+    font-size: .7rem;
+  }
+  .sl-step-arrow {
+    color: rgba(201,168,76,.4);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  @media (max-width: 640px) {
+    .sl-steps { display: none; }
   }
 </style>
 
-<!-- Film Strip (top of page) -->
+<!-- Film Strip -->
 <svg class="sl-strip" viewBox="0 0 1440 22" preserveAspectRatio="none" aria-hidden="true">
   <defs>
     <pattern id="sl-fs" x="0" y="0" width="32" height="22" patternUnits="userSpaceOnUse">
@@ -441,57 +392,45 @@
   <rect width="1440" height="22" fill="url(#sl-fs)"/>
 </svg>
 
-<!-- Hero block -->
-<div class="sl-hero">
-  <div class="sl-hero-strip">
-    <svg viewBox="0 0 1440 28" preserveAspectRatio="none" width="100%" height="28" aria-hidden="true">
-      <rect width="1440" height="28" fill="#0d1b2a"/>
-      <defs>
-        <pattern id="sl-hs" x="0" y="0" width="36" height="28" patternUnits="userSpaceOnUse">
-          <rect x="9" y="7" width="18" height="14" rx="2" fill="#162032"/>
-        </pattern>
-      </defs>
-      <rect width="1440" height="28" fill="url(#sl-hs)"/>
-    </svg>
-  </div>
-  <div class="sl-hero-inner">
-    <span class="sl-eyebrow">Script &amp; Pad · Production Tools</span>
-    <h1 class="sl-hero-h1">Shot List Generator</h1>
-    <p class="sl-hero-sub">Upload your script. Build your shots. Export a professional shot list — free, in your browser.</p>
-    <div class="sl-pills">
-      <span class="sl-pill">📄 PDF &amp; DOCX</span>
-      <span class="sl-pill">🎬 Acts · Scenes · Shots</span>
-      <span class="sl-pill">💾 JSON Export</span>
-    </div>
-  </div>
-</div>
-
 <div class="sl-page">
 
-  <!-- Upload Panel -->
-  <div class="sl-upload-panel">
-    <div class="sl-file-zone" id="sl-drop-zone">
-      <input type="file" id="scriptFile" accept=".pdf,.docx,.doc,.json">
-      <div class="sl-file-icon">
-        <svg viewBox="0 0 48 48" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="8" y="4" width="26" height="36" rx="4" fill="#1e2f45" stroke="#c9a84c" stroke-width="1.5"/>
-          <path d="M28 4 L34 10 L28 10 Z" fill="#253652"/>
-          <rect x="28" y="4" width="6" height="6" rx="1" fill="#2c3e50"/>
-          <rect x="14" y="18" width="16" height="2" rx="1" fill="#c9a84c" opacity="0.7"/>
-          <rect x="14" y="24" width="12" height="2" rx="1" fill="#3d5166"/>
-          <rect x="14" y="30" width="14" height="2" rx="1" fill="#3d5166"/>
-        </svg>
-      </div>
-      <p class="sl-file-heading">Drop your script or saved shot list</p>
-      <p class="sl-file-sub">PDF / DOCX to start · JSON to restore saved work</p>
-      <div class="sl-badge-row">
-        <span class="sl-badge">.pdf</span>
-        <span class="sl-badge">.docx</span>
-        <span class="sl-badge">.doc</span>
-        <span class="sl-badge">.json</span>
-      </div>
+  <!-- Header -->
+  <div class="sl-header">
+    <span class="sl-pretag">🎬 Production Tool</span>
+    <h1 class="sl-title">Shot List <span>Generator</span></h1>
+    <p class="sl-sub">Upload your script — PDF or DOCX — and build a hierarchical visual shot list organized by Act, Scene, and Sequence.</p>
+  </div>
+
+  <!-- Steps row -->
+  <div class="sl-steps">
+    <div class="sl-step">
+      <span class="sl-step-num">1</span>
+      <span class="sl-step-label">Upload your script<br><small>PDF, DOCX or saved JSON</small></span>
     </div>
-    <div class="sl-upload-cta">
+    <div class="sl-step-arrow">→</div>
+    <div class="sl-step">
+      <span class="sl-step-num">2</span>
+      <span class="sl-step-label">Click Generate<br><small>Scenes are parsed instantly</small></span>
+    </div>
+    <div class="sl-step-arrow">→</div>
+    <div class="sl-step">
+      <span class="sl-step-num">3</span>
+      <span class="sl-step-label">Build your shots<br><small>Add, edit, drag to reorder</small></span>
+    </div>
+  </div>
+
+  <!-- Upload Panel -->
+  <div class="sl-upload-panel" style="max-width:1200px;margin:0 auto 0;padding:28px 32px 22px;box-sizing:border-box;">
+    <div class="sl-upload-inner">
+      <div class="sl-file-zone" id="sl-drop-zone">
+        <input type="file" id="scriptFile" accept=".pdf,.docx,.doc,.json">
+        <div class="sl-file-icon">📄</div>
+        <div class="sl-file-label">
+          <strong>Drop your script or saved shot list</strong>
+          PDF / DOCX to start · JSON to restore saved work
+        </div>
+        <div class="sl-file-types">.pdf &nbsp;·&nbsp; .docx &nbsp;·&nbsp; .doc &nbsp;·&nbsp; .json</div>
+      </div>
       <button class="sl-upload-btn" onclick="processFile()">Generate Shot List ↗</button>
     </div>
   </div>
@@ -504,34 +443,28 @@
 
   <!-- Tabs -->
   <div class="sl-tabs">
-    <button id="tab-shot-list" class="sl-tab-active">Shot List <span>overview</span></button>
-    <button id="tab-compound-table">Build Shot List <span>edit here</span></button>
+    <button id="tab-shot-list" class="sl-tab-active">Shot List <span style="font-size:.7rem;opacity:.5;font-weight:400;margin-left:4px;">overview</span></button>
+    <button id="tab-compound-table">Build Shot List <span style="font-size:.7rem;opacity:.5;font-weight:400;margin-left:4px;">edit here</span></button>
   </div>
 
   <!-- Shot List Section -->
   <div id="shot-list-section" class="sl-section">
-    <div id="sl-empty-state" class="sl-empty-state">
-      <div class="sl-empty-icon">
-        <svg viewBox="0 0 72 62" width="72" height="62" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="24" width="64" height="34" rx="5" fill="#1e2f45" stroke="#c9a84c" stroke-width="1.5"/>
-          <rect x="4" y="11" width="64" height="17" rx="4" fill="#253652" stroke="#c9a84c" stroke-width="1.5"/>
-          <rect x="12" y="11" width="8" height="17" fill="#c9a84c" opacity="0.75"/>
-          <rect x="28" y="11" width="8" height="17" fill="#c9a84c" opacity="0.35"/>
-          <rect x="44" y="11" width="8" height="17" fill="#c9a84c" opacity="0.75"/>
-          <rect x="60" y="11" width="7" height="17" fill="#c9a84c" opacity="0.35"/>
-          <polygon points="10,11 24,11 15,3" fill="#c9a84c" opacity="0.6"/>
-          <rect x="14" y="38" width="28" height="3" rx="1.5" fill="#c9a84c" opacity="0.35"/>
-          <rect x="14" y="46" width="20" height="3" rx="1.5" fill="#3d5166"/>
-          <rect x="14" y="54" width="24" height="3" rx="1.5" fill="#3d5166"/>
-        </svg>
-      </div>
-      <p class="sl-empty-h">Your shot list will appear here</p>
-      <p class="sl-empty-sub">
-        Upload a script above and click Generate Shot List.
-        Then switch to <strong style="color:#c9a84c;">Build Shot List</strong>
-        to add shots, sequences and director notes.
+    <div id="sl-empty-state" style="text-align:center;padding:60px 20px;">
+      <div style="font-size:2.5rem;margin-bottom:16px;">🎬</div>
+      <p style="font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;
+         color:#f5f0e8;margin:0 0 10px;">Your shot list will appear here</p>
+      <p style="font-size:.84rem;color:rgba(245,240,232,.45);max-width:380px;
+         margin:0 auto 24px;line-height:1.7;font-family:'Lora',Georgia,serif;">
+         Upload a script above and click Generate Shot List.
+         Then switch to <strong style="color:#c9a84c;">Build Shot List</strong>
+         to add shots, sequences and director notes.
       </p>
-      <a href="#sl-drop-zone" class="sl-empty-link">Upload a Script ↑</a>
+      <a href="#sl-drop-zone"
+         style="display:inline-block;padding:10px 22px;background:#c9a84c;
+         color:#0d1b2a;border-radius:6px;font-weight:700;font-size:.84rem;
+         text-decoration:none;font-family:'Lora',Georgia,serif;">
+         Upload a Script ↑
+      </a>
     </div>
   </div>
 
@@ -542,24 +475,7 @@
 
 </div>
 
-<!-- Footer -->
-<div class="hp-foot">
-  <div class="hp-wrap">
-    <div class="hp-foot-inner">
-      <a href="/" class="hp-foot-brand">
-        <div class="hp-foot-mark">S</div>
-        <span class="hp-foot-name">Script &amp; Pad</span>
-      </a>
-      <p class="hp-foot-copy">© 2025 Script and Pad. All Rights Reserved.</p>
-      <ul class="hp-foot-links">
-        <li><a href="/privacy.html">Privacy</a></li>
-        <li><a href="/terms.html">Terms</a></li>
-        <li><a href="/support.html">Support</a></li>
-        <li><a href="/blog/">Blog</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+<footer class="sl-foot">© 2025 Script and Pad · Build better shot lists</footer>
 
 <!-- PDF.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -577,10 +493,10 @@
 
 <script>
   // Tab switching
-  const tabShotList      = document.getElementById('tab-shot-list');
-  const tabCompoundTable = document.getElementById('tab-compound-table');
-  const shotListSection  = document.getElementById('shot-list-section');
-  const compoundSection  = document.getElementById('compound-table-section');
+  const tabShotList       = document.getElementById('tab-shot-list');
+  const tabCompoundTable  = document.getElementById('tab-compound-table');
+  const shotListSection   = document.getElementById('shot-list-section');
+  const compoundSection   = document.getElementById('compound-table-section');
 
   function activateTab(active, inactive, show, hide) {
     active.classList.add('sl-tab-active');
