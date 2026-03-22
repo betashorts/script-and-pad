@@ -7,7 +7,7 @@
 // ── CDN URLs ──────────────────────────────────────────────────
 const SL_JSPDF_URL     = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
 const SL_AUTOTABLE_URL = "https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js";
-const SL_DOCX_URL      = "https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.js";
+const SL_DOCX_URL      = "https://cdn.jsdelivr.net/npm/docx@7.8.2/build/index.js";
 
 // ── Dynamic script loader ─────────────────────────────────────
 function loadScript(url) {
@@ -308,8 +308,8 @@ window.exportShotListDOCX = async function () {
   try {
     await loadScript(SL_DOCX_URL);
 
-    // Library detection: docx@8 UMD exposes itself as window.docx
-    const D = window.docx || window;
+    // Library detection: docx UMD exposes itself as window.docx
+    const D = window.docx;
     if (!D || !D.Document) {
       throw new Error("docx library failed to load. Document constructor not found.");
     }
