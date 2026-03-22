@@ -98,7 +98,14 @@
     --sl-fb:      'Lora', Georgia, serif;
   }
 
-  /* ── Active nav link ─────────────────────────────────────── */
+  /* ── Dark navbar override ───────────────────────────────── */
+  .navbar             { background: #0d1b2a !important; border-bottom: 1px solid rgba(201,168,76,.15) !important; }
+  .brand-main         { color: #f5f0e8 !important; }
+  .brand-tag          { color: rgba(245,240,232,0.52) !important; }
+  .nav-link           { color: rgba(245,240,232,.72) !important; }
+  .nav-link:hover     { background: rgba(30,47,69,.8) !important; color: #c9a84c !important; }
+  .hamburger-line     { background: #f5f0e8 !important; }
+  .navbar-links       { background: #0d1b2a !important; }
   .navbar-links a[href="/shot-list/"] { color: #c9a84c; }
 
   /* ── Page shell ──────────────────────────────────────────── */
@@ -295,12 +302,15 @@
   /* ── Tab switcher ────────────────────────────────────────── */
   .sl-tabs {
     display: flex;
-    max-width: 1100px;
-    margin: 24px auto 0;
-    padding: 0 32px;
+    max-width: 100%;
+    margin: 24px 0 0;
+    padding: 0 calc((100% - 1100px) / 2 + 32px);
     box-sizing: border-box;
     border-bottom: 1px solid var(--sl-border);
     background: var(--sl-navy);
+    position: sticky;
+    top: 64px;
+    z-index: 50;
   }
   .sl-tabs button {
     padding: 14px 20px;
