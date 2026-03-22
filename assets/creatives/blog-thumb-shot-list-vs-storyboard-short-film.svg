@@ -1,0 +1,124 @@
+<svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#253652"/>
+  <!-- Depth circles -->
+  <circle cx="20" cy="175" r="130" fill="#1e2f45" opacity="0.5"/>
+  <circle cx="360" cy="25" r="85" fill="#1e2f45" opacity="0.45"/>
+  <!-- Spotlight -->
+  <polygon points="130,0 250,0 330,200 60,200" fill="#c9a84c" opacity="0.05"/>
+  <!-- Radial glow -->
+  <circle cx="190" cy="100" r="120" fill="#c9a84c" opacity="0.04"/>
+
+  <!-- Gold vertical divider -->
+  <rect x="186" y="16" width="2.5" height="168" rx="1" fill="#c9a84c" opacity="0.55"/>
+  <!-- VS badge -->
+  <circle cx="187" cy="100" r="16" fill="#c9a84c"/>
+  <text x="187" y="105" font-size="11" font-family="Georgia, serif" font-weight="bold" fill="#0d1b2a" text-anchor="middle">VS</text>
+
+  <!-- LEFT PANEL: Storyboard (sketch frames) -->
+  <text x="93" y="32" font-size="8" font-family="Lora, Georgia, serif" fill="rgba(245,240,232,0.45)" text-anchor="middle" letter-spacing="1">STORYBOARD</text>
+
+  <!-- 2x2 grid of storyboard frames -->
+  <!-- Frame 1 top-left -->
+  <rect x="18" y="38" width="72" height="52" rx="5" fill="#1e2f45" stroke="rgba(245,240,232,0.2)" stroke-width="1.2"/>
+  <!-- Hand-drawn style sketch in frame 1 -->
+  <path d="M24 80 Q32 56 44 62 Q52 50 60 58 Q68 52 82 68" stroke="rgba(245,240,232,0.28)" stroke-width="1.5" fill="none"/>
+  <circle cx="44" cy="50" r="6" fill="none" stroke="rgba(245,240,232,0.22)" stroke-width="1.2"/>
+  <rect x="24" y="72" width="64" height="12" rx="2" fill="rgba(245,240,232,0.05)"/>
+  <!-- Horizon line -->
+  <line x1="22" y1="70" x2="88" y2="70" stroke="rgba(245,240,232,0.12)" stroke-width="0.8"/>
+  <!-- Arrow indicating movement in frame 1 -->
+  <path d="M58 60 L70 56" stroke="#c9a84c" stroke-width="1.2" fill="none" opacity="0.5"/>
+  <polygon points="70,54 72,58 68,57" fill="#c9a84c" opacity="0.5"/>
+
+  <!-- Frame 2 top-right (within left panel) -->
+  <rect x="98" y="38" width="72" height="52" rx="5" fill="#1e2f45" stroke="rgba(245,240,232,0.2)" stroke-width="1.2"/>
+  <!-- Different composition sketch -->
+  <rect x="108" y="48" width="16" height="24" rx="3" fill="rgba(245,240,232,0.1)" stroke="rgba(245,240,232,0.2)" stroke-width="1"/>
+  <rect x="134" y="55" width="16" height="17" rx="3" fill="rgba(245,240,232,0.1)" stroke="rgba(245,240,232,0.2)" stroke-width="1"/>
+  <circle cx="116" cy="46" r="4" fill="rgba(212,149,106,0.5)"/>
+  <circle cx="142" cy="52" r="4" fill="rgba(212,149,106,0.5)"/>
+  <!-- OTS line -->
+  <path d="M124 60 L138 56" stroke="rgba(245,240,232,0.18)" stroke-width="1" stroke-dasharray="2 2"/>
+
+  <!-- Frame 3 bottom-left -->
+  <rect x="18" y="98" width="72" height="52" rx="5" fill="#1e2f45" stroke="rgba(245,240,232,0.2)" stroke-width="1.2"/>
+  <!-- Close-up sketch -->
+  <ellipse cx="55" cy="120" rx="20" ry="24" fill="none" stroke="rgba(245,240,232,0.18)" stroke-width="1.2"/>
+  <circle cx="55" cy="112" r="9" fill="rgba(212,149,106,0.35)"/>
+  <path d="M42 130 Q55 140 68 130" stroke="rgba(245,240,232,0.15)" stroke-width="1" fill="none"/>
+
+  <!-- Frame 4 bottom-right -->
+  <rect x="98" y="98" width="72" height="52" rx="5" fill="#1e2f45" stroke="rgba(245,240,232,0.2)" stroke-width="1.2"/>
+  <!-- Wide shot sketch -->
+  <rect x="103" y="103" width="62" height="42" rx="3" fill="none"/>
+  <path d="M106 135 Q125 108 145 120 Q155 112 165 130" stroke="rgba(245,240,232,0.2)" stroke-width="1.2" fill="none"/>
+  <!-- Sun/sky line -->
+  <line x1="106" y1="118" x2="168" y2="118" stroke="rgba(245,240,232,0.1)" stroke-width="0.8"/>
+  <circle cx="158" cy="110" r="5" fill="rgba(201,168,76,0.18)"/>
+
+  <text x="93" y="168" font-size="8" font-family="Lora, Georgia, serif" fill="rgba(245,240,232,0.35)" text-anchor="middle">Visual composition</text>
+
+  <!-- RIGHT PANEL: Shot list rows (technical) -->
+  <text x="283" y="32" font-size="8" font-family="Lora, Georgia, serif" fill="rgba(201,168,76,0.7)" text-anchor="middle" letter-spacing="1">SHOT LIST</text>
+
+  <!-- Shot list card -->
+  <rect x="196" y="38" width="166" height="132" rx="6" fill="#162032" stroke="rgba(201,168,76,0.18)" stroke-width="1"/>
+  <!-- Header -->
+  <rect x="196" y="38" width="166" height="14" rx="6" fill="#c9a84c"/>
+  <rect x="200" y="42" width="12" height="4" rx="1" fill="rgba(22,32,50,0.6)"/>
+  <rect x="218" y="42" width="22" height="4" rx="1" fill="rgba(22,32,50,0.6)"/>
+  <rect x="248" y="42" width="18" height="4" rx="1" fill="rgba(22,32,50,0.6)"/>
+  <rect x="274" y="42" width="30" height="4" rx="1" fill="rgba(22,32,50,0.6)"/>
+  <rect x="312" y="42" width="44" height="4" rx="1" fill="rgba(22,32,50,0.6)"/>
+
+  <!-- Row 1 -->
+  <rect x="196" y="53" width="166" height="22" fill="#1e2f45"/>
+  <circle cx="208" cy="64" r="5.5" fill="#c9a84c"/>
+  <path d="M205.5 64.5 L208 67 L212 62" stroke="#162032" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="220" y="59" width="30" height="4" rx="1" fill="rgba(245,240,232,0.5)"/>
+  <rect x="256" y="59" width="20" height="4" rx="1" fill="rgba(245,240,232,0.42)"/>
+  <rect x="283" y="59" width="24" height="4" rx="1" fill="rgba(245,240,232,0.42)"/>
+  <rect x="220" y="66" width="22" height="3" rx="1" fill="rgba(245,240,232,0.28)"/>
+  <rect x="248" y="66" width="36" height="3" rx="1" fill="rgba(245,240,232,0.25)"/>
+
+  <!-- Row 2 -->
+  <rect x="196" y="76" width="166" height="22" fill="#213449"/>
+  <circle cx="208" cy="87" r="5.5" fill="#c9a84c"/>
+  <path d="M205.5 87.5 L208 90 L212 85" stroke="#162032" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="220" y="81" width="24" height="4" rx="1" fill="rgba(245,240,232,0.5)"/>
+  <rect x="250" y="81" width="28" height="4" rx="1" fill="rgba(245,240,232,0.42)"/>
+  <rect x="285" y="81" width="22" height="4" rx="1" fill="rgba(245,240,232,0.42)"/>
+  <rect x="220" y="89" width="34" height="3" rx="1" fill="rgba(245,240,232,0.28)"/>
+
+  <!-- Row 3 -->
+  <rect x="196" y="99" width="166" height="22" fill="#1e2f45"/>
+  <circle cx="208" cy="110" r="5.5" fill="#c9a84c"/>
+  <path d="M205.5 110.5 L208 113 L212 108" stroke="#162032" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="220" y="103" width="28" height="4" rx="1" fill="rgba(245,240,232,0.5)"/>
+  <rect x="254" y="103" width="18" height="4" rx="1" fill="rgba(245,240,232,0.42)"/>
+  <rect x="279" y="103" width="30" height="4" rx="1" fill="rgba(245,240,232,0.42)"/>
+  <rect x="220" y="111" width="20" height="3" rx="1" fill="rgba(245,240,232,0.28)"/>
+  <rect x="246" y="111" width="40" height="3" rx="1" fill="rgba(245,240,232,0.25)"/>
+
+  <!-- Row 4 -->
+  <rect x="196" y="122" width="166" height="22" fill="#213449"/>
+  <circle cx="208" cy="133" r="5.5" fill="#c9a84c"/>
+  <path d="M205.5 133.5 L208 136 L212 131" stroke="#162032" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="220" y="127" width="20" height="4" rx="1" fill="rgba(245,240,232,0.5)"/>
+  <rect x="246" y="127" width="30" height="4" rx="1" fill="rgba(245,240,232,0.42)"/>
+  <rect x="220" y="135" width="40" height="3" rx="1" fill="rgba(245,240,232,0.28)"/>
+
+  <text x="283" y="168" font-size="8" font-family="Lora, Georgia, serif" fill="rgba(201,168,76,0.6)" text-anchor="middle">Logistics + priority</text>
+
+  <!-- Small filmmaker character bottom center, looking both ways -->
+  <ellipse cx="187" cy="192" rx="11" ry="7" fill="#3d2b1f"/>
+  <circle cx="187" cy="187" r="10" fill="#d4956a"/>
+  <path d="M178 183 Q181 176 187 178 Q193 176 196 183" fill="#3d2b1f"/>
+  <circle cx="183" cy="185" r="1.8" fill="#2c1a0e"/>
+  <circle cx="191" cy="185" r="1.8" fill="#2c1a0e"/>
+
+  <!-- Gold stars -->
+  <text x="14" y="52" font-size="18" fill="#c9a84c" opacity="0.44" font-family="serif">★</text>
+  <text x="352" y="190" font-size="14" fill="#c9a84c" opacity="0.4" font-family="serif">★</text>
+</svg>
