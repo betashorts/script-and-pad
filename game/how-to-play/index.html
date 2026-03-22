@@ -1,0 +1,529 @@
+---
+layout: default
+title: "How to Play Beat Lab — Script & Pad"
+meta: |
+  <meta name="description" content="Learn how to use Beat Lab — Script & Pad's free drum beat ear training game. A complete guide to all features.">
+---
+
+<style>
+  footer { display: none; }
+  body { background: #0d1b2a; }
+
+  :root {
+    --c-navy:  #0d1b2a;
+    --c-navy2: #162032;
+    --c-navy3: #1e2f45;
+    --c-gold:  #c9a84c;
+    --c-gold2: #e8c96a;
+    --c-cream: #f5f0e8;
+    --c-teal:  #2a7f7f;
+    --c-rust:  #c0533a;
+    --c-muted: rgba(245,240,232,0.52);
+    --fh: 'Playfair Display', Georgia, serif;
+    --fb: 'Lora', Georgia, serif;
+  }
+
+  /* Dark navbar */
+  .navbar { background: var(--c-navy) !important; border-bottom: 1px solid rgba(201,168,76,.15) !important; }
+  .brand-main { color: var(--c-cream) !important; }
+  .brand-tag  { color: var(--c-muted) !important; }
+  .nav-link   { color: rgba(245,240,232,.72) !important; }
+  .nav-link:hover { background: rgba(30,47,69,.8) !important; color: var(--c-gold) !important; }
+  .hamburger-line { background: var(--c-cream) !important; }
+  .navbar-links   { background: var(--c-navy) !important; }
+
+  main { background: var(--c-navy); font-family: var(--fb); color: var(--c-cream); }
+
+  /* Film strip top */
+  .htp-strip { width: 100%; line-height: 0; background: var(--c-navy); }
+  .htp-strip svg { display: block; }
+
+  /* Page hero */
+  .htp-hero {
+    background: var(--c-navy2);
+    padding: 64px 28px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .htp-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(201,168,76,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .htp-back {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--fb); font-size: 0.82rem;
+    color: var(--c-muted); text-decoration: none;
+    margin-bottom: 28px;
+    transition: color 0.2s;
+  }
+  .htp-back:hover { color: var(--c-gold); }
+  .htp-label {
+    display: inline-block; font-family: var(--fb); font-size: 0.72rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--c-gold); border: 1px solid rgba(201,168,76,0.3);
+    padding: 4px 14px; border-radius: 100px; margin-bottom: 20px;
+  }
+  .htp-title {
+    font-family: var(--fh); font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900; color: var(--c-cream); margin: 0 0 16px;
+    line-height: 1.1;
+  }
+  .htp-title em { color: var(--c-gold); font-style: italic; }
+  .htp-sub {
+    font-family: var(--fb); font-size: 1.05rem; color: var(--c-muted);
+    max-width: 520px; margin: 0 auto 28px; line-height: 1.7;
+  }
+  .htp-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--c-gold); color: var(--c-navy);
+    font-family: var(--fb); font-size: 0.9rem; font-weight: 700;
+    padding: 12px 26px; border-radius: 8px; text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .htp-cta:hover { background: var(--c-gold2); transform: translateY(-2px); }
+
+  /* Main content */
+  .htp-main {
+    max-width: 860px; margin: 0 auto;
+    padding: 72px 28px 80px;
+  }
+
+  /* Section */
+  .htp-section { margin-bottom: 72px; }
+  .htp-section-num {
+    font-family: var(--fb); font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-gold);
+    opacity: 0.6; margin-bottom: 6px; display: block;
+  }
+  .htp-section-title {
+    font-family: var(--fh); font-size: 1.8rem; font-weight: 800;
+    color: var(--c-cream); margin: 0 0 28px; line-height: 1.2;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+  }
+
+  /* Feature cards */
+  .htp-cards { display: flex; flex-direction: column; gap: 16px; }
+  .htp-card {
+    background: var(--c-navy2); border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 14px; padding: 24px 28px;
+    display: grid; grid-template-columns: 48px 1fr; gap: 20px; align-items: start;
+  }
+  .htp-card-icon {
+    width: 48px; height: 48px; border-radius: 10px;
+    background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: var(--c-gold);
+  }
+  .htp-card-body h3 {
+    font-family: var(--fh); font-size: 1.1rem; font-weight: 700;
+    color: var(--c-cream); margin: 0 0 8px;
+  }
+  .htp-card-body p {
+    font-family: var(--fb); font-size: 0.92rem; color: var(--c-muted);
+    line-height: 1.7; margin: 0;
+  }
+  .htp-card-body .htp-tag {
+    display: inline-block; font-family: var(--fb); font-size: 0.68rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    background: rgba(201,168,76,0.1); color: var(--c-gold);
+    padding: 2px 8px; border-radius: 4px; margin-bottom: 8px;
+  }
+
+  /* Step flow */
+  .htp-steps { display: flex; flex-direction: column; gap: 0; }
+  .htp-step {
+    display: grid; grid-template-columns: 40px 1fr; gap: 16px;
+    align-items: start; position: relative; padding-bottom: 28px;
+  }
+  .htp-step:last-child { padding-bottom: 0; }
+  .htp-step-num {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--c-gold); color: var(--c-navy);
+    font-family: var(--fh); font-size: 1rem; font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; position: relative; z-index: 1;
+  }
+  .htp-step:not(:last-child) .htp-step-num::after {
+    content: '';
+    position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
+    width: 2px; height: calc(100% + 28px - 40px);
+    background: rgba(201,168,76,0.2);
+  }
+  .htp-step-body { padding-top: 8px; }
+  .htp-step-body h3 {
+    font-family: var(--fh); font-size: 1.05rem; font-weight: 700;
+    color: var(--c-cream); margin: 0 0 8px;
+  }
+  .htp-step-body p {
+    font-family: var(--fb); font-size: 0.9rem; color: var(--c-muted);
+    line-height: 1.7; margin: 0;
+  }
+
+  /* Grid diagram */
+  .htp-grid-demo {
+    background: var(--c-navy2); border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 14px; padding: 24px; margin: 28px 0;
+    overflow-x: auto;
+  }
+  .htp-grid-demo-label {
+    font-family: var(--fb); font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--c-gold); margin-bottom: 16px; display: block;
+  }
+  .htp-mini-grid {
+    display: grid; grid-template-columns: 80px repeat(16, 1fr); gap: 3px;
+  }
+  .htp-mini-inst {
+    font-family: 'Courier New', monospace; font-size: 0.65rem;
+    color: var(--c-muted); display: flex; align-items: center; height: 24px;
+  }
+  .htp-mini-cell {
+    height: 24px; border-radius: 4px; background: #1e2d40;
+    border: 1px solid rgba(201,168,76,0.08);
+  }
+  .htp-mini-cell.on { background: var(--c-gold); border-color: var(--c-gold); }
+  .htp-mini-cell.ph { background: rgba(201,168,76,0.18); border-top: 2px solid var(--c-gold); }
+  .htp-mini-cell.b4 { border-left: 2px solid rgba(201,168,76,0.3); }
+  .htp-grid-caption {
+    margin-top: 12px; font-family: var(--fb); font-size: 0.82rem;
+    color: var(--c-muted); font-style: italic;
+  }
+
+  /* Tip callout */
+  .htp-tip {
+    background: rgba(42,127,127,0.08); border: 1px solid rgba(42,127,127,0.25);
+    border-left: 4px solid var(--c-teal); border-radius: 0 10px 10px 0;
+    padding: 16px 20px; margin: 20px 0;
+    font-family: var(--fb); font-size: 0.88rem; color: rgba(245,240,232,0.7);
+    line-height: 1.6;
+  }
+  .htp-tip strong { color: #3ab5b5; }
+
+  /* Footer */
+  .htp-foot {
+    background: var(--c-navy); border-top: 1px solid rgba(201,168,76,.12); padding: 38px 0;
+  }
+  .htp-foot-wrap { max-width: 860px; margin: 0 auto; padding: 0 28px; }
+  .htp-foot-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap;
+  }
+  .htp-foot-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .htp-foot-mark {
+    width: 32px; height: 32px; background: var(--c-gold); border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--fh); font-size: 1rem; font-weight: 900; color: var(--c-navy);
+  }
+  .htp-foot-name { font-family: var(--fh); font-size: 0.95rem; font-weight: 700; color: var(--c-cream); }
+  .htp-foot-copy { font-family: var(--fb); font-size: 0.78rem; color: var(--c-muted); }
+
+  @media (max-width: 640px) {
+    .htp-hero { padding: 48px 20px 44px; }
+    .htp-main { padding: 48px 20px 60px; }
+    .htp-card { grid-template-columns: 1fr; gap: 12px; }
+    .htp-foot-inner { flex-direction: column; text-align: center; }
+  }
+</style>
+
+<!-- Film Strip -->
+<div class="htp-strip">
+  <svg viewBox="0 0 1440 22" preserveAspectRatio="none" width="100%" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <pattern id="htp-perf" x="0" y="0" width="32" height="22" patternUnits="userSpaceOnUse">
+        <rect width="32" height="22" fill="#0d1b2a"/>
+        <rect x="6" y="4" width="20" height="14" rx="3" fill="#162032"/>
+      </pattern>
+    </defs>
+    <rect width="1440" height="22" fill="url(#htp-perf)"/>
+  </svg>
+</div>
+
+<!-- Hero -->
+<div class="htp-hero">
+  <div style="position:relative;z-index:1;">
+    <a href="/game/" class="htp-back">← Back to Beat Lab</a><br>
+    <span class="htp-label">Beat Lab · Guide</span>
+    <h1 class="htp-title">How to Play <em>Beat Lab</em></h1>
+    <p class="htp-sub">Beat Lab is a free drum ear training game. Listen to a real drum pattern, recreate it on the grid, and score your accuracy. Here's everything you need to know.</p>
+    <a href="/game/" class="htp-cta">Open Beat Lab →</a>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="htp-main">
+
+  <!-- Section 1: The Core Loop -->
+  <div class="htp-section">
+    <span class="htp-section-num">01 —</span>
+    <h2 class="htp-section-title">The Core Loop</h2>
+    <div class="htp-steps">
+      <div class="htp-step">
+        <div class="htp-step-num">1</div>
+        <div class="htp-step-body">
+          <h3>Pick a beat from the sidebar</h3>
+          <p>The left sidebar lists all 22 drum patterns, grouped by genre. Each pattern shows its BPM and difficulty badge (Easy, Medium, or Hard). Start with Easy patterns to build your ear before moving to harder ones.</p>
+        </div>
+      </div>
+      <div class="htp-step">
+        <div class="htp-step-num">2</div>
+        <div class="htp-step-body">
+          <h3>Listen to the reference beat</h3>
+          <p>Click <strong style="color:#c9a84c;">▶ Listen to Beat</strong> to hear the reference drum pattern. Listen carefully for where each drum instrument hits. You can listen as many times as you need — use the tempo slider to slow it down.</p>
+        </div>
+      </div>
+      <div class="htp-step">
+        <div class="htp-step-num">3</div>
+        <div class="htp-step-body">
+          <h3>Recreate the pattern on the grid</h3>
+          <p>Click cells in the drum grid to place your hits. Gold cells are active. Each row is a different drum instrument (Kick, Snare, Hi-Hat, etc). Each column is one step in time — 16 steps per bar.</p>
+        </div>
+      </div>
+      <div class="htp-step">
+        <div class="htp-step-num">4</div>
+        <div class="htp-step-body">
+          <h3>Check your accuracy</h3>
+          <p>Click <strong style="color:#c9a84c;">✓ Check Accuracy</strong> to see how closely your pattern matches the reference. You'll receive a percentage score and a star rating (up to 3 stars for 90%+).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: The Grid -->
+  <div class="htp-section">
+    <span class="htp-section-num">02 —</span>
+    <h2 class="htp-section-title">Understanding the Grid</h2>
+
+    <div class="htp-grid-demo">
+      <span class="htp-grid-demo-label">Example: Basic Rock Beat</span>
+      <div class="htp-mini-grid">
+        <!-- Beat labels row -->
+        <div class="htp-mini-inst"></div>
+        <div style="grid-column:span 4;font-family:monospace;font-size:0.6rem;color:#c9a84c;text-align:center;height:14px;display:flex;align-items:center;justify-content:center;">1</div>
+        <div style="grid-column:span 4;font-family:monospace;font-size:0.6rem;color:#c9a84c;text-align:center;height:14px;display:flex;align-items:center;justify-content:center;">2</div>
+        <div style="grid-column:span 4;font-family:monospace;font-size:0.6rem;color:#c9a84c;text-align:center;height:14px;display:flex;align-items:center;justify-content:center;">3</div>
+        <div style="grid-column:span 4;font-family:monospace;font-size:0.6rem;color:#c9a84c;text-align:center;height:14px;display:flex;align-items:center;justify-content:center;">4</div>
+        <!-- Kick row -->
+        <div class="htp-mini-inst">Kick</div>
+        <div class="htp-mini-cell on b4"></div><div class="htp-mini-cell"></div><div class="htp-mini-cell"></div><div class="htp-mini-cell"></div>
+        <div class="htp-mini-cell b4"></div><div class="htp-mini-cell"></div><div class="htp-mini-cell on"></div><div class="htp-mini-cell"></div>
+        <div class="htp-mini-cell on b4"></div><div class="htp-mini-cell"></div><div class="htp-mini-cell"></div><div class="htp-mini-cell"></div>
+        <div class="htp-mini-cell b4"></div><div class="htp-mini-cell"></div><div class="htp-mini-cell on"></div><div class="htp-mini-cell"></div>
+        <!-- Snare row -->
+        <div class="htp-mini-inst">Snare</div>
+        <div class="htp-mini-cell b4"></div><div class="htp-mini-cell"></div><div class="htp-mini-cell"></div><div class="htp-mini-cell"></div>
+        <div class="htp-mini-cell on b4"></div><div class="htp-mini-cell"></div><div class="htp-mini-cell"></div><div class="htp-mini-cell"></div>
+        <div class="htp-mini-cell b4"></div><div class="htp-mini-cell"></div><div class="htp-mini-cell"></div><div class="htp-mini-cell"></div>
+        <div class="htp-mini-cell on b4"></div><div class="htp-mini-cell"></div><div class="htp-mini-cell"></div><div class="htp-mini-cell"></div>
+        <!-- Hi-Hat row with playhead marker -->
+        <div class="htp-mini-inst">Hi-Hat</div>
+        <div class="htp-mini-cell on b4"></div><div class="htp-mini-cell on"></div><div class="htp-mini-cell on"></div><div class="htp-mini-cell on"></div>
+        <div class="htp-mini-cell ph on b4"></div><div class="htp-mini-cell on"></div><div class="htp-mini-cell on"></div><div class="htp-mini-cell on"></div>
+        <div class="htp-mini-cell on b4"></div><div class="htp-mini-cell on"></div><div class="htp-mini-cell on"></div><div class="htp-mini-cell on"></div>
+        <div class="htp-mini-cell on b4"></div><div class="htp-mini-cell on"></div><div class="htp-mini-cell on"></div><div class="htp-mini-cell on"></div>
+      </div>
+      <p class="htp-grid-caption">Gold cells = active hits. The highlighted column shows the playhead (current step during playback). Bold borders mark each quarter-note beat.</p>
+    </div>
+
+    <div class="htp-cards">
+      <div class="htp-card">
+        <div class="htp-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="8" width="16" height="10" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="3" x2="8" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="3" x2="14" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="13" x2="14" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="htp-card-body">
+          <div class="htp-tag">Rows</div>
+          <h3>Each row = one drum instrument</h3>
+          <p>Kick (deep bass thud), Snare (sharp crack), Hi-Hat (steady ticking), Crash cymbal, and more depending on the pattern. Each instrument label has a <strong style="color:#c9a84c;">?</strong> tooltip explaining what it sounds like.</p>
+        </div>
+      </div>
+      <div class="htp-card">
+        <div class="htp-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="9" width="18" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="7" y1="6" x2="7" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="6" x2="11" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="15" y1="6" x2="15" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="htp-card-body">
+          <div class="htp-tag">Columns</div>
+          <h3>Each column = one step in time</h3>
+          <p>16 steps per bar in 4/4 time. The bold dividers mark each beat (1, 2, 3, 4). The numbers and symbols above the grid (1, +, ·) label the beat subdivisions — click any to seek playback to that position.</p>
+        </div>
+      </div>
+      <div class="htp-card">
+        <div class="htp-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="6" width="16" height="10" rx="2" fill="rgba(201,168,76,0.25)" stroke="#c9a84c" stroke-width="1.5"/><line x1="11" y1="6" x2="11" y2="16" stroke="#c9a84c" stroke-width="2" stroke-linecap="round" opacity="0.8"/></svg>
+        </div>
+        <div class="htp-card-body">
+          <div class="htp-tag">Playhead</div>
+          <h3>The gold column moves with the beat</h3>
+          <p>When playback is running, a gold highlight sweeps the grid column by column, showing which step is sounding at any moment. Click a step number above the grid to seek playback to that position.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="htp-tip">
+      <strong>Tip:</strong> Watch the playhead while listening to the reference. The column lights up exactly when that step plays — the fastest way to map drum hits to grid positions without reading notation.
+    </div>
+  </div>
+
+  <!-- Section 3: Controls -->
+  <div class="htp-section">
+    <span class="htp-section-num">03 —</span>
+    <h2 class="htp-section-title">Controls Explained</h2>
+    <div class="htp-cards">
+
+      <div class="htp-card">
+        <div class="htp-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><polygon points="6,4 18,11 6,18" fill="#c9a84c"/></svg>
+        </div>
+        <div class="htp-card-body">
+          <div class="htp-tag">Primary</div>
+          <h3>▶ Listen to Beat</h3>
+          <p>Plays the reference drum pattern at the current tempo. Replay as many times as needed. The playhead sweeps the grid as it plays. Click again to stop.</p>
+        </div>
+      </div>
+
+      <div class="htp-card">
+        <div class="htp-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><polygon points="6,4 18,11 6,18" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <div class="htp-card-body">
+          <div class="htp-tag">Primary</div>
+          <h3>▷ Play Mine</h3>
+          <p>Plays back your current grid pattern. Use this to compare your version against the reference before checking accuracy. Click again to stop.</p>
+        </div>
+      </div>
+
+      <div class="htp-card">
+        <div class="htp-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><polyline points="5,11 9,15 17,7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="htp-card-body">
+          <div class="htp-tag">Primary</div>
+          <h3>✓ Check Accuracy</h3>
+          <p>Compares your grid against the reference pattern and gives a percentage score plus star rating. Score is based on how many reference notes you placed correctly.</p>
+        </div>
+      </div>
+
+      <div class="htp-card">
+        <div class="htp-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"/></svg>
+        </div>
+        <div class="htp-card-body">
+          <div class="htp-tag">Secondary</div>
+          <h3>◉ Reveal Solution</h3>
+          <p>Shows the correct pattern on the grid. Use when stuck or to study the exact pattern after attempting it. Try at least once before revealing — the attempt is where the learning happens.</p>
+        </div>
+      </div>
+
+      <div class="htp-card">
+        <div class="htp-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 11 C4 7.1 7.1 4 11 4 C13.7 4 16.1 5.4 17.4 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M18 11 C18 14.9 14.9 18 11 18 C8.3 18 5.9 16.6 4.6 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><polyline points="15,6 17.5,8 20,6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="7,16 4.5,14 2,16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="htp-card-body">
+          <div class="htp-tag">Icon button — top-right of grid</div>
+          <h3>Loop</h3>
+          <p>When Loop is ON (icon turns gold), the beat repeats continuously. Useful for studying a pattern over multiple repetitions without clicking Play each time. Click again to turn off.</p>
+        </div>
+      </div>
+
+      <div class="htp-card">
+        <div class="htp-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="5" y1="5" x2="17" y2="17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="17" y1="5" x2="5" y2="17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="htp-card-body">
+          <div class="htp-tag">Icon button — top-right of grid</div>
+          <h3>Clear</h3>
+          <p>Clears all the cells you've placed, giving you a blank slate to try again. The reference pattern is unchanged — only your attempt is erased.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Section 4: Tempo Slider -->
+  <div class="htp-section">
+    <span class="htp-section-num">04 —</span>
+    <h2 class="htp-section-title">The Tempo Slider</h2>
+    <div class="htp-cards">
+      <div class="htp-card">
+        <div class="htp-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="3" y1="11" x2="19" y2="11" stroke="currentColor" stroke-width="1.5"/><circle cx="14" cy="11" r="3" fill="#c9a84c" stroke="#c9a84c"/></svg>
+        </div>
+        <div class="htp-card-body">
+          <div class="htp-tag">Ear Training Tool</div>
+          <h3>Slow it down to hear every hit</h3>
+          <p>Drag the slider left to reduce the tempo (down to 50%). At a slower speed, each drum hit is easier to isolate and place on the grid. Once you've decoded the pattern, drag back to full speed to confirm.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="htp-tip">
+      <strong>How to use it:</strong> Start at 50–60% speed. Listen once and place the kick and snare. Listen again and add the hi-hat. Then increase the tempo in steps until you're hearing it at full speed. This is the fastest way to decode a difficult pattern.
+    </div>
+  </div>
+
+  <!-- Section 5: Tips -->
+  <div class="htp-section">
+    <span class="htp-section-num">05 —</span>
+    <h2 class="htp-section-title">Tips for Better Ear Training</h2>
+    <div class="htp-cards">
+      <div class="htp-card">
+        <div class="htp-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="9" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M11 14 L11 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="htp-card-body">
+          <h3>Start with the kick and snare</h3>
+          <p>Every pattern has a rhythmic foundation — usually kick on beats 1 and 3, snare on 2 and 4. Place these first, then add the hi-hat. Leave fills and embellishments for last.</p>
+        </div>
+      </div>
+      <div class="htp-card">
+        <div class="htp-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 11 Q4 6 11 6 Q18 6 18 11 Q18 16 11 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><polyline points="8,16 11,19 14,16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="htp-card-body">
+          <h3>Count out loud while listening</h3>
+          <p>Say "1-and-2-and-3-and-4-and" while the beat plays. This maps the 8th-note positions to real numbers. When a hit lands on the "and" of 2, you know exactly which column it belongs to.</p>
+        </div>
+      </div>
+      <div class="htp-card">
+        <div class="htp-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="4" y="4" width="14" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="4" y1="11" x2="18" y2="11" stroke="currentColor" stroke-width="1" stroke-opacity="0.4"/><line x1="11" y1="4" x2="11" y2="18" stroke="currentColor" stroke-width="1" stroke-opacity="0.4"/></svg>
+        </div>
+        <div class="htp-card-body">
+          <h3>Watch the playhead, not just your ears</h3>
+          <p>The gold column sweeping the grid during playback is your visual map of the beat. If you hear a kick but can't tell which column it's on, watch which column lights up when you hear it.</p>
+        </div>
+      </div>
+      <div class="htp-card">
+        <div class="htp-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M6 16 L6 10 M10 16 L10 7 M14 16 L14 12 M18 16 L18 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="htp-card-body">
+          <h3>Follow the difficulty progression</h3>
+          <p>Easy patterns (85–100 BPM, simple grooves) build the foundational vocabulary that all complex beats are built from. Don't skip ahead — the basics make hard patterns much more approachable.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="text-align:center;padding:40px 0;">
+    <p style="font-family:var(--fb);font-size:1rem;color:var(--c-muted);margin-bottom:24px;">Ready to start training your ear?</p>
+    <a href="/game/" class="htp-cta">Play Beat Lab — it's free →</a>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="htp-foot">
+  <div class="htp-foot-wrap">
+    <div class="htp-foot-inner">
+      <a href="/" class="htp-foot-brand">
+        <div class="htp-foot-mark">S</div>
+        <span class="htp-foot-name">Script &amp; Pad</span>
+      </a>
+      <p class="htp-foot-copy">© 2025 Script and Pad. All Rights Reserved.</p>
+    </div>
+  </div>
+</div>

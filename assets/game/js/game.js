@@ -111,9 +111,9 @@ let currentStep = -1;
 let playheadInterval = null;
 
 // Session state (no localStorage — resets on page refresh)
-let sessionDecoded  = 0;   // beats decoded at >=70% accuracy this session
-let sessionStreak   = 0;   // consecutive successful decodes
-let sessionPatterns = 0;   // total Check Accuracy attempts this session
+let sessionDecoded  = 0;
+let sessionStreak   = 0;
+let sessionPatterns = 0;
 
 // Playhead state
 let cueStep = 0;           // visual cue / start position (set by clicking step numbers)
@@ -155,14 +155,6 @@ function updateDifficultyBadge(bpm) {
   el.className = "gm-badge " + d.cls;
 }
 
-function updateSessionUI() {
-  const scoreEl  = document.getElementById("gm-session-score");
-  const streakEl = document.getElementById("gm-session-streak");
-  const bestEl   = document.getElementById("gm-session-best");
-  if (scoreEl)  scoreEl.textContent  = sessionDecoded;
-  if (streakEl) streakEl.textContent = sessionStreak;
-  if (bestEl)   bestEl.textContent   = sessionPatterns;
-}
 
 // ── Result Panel ───────────────────────────────────────────────
 
@@ -200,7 +192,6 @@ function showResult(accuracy, correct, total) {
     } else {
       sessionStreak = 0;
     }
-    updateSessionUI();
   }
 }
 
@@ -283,15 +274,6 @@ async function loadMIDIFile(beatFile = AVAILABLE_BEATS[0].file) {
         }
       });
     });
-
-    // Debug info
-    document.getElementById("debug-time-signature").textContent =
-      `${midi.header.timeSignatures[0]?.timeSignature[0] || 4}/${midi.header.timeSignatures[0]?.timeSignature[1] || 4}`;
-    const calcBPM = Math.round((midi.durationTicks / midi.header.ppq) * (60 / midi.duration));
-    document.getElementById("debug-bpm").textContent = calcBPM;
-    document.getElementById("debug-bars").textContent = Math.ceil(midi.durationTicks / (midi.header.ppq * 4));
-    document.getElementById("debug-midi-notes").textContent = Array.from(uniqueNotes).join(", ");
-    document.getElementById("debug-duration").textContent = midi.duration.toFixed(2);
 
     await loadSamples();
     createPianoRoll();
@@ -808,7 +790,6 @@ function createBeatListGrouped() {
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     createBeatListGrouped();
-    updateSessionUI();
 
     // Unlock audio on first interaction
     const unlockAudio = async () => {
@@ -836,8 +817,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.getElementById("loopToggle")?.addEventListener("click", function () {
       isLoopOn = !isLoopOn;
-      this.textContent = `↺ Loop: ${isLoopOn ? "On" : "Off"}`;
-      this.classList.toggle("gm-loop-on", isLoopOn);
+      this.classList.toggle("gm-loop-active", isLoopOn);
     });
 
     // NEW: Tempo slider wiring
