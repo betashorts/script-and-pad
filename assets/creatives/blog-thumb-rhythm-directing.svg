@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#1e2f45"/>
+  <!-- Depth circles -->
+  <circle cx="300" cy="160" r="120" fill="#253652" opacity="0.55"/>
+  <circle cx="60" cy="40" r="80" fill="#0d1b2a" opacity="0.65"/>
+
+  <!-- Clapperboard (left side) -->
+  <rect x="30" y="40" width="110" height="90" rx="6" fill="#0d1b2a" stroke="#253652" stroke-width="2"/>
+  <!-- Clapper top (striped) -->
+  <rect x="30" y="28" width="110" height="22" rx="4" fill="#162032" stroke="#253652" stroke-width="1.5"/>
+  <!-- Clapper stripes -->
+  <rect x="38" y="28" width="14" height="22" fill="#c9a84c" opacity="0.85"/>
+  <rect x="66" y="28" width="14" height="22" fill="#c9a84c" opacity="0.85"/>
+  <rect x="94" y="28" width="14" height="22" fill="#c9a84c" opacity="0.85"/>
+  <rect x="122" y="28" width="14" height="22" fill="#c9a84c" opacity="0.85"/>
+  <!-- Board content lines -->
+  <rect x="38" y="58" width="90" height="6" rx="2" fill="#253652"/>
+  <rect x="38" y="70" width="70" height="5" rx="2" fill="#1e2f45"/>
+  <rect x="38" y="81" width="80" height="5" rx="2" fill="#1e2f45"/>
+  <rect x="38" y="92" width="55" height="5" rx="2" fill="#1e2f45"/>
+  <!-- "SCENE" label hint -->
+  <text x="83" y="63" font-family="Arial,sans-serif" font-size="5" fill="#c9a84c" text-anchor="middle" font-weight="bold">SCENE</text>
+
+  <!-- Waveform / rhythm bars (right side) -->
+  <!-- Background panel -->
+  <rect x="170" y="35" width="180" height="100" rx="6" fill="#0d1b2a" stroke="#253652" stroke-width="1.5"/>
+  <!-- Centre line -->
+  <line x1="178" y1="85" x2="342" y2="85" stroke="#253652" stroke-width="1"/>
+  <!-- Waveform bars - mimicking a drum pattern waveform -->
+  <rect x="184" y="72" width="8" height="26" rx="2" fill="#c9a84c" opacity="0.9"/>
+  <rect x="196" y="79" width="8" height="12" rx="2" fill="#2a7f7f" opacity="0.7"/>
+  <rect x="208" y="63" width="8" height="44" rx="2" fill="#c9a84c" opacity="0.9"/>
+  <rect x="220" y="80" width="8" height="10" rx="2" fill="#2a7f7f" opacity="0.7"/>
+  <rect x="232" y="73" width="8" height="24" rx="2" fill="#c9a84c" opacity="0.85"/>
+  <rect x="244" y="78" width="8" height="14" rx="2" fill="#2a7f7f" opacity="0.7"/>
+  <rect x="256" y="60" width="8" height="50" rx="2" fill="#c9a84c" opacity="0.9"/>
+  <rect x="268" y="80" width="8" height="10" rx="2" fill="#2a7f7f" opacity="0.7"/>
+  <rect x="280" y="71" width="8" height="28" rx="2" fill="#c9a84c" opacity="0.85"/>
+  <rect x="292" y="77" width="8" height="16" rx="2" fill="#2a7f7f" opacity="0.7"/>
+  <rect x="304" y="64" width="8" height="42" rx="2" fill="#c9a84c" opacity="0.9"/>
+  <rect x="316" y="79" width="8" height="12" rx="2" fill="#2a7f7f" opacity="0.7"/>
+  <rect x="328" y="75" width="8" height="20" rx="2" fill="#c9a84c" opacity="0.75"/>
+  <!-- Playhead -->
+  <line x1="260" y1="35" x2="260" y2="135" stroke="#e8c96a" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Step grid below waveform -->
+  <rect x="178" y="118" width="156" height="10" rx="2" fill="#162032"/>
+  <!-- Active steps (kick pattern hints) -->
+  <rect x="180" y="120" width="10" height="6" rx="1" fill="#c9a84c"/>
+  <rect x="220" y="120" width="10" height="6" rx="1" fill="#c9a84c"/>
+  <rect x="260" y="120" width="10" height="6" rx="1" fill="#c9a84c"/>
+  <rect x="300" y="120" width="10" height="6" rx="1" fill="#c9a84c"/>
+
+  <!-- Director character (bottom left) -->
+  <!-- Chair/seat hint -->
+  <rect x="18" y="162" width="60" height="6" rx="3" fill="#253652"/>
+  <!-- Body -->
+  <rect x="28" y="142" width="24" height="24" rx="10" fill="#2a7f7f"/>
+  <!-- Head -->
+  <circle cx="40" cy="133" r="12" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M28 128 Q40 118 52 128 L52 123 Q40 112 28 123 Z" fill="#0d1b2a"/>
+  <!-- Eye -->
+  <circle cx="44" cy="134" r="2" fill="#0d1b2a"/>
+  <!-- Raised arm (pointing at waveform) -->
+  <path d="M52 150 Q90 130 160 95" stroke="#d4956a" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <!-- Megaphone hint -->
+  <polygon points="158,87 175,80 175,102 158,97" fill="#c9a84c"/>
+  <rect x="150" y="89" width="10" height="8" rx="2" fill="#c9a84c"/>
+  <!-- Other arm -->
+  <path d="M28 150 Q20 162 18 168" stroke="#d4956a" stroke-width="8" stroke-linecap="round" fill="none"/>
+
+  <!-- Musical notes floating -->
+  <text x="148" y="50" font-family="Arial,sans-serif" font-size="18" fill="#c9a84c" opacity="0.35">♩</text>
+  <text x="345" y="40" font-family="Arial,sans-serif" font-size="14" fill="#c9a84c" opacity="0.3">♪</text>
+  <text x="20" y="200" font-family="Arial,sans-serif" font-size="12" fill="#c9a84c" opacity="0.25">♫</text>
+
+  <!-- Gold stars -->
+  <text x="355" y="24" font-family="Arial,sans-serif" font-size="15" fill="#c9a84c" opacity="0.4">★</text>
+</svg>
