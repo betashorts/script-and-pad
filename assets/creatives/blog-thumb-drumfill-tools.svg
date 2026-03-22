@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#1e2f45"/>
+  <circle cx="310" cy="155" r="120" fill="#253652" opacity="0.5"/>
+  <circle cx="55" cy="45" r="80" fill="#0d1b2a" opacity="0.6"/>
+
+  <!-- Three toms in a row (fill targets, highlighted gold) -->
+  <!-- High tom -->
+  <ellipse cx="95" cy="68" rx="38" ry="15" fill="#c9a84c" opacity="0.9"/>
+  <rect x="57" y="68" width="76" height="28" fill="#e8c96a" opacity="0.25"/>
+  <ellipse cx="95" cy="96" rx="38" ry="15" fill="#1e2f45" stroke="#c9a84c" stroke-width="2"/>
+  <!-- Lug bolts -->
+  <circle cx="62" cy="82" r="2.5" fill="#c9a84c" opacity="0.7"/>
+  <circle cx="128" cy="82" r="2.5" fill="#c9a84c" opacity="0.7"/>
+  <!-- Stand -->
+  <line x1="95" y1="111" x2="95" y2="145" stroke="#253652" stroke-width="2.5"/>
+  <line x1="95" y1="145" x2="80" y2="175" stroke="#253652" stroke-width="2"/>
+  <line x1="95" y1="145" x2="110" y2="175" stroke="#253652" stroke-width="2"/>
+
+  <!-- Mid tom -->
+  <ellipse cx="195" cy="62" rx="42" ry="15" fill="#c9a84c" opacity="0.85"/>
+  <rect x="153" y="62" width="84" height="32" fill="#e8c96a" opacity="0.2"/>
+  <ellipse cx="195" cy="94" rx="42" ry="15" fill="#1e2f45" stroke="#c9a84c" stroke-width="2"/>
+  <circle cx="160" cy="78" r="2.5" fill="#c9a84c" opacity="0.7"/>
+  <circle cx="230" cy="78" r="2.5" fill="#c9a84c" opacity="0.7"/>
+  <!-- Stand -->
+  <line x1="195" y1="109" x2="195" y2="145" stroke="#253652" stroke-width="2.5"/>
+  <line x1="195" y1="145" x2="178" y2="175" stroke="#253652" stroke-width="2"/>
+  <line x1="195" y1="145" x2="212" y2="175" stroke="#253652" stroke-width="2"/>
+
+  <!-- Floor tom (right, larger) -->
+  <ellipse cx="310" cy="80" rx="52" ry="18" fill="#c9a84c"/>
+  <rect x="258" y="80" width="104" height="40" fill="#e8c96a" opacity="0.22"/>
+  <ellipse cx="310" cy="120" rx="52" ry="18" fill="#1e2f45" stroke="#c9a84c" stroke-width="2.5"/>
+  <circle cx="265" cy="100" r="3" fill="#c9a84c" opacity="0.7"/>
+  <circle cx="355" cy="100" r="3" fill="#c9a84c" opacity="0.7"/>
+  <!-- Floor tom legs -->
+  <line x1="275" y1="136" x2="260" y2="175" stroke="#253652" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="345" y1="136" x2="358" y2="175" stroke="#253652" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Drumstick striking mid tom -->
+  <line x1="155" y1="30" x2="192" y2="65" stroke="#d4956a" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="155" cy="28" r="5" fill="#d4956a"/>
+  <!-- Second stick striking floor tom -->
+  <line x1="280" y1="35" x2="308" y2="82" stroke="#d4956a" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="278" cy="33" r="5" fill="#d4956a"/>
+
+  <!-- Fill pattern grid at bottom -->
+  <rect x="18" y="148" width="344" height="40" rx="4" fill="#0d1b2a" stroke="#253652" stroke-width="1"/>
+  <text x="20" y="160" font-family="Arial,sans-serif" font-size="5.5" fill="#2a7f7f">SN</text>
+  <text x="20" y="174" font-family="Arial,sans-serif" font-size="5.5" fill="#2a7f7f">TM</text>
+  <text x="20" y="184" font-family="Arial,sans-serif" font-size="5.5" fill="#2a7f7f">KK</text>
+
+  <!-- SN steps (first 12 steps off, last 4 = fill) -->
+  <rect x="32" y="152" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="51" y="152" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="70" y="152" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="89" y="152" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="108" y="152" width="17" height="7" rx="1" fill="#e8c96a"/>
+  <rect x="127" y="152" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="146" y="152" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="165" y="152" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="184" y="152" width="17" height="7" rx="1" fill="#e8c96a"/>
+  <rect x="203" y="152" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="222" y="152" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="241" y="152" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <!-- Fill begins: last 4 steps -->
+  <rect x="260" y="152" width="17" height="7" rx="1" fill="#c9a84c"/>
+  <rect x="279" y="152" width="17" height="7" rx="1" fill="#c9a84c"/>
+  <rect x="298" y="152" width="17" height="7" rx="1" fill="#c9a84c"/>
+  <rect x="317" y="152" width="17" height="7" rx="1" fill="#c9a84c"/>
+
+  <!-- TOM steps (fill toms) -->
+  <rect x="32" y="165" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="51" y="165" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="70" y="165" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="89" y="165" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="108" y="165" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="127" y="165" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="146" y="165" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="165" y="165" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="184" y="165" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="203" y="165" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="222" y="165" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="241" y="165" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="260" y="165" width="17" height="7" rx="1" fill="#c9a84c" opacity="0.7"/>
+  <rect x="279" y="165" width="17" height="7" rx="1" fill="#c9a84c" opacity="0.85"/>
+  <rect x="298" y="165" width="17" height="7" rx="1" fill="#c9a84c"/>
+  <rect x="317" y="165" width="17" height="7" rx="1" fill="#c9a84c"/>
+
+  <!-- KK steps -->
+  <rect x="32" y="177" width="17" height="7" rx="1" fill="#c0533a"/>
+  <rect x="51" y="177" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="70" y="177" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="89" y="177" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="108" y="177" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="127" y="177" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="146" y="177" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="165" y="177" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="184" y="177" width="17" height="7" rx="1" fill="#c0533a"/>
+  <rect x="203" y="177" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="222" y="177" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="241" y="177" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="260" y="177" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="279" y="177" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="298" y="177" width="17" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="317" y="177" width="17" height="7" rx="1" fill="#c0533a"/>
+
+  <!-- "FILL →" label -->
+  <rect x="248" y="140" width="90" height="12" rx="3" fill="#c9a84c" opacity="0.2"/>
+  <text x="293" y="149" font-family="Arial,sans-serif" font-size="7" fill="#c9a84c" text-anchor="middle" font-weight="bold">FILL →</text>
+
+  <!-- Gold star -->
+  <text x="355" y="24" font-family="Arial,sans-serif" font-size="15" fill="#c9a84c" opacity="0.4">★</text>
+</svg>

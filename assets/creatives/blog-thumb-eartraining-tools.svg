@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#1e2f45"/>
+  <!-- Depth circles -->
+  <circle cx="320" cy="160" r="130" fill="#253652" opacity="0.5"/>
+  <circle cx="50" cy="40" r="80" fill="#0d1b2a" opacity="0.6"/>
+
+  <!-- Large ear shape (centre-left) -->
+  <ellipse cx="155" cy="100" rx="68" ry="85" fill="#0d1b2a" stroke="#253652" stroke-width="2"/>
+  <!-- Inner ear curve -->
+  <path d="M130 55 Q175 55 182 100 Q182 140 155 158 Q135 165 125 150 Q118 138 125 120 Q135 108 145 115 Q158 122 155 138 Q152 148 145 148" stroke="#253652" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Ear canal / highlight -->
+  <ellipse cx="148" cy="102" rx="28" ry="35" fill="#162032"/>
+  <path d="M135 75 Q165 78 168 102 Q168 126 148 138" stroke="#2a7f7f" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <!-- Earlobe -->
+  <ellipse cx="130" cy="162" rx="18" ry="12" fill="#1e2f45"/>
+
+  <!-- Sound waves radiating right from ear -->
+  <!-- Wave 1 (inner) -->
+  <path d="M218 80 Q230 100 218 120" stroke="#c9a84c" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.9"/>
+  <!-- Wave 2 -->
+  <path d="M232 68 Q252 100 232 132" stroke="#c9a84c" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <!-- Wave 3 -->
+  <path d="M248 55 Q276 100 248 145" stroke="#c9a84c" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <!-- Wave 4 (outer) -->
+  <path d="M264 42 Q300 100 264 158" stroke="#c9a84c" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- Step sequencer / rhythm grid (right side, inside the "sound") -->
+  <rect x="285" y="70" width="80" height="60" rx="4" fill="#0d1b2a" stroke="#253652" stroke-width="1.5"/>
+  <!-- Grid rows (3 instruments) -->
+  <text x="287" y="85" font-family="Arial,sans-serif" font-size="5" fill="#2a7f7f">HH</text>
+  <text x="287" y="101" font-family="Arial,sans-serif" font-size="5" fill="#2a7f7f">SN</text>
+  <text x="287" y="117" font-family="Arial,sans-serif" font-size="5" fill="#2a7f7f">KK</text>
+  <!-- Row 1 cells (hi-hat: all 8 steps) -->
+  <rect x="298" y="78" width="7" height="7" rx="1" fill="#c9a84c"/>
+  <rect x="307" y="78" width="7" height="7" rx="1" fill="#c9a84c"/>
+  <rect x="316" y="78" width="7" height="7" rx="1" fill="#c9a84c"/>
+  <rect x="325" y="78" width="7" height="7" rx="1" fill="#c9a84c"/>
+  <rect x="334" y="78" width="7" height="7" rx="1" fill="#c9a84c"/>
+  <rect x="343" y="78" width="7" height="7" rx="1" fill="#c9a84c"/>
+  <rect x="352" y="78" width="7" height="7" rx="1" fill="#c9a84c"/>
+  <rect x="361" y="78" width="7" height="7" rx="1" fill="#c9a84c"/>
+  <!-- Row 2 cells (snare: beats 2 and 4) -->
+  <rect x="298" y="95" width="7" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="307" y="95" width="7" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="316" y="95" width="7" height="7" rx="1" fill="#e8c96a"/>
+  <rect x="325" y="95" width="7" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="334" y="95" width="7" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="343" y="95" width="7" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="352" y="95" width="7" height="7" rx="1" fill="#e8c96a"/>
+  <rect x="361" y="95" width="7" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <!-- Row 3 cells (kick: beats 1 and 3) -->
+  <rect x="298" y="112" width="7" height="7" rx="1" fill="#c0533a"/>
+  <rect x="307" y="112" width="7" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="316" y="112" width="7" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="325" y="112" width="7" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="334" y="112" width="7" height="7" rx="1" fill="#c0533a"/>
+  <rect x="343" y="112" width="7" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="352" y="112" width="7" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+  <rect x="361" y="112" width="7" height="7" rx="1" fill="#162032" stroke="#253652" stroke-width="0.5"/>
+
+  <!-- Musical notes (floating) -->
+  <text x="28" y="80" font-family="Arial,sans-serif" font-size="20" fill="#c9a84c" opacity="0.3">♩</text>
+  <text x="55" y="170" font-family="Arial,sans-serif" font-size="16" fill="#c9a84c" opacity="0.25">♪</text>
+  <text x="220" y="165" font-family="Arial,sans-serif" font-size="14" fill="#c9a84c" opacity="0.35">♫</text>
+
+  <!-- Gold star -->
+  <text x="355" y="24" font-family="Arial,sans-serif" font-size="15" fill="#c9a84c" opacity="0.4">★</text>
+  <text x="22" y="192" font-family="Arial,sans-serif" font-size="13" fill="#c9a84c" opacity="0.3">★</text>
+</svg>

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#1e2f45"/>
+  <circle cx="300" cy="160" r="120" fill="#253652" opacity="0.5"/>
+  <circle cx="55" cy="40" r="75" fill="#0d1b2a" opacity="0.6"/>
+
+  <!-- Drum machine body -->
+  <rect x="20" y="30" width="340" height="140" rx="10" fill="#0d1b2a" stroke="#253652" stroke-width="2"/>
+  <rect x="25" y="35" width="330" height="130" rx="7" fill="#162032"/>
+
+  <!-- Header bar -->
+  <rect x="25" y="35" width="330" height="22" rx="7" fill="#0d1b2a"/>
+  <rect x="25" y="50" width="330" height="7" fill="#0d1b2a"/>
+  <!-- Title text -->
+  <text x="50" y="50" font-family="Arial,sans-serif" font-size="9" fill="#c9a84c" font-weight="bold">BEAT LAB  ·  STEP SEQUENCER</text>
+  <!-- Power LED -->
+  <circle cx="340" cy="46" r="5" fill="#2a7f7f"/>
+  <circle cx="340" cy="46" r="3" fill="#c9a84c" opacity="0.9"/>
+
+  <!-- Row labels (instrument names) -->
+  <text x="28" y="82" font-family="Arial,sans-serif" font-size="7" fill="#2a7f7f">KICK</text>
+  <text x="28" y="100" font-family="Arial,sans-serif" font-size="7" fill="#2a7f7f">SNARE</text>
+  <text x="28" y="118" font-family="Arial,sans-serif" font-size="7" fill="#2a7f7f">HI-HAT</text>
+  <text x="28" y="136" font-family="Arial,sans-serif" font-size="7" fill="#2a7f7f">OPEN HH</text>
+  <text x="28" y="154" font-family="Arial,sans-serif" font-size="7" fill="#2a7f7f">TOM</text>
+
+  <!-- Grid columns (8 steps shown, wider) -->
+  <!-- Step numbers -->
+  <text x="77" y="68" font-family="Arial,sans-serif" font-size="6" fill="#253652" text-anchor="middle">1</text>
+  <text x="107" y="68" font-family="Arial,sans-serif" font-size="6" fill="#253652" text-anchor="middle">2</text>
+  <text x="137" y="68" font-family="Arial,sans-serif" font-size="6" fill="#253652" text-anchor="middle">3</text>
+  <text x="167" y="68" font-family="Arial,sans-serif" font-size="6" fill="#253652" text-anchor="middle">4</text>
+  <text x="197" y="68" font-family="Arial,sans-serif" font-size="6" fill="#253652" text-anchor="middle">5</text>
+  <text x="227" y="68" font-family="Arial,sans-serif" font-size="6" fill="#253652" text-anchor="middle">6</text>
+  <text x="257" y="68" font-family="Arial,sans-serif" font-size="6" fill="#253652" text-anchor="middle">7</text>
+  <text x="287" y="68" font-family="Arial,sans-serif" font-size="6" fill="#253652" text-anchor="middle">8</text>
+  <text x="317" y="68" font-family="Arial,sans-serif" font-size="6" fill="#253652" text-anchor="middle">9</text>
+  <text x="347" y="68" font-family="Arial,sans-serif" font-size="6" fill="#253652" text-anchor="middle">10</text>
+
+  <!-- KICK row -->
+  <rect x="62" y="72" width="26" height="14" rx="3" fill="#c0533a"/>
+  <rect x="92" y="72" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="122" y="72" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="152" y="72" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="182" y="72" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="212" y="72" width="26" height="14" rx="3" fill="#c0533a"/>
+  <rect x="242" y="72" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="272" y="72" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="302" y="72" width="26" height="14" rx="3" fill="#c0533a"/>
+  <rect x="332" y="72" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+
+  <!-- SNARE row -->
+  <rect x="62" y="90" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="92" y="90" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="122" y="90" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="152" y="90" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="182" y="90" width="26" height="14" rx="3" fill="#e8c96a"/>
+  <rect x="212" y="90" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="242" y="90" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="272" y="90" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="302" y="90" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="332" y="90" width="26" height="14" rx="3" fill="#e8c96a"/>
+
+  <!-- HI-HAT row (all on) -->
+  <rect x="62" y="108" width="26" height="14" rx="3" fill="#c9a84c"/>
+  <rect x="92" y="108" width="26" height="14" rx="3" fill="#c9a84c"/>
+  <rect x="122" y="108" width="26" height="14" rx="3" fill="#c9a84c"/>
+  <rect x="152" y="108" width="26" height="14" rx="3" fill="#c9a84c"/>
+  <rect x="182" y="108" width="26" height="14" rx="3" fill="#c9a84c"/>
+  <rect x="212" y="108" width="26" height="14" rx="3" fill="#c9a84c"/>
+  <rect x="242" y="108" width="26" height="14" rx="3" fill="#c9a84c"/>
+  <rect x="272" y="108" width="26" height="14" rx="3" fill="#c9a84c"/>
+  <rect x="302" y="108" width="26" height="14" rx="3" fill="#c9a84c"/>
+  <rect x="332" y="108" width="26" height="14" rx="3" fill="#c9a84c"/>
+
+  <!-- OPEN HH row -->
+  <rect x="62" y="126" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="92" y="126" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="122" y="126" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="152" y="126" width="26" height="14" rx="3" fill="#2a7f7f" opacity="0.7"/>
+  <rect x="182" y="126" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="212" y="126" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="242" y="126" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="272" y="126" width="26" height="14" rx="3" fill="#2a7f7f" opacity="0.7"/>
+  <rect x="302" y="126" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="332" y="126" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+
+  <!-- TOM row -->
+  <rect x="62" y="144" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="92" y="144" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="122" y="144" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="152" y="144" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="182" y="144" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="212" y="144" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+  <rect x="242" y="144" width="26" height="14" rx="3" fill="#c9a84c" opacity="0.6"/>
+  <rect x="272" y="144" width="26" height="14" rx="3" fill="#c9a84c" opacity="0.8"/>
+  <rect x="302" y="144" width="26" height="14" rx="3" fill="#c9a84c"/>
+  <rect x="332" y="144" width="26" height="14" rx="3" fill="#162032" stroke="#253652" stroke-width="0.8"/>
+
+  <!-- Playhead line (over step 5) -->
+  <line x1="197" y1="62" x2="197" y2="162" stroke="#e8c96a" stroke-width="1.5" opacity="0.8"/>
+  <polygon points="191,62 203,62 197,68" fill="#e8c96a"/>
+
+  <!-- Gold star -->
+  <text x="22" y="22" font-family="Arial,sans-serif" font-size="14" fill="#c9a84c" opacity="0.35">★</text>
+</svg>
