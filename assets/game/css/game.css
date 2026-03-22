@@ -580,3 +580,310 @@
   .gm-roll-wrap { padding: 10px 8px; }
   .gm-result-score { font-size: 1.4rem; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   NEW LEARNING FEATURES — Beat Lab Upgrades
+═══════════════════════════════════════════════════════════ */
+
+/* ── Enhanced Playhead Column ────────────────────────────── */
+.gm-roll-wrap .grid-cell.gm-playhead {
+  background: rgba(201,168,76,0.18);
+  border-top: 2px solid #c9a84c;
+}
+
+/* ── Subdivision Step Labels ─────────────────────────────── */
+.gm-step-num.gm-beat-eighth {
+  color: rgba(245,240,232,0.4);
+  font-size: 0.58rem;
+  font-family: var(--gm-font-body);
+}
+
+.gm-step-num.gm-beat-sub {
+  color: rgba(245,240,232,0.18);
+  font-size: 0.6rem;
+}
+
+/* ── Beat Description + Hints ────────────────────────────── */
+.gm-beat-meta {
+  margin-bottom: 14px;
+}
+
+.gm-beat-description {
+  font-family: var(--gm-font-body);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(245,240,232,0.5);
+  margin: 0 0 8px;
+  max-width: 520px;
+  line-height: 1.5;
+  min-height: 1.3em;
+}
+
+.gm-hints {
+  margin-top: 4px;
+}
+
+.gm-hints summary {
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--gm-gold);
+  font-family: var(--gm-font-body);
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+  padding: 4px 0;
+}
+
+.gm-hints summary::-webkit-details-marker { display: none; }
+
+.gm-hints[open] summary { opacity: 0.85; }
+
+.gm-hint-list {
+  margin: 8px 0 0;
+  padding: 10px 16px 10px 20px;
+  border-left: 2px solid var(--gm-gold);
+  list-style: disc;
+  font-family: var(--gm-font-body);
+  font-size: 0.82rem;
+  color: rgba(245,240,232,0.6);
+  line-height: 1.7;
+}
+
+.gm-hint-list li { margin-bottom: 2px; }
+
+/* ── Tempo Trainer ────────────────────────────────────────── */
+.gm-tempo-trainer {
+  background: var(--gm-navy-2);
+  border: 1px solid rgba(201,168,76,0.18);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+}
+
+.gm-tempo-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.gm-tempo-label {
+  font-family: var(--gm-font-body);
+  font-size: 0.82rem;
+  color: var(--gm-cream);
+  transition: color 0.2s;
+}
+
+.gm-tempo-bpm {
+  font-family: var(--gm-font-mono);
+  font-size: 0.78rem;
+  color: var(--gm-gold);
+  background: var(--gm-navy-3);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* Slider track + thumb — gold theme */
+.gm-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--gm-navy-3);
+  outline: none;
+  cursor: pointer;
+  display: block;
+}
+
+.gm-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--gm-gold);
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(201,168,76,0.5);
+  transition: box-shadow 0.15s;
+}
+
+.gm-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 12px rgba(201,168,76,0.8);
+}
+
+.gm-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--gm-gold);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 6px rgba(201,168,76,0.5);
+}
+
+.gm-slider::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, rgba(201,168,76,0.5) 0%, var(--gm-navy-3) 0%);
+  height: 5px;
+  border-radius: 3px;
+}
+
+.gm-tempo-hint {
+  font-size: 0.7rem;
+  color: var(--gm-text-dim);
+  margin: 6px 0 0;
+  font-family: var(--gm-font-body);
+}
+
+/* ── Count-In Overlay ─────────────────────────────────────── */
+.gm-countin {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: rgba(13,27,42,0.88);
+  z-index: 50;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.gm-countin.active {
+  display: flex;
+}
+
+.gm-countin-num {
+  font-family: var(--gm-font-head);
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--gm-gold);
+  line-height: 1;
+  opacity: 0;
+  transform: scale(1.3);
+}
+
+.gm-countin-num.pulse {
+  animation: gm-count-pulse 0.12s ease-out forwards;
+}
+
+@keyframes gm-count-pulse {
+  0%   { opacity: 0;   transform: scale(1.3); }
+  15%  { opacity: 1;   transform: scale(1); }
+  80%  { opacity: 1;   transform: scale(1); }
+  100% { opacity: 0.4; transform: scale(0.95); }
+}
+
+/* ── Instrument Label Tooltips ───────────────────────────── */
+.instrument-label {
+  position: relative; /* needed for absolute tooltip */
+  overflow: visible;  /* allow tooltip to overflow */
+}
+
+.gm-inst-hint-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  font-family: var(--gm-font-mono);
+  color: var(--gm-navy);
+  background: rgba(201,168,76,0.6);
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 4px;
+  flex-shrink: 0;
+  vertical-align: middle;
+  line-height: 1;
+  user-select: none;
+}
+
+.gm-inst-hint-icon:hover,
+.gm-inst-hint-icon:focus {
+  background: var(--gm-gold);
+  outline: none;
+}
+
+.gm-inst-tooltip {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 6px);
+  z-index: 100;
+  background: var(--gm-navy-2);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 8px;
+  padding: 9px 13px;
+  font-size: 0.76rem;
+  font-family: var(--gm-font-body);
+  color: var(--gm-cream);
+  max-width: 210px;
+  white-space: normal;
+  line-height: 1.45;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+  pointer-events: none;
+}
+
+.gm-inst-tooltip.visible {
+  display: block;
+  animation: gm-tooltip-in 0.15s ease-out forwards;
+}
+
+@keyframes gm-tooltip-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Genre Group Sidebar ─────────────────────────────────── */
+.gm-genre-section {
+  border-bottom: 1px solid rgba(201,168,76,0.07);
+}
+
+.gm-genre-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px 8px;
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: var(--gm-gold);
+  opacity: 0.85;
+  user-select: none;
+  transition: opacity 0.15s;
+}
+
+.gm-genre-header:hover { opacity: 1; }
+
+.gm-genre-arrow {
+  font-size: 0.45rem;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.gm-genre-section:not(.collapsed) .gm-genre-arrow {
+  transform: rotate(90deg);
+}
+
+.gm-genre-beats {
+  overflow: hidden;
+  max-height: 999px;
+  transition: max-height 0.25s ease-in-out;
+}
+
+.gm-genre-section.collapsed .gm-genre-beats {
+  max-height: 0;
+}
+
+/* ── Responsive tweaks for new elements ─────────────────── */
+@media (max-width: 768px) {
+  .gm-tempo-trainer { padding: 10px 12px; }
+  .gm-beat-description { font-size: 0.8rem; }
+  .gm-countin-num { font-size: 52px; }
+  .gm-genre-header { padding: 8px 14px 6px; font-size: 0.62rem; }
+  .gm-inst-tooltip { max-width: 180px; font-size: 0.72rem; }
+}
