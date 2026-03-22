@@ -115,6 +115,9 @@ let sessionDecoded  = 0;   // beats decoded at >=70% accuracy this session
 let sessionStreak   = 0;   // consecutive successful decodes
 let sessionPatterns = 0;   // total Check Accuracy attempts this session
 
+// Playhead state
+let cueStep = 0;           // visual cue / start position (set by clicking step numbers)
+
 // ── Utility ────────────────────────────────────────────────────
 
 // Clean instrument display names
@@ -246,6 +249,8 @@ async function loadMIDIFile(beatFile = AVAILABLE_BEATS[0].file) {
 
     // Reset tempo slider to full speed on new beat
     resetTempoSlider();
+    // Reset cue position to start
+    cueStep = 0;
 
     // Beat name — use authored name from beats.js
     const beatName = AVAILABLE_BEATS.find((b) => b.file === beatFile)?.name || "Unknown Beat";
@@ -330,6 +335,18 @@ function createPianoRoll() {
       num.className = "gm-step-num gm-beat-sub";
       num.textContent = "·";
     }
+
+    // Click to set cue/start position
+    num.title = `Start from step ${s + 1}`;
+    num.addEventListener("click", () => {
+      cueStep = s;
+      updatePlayheadUI();
+      if (!isPlaying) {
+        document.getElementById("status").textContent =
+          `Cued at step ${s + 1} of 16 — press ▶ to play from here`;
+      }
+    });
+
     pianoRoll.appendChild(num);
   }
 
@@ -401,15 +418,24 @@ function updatePianoRollUI() {
 }
 
 function updatePlayheadUI() {
-  // Clear previous column highlight
+  // Clear all existing column highlights (grid cells + step number headers)
   document.querySelectorAll(".grid-col-active").forEach((el) => {
     el.classList.remove("grid-col-active");
   });
-  // Highlight current step column
-  if (isPlaying && currentStep >= 0) {
-    document.querySelectorAll(`.grid-cell[data-step="${currentStep}"]`).forEach((cell) => {
+
+  // Determine which step to show:
+  // - while playing: currentStep (live audio position)
+  // - while idle: cueStep (user-selected start position)
+  const activeStep = isPlaying ? currentStep : cueStep;
+
+  if (activeStep >= 0) {
+    // Highlight grid cells in this column
+    document.querySelectorAll(`.grid-cell[data-step="${activeStep}"]`).forEach((cell) => {
       cell.classList.add("grid-col-active");
     });
+    // Also highlight the step number header above this column
+    const stepNums = document.querySelectorAll("#piano-roll .gm-step-num");
+    if (stepNums[activeStep]) stepNums[activeStep].classList.add("grid-col-active");
   }
 }
 
@@ -420,9 +446,13 @@ function getStepDuration() {
   return (60000 / (BPM * tempoMultiplier)) / 4;
 }
 
-function startPlayhead() {
-  stopPlayhead();
-  currentStep = 0;
+function startPlayhead(fromStep = 0) {
+  // Clear any existing interval first (without calling updatePlayheadUI — caller will do it)
+  if (playheadInterval) {
+    clearInterval(playheadInterval);
+    playheadInterval = null;
+  }
+  currentStep = fromStep;
   updatePlayheadUI();
   playheadInterval = setInterval(() => {
     currentStep = (currentStep + 1) % STEPS;
@@ -435,19 +465,23 @@ function stopPlayhead() {
     clearInterval(playheadInterval);
     playheadInterval = null;
   }
+  // Remember the last played position as the cue point
+  if (currentStep >= 0) cueStep = currentStep;
   currentStep = -1;
-  updatePlayheadUI();
+  // Note: caller is responsible for calling updatePlayheadUI() after setting isPlaying = false
 }
 
 // ── Playback ───────────────────────────────────────────────────
 
 function schedulePlayback(pattern, statusMsg, afterMsg) {
   if (isPlaying) {
+    // Toggle: stop if already playing
     Tone.Transport.stop();
     Tone.Transport.cancel();
     stopPlayhead();
     isPlaying = false;
-    document.getElementById("status").textContent = "Playback stopped";
+    updatePlayheadUI(); // show cueStep cursor now that we're idle
+    document.getElementById("status").textContent = `Stopped — cued at step ${cueStep + 1}`;
     return;
   }
 
@@ -466,25 +500,36 @@ function schedulePlayback(pattern, statusMsg, afterMsg) {
     ).start(0);
   });
 
-  // NEW: Apply tempo multiplier to transport BPM before starting
+  // Apply tempo multiplier
   Tone.Transport.bpm.value = BPM * tempoMultiplier;
-  Tone.Transport.start();
+
+  // Seek to cueStep position if set beyond step 0
+  if (cueStep > 0) {
+    const seekBeats     = Math.floor(cueStep / 4);
+    const seekSixteenths = cueStep % 4;
+    Tone.Transport.start("+0", `0:${seekBeats}:${seekSixteenths}`);
+  } else {
+    Tone.Transport.start();
+  }
+
   isPlaying = true;
   document.getElementById("status").textContent = statusMsg;
-  startPlayhead();
+  startPlayhead(cueStep); // visual playhead starts from same position as audio
 
   function scheduleStop() {
+    // "+1m" = 1 measure from current transport position (works correctly with any cueStep)
     Tone.Transport.schedule(() => {
       Tone.Transport.stop();
       Tone.Transport.cancel();
       stopPlayhead();
       isPlaying = false;
+      updatePlayheadUI(); // show cueStep cursor
       document.getElementById("status").textContent = afterMsg;
 
       if (isLoopOn) {
         setTimeout(() => schedulePlayback(pattern, statusMsg, afterMsg), 150);
       }
-    }, "1m");
+    }, "+1m");
   }
   scheduleStop();
 }
@@ -637,8 +682,10 @@ function updateBeatMeta(beatName) {
 // ── NEW: Tempo Slider Reset ───────────────────────────────────
 
 function updateSliderTrack(slider) {
+  // Set a CSS custom property on the element; both the input background (Firefox)
+  // and the ::-webkit-slider-runnable-track (Chrome) read from this variable.
   const pct = parseInt(slider.value);
-  slider.style.background = `linear-gradient(to right, #c9a84c ${pct}%, var(--gm-navy-3) ${pct}%)`;
+  slider.style.setProperty("--gm-fill", pct + "%");
 }
 
 function resetTempoSlider() {
@@ -771,16 +818,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
     document.addEventListener("click", unlockAudio, { once: true });
 
-    // Button wiring — NEW: count-in wraps both Listen and Play Mine
+    // Button wiring
     document.getElementById("playReference")?.addEventListener("click", async () => {
       await unlockAudio();
-      if (!isPlaying) await performCountIn();
       playReferencePattern();
     });
 
     document.getElementById("playUser")?.addEventListener("click", async () => {
       await unlockAudio();
-      if (!isPlaying) await performCountIn();
       playUserPattern();
     });
 
