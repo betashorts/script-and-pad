@@ -1,0 +1,81 @@
+<svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#0d1b2a"/>
+  <!-- Depth circles -->
+  <circle cx="30" cy="180" r="120" fill="#0a1520" opacity="0.55"/>
+  <circle cx="360" cy="30" r="90" fill="#0a1520" opacity="0.45"/>
+  <!-- Spotlight -->
+  <polygon points="0,0 80,0 180,200 -60,200" fill="#c9a84c" opacity="0.05"/>
+  <!-- Teal glow circle left -->
+  <circle cx="40" cy="100" r="90" fill="#2a7f7f" opacity="0.06"/>
+  <!-- Radial glow -->
+  <circle cx="190" cy="80" r="130" fill="#c9a84c" opacity="0.04"/>
+
+  <!-- Dotted connecting path between steps -->
+  <path d="M72 70 Q130 55 185 70 Q240 85 288 70" stroke="#c9a84c" stroke-width="1.5" fill="none" stroke-dasharray="4 4" opacity="0.5"/>
+
+  <!-- Step 1 circle -->
+  <circle cx="72" cy="70" r="24" fill="#c9a84c"/>
+  <text x="72" y="77" font-size="18" font-family="Georgia, serif" font-weight="bold" fill="#0d1b2a" text-anchor="middle">1</text>
+  <!-- Step 1 icon: script page -->
+  <rect x="56" y="100" width="32" height="40" rx="4" fill="#162032" stroke="#c9a84c" stroke-width="1" opacity="0.9"/>
+  <rect x="60" y="106" width="24" height="3" rx="1" fill="rgba(201,168,76,0.7)"/>
+  <rect x="60" y="112" width="20" height="2" rx="1" fill="rgba(245,240,232,0.35)"/>
+  <rect x="60" y="117" width="22" height="2" rx="1" fill="rgba(245,240,232,0.35)"/>
+  <rect x="60" y="122" width="18" height="2" rx="1" fill="rgba(245,240,232,0.3)"/>
+  <text x="72" y="152" font-size="8" font-family="Lora, Georgia, serif" fill="rgba(245,240,232,0.5)" text-anchor="middle">Lock script</text>
+
+  <!-- Step 2 circle -->
+  <circle cx="180" cy="70" r="24" fill="#c9a84c"/>
+  <text x="180" y="77" font-size="18" font-family="Georgia, serif" font-weight="bold" fill="#0d1b2a" text-anchor="middle">2</text>
+  <!-- Step 2 icon: camera -->
+  <rect x="164" y="100" width="32" height="22" rx="5" fill="#162032" stroke="#c9a84c" stroke-width="1" opacity="0.9"/>
+  <rect x="172" y="96" width="12" height="6" rx="2" fill="#1e2f45"/>
+  <circle cx="180" cy="111" r="7" fill="#0d1b2a" stroke="#c9a84c" stroke-width="1"/>
+  <circle cx="180" cy="111" r="3.5" fill="#162032"/>
+  <text x="180" y="138" font-size="8" font-family="Lora, Georgia, serif" fill="rgba(245,240,232,0.5)" text-anchor="middle">Break scenes</text>
+
+  <!-- Step 3 circle -->
+  <circle cx="288" cy="70" r="24" fill="#c9a84c"/>
+  <text x="288" y="77" font-size="18" font-family="Georgia, serif" font-weight="bold" fill="#0d1b2a" text-anchor="middle">3</text>
+  <!-- Step 3 icon: grid/table -->
+  <rect x="272" y="99" width="32" height="28" rx="4" fill="#162032" stroke="#c9a84c" stroke-width="1" opacity="0.9"/>
+  <rect x="272" y="99" width="32" height="8" rx="4" fill="#c9a84c" opacity="0.8"/>
+  <line x1="272" y1="115" x2="304" y2="115" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+  <line x1="272" y1="121" x2="304" y2="121" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+  <line x1="287" y1="107" x2="287" y2="127" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+  <text x="288" y="142" font-size="8" font-family="Lora, Georgia, serif" fill="rgba(245,240,232,0.5)" text-anchor="middle">Build shots</text>
+
+  <!-- Step 4 — implied by character/export arrow -->
+  <!-- Export arrow -->
+  <text x="344" y="75" font-size="26" fill="#c9a84c" opacity="0.6" font-family="serif">→</text>
+  <text x="338" y="92" font-size="8" font-family="Lora, Georgia, serif" fill="rgba(201,168,76,0.5)" text-anchor="middle">Export</text>
+
+  <!-- Filmmaker character bottom-right with pencil + notepad -->
+  <!-- Hair -->
+  <ellipse cx="323" cy="147" rx="20" ry="13" fill="#3d2b1f"/>
+  <!-- Head -->
+  <circle cx="323" cy="151" r="17" fill="#d4956a"/>
+  <!-- Hair front -->
+  <path d="M307 147 Q311 136 323 138 Q335 136 339 147" fill="#3d2b1f"/>
+  <!-- Eyes -->
+  <circle cx="318" cy="149" r="2" fill="#2c1a0e"/>
+  <circle cx="328" cy="149" r="2" fill="#2c1a0e"/>
+  <!-- Body -->
+  <rect x="308" y="167" width="30" height="30" rx="12" fill="#2a7f7f"/>
+  <!-- Left arm with notepad -->
+  <path d="M308 175 Q296 178 284 175" stroke="#d4956a" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <!-- Notepad -->
+  <rect x="267" y="163" width="22" height="26" rx="3" fill="#f5f0e8"/>
+  <rect x="271" y="167" width="14" height="2.5" rx="1" fill="rgba(22,32,50,0.35)"/>
+  <rect x="271" y="172" width="12" height="2" rx="1" fill="rgba(22,32,50,0.3)"/>
+  <rect x="271" y="177" width="13" height="2" rx="1" fill="rgba(22,32,50,0.3)"/>
+  <!-- Right arm with pencil -->
+  <path d="M338 175 Q346 170 352 163" stroke="#d4956a" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <rect x="348" y="153" width="4" height="18" rx="2" transform="rotate(-30 348 153)" fill="#c9a84c"/>
+  <polygon points="350,168 354,168 352,175" transform="rotate(-30 352 168)" fill="#f5f0e8"/>
+
+  <!-- Gold stars -->
+  <text x="130" y="185" font-size="18" fill="#c9a84c" opacity="0.44" font-family="serif">★</text>
+  <text x="14" y="52" font-size="14" fill="#c9a84c" opacity="0.38" font-family="serif">★</text>
+</svg>
