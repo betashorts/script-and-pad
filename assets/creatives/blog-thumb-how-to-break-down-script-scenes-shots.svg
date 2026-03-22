@@ -1,0 +1,123 @@
+<svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#162032"/>
+  <!-- Depth circles -->
+  <circle cx="340" cy="170" r="130" fill="#0d1b2a" opacity="0.48"/>
+  <circle cx="25" cy="25" r="85" fill="#0d1b2a" opacity="0.42"/>
+  <!-- Spotlight -->
+  <polygon points="0,0 100,0 240,200 -50,200" fill="#c9a84c" opacity="0.05"/>
+  <!-- Radial glow -->
+  <circle cx="160" cy="100" r="120" fill="#c9a84c" opacity="0.04"/>
+
+  <!-- Script page (center-left, portrait) -->
+  <rect x="18" y="22" width="120" height="158" rx="7" fill="#f5f0e8"/>
+  <rect x="18" y="22" width="120" height="158" rx="7" fill="none" stroke="#ddd6c8" stroke-width="1"/>
+  <!-- Script page header (title block) -->
+  <rect x="28" y="30" width="100" height="8" rx="2" fill="rgba(22,32,50,0.12)"/>
+  <!-- Scene sluglines highlighted in gold -->
+  <rect x="28" y="46" width="100" height="7" rx="2" fill="#c9a84c" opacity="0.85"/>
+  <rect x="30" y="48" width="65" height="3" rx="1" fill="rgba(22,32,50,0.5)"/>
+  <!-- Body lines after slugline 1 -->
+  <rect x="28" y="57" width="80" height="3" rx="1" fill="rgba(22,32,50,0.18)"/>
+  <rect x="28" y="62" width="92" height="3" rx="1" fill="rgba(22,32,50,0.15)"/>
+  <rect x="28" y="67" width="70" height="3" rx="1" fill="rgba(22,32,50,0.15)"/>
+  <!-- Annotation dot: gold = cast -->
+  <circle cx="118" cy="59" r="4" fill="#c9a84c" opacity="0.8"/>
+  <!-- Slugline 2 highlighted -->
+  <rect x="28" y="75" width="100" height="7" rx="2" fill="#c9a84c" opacity="0.75"/>
+  <rect x="30" y="77" width="72" height="3" rx="1" fill="rgba(22,32,50,0.5)"/>
+  <!-- Body lines after slugline 2 -->
+  <rect x="28" y="86" width="76" height="3" rx="1" fill="rgba(22,32,50,0.18)"/>
+  <rect x="28" y="91" width="88" height="3" rx="1" fill="rgba(22,32,50,0.15)"/>
+  <!-- Annotation dot: teal = location -->
+  <circle cx="118" cy="88" r="4" fill="#2a7f7f" opacity="0.8"/>
+  <!-- Slugline 3 highlighted -->
+  <rect x="28" y="99" width="100" height="7" rx="2" fill="#c9a84c" opacity="0.65"/>
+  <rect x="30" y="101" width="58" height="3" rx="1" fill="rgba(22,32,50,0.5)"/>
+  <!-- Body lines after slugline 3 -->
+  <rect x="28" y="110" width="84" height="3" rx="1" fill="rgba(22,32,50,0.18)"/>
+  <rect x="28" y="115" width="66" height="3" rx="1" fill="rgba(22,32,50,0.15)"/>
+  <rect x="28" y="120" width="78" height="3" rx="1" fill="rgba(22,32,50,0.15)"/>
+  <!-- Annotation dot: rust = prop -->
+  <circle cx="118" cy="113" r="4" fill="#c0533a" opacity="0.8"/>
+  <!-- Slugline 4 -->
+  <rect x="28" y="128" width="100" height="7" rx="2" fill="#c9a84c" opacity="0.55"/>
+  <rect x="30" y="130" width="80" height="3" rx="1" fill="rgba(22,32,50,0.5)"/>
+  <rect x="28" y="139" width="72" height="3" rx="1" fill="rgba(22,32,50,0.15)"/>
+  <rect x="28" y="144" width="60" height="3" rx="1" fill="rgba(22,32,50,0.15)"/>
+  <!-- More faded rows -->
+  <rect x="28" y="152" width="88" height="3" rx="1" fill="rgba(22,32,50,0.1)"/>
+  <rect x="28" y="158" width="64" height="3" rx="1" fill="rgba(22,32,50,0.08)"/>
+  <rect x="28" y="164" width="76" height="3" rx="1" fill="rgba(22,32,50,0.08)"/>
+
+  <!-- Magnifying glass overlapping script -->
+  <circle cx="100" cy="78" r="26" fill="none" stroke="#c9a84c" stroke-width="3" opacity="0.55"/>
+  <circle cx="100" cy="78" r="26" fill="rgba(201,168,76,0.04)"/>
+  <line x1="119" y1="97" x2="132" y2="112" stroke="#c9a84c" stroke-width="3.5" stroke-linecap="round" opacity="0.55"/>
+
+  <!-- Arrow from script to hierarchy -->
+  <path d="M145 100 Q165 100 175 100" stroke="#c9a84c" stroke-width="2" fill="none" opacity="0.7"/>
+  <polygon points="175,96 183,100 175,104" fill="#c9a84c" opacity="0.7"/>
+
+  <!-- Hierarchy diagram: Act → Scene → Shot nodes -->
+  <!-- Act node -->
+  <rect x="186" y="50" width="50" height="22" rx="6" fill="#c9a84c"/>
+  <text x="211" y="65" font-size="9" font-family="Georgia, serif" font-weight="bold" fill="#0d1b2a" text-anchor="middle">ACT I</text>
+  <!-- Line down from Act -->
+  <line x1="211" y1="72" x2="211" y2="84" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+  <!-- Branch lines -->
+  <line x1="211" y1="84" x2="195" y2="84" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+  <line x1="211" y1="84" x2="227" y2="84" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+  <!-- Scene node 1 -->
+  <line x1="195" y1="84" x2="195" y2="92" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+  <rect x="176" y="92" width="38" height="18" rx="4" fill="#1e2f45" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+  <text x="195" y="104" font-size="7.5" font-family="Lora, Georgia, serif" fill="#c9a84c" text-anchor="middle">Scene 1</text>
+  <!-- Scene node 2 -->
+  <line x1="227" y1="84" x2="227" y2="92" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+  <rect x="208" y="92" width="38" height="18" rx="4" fill="#1e2f45" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+  <text x="227" y="104" font-size="7.5" font-family="Lora, Georgia, serif" fill="#c9a84c" text-anchor="middle">Scene 2</text>
+  <!-- Shot children from scene 1 -->
+  <line x1="195" y1="110" x2="195" y2="120" stroke="rgba(201,168,76,0.35)" stroke-width="1.2"/>
+  <line x1="195" y1="120" x2="185" y2="120" stroke="rgba(201,168,76,0.35)" stroke-width="1.2"/>
+  <line x1="195" y1="120" x2="205" y2="120" stroke="rgba(201,168,76,0.35)" stroke-width="1.2"/>
+  <circle cx="185" cy="128" r="7" fill="#2c3e50" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+  <text x="185" y="131.5" font-size="6" font-family="Lora, Georgia, serif" fill="#c9a84c" text-anchor="middle">S1</text>
+  <line x1="185" y1="120" x2="185" y2="121" stroke="rgba(201,168,76,0.35)" stroke-width="1.2"/>
+  <circle cx="205" cy="128" r="7" fill="#2c3e50" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+  <text x="205" y="131.5" font-size="6" font-family="Lora, Georgia, serif" fill="#c9a84c" text-anchor="middle">S2</text>
+  <line x1="205" y1="120" x2="205" y2="121" stroke="rgba(201,168,76,0.35)" stroke-width="1.2"/>
+  <!-- Act II node -->
+  <rect x="248" y="50" width="50" height="22" rx="6" fill="rgba(201,168,76,0.6)"/>
+  <text x="273" y="65" font-size="9" font-family="Georgia, serif" font-weight="bold" fill="#0d1b2a" text-anchor="middle">ACT II</text>
+  <line x1="273" y1="72" x2="273" y2="84" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+  <line x1="255" y1="84" x2="291" y2="84" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+  <line x1="255" y1="84" x2="255" y2="92" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+  <line x1="273" y1="84" x2="273" y2="92" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+  <line x1="291" y1="84" x2="291" y2="92" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+  <rect x="238" y="92" width="34" height="16" rx="4" fill="#1e2f45" stroke="rgba(201,168,76,0.3)" stroke-width="1" opacity="0.9"/>
+  <text x="255" y="103" font-size="7" font-family="Lora, Georgia, serif" fill="rgba(201,168,76,0.8)" text-anchor="middle">Sc 3</text>
+  <rect x="257" y="92" width="34" height="16" rx="4" fill="#1e2f45" stroke="rgba(201,168,76,0.3)" stroke-width="1" opacity="0.8"/>
+  <text x="274" y="103" font-size="7" font-family="Lora, Georgia, serif" fill="rgba(201,168,76,0.7)" text-anchor="middle">Sc 4</text>
+  <rect x="275" y="92" width="34" height="16" rx="4" fill="#1e2f45" stroke="rgba(201,168,76,0.25)" stroke-width="1" opacity="0.7"/>
+  <text x="292" y="103" font-size="7" font-family="Lora, Georgia, serif" fill="rgba(201,168,76,0.6)" text-anchor="middle">Sc 5</text>
+
+  <!-- Flat character top-right with annotation pen -->
+  <ellipse cx="346" cy="52" rx="18" ry="12" fill="#3d2b1f"/>
+  <circle cx="346" cy="56" r="16" fill="#d4956a"/>
+  <path d="M331 50 Q335 40 346 42 Q357 40 361 50" fill="#3d2b1f"/>
+  <circle cx="341" cy="54" r="2" fill="#2c1a0e"/>
+  <circle cx="351" cy="54" r="2" fill="#2c1a0e"/>
+  <rect x="332" y="71" width="28" height="26" rx="10" fill="#2a7f7f"/>
+  <!-- Right arm with pen -->
+  <path d="M360 78 Q368 70 374 62" stroke="#d4956a" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <rect x="370" y="53" width="4" height="16" rx="2" transform="rotate(-28 370 53)" fill="#c9a84c"/>
+  <!-- Left arm gesturing -->
+  <path d="M332 78 Q320 80 310 76" stroke="#d4956a" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <!-- Legs -->
+  <rect x="335" y="96" width="11" height="28" rx="5" fill="#1e2f45"/>
+  <rect x="350" y="96" width="11" height="28" rx="5" fill="#1e2f45"/>
+
+  <!-- Gold stars -->
+  <text x="300" y="168" font-size="20" fill="#c9a84c" opacity="0.44" font-family="serif">★</text>
+  <text x="152" y="192" font-size="14" fill="#c9a84c" opacity="0.38" font-family="serif">★</text>
+</svg>
