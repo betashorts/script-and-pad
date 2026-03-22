@@ -681,11 +681,12 @@ function updateBeatMeta(beatName) {
 
 // ── NEW: Tempo Slider Reset ───────────────────────────────────
 
-function updateSliderTrack(slider) {
-  // Set a CSS custom property on the element; both the input background (Firefox)
-  // and the ::-webkit-slider-runnable-track (Chrome) read from this variable.
-  const pct = parseInt(slider.value);
-  slider.style.setProperty("--gm-fill", pct + "%");
+function syncSliderFill(slider) {
+  const min = parseFloat(slider.min) || 50;
+  const max = parseFloat(slider.max) || 100;
+  const val = parseFloat(slider.value);
+  const pct = ((val - min) / (max - min)) * 100;
+  slider.style.setProperty('--fill-pct', pct + '%');
 }
 
 function resetTempoSlider() {
@@ -694,7 +695,7 @@ function resetTempoSlider() {
   if (!slider) return;
   slider.value = 100;
   tempoMultiplier = 1.0;
-  updateSliderTrack(slider);
+  syncSliderFill(slider);
   if (labelEl) labelEl.textContent = `Hearing at full speed — ${BPM} BPM`;
 }
 
@@ -848,7 +849,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const pct = parseInt(tempoSlider.value);
         tempoMultiplier = pct / 100;
         const actualBpm = Math.round(BPM * tempoMultiplier);
-        updateSliderTrack(tempoSlider);
+        syncSliderFill(tempoSlider);
         if (tempoLabelEl) tempoLabelEl.textContent = pct < 100
           ? `Slowed to ${actualBpm} BPM — slow it down to decode the pattern`
           : `Hearing at full speed — ${BPM} BPM`;
