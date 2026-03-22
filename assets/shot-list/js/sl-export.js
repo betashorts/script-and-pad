@@ -7,7 +7,7 @@
 // ── CDN URLs ──────────────────────────────────────────────────
 const SL_JSPDF_URL     = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
 const SL_AUTOTABLE_URL = "https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js";
-const SL_DOCX_URL      = "https://unpkg.com/docx@8.5.0/build/index.js";
+const SL_DOCX_URL      = "https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.js";
 
 // ── Dynamic script loader ─────────────────────────────────────
 function loadScript(url) {
@@ -86,89 +86,215 @@ window.exportShotListPDF = async function () {
     await loadScript(SL_AUTOTABLE_URL);
 
     const { jsPDF } = window.jspdf;
-    const doc  = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
+    const doc = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
+    const pW  = doc.internal.pageSize.getWidth();
+    const pH  = doc.internal.pageSize.getHeight();
 
     const rows = extractShotListRows();
     if (!rows.length) { slStatus("No shots to export."); return; }
 
-    // Build body rows + parallel image map indexed by body row position
-    const body      = [];
-    const rowImages = [];   // null for separator rows, imageData string or null for data rows
-    let lastKey     = null;
+    const dateStr = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+
+    // ── Page header block ─────────────────────────────────────
+    doc.setFillColor(26, 43, 60);
+    doc.rect(10, 6, 2, 13, "F");                       // left accent bar
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.setTextColor(26, 43, 60);
+    doc.text("SHOT LIST", 15, 13);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(85, 85, 85);
+    doc.text(rows[0].sceneTitle || "Shot List", 15, 18.5);
+
+    doc.setFontSize(8);
+    doc.setTextColor(136, 136, 136);
+    doc.text(dateStr, pW - 10, 13, { align: "right" });
+
+    doc.setDrawColor(220, 220, 220);
+    doc.setLineWidth(0.3);
+    doc.line(10, 21, pW - 10, 21);
+
+    // ── Build body + tracking arrays ──────────────────────────
+    // rowTypes[i]: "act" | "scene" | "data"
+    // rowImages[i]: imageData string | null
+    // dataIndexByBodyRow[i]: sequential data-row index (for alternating colors)
+    const body               = [];
+    const rowTypes           = [];
+    const rowImages          = [];
+    const dataIndexByBodyRow = {};
+    let lastAct   = null;
+    let lastScene = null;
+    let dataCount = 0;
 
     rows.forEach(r => {
-      const key = r.actTitle + "||" + r.sceneTitle;
-      if (key !== lastKey) {
+      const actKey   = r.actTitle;
+      const sceneKey = r.actTitle + "||" + r.sceneTitle;
+
+      if (actKey !== lastAct) {
         body.push([{
-          content: r.actTitle + " — " + r.sceneTitle,
-          colSpan: 10,
+          content: r.actTitle.toUpperCase(),
+          colSpan: 12,
           styles: {
-            fillColor: [22, 32, 50],
-            textColor: [201, 168, 76],
-            fontStyle:  "bold",
-            halign:     "left",
-            cellPadding: 3,
+            fillColor:   [26, 43, 60],
+            textColor:   [201, 168, 76],
+            fontStyle:   "bold",
+            fontSize:    9,
+            halign:      "left",
+            cellPadding: { top: 4, bottom: 4, left: 6, right: 4 },
           },
         }]);
+        rowTypes.push("act");
         rowImages.push(null);
-        lastKey = key;
+        lastAct   = actKey;
+        lastScene = null;
       }
-      const soundPri = (r.sound + (r.priority ? " [" + r.priority + "]" : "")).trim();
-      body.push([r.label, r.description, r.shotSize, r.angle, r.movement, r.lens, r.equipment, r.subject, soundPri, ""]);
+
+      if (sceneKey !== lastScene) {
+        body.push([{
+          content: "  " + r.sceneTitle,
+          colSpan: 12,
+          styles: {
+            fillColor:   [245, 247, 250],
+            textColor:   [26, 43, 60],
+            fontStyle:   "bold",
+            fontSize:    8,
+            halign:      "left",
+            cellPadding: { top: 3, bottom: 3, left: 10, right: 4 },
+          },
+        }]);
+        rowTypes.push("scene");
+        rowImages.push(null);
+        lastScene = sceneKey;
+      }
+
+      const bodyIdx = body.length;
+      body.push([
+        r.label, "",          // 0: #, 1: IMAGE (drawn in didDrawCell)
+        r.shotSize, r.angle, r.movement, r.lens,
+        r.subject, r.sound, r.priority,
+        "",                   // 9: VFX NOTE (no field in extracted rows)
+        r.description, r.dpNote,
+      ]);
+      dataIndexByBodyRow[bodyIdx] = dataCount;
+      rowTypes.push("data");
       rowImages.push(r.imageData || null);
+      dataCount++;
     });
 
+    // ── AutoTable ─────────────────────────────────────────────
     doc.autoTable({
-      head: [["Shot", "Description", "Size", "Angle", "Movement", "Lens", "Equipment", "Subject", "Sound / Priority", "Image"]],
+      head: [["#", "IMAGE", "SHOT SIZE", "ANGLE", "MOVEMENT", "LENS", "SUBJECT", "SOUND", "PRIORITY", "VFX NOTE", "DESCRIPTION", "DR NOTE"]],
       body,
-      startY: 10,
-      margin: { left: 6, right: 6 },
+      startY: 23,
+      margin: { top: 20, right: 10, bottom: 16, left: 10 },
       styles: {
         fontSize:    7,
         cellPadding: 2,
-        overflow:    "linebreak",
-        fillColor:   [13, 27, 42],
-        textColor:   [232, 224, 208],
-        lineColor:   [44, 62, 80],
-        lineWidth:   0.2,
+        overflow:    "ellipsize",
+        valign:      "middle",
+        lineColor:   [220, 220, 220],
+        lineWidth:   0.1,
         font:        "helvetica",
+        fillColor:   [255, 255, 255],
+        textColor:   [51, 51, 51],
       },
       headStyles: {
-        fillColor:  [13, 27, 42],
+        fillColor:  [26, 43, 60],
         textColor:  [201, 168, 76],
         fontStyle:  "bold",
-        lineColor:  [201, 168, 76],
-        lineWidth:  0.4,
+        fontSize:   7,
+        halign:     "center",
+        lineColor:  [26, 43, 60],
+        lineWidth:  0.2,
       },
-      alternateRowStyles: {
-        fillColor: [18, 32, 48],
-      },
+      // Disable AutoTable's built-in alternating — handled manually in didParseCell
+      alternateRowStyles: {},
       columnStyles: {
-        0: { cellWidth: 12 },
-        1: { cellWidth: 52 },
-        2: { cellWidth: 18 },
-        3: { cellWidth: 16 },
-        4: { cellWidth: 18 },
-        5: { cellWidth: 14 },
-        6: { cellWidth: 22 },
-        7: { cellWidth: 22 },
-        8: { cellWidth: 24 },
-        9: { cellWidth: 30, minCellHeight: 22 },
+        0:  { cellWidth: 8,  halign: "center" },
+        1:  { cellWidth: 25, minCellHeight: 18 },
+        2:  { cellWidth: 18 },
+        3:  { cellWidth: 16 },
+        4:  { cellWidth: 16 },
+        5:  { cellWidth: 14 },
+        6:  { cellWidth: 22 },
+        7:  { cellWidth: 16 },
+        8:  { cellWidth: 14 },
+        9:  { cellWidth: 22 },
+        10: { cellWidth: 60 },
+        11: { cellWidth: 46 },
+      },
+      didParseCell: function (data) {
+        if (data.section !== "body") return;
+        const type = rowTypes[data.row.index];
+        if (type === "act" || type === "scene") return; // styled via inline body styles
+
+        // Data row alternating fill
+        const di = dataIndexByBodyRow[data.row.index];
+        data.cell.styles.fillColor = (di % 2 === 0) ? [255, 255, 255] : [248, 249, 251];
+        data.cell.styles.textColor = [51, 51, 51];
+
+        // Shot # cell: bold dark navy
+        if (data.column.index === 0) {
+          data.cell.styles.fontStyle = "bold";
+          data.cell.styles.textColor = [26, 43, 60];
+        }
+
+        // Description (col 10) and DR Note (col 11): top-align, slightly smaller, wrap
+        if (data.column.index === 10 || data.column.index === 11) {
+          data.cell.styles.fontSize = 6.5;
+          data.cell.styles.valign   = "top";
+          data.cell.styles.overflow = "linebreak";
+        }
       },
       didDrawCell: function (data) {
-        if (data.section !== "body" || data.column.index !== 9) return;
-        const imgData = rowImages[data.row.index];
-        if (!imgData) return;
-        const fmt = imgData.startsWith("data:image/png") ? "PNG" : "JPEG";
-        const x = data.cell.x + 1;
-        const y = data.cell.y + 1;
-        const w = data.cell.width  - 2;
-        const h = data.cell.height - 2;
-        try { doc.addImage(imgData, fmt, x, y, w, h); } catch (e) { /* skip corrupt image */ }
+        if (data.section !== "body") return;
+        const type = rowTypes[data.row.index];
+
+        // Scene header row: gold left-border accent (1.5mm)
+        if (type === "scene" && data.column.index === 0) {
+          doc.setFillColor(201, 168, 76);
+          doc.rect(data.cell.x, data.cell.y, 1.5, data.cell.height, "F");
+        }
+
+        // IMAGE column (index 1), data rows only
+        if (type === "data" && data.column.index === 1) {
+          const imgData = rowImages[data.row.index];
+          const x = data.cell.x + 1;
+          const y = data.cell.y + 1;
+          const w = data.cell.width  - 2;
+          const h = data.cell.height - 2;
+
+          if (imgData) {
+            const fmt = imgData.startsWith("data:image/png") ? "PNG" : "JPEG";
+            try { doc.addImage(imgData, fmt, x, y, w, h); } catch (e) { /* skip corrupt */ }
+          } else {
+            // Placeholder: light gray rect with em-dash
+            doc.setFillColor(240, 240, 240);
+            doc.rect(x, y, w, h, "F");
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(8);
+            doc.setTextColor(180, 180, 180);
+            doc.text("\u2014", x + w / 2, y + h / 2 + 1.5, { align: "center" });
+          }
+        }
+      },
+      didDrawPage: function (data) {
+        // Footer: thin rule + left label + right page number
+        doc.setDrawColor(220, 220, 220);
+        doc.setLineWidth(0.2);
+        doc.line(10, pH - 8, pW - 10, pH - 8);
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(7);
+        doc.setTextColor(136, 136, 136);
+        doc.text("Script & Pad \u2014 scriptandpad.com", 10, pH - 4);
+        doc.text("Page " + data.pageNumber, pW - 10, pH - 4, { align: "right" });
       },
     });
 
-    doc.save("shot-list.pdf");
+    doc.save("shot-list-" + dateStr.replace(/,?\s+/g, "-") + ".pdf");
     slStatus("PDF exported successfully.");
   } catch (err) {
     console.error("[sl-export] PDF:", err);
@@ -182,36 +308,46 @@ window.exportShotListDOCX = async function () {
   try {
     await loadScript(SL_DOCX_URL);
 
-    const D = window.docx;
-    const { Document, Table, TableRow, TableCell, Paragraph, TextRun, ImageRun,
-            Packer, WidthType, PageOrientation, AlignmentType, HeightRule, ShadingType } = D;
+    // Library detection: docx@8 UMD exposes itself as window.docx
+    const D = window.docx || window;
+    if (!D || !D.Document) {
+      throw new Error("docx library failed to load. Document constructor not found.");
+    }
+
+    const { Document, Packer, Paragraph, Table, TableRow, TableCell,
+            ImageRun, TextRun, WidthType, PageOrientation, AlignmentType,
+            HeightRule, ShadingType } = D;
 
     const rows = extractShotListRows();
     if (!rows.length) { slStatus("No shots to export."); return; }
 
+    const dateStr = new Date().toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/\//g, "-");
+
     // base64 data URL → Uint8Array
     function b64ToBytes(dataUrl) {
-      const base64 = dataUrl.replace(/^data:[^;]+;base64,/, "");
-      const bin    = atob(base64);
-      const buf    = new Uint8Array(bin.length);
+      const base64 = dataUrl.split(",")[1];
+      const bin = atob(base64);
+      const buf = new Uint8Array(bin.length);
       for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i);
       return buf;
     }
 
-    // Column widths in DXA (1 inch = 1440 DXA); landscape A4 usable ≈ 14400 DXA
-    const COL_W = [700, 3000, 900, 800, 900, 700, 1300, 1300, 1300, 1500];
+    // Column widths in DXA; landscape A4 = 16838 twips, margins 720 each side
+    const COLS  = ["#", "IMAGE", "SHOT SIZE", "ANGLE", "MOVEMENT", "LENS", "SUBJECT", "SOUND", "PRIORITY", "VFX NOTE", "DESCRIPTION", "DR NOTE"];
+    const COL_W = [400, 1800, 1000, 900, 900, 1100, 1000, 800, 800, 900, 2000, 1600];
+    const TOTAL_W = COL_W.reduce((a, b) => a + b, 0);
 
-    function makeCell(text, { bold = false, gold = false, bg = "0d1b2a", w, span } = {}) {
+    function makeCell(text, { bold = false, textColor = "333333", bg = "FFFFFF", w, span, fontSize = 16 } = {}) {
       return new TableCell({
-        columnSpan:    span || 1,
-        width:         w != null ? { size: w, type: WidthType.DXA } : undefined,
-        shading:       { fill: bg, type: ShadingType.CLEAR, color: "auto" },
+        columnSpan: span || 1,
+        width:      w != null ? { size: w, type: WidthType.DXA } : undefined,
+        shading:    { fill: bg, type: ShadingType.CLEAR, color: "auto" },
         children: [new Paragraph({
           children: [new TextRun({
             text:  String(text || ""),
             bold,
-            color: gold ? "c9a84c" : "e8e0d0",
-            size:  16,
+            color: textColor,
+            size:  fontSize,
             font:  "Calibri",
           })],
         })],
@@ -219,75 +355,92 @@ window.exportShotListDOCX = async function () {
     }
 
     // Header row
-    const COLS = ["Shot", "Description", "Size", "Angle", "Movement", "Lens", "Equipment", "Subject", "Sound / Priority", "Image"];
     const headerRow = new TableRow({
       tableHeader: true,
       height: { value: 400, rule: HeightRule.ATLEAST },
-      children: COLS.map((c, i) => makeCell(c, { bold: true, gold: true, bg: "0a131e", w: COL_W[i] })),
+      children: COLS.map((c, i) => makeCell(c, { bold: true, textColor: "C9A84C", bg: "1A2B3C", w: COL_W[i], fontSize: 16 })),
     });
 
     const tableRows = [headerRow];
-    let lastKey = null;
+    let lastAct   = null;
+    let lastScene = null;
+    let dataCount = 0;
 
     for (const r of rows) {
-      const key = r.actTitle + "||" + r.sceneTitle;
-      if (key !== lastKey) {
+      const actKey   = r.actTitle;
+      const sceneKey = r.actTitle + "||" + r.sceneTitle;
+
+      if (actKey !== lastAct) {
         tableRows.push(new TableRow({
-          height: { value: 380, rule: HeightRule.ATLEAST },
-          children: [makeCell(r.actTitle + " — " + r.sceneTitle, {
-            bold: true, gold: true, bg: "162032",
-            w: COL_W.reduce((a, b) => a + b, 0),
-            span: COLS.length,
+          height: { value: 420, rule: HeightRule.ATLEAST },
+          children: [makeCell(r.actTitle.toUpperCase(), {
+            bold: true, textColor: "C9A84C", bg: "1A2B3C",
+            w: TOTAL_W, span: COLS.length, fontSize: 24,
           })],
         }));
-        lastKey = key;
+        lastAct   = actKey;
+        lastScene = null;
       }
 
-      // Image cell
+      if (sceneKey !== lastScene) {
+        tableRows.push(new TableRow({
+          height: { value: 360, rule: HeightRule.ATLEAST },
+          children: [makeCell(r.sceneTitle, {
+            bold: true, textColor: "1A2B3C", bg: "F5F7FA",
+            w: TOTAL_W, span: COLS.length, fontSize: 20,
+          })],
+        }));
+        lastScene = sceneKey;
+      }
+
+      const bg = dataCount % 2 === 0 ? "FFFFFF" : "F8F9FB";
+
+      // Image cell (column index 1)
       let imgCell;
       if (r.imageData) {
         const imgType = r.imageData.startsWith("data:image/png") ? "png" : "jpg";
         try {
           imgCell = new TableCell({
-            width:   { size: COL_W[9], type: WidthType.DXA },
-            shading: { fill: "0d1b2a", type: ShadingType.CLEAR, color: "auto" },
+            width:   { size: COL_W[1], type: WidthType.DXA },
+            shading: { fill: bg, type: ShadingType.CLEAR, color: "auto" },
             children: [new Paragraph({
               alignment: AlignmentType.CENTER,
               children:  [new ImageRun({
                 data:           b64ToBytes(r.imageData),
                 type:           imgType,
-                transformation: { width: 90, height: 68 },
+                transformation: { width: 100, height: 56 },
               })],
             })],
           });
         } catch (e) {
-          imgCell = makeCell("", { w: COL_W[9] });
+          imgCell = makeCell("", { bg, w: COL_W[1] });
         }
       } else {
-        imgCell = makeCell("", { w: COL_W[9] });
+        imgCell = makeCell("", { bg, w: COL_W[1] });
       }
-
-      const soundPri = (r.sound + (r.priority ? " [" + r.priority + "]" : "")).trim();
 
       tableRows.push(new TableRow({
         height: { value: 900, rule: HeightRule.ATLEAST },
         children: [
-          makeCell(r.label,       { w: COL_W[0] }),
-          makeCell(r.description, { w: COL_W[1] }),
-          makeCell(r.shotSize,    { w: COL_W[2] }),
-          makeCell(r.angle,       { w: COL_W[3] }),
-          makeCell(r.movement,    { w: COL_W[4] }),
-          makeCell(r.lens,        { w: COL_W[5] }),
-          makeCell(r.equipment,   { w: COL_W[6] }),
-          makeCell(r.subject,     { w: COL_W[7] }),
-          makeCell(soundPri,      { w: COL_W[8] }),
+          makeCell(r.label,       { bold: true, textColor: "1A2B3C", bg, w: COL_W[0]  }),
           imgCell,
+          makeCell(r.shotSize,    { textColor: "333333", bg, w: COL_W[2]  }),
+          makeCell(r.angle,       { textColor: "333333", bg, w: COL_W[3]  }),
+          makeCell(r.movement,    { textColor: "333333", bg, w: COL_W[4]  }),
+          makeCell(r.lens,        { textColor: "333333", bg, w: COL_W[5]  }),
+          makeCell(r.subject,     { textColor: "333333", bg, w: COL_W[6]  }),
+          makeCell(r.sound,       { textColor: "333333", bg, w: COL_W[7]  }),
+          makeCell(r.priority,    { textColor: "333333", bg, w: COL_W[8]  }),
+          makeCell("",            { textColor: "333333", bg, w: COL_W[9]  }),
+          makeCell(r.description, { textColor: "333333", bg, w: COL_W[10] }),
+          makeCell(r.dpNote,      { textColor: "333333", bg, w: COL_W[11] }),
         ],
       }));
+      dataCount++;
     }
 
     const table = new Table({
-      width: { size: COL_W.reduce((a, b) => a + b, 0), type: WidthType.DXA },
+      width: { size: TOTAL_W, type: WidthType.DXA },
       rows:  tableRows,
     });
 
@@ -303,13 +456,25 @@ window.exportShotListDOCX = async function () {
       }],
     });
 
-    const blob = await Packer.toBlob(docFile);
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement("a");
+    // Packer: toBlob (docx@8) with toBuffer fallback
+    let blob;
+    if (typeof Packer.toBlob === "function") {
+      blob = await Packer.toBlob(docFile);
+    } else {
+      const buffer = await Packer.toBuffer(docFile);
+      blob = new Blob([buffer], {
+        type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      });
+    }
+
+    const url = URL.createObjectURL(blob);
+    const a   = document.createElement("a");
     a.href     = url;
-    a.download = "shot-list.docx";
+    a.download = "shot-list-" + dateStr + ".docx";
+    document.body.appendChild(a);
     a.click();
-    URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
     slStatus("DOCX exported successfully.");
   } catch (err) {
     console.error("[sl-export] DOCX:", err);
