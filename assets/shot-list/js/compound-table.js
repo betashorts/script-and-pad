@@ -1403,6 +1403,60 @@ window.addEventListener("DOMContentLoaded", () => {
     };
     document.body.appendChild(exportBtn);
   }
+
+  // ── Export PDF button ─────────────────────────────────────────────────
+  if (!document.getElementById("floating-pdf-btn")) {
+    const pdfBtn = document.createElement("button");
+    pdfBtn.id = "floating-pdf-btn";
+    pdfBtn.innerHTML = "⬇ PDF";
+    pdfBtn.title = "Export shot list as PDF";
+    pdfBtn.style.cssText =
+      "position:fixed;bottom:24px;right:240px;" +
+      "padding:11px 18px;background:transparent;" +
+      "border:1px solid rgba(201,168,76,0.5);color:#c9a84c;" +
+      "border-radius:7px;font-size:0.88rem;font-weight:700;" +
+      "cursor:pointer;z-index:1000;font-family:'Lora',serif;" +
+      "transition:background 0.2s,box-shadow 0.2s;";
+    pdfBtn.onmouseover = () => {
+      pdfBtn.style.background = "rgba(201,168,76,0.1)";
+      pdfBtn.style.boxShadow = "0 0 12px rgba(201,168,76,0.3)";
+    };
+    pdfBtn.onmouseout = () => {
+      pdfBtn.style.background = "transparent";
+      pdfBtn.style.boxShadow = "";
+    };
+    pdfBtn.onclick = () => {
+      if (typeof window.exportShotListPDF === "function") window.exportShotListPDF();
+    };
+    document.body.appendChild(pdfBtn);
+  }
+
+  // ── Export DOCX button ────────────────────────────────────────────────
+  if (!document.getElementById("floating-docx-btn")) {
+    const docxBtn = document.createElement("button");
+    docxBtn.id = "floating-docx-btn";
+    docxBtn.innerHTML = "⬇ DOCX";
+    docxBtn.title = "Export shot list as DOCX";
+    docxBtn.style.cssText =
+      "position:fixed;bottom:24px;right:310px;" +
+      "padding:11px 18px;background:transparent;" +
+      "border:1px solid rgba(201,168,76,0.5);color:#c9a84c;" +
+      "border-radius:7px;font-size:0.88rem;font-weight:700;" +
+      "cursor:pointer;z-index:1000;font-family:'Lora',serif;" +
+      "transition:background 0.2s,box-shadow 0.2s;";
+    docxBtn.onmouseover = () => {
+      docxBtn.style.background = "rgba(201,168,76,0.1)";
+      docxBtn.style.boxShadow = "0 0 12px rgba(201,168,76,0.3)";
+    };
+    docxBtn.onmouseout = () => {
+      docxBtn.style.background = "transparent";
+      docxBtn.style.boxShadow = "";
+    };
+    docxBtn.onclick = () => {
+      if (typeof window.exportShotListDOCX === "function") window.exportShotListDOCX();
+    };
+    document.body.appendChild(docxBtn);
+  }
 });
 
 // Update the CSS for loader
