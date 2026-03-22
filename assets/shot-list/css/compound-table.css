@@ -536,6 +536,11 @@
 
 .basic-unit-tools button:active { transform: translateY(0); }
 
+.basic-unit-tools button svg {
+  display: block;
+  flex-shrink: 0;
+}
+
 .basic-unit-tools .draw-btn.active {
   background: var(--ct-gold-d);
   color: var(--ct-gold);
@@ -574,6 +579,7 @@
   appearance: none;
   -webkit-appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: 10px 6px;
   background-repeat: no-repeat;
   background-position: right 10px center;
   padding-right: 28px;
