@@ -323,9 +323,27 @@
 /* ── Controls ─────────────────────────────────────────────── */
 .gm-controls {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.gm-controls-primary {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.gm-controls-secondary {
+  display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 10px;
+}
+
+.gm-controls-primary .btn {
+  padding: 12px 24px;
+  font-size: 0.92rem;
 }
 
 .btn {
@@ -352,13 +370,13 @@
 
 .gm-btn-secondary {
   background: var(--gm-navy-3);
-  color: var(--gm-cream);
-  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gm-gold);
+  border: 1px solid rgba(201,168,76,0.5);
 }
 
 .gm-btn-secondary:hover {
   border-color: var(--gm-gold);
-  color: var(--gm-gold);
+  background: rgba(201,168,76,0.08);
 }
 
 .gm-btn-ghost {
@@ -886,4 +904,111 @@
   .gm-countin-num { font-size: 52px; }
   .gm-genre-header { padding: 8px 14px 6px; font-size: 0.62rem; }
   .gm-inst-tooltip { max-width: 180px; font-size: 0.72rem; }
+}
+
+/* ── FIX: Playhead — grid-col-active column highlight ────── */
+.grid-cell.grid-col-active {
+  background-color: rgba(201, 168, 76, 0.18) !important;
+  border-top: 2px solid #c9a84c !important;
+}
+
+/* Active (user-clicked) cells remain visible through playhead */
+.grid-cell.active.grid-col-active {
+  background-color: #c9a84c !important;
+  border-top: 2px solid #e8c96a !important;
+  box-shadow: 0 0 14px rgba(201,168,76,0.6) !important;
+}
+
+/* ── FIX: Count-In overlay z-index ───────────────────────── */
+.gm-countin {
+  z-index: 200;
+}
+
+/* ── FIX: Utility (secondary) buttons ────────────────────── */
+.gm-btn-util {
+  background: transparent;
+  color: rgba(245,240,232,0.45);
+  border: 1px solid rgba(245,240,232,0.15);
+  font-size: 0.78rem;
+  padding: 8px 16px;
+}
+
+.gm-btn-util:hover {
+  border-color: rgba(201,168,76,0.4);
+  color: rgba(245,240,232,0.7);
+}
+
+/* Loop active state still works on any base class */
+.btn.gm-loop-on {
+  background: rgba(201,168,76,0.15);
+  border-color: var(--gm-gold);
+  color: var(--gm-gold);
+}
+
+/* ── FIX: Difficulty badge colours ───────────────────────── */
+.gm-badge-easy   { background: rgba(42,127,127,0.2);  color: #2a7f7f; border: 1px solid #2a7f7f; letter-spacing: 1px; text-transform: uppercase; }
+.gm-badge-medium { background: rgba(201,168,76,0.2);  color: #c9a84c; border: 1px solid #c9a84c; letter-spacing: 1px; text-transform: uppercase; }
+.gm-badge-hard   { background: rgba(192,83,58,0.2);   color: #c0533a; border: 1px solid #c0533a; letter-spacing: 1px; text-transform: uppercase; }
+
+/* ── FIX: Slider — remove default, pure JS-driven gradient ─ */
+.gm-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 3px;
+  /* background set by JS updateSliderTrack() */
+  background: var(--gm-navy-3);
+  outline: none;
+  cursor: pointer;
+  display: block;
+}
+
+.gm-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #c9a84c;
+  cursor: pointer;
+  border: none;
+  box-shadow: none;
+}
+
+.gm-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #c9a84c;
+  cursor: pointer;
+  border: none;
+}
+
+/* Remove the webkit track gradient since JS handles it */
+.gm-slider::-webkit-slider-runnable-track {
+  background: transparent;
+  height: 5px;
+  border-radius: 3px;
+}
+
+/* ── FIX: Stat pill SVG alignment ────────────────────────── */
+.gm-stat-pill svg {
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ── FIX: Mobile controls 2-row layout ───────────────────── */
+@media (max-width: 600px) {
+  .gm-controls-primary,
+  .gm-controls-secondary {
+    flex-direction: column;
+  }
+
+  .gm-controls-primary .btn,
+  .gm-controls-secondary .btn {
+    width: 100%;
+    text-align: center;
+  }
 }

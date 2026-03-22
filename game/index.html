@@ -45,13 +45,16 @@ meta: |
     <!-- Session Stats (session-only, no localStorage) -->
     <div class="gm-session-bar">
       <div class="gm-stat-pill">
-        <span>🎯</span> Score <strong id="gm-session-score">0</strong>
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="10" cy="10" r="8" stroke="#c9a84c" stroke-width="1.5"/><circle cx="10" cy="10" r="5" stroke="#c9a84c" stroke-width="1.5"/><circle cx="10" cy="10" r="2" fill="#c9a84c"/></svg>
+        Decoded <strong id="gm-session-score">0</strong>
       </div>
       <div class="gm-stat-pill">
-        <span>🔥</span> Streak <strong id="gm-session-streak">0</strong>
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 2 C10 2 14 6 14 10 C14 13 12 15 10 18 C8 15 6 13 6 10 C6 6 10 2 10 2Z" fill="#c0533a" opacity="0.8"/><path d="M10 8 C10 8 12 10 12 12 C12 13.5 11 14.5 10 16 C9 14.5 8 13.5 8 12 C8 10 10 8 10 8Z" fill="#e8c96a"/></svg>
+        On a Run <strong id="gm-session-streak">0</strong>
       </div>
       <div class="gm-stat-pill">
-        <span>🏆</span> Best <strong id="gm-session-best">—</strong>
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="7" height="7" rx="1.5" stroke="#c9a84c" stroke-width="1.5"/><rect x="11" y="2" width="7" height="7" rx="1.5" stroke="#c9a84c" stroke-width="1.5"/><rect x="2" y="11" width="7" height="7" rx="1.5" stroke="#c9a84c" stroke-width="1.5"/><rect x="11" y="11" width="7" height="7" rx="1.5" stroke="#c9a84c" stroke-width="1.5"/></svg>
+        Patterns <strong id="gm-session-best">0</strong>
       </div>
     </div>
 
@@ -89,11 +92,10 @@ meta: |
     <!-- Tempo Trainer -->
     <div class="gm-tempo-trainer">
       <div class="gm-tempo-label-row">
-        <span class="gm-tempo-label" id="gm-tempo-label">🎯 Full speed</span>
-        <span class="gm-tempo-bpm" id="gm-tempo-bpm">— BPM</span>
+        <span class="gm-tempo-label" id="gm-tempo-label">Hearing at full speed — — BPM</span>
       </div>
       <input type="range" id="gm-tempo-slider" class="gm-slider" min="50" max="100" value="100" step="1">
-      <p class="gm-tempo-hint">Drag left to slow down — learn at your pace, then build to full speed</p>
+      <p class="gm-tempo-hint">Slow it down to hear each hit clearly, then build back to full speed</p>
     </div>
 
     <!-- Piano Roll -->
@@ -107,12 +109,16 @@ meta: |
 
     <!-- Controls -->
     <div class="gm-controls">
-      <button id="playReference" class="btn gm-btn-primary">▶ Listen to Beat</button>
-      <button id="playUser"      class="btn gm-btn-secondary">▷ Play Mine</button>
-      <button id="checkAccuracy" class="btn gm-btn-secondary">✓ Check Accuracy</button>
-      <button id="toggleSolution" class="btn gm-btn-ghost">◉ Reveal Solution</button>
-      <button id="clearPattern"  class="btn gm-btn-danger">✕ Clear</button>
-      <button id="loopToggle"    class="btn gm-btn-ghost">↺ Loop: Off</button>
+      <div class="gm-controls-primary">
+        <button id="playReference" class="btn gm-btn-primary">▶ Listen to Beat</button>
+        <button id="playUser"      class="btn gm-btn-secondary">▷ Play Mine</button>
+        <button id="checkAccuracy" class="btn gm-btn-secondary">✓ Check Accuracy</button>
+      </div>
+      <div class="gm-controls-secondary">
+        <button id="toggleSolution" class="btn gm-btn-util">◉ Reveal Solution</button>
+        <button id="clearPattern"   class="btn gm-btn-util">✕ Clear</button>
+        <button id="loopToggle"     class="btn gm-btn-util">↺ Loop: Off</button>
+      </div>
     </div>
 
     <!-- Status line -->
