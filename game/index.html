@@ -77,8 +77,31 @@ meta: |
       <span class="gm-badge gm-badge-easy" id="gm-difficulty">Easy</span>
     </div>
 
+    <!-- Beat Description + What To Listen For -->
+    <div class="gm-beat-meta">
+      <p class="gm-beat-description" id="gm-beat-description"></p>
+      <details class="gm-hints" id="gm-hints-details">
+        <summary>👂 What to listen for</summary>
+        <ul class="gm-hint-list" id="gm-hint-list"></ul>
+      </details>
+    </div>
+
+    <!-- Tempo Trainer -->
+    <div class="gm-tempo-trainer">
+      <div class="gm-tempo-label-row">
+        <span class="gm-tempo-label" id="gm-tempo-label">🎯 Full speed</span>
+        <span class="gm-tempo-bpm" id="gm-tempo-bpm">— BPM</span>
+      </div>
+      <input type="range" id="gm-tempo-slider" class="gm-slider" min="50" max="100" value="100" step="1">
+      <p class="gm-tempo-hint">Drag left to slow down — learn at your pace, then build to full speed</p>
+    </div>
+
     <!-- Piano Roll -->
-    <div class="gm-roll-wrap">
+    <div class="gm-roll-wrap" style="position:relative;">
+      <!-- Count-In Overlay -->
+      <div class="gm-countin" id="gm-countin">
+        <span class="gm-countin-num" id="gm-countin-num">1</span>
+      </div>
       <div id="piano-roll"></div>
     </div>
 
