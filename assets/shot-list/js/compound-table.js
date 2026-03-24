@@ -1402,28 +1402,32 @@ window.addEventListener("DOMContentLoaded", () => {
       URL.revokeObjectURL(url);
     };
     document.body.appendChild(exportBtn);
+    exportBtn.style.display = 'none';
   }
 
   // ── Export PDF button ─────────────────────────────────────────────────
   if (!document.getElementById("floating-pdf-btn")) {
     const pdfBtn = document.createElement("button");
     pdfBtn.id = "floating-pdf-btn";
-    pdfBtn.innerHTML = "⬇ PDF";
+    pdfBtn.innerHTML = "↓ PDF";
     pdfBtn.title = "Export shot list as PDF";
     pdfBtn.style.cssText =
-      "position:fixed;bottom:24px;right:240px;" +
-      "padding:11px 18px;background:transparent;" +
-      "border:1px solid rgba(201,168,76,0.5);color:#c9a84c;" +
-      "border-radius:7px;font-size:0.88rem;font-weight:700;" +
-      "cursor:pointer;z-index:1000;font-family:'Lora',serif;" +
-      "transition:background 0.2s,box-shadow 0.2s;";
+      "position:fixed;bottom:24px;right:24px;" +
+      "padding:10px 20px;background:#c9a84c;" +
+      "color:#0d1b2a;border:none;" +
+      "border-radius:7px;font-size:0.86rem;font-weight:700;" +
+      "cursor:pointer;z-index:1000;font-family:'Playfair Display',Georgia,serif;" +
+      "transition:background 0.2s,transform 0.2s,box-shadow 0.2s;" +
+      "box-shadow:0 4px 18px rgba(201,168,76,0.3);";
     pdfBtn.onmouseover = () => {
-      pdfBtn.style.background = "rgba(201,168,76,0.1)";
-      pdfBtn.style.boxShadow = "0 0 12px rgba(201,168,76,0.3)";
+      pdfBtn.style.background = "#e8c96a";
+      pdfBtn.style.transform = "translateY(-2px)";
+      pdfBtn.style.boxShadow = "0 6px 24px rgba(201,168,76,0.45)";
     };
     pdfBtn.onmouseout = () => {
-      pdfBtn.style.background = "transparent";
-      pdfBtn.style.boxShadow = "";
+      pdfBtn.style.background = "#c9a84c";
+      pdfBtn.style.transform = "";
+      pdfBtn.style.boxShadow = "0 4px 18px rgba(201,168,76,0.3)";
     };
     pdfBtn.onclick = () => {
       if (typeof window.exportShotListPDF === "function") window.exportShotListPDF();
@@ -1435,21 +1439,23 @@ window.addEventListener("DOMContentLoaded", () => {
   if (!document.getElementById("floating-docx-btn")) {
     const docxBtn = document.createElement("button");
     docxBtn.id = "floating-docx-btn";
-    docxBtn.innerHTML = "⬇ DOCX";
+    docxBtn.innerHTML = "↓ DOCX";
     docxBtn.title = "Export shot list as DOCX";
     docxBtn.style.cssText =
-      "position:fixed;bottom:24px;right:310px;" +
-      "padding:11px 18px;background:transparent;" +
-      "border:1px solid rgba(201,168,76,0.5);color:#c9a84c;" +
-      "border-radius:7px;font-size:0.88rem;font-weight:700;" +
-      "cursor:pointer;z-index:1000;font-family:'Lora',serif;" +
-      "transition:background 0.2s,box-shadow 0.2s;";
+      "position:fixed;bottom:24px;right:110px;" +
+      "padding:10px 20px;background:transparent;" +
+      "border:1px solid rgba(201,168,76,0.45);color:#c9a84c;" +
+      "border-radius:7px;font-size:0.86rem;font-weight:700;" +
+      "cursor:pointer;z-index:1000;font-family:'Playfair Display',Georgia,serif;" +
+      "transition:background 0.2s,box-shadow 0.2s,border-color 0.2s;";
     docxBtn.onmouseover = () => {
       docxBtn.style.background = "rgba(201,168,76,0.1)";
-      docxBtn.style.boxShadow = "0 0 12px rgba(201,168,76,0.3)";
+      docxBtn.style.borderColor = "#c9a84c";
+      docxBtn.style.boxShadow = "0 0 14px rgba(201,168,76,0.25)";
     };
     docxBtn.onmouseout = () => {
       docxBtn.style.background = "transparent";
+      docxBtn.style.borderColor = "rgba(201,168,76,0.45)";
       docxBtn.style.boxShadow = "";
     };
     docxBtn.onclick = () => {
@@ -1563,4 +1569,5 @@ function createFloatingSaveButton() {
     setTimeout(() => btn.classList.remove("saved"), 1200);
   };
   document.body.appendChild(btn);
+  btn.style.display = 'none';
 }
