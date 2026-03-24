@@ -3,7 +3,7 @@ layout: post
 title: "What Is a Screenplay in a Movie? Format, Structure and Purpose Explained"
 date: 2026-03-03 00:00:00 +0000
 thumb: "/assets/creatives/blog-thumb-what-is-a-screenplay-in-a-movie.svg"
-meta: '<meta name="description" content="What is a screenplay in a movie? Understand how the script fits into the production pipeline, from the writer's page to the finished film."><meta name="keywords" content="what is a screenplay in a movie, screenplay in film production, how does a screenplay work, script to screen, film production pipeline"><meta name="author" content="Script and Pad"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/what-is-a-screenplay-in-a-movie/">'
+meta: '<meta name="description" content="What is a screenplay in a movie? Understand how the script fits into the production pipeline, from the page of the writer to the finished film."><meta name="keywords" content="what is a screenplay in a movie, screenplay in film production, how does a screenplay work, script to screen, film production pipeline"><meta name="author" content="Script and Pad"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/what-is-a-screenplay-in-a-movie/">'
 og: >
   title: "What Is a Screenplay in a Movie? Format, Structure and Purpose Explained"
   description: "What is a screenplay in a movie? Understand how the script fits into the production pipeline, from the writer's page to the finished film."
