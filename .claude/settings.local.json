@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:scriptandpad.com)"
+      "WebFetch(domain:scriptandpad.com)",
+      "Bash(ls -la \"C:\\\\Users\\\\dines\\\\Desktop\\\\PROD\\\\SCRIPT AND PAD\\\\script-and-pad\\\\assets\\\\creatives 2>/dev/null || ls -la /c/Users/dines/Desktop/PROD/SCRIPT\" AND \"PAD/script-and-pad/assets/creatives/ 2>/dev/null || find /c/Users/dines/Desktop/PROD/SCRIPT\" AND PAD/script-and-pad/assets/creatives -maxdepth 1 -type f)",
+      "Bash(xargs -I {} basename {})",
+      "Bash(ls C:UsersdinesDesktopPRODSCRIPT AND PADscript-and-pad_posts2026-05-*)",
+      "Bash(\"C:\\\\Users\\\\dines\\\\Desktop\\\\PROD\\\\SCRIPT AND:*)"
     ]
   }
 }
