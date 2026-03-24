@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#1e2f45"/>
+
+  <!-- Depth circles -->
+  <circle cx="300" cy="160" r="130" fill="#162032" opacity="0.5"/>
+  <circle cx="50" cy="30" r="100" fill="#0d1b2a" opacity="0.4"/>
+
+  <!-- Radial spotlight from top -->
+  <polygon fill="#c9a84c" opacity="0.06" points="190,0 90,200 290,200"/>
+
+  <!-- Large open dictionary/book slightly rotated -->
+  <g transform="rotate(-4, 190, 105)">
+    <!-- Book shadow -->
+    <rect x="68" y="32" width="234" height="148" rx="6" fill="#0d1b2a" opacity="0.5"/>
+    <!-- Left page -->
+    <rect x="72" y="36" width="112" height="140" rx="3" fill="#f5f0e8"/>
+    <!-- Right page -->
+    <rect x="186" y="36" width="112" height="140" rx="3" fill="#f5f0e8"/>
+    <!-- Spine -->
+    <rect x="183" y="36" width="6" height="140" fill="#c9a84c" opacity="0.4"/>
+
+    <!-- Left page: dictionary entry -->
+    <!-- Headword "screenplay" in gold -->
+    <text x="82" y="58" fill="#c9a84c" font-size="11" font-family="sans-serif" font-weight="bold" opacity="0.95">screenplay</text>
+    <!-- Gold underline -->
+    <rect x="82" y="61" width="72" height="2" rx="1" fill="#c9a84c" opacity="0.6"/>
+    <!-- Part of speech -->
+    <text x="82" y="73" fill="#253652" font-size="7" font-family="sans-serif" font-style="italic" opacity="0.8">noun</text>
+    <!-- Gold bracket -->
+    <text x="82" y="85" fill="#c9a84c" font-size="8" font-family="sans-serif" opacity="0.7">[ screen + play ]</text>
+    <!-- Definition lines -->
+    <rect x="82" y="92" width="94" height="3" rx="1" fill="#253652" opacity="0.6"/>
+    <rect x="82" y="99" width="98" height="3" rx="1" fill="#253652" opacity="0.6"/>
+    <rect x="82" y="106" width="88" height="3" rx="1" fill="#253652" opacity="0.5"/>
+    <rect x="82" y="113" width="94" height="3" rx="1" fill="#253652" opacity="0.5"/>
+    <rect x="82" y="120" width="76" height="3" rx="1" fill="#253652" opacity="0.4"/>
+    <!-- Second definition block -->
+    <rect x="82" y="132" width="94" height="3" rx="1" fill="#253652" opacity="0.5"/>
+    <rect x="82" y="139" width="86" height="3" rx="1" fill="#253652" opacity="0.5"/>
+    <rect x="82" y="146" width="90" height="3" rx="1" fill="#253652" opacity="0.4"/>
+    <rect x="82" y="153" width="72" height="3" rx="1" fill="#253652" opacity="0.3"/>
+    <rect x="82" y="160" width="80" height="3" rx="1" fill="#253652" opacity="0.3"/>
+
+    <!-- Right page content -->
+    <rect x="196" y="50" width="90" height="3" rx="1" fill="#253652" opacity="0.5"/>
+    <rect x="196" y="58" width="96" height="3" rx="1" fill="#253652" opacity="0.5"/>
+    <rect x="196" y="66" width="82" height="3" rx="1" fill="#253652" opacity="0.4"/>
+    <rect x="196" y="74" width="88" height="3" rx="1" fill="#253652" opacity="0.4"/>
+    <rect x="196" y="84" width="90" height="3" rx="1" fill="#253652" opacity="0.4"/>
+    <rect x="196" y="92" width="76" height="3" rx="1" fill="#253652" opacity="0.3"/>
+  </g>
+
+  <!-- Clapperboard top-right -->
+  <rect x="296" y="14" width="54" height="40" rx="4" fill="#253652"/>
+  <rect x="296" y="14" width="54" height="14" rx="4" fill="#162032"/>
+  <line x1="308" y1="14" x2="304" y2="28" stroke="#c9a84c" stroke-width="2"/>
+  <line x1="320" y1="14" x2="316" y2="28" stroke="#c9a84c" stroke-width="2"/>
+  <line x1="332" y1="14" x2="328" y2="28" stroke="#c9a84c" stroke-width="2"/>
+  <rect x="304" y="33" width="30" height="3" rx="1" fill="#3d5166" opacity="0.7"/>
+  <rect x="304" y="39" width="26" height="3" rx="1" fill="#3d5166" opacity="0.6"/>
+  <rect x="304" y="45" width="20" height="3" rx="1" fill="#3d5166" opacity="0.5"/>
+
+  <!-- Ink pen and inkwell left of book -->
+  <!-- Inkwell -->
+  <ellipse cx="36" cy="130" rx="18" ry="8" fill="#162032" stroke="#c9a84c" stroke-width="1.5" opacity="0.8"/>
+  <rect x="18" y="118" width="36" height="14" rx="4" fill="#162032" stroke="#c9a84c" stroke-width="1" opacity="0.7"/>
+  <ellipse cx="36" cy="118" rx="18" ry="6" fill="#253652" opacity="0.8"/>
+  <!-- Ink surface -->
+  <ellipse cx="36" cy="118" rx="12" ry="4" fill="#0d1b2a" opacity="0.9"/>
+  <!-- Pen dipping in -->
+  <path d="M52,90 L38,116" stroke="#c9a84c" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+  <path d="M52,90 L56,86 L50,88 Z" fill="#c9a84c" opacity="0.9"/>
+  <path d="M38,116 L36,120" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Flat writer character bottom-right thinking pose -->
+  <!-- Head -->
+  <circle cx="336" cy="148" r="13" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M323,146 Q323,135 336,135 Q349,135 349,146 Q346,138 336,138 Q326,138 323,146Z" fill="#3d5166"/>
+  <!-- Body -->
+  <rect x="324" y="161" width="24" height="28" rx="12" fill="#2a7f7f"/>
+  <!-- Thinking arm up to chin -->
+  <path d="M324,168 Q316,162 322,154" stroke="#d4956a" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <circle cx="322" cy="154" r="5" fill="#d4956a"/>
+  <!-- Thinking bubble dots -->
+  <circle cx="310" cy="144" r="3" fill="#c9a84c" opacity="0.5"/>
+  <circle cx="302" cy="136" r="4" fill="#c9a84c" opacity="0.4"/>
+  <circle cx="292" cy="126" r="6" fill="#c9a84c" opacity="0.3"/>
+
+  <!-- Gold stars -->
+  <text x="14" y="198" fill="#c9a84c" opacity="0.4" font-size="26">★</text>
+  <text x="350" y="198" fill="#c9a84c" opacity="0.45" font-size="20">★</text>
+</svg>
