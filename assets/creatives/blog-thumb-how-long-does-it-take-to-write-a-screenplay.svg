@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#162032"/>
+  <!-- Depth circles -->
+  <circle cx="185" cy="95" r="120" fill="#1e2f45" opacity="0.45"/>
+  <circle cx="340" cy="160" r="80" fill="#0d1b2a" opacity="0.5"/>
+  <!-- Spotlight from top -->
+  <polygon points="185,0 115,200 255,200" fill="#c9a84c" opacity="0.06"/>
+  <!-- Radial glow -->
+  <circle cx="185" cy="95" r="90" fill="#c9a84c" opacity="0.04"/>
+
+  <!-- Large hourglass center -->
+  <!-- Outer frame -->
+  <path d="M130,22 L240,22 L240,30 L200,78 L240,120 L240,128 L130,128 L130,120 L170,78 L130,30 Z"
+        fill="none" stroke="#c9a84c" stroke-width="2.5"/>
+  <!-- Top half fill (cream sand) -->
+  <path d="M132,32 L238,32 L198,76 L172,76 Z" fill="#f5f0e8" opacity="0.6"/>
+  <!-- Narrow passage glow -->
+  <ellipse cx="185" cy="78" rx="14" ry="4" fill="#c9a84c" opacity="0.5"/>
+  <!-- Bottom half: pages falling (instead of sand) -->
+  <!-- Small page shapes accumulating in bottom half -->
+  <rect x="148" y="108" width="14" height="10" rx="1" fill="#f5f0e8" opacity="0.7" transform="rotate(-8,155,113)"/>
+  <rect x="163" y="110" width="14" height="10" rx="1" fill="#f5f0e8" opacity="0.65" transform="rotate(5,170,115)"/>
+  <rect x="175" y="108" width="14" height="10" rx="1" fill="#f5f0e8" opacity="0.6" transform="rotate(-3,182,113)"/>
+  <rect x="192" y="109" width="14" height="10" rx="1" fill="#f5f0e8" opacity="0.55" transform="rotate(7,199,114)"/>
+  <rect x="207" y="108" width="14" height="10" rx="1" fill="#f5f0e8" opacity="0.5" transform="rotate(-5,214,113)"/>
+  <!-- Lines on pages -->
+  <line x1="150" y1="111" x2="160" y2="111" stroke="#3d5166" stroke-width="1" opacity="0.5"/>
+  <line x1="176" y1="111" x2="186" y2="111" stroke="#3d5166" stroke-width="1" opacity="0.5"/>
+  <line x1="194" y1="112" x2="204" y2="112" stroke="#3d5166" stroke-width="1" opacity="0.5"/>
+  <!-- Falling pages (in passage) -->
+  <rect x="180" y="84" width="10" height="8" rx="1" fill="#f5f0e8" opacity="0.7" transform="rotate(-10,185,88)"/>
+  <rect x="186" y="92" width="10" height="8" rx="1" fill="#f5f0e8" opacity="0.6" transform="rotate(8,191,96)"/>
+  <!-- Hourglass caps (gold bars top and bottom) -->
+  <rect x="128" y="20" width="114" height="7" rx="3" fill="#c9a84c" opacity="0.85"/>
+  <rect x="128" y="126" width="114" height="7" rx="3" fill="#c9a84c" opacity="0.85"/>
+
+  <!-- Timeline bar below hourglass -->
+  <rect x="85" y="148" width="200" height="5" rx="2" fill="#2c3e50"/>
+  <!-- Gold markers -->
+  <rect x="85" y="144" width="3" height="13" rx="1" fill="#c9a84c" opacity="0.85"/>
+  <rect x="152" y="144" width="3" height="13" rx="1" fill="#c9a84c" opacity="0.85"/>
+  <rect x="218" y="144" width="3" height="13" rx="1" fill="#c9a84c" opacity="0.85"/>
+  <rect x="284" y="144" width="3" height="13" rx="1" fill="#c9a84c" opacity="0.7"/>
+  <!-- Timeline labels -->
+  <text x="79" y="167" font-family="monospace" font-size="7" fill="#c9a84c" opacity="0.8">W1</text>
+  <text x="146" y="167" font-family="monospace" font-size="7" fill="#c9a84c" opacity="0.8">W4</text>
+  <text x="212" y="167" font-family="monospace" font-size="7" fill="#c9a84c" opacity="0.8">W8</text>
+  <text x="278" y="167" font-family="monospace" font-size="7" fill="#c9a84c" opacity="0.65">W12</text>
+
+  <!-- Small alarm clock top-left -->
+  <circle cx="46" cy="42" r="18" fill="#1e2f45" stroke="#c9a84c" stroke-width="1.5"/>
+  <circle cx="46" cy="42" r="13" fill="#162032"/>
+  <!-- Clock hands -->
+  <line x1="46" y1="42" x2="46" y2="32" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+  <line x1="46" y1="42" x2="54" y2="44" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Bell bumps -->
+  <circle cx="33" cy="28" r="5" fill="#c9a84c" opacity="0.7"/>
+  <circle cx="59" cy="28" r="5" fill="#c9a84c" opacity="0.7"/>
+  <!-- Clock feet -->
+  <rect x="40" y="59" width="4" height="5" rx="2" fill="#c9a84c" opacity="0.6"/>
+  <rect x="48" y="59" width="4" height="5" rx="2" fill="#c9a84c" opacity="0.6"/>
+
+  <!-- Flat writer character right of hourglass -->
+  <!-- Head -->
+  <circle cx="308" cy="85" r="12" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M296 82 Q308 70 320 82 Q316 73 308 72 Q300 73 296 82 Z" fill="#3d2b1f"/>
+  <!-- Body -->
+  <rect x="296" y="98" width="24" height="26" rx="12" fill="#2c3e50"/>
+  <!-- Desk -->
+  <rect x="272" y="118" width="72" height="6" rx="2" fill="#1e2f45" stroke="#3d5166" stroke-width="1"/>
+  <!-- Stack of pages on desk -->
+  <rect x="278" y="108" width="16" height="10" rx="1" fill="#f5f0e8" opacity="0.8"/>
+  <rect x="280" y="106" width="16" height="10" rx="1" fill="#f5f0e8" opacity="0.7"/>
+  <rect x="282" y="104" width="16" height="10" rx="1" fill="#f5f0e8" opacity="0.6"/>
+  <!-- Lines on top page -->
+  <line x1="284" y1="107" x2="296" y2="107" stroke="#3d5166" stroke-width="1" opacity="0.5"/>
+  <line x1="284" y1="110" x2="296" y2="110" stroke="#3d5166" stroke-width="1" opacity="0.5"/>
+  <!-- Left arm writing -->
+  <path d="M296 104 Q286 108 280 118" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Pen in hand -->
+  <line x1="278" y1="118" x2="271" y2="124" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Right arm down -->
+  <path d="M320 104 Q328 110 330 118" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Legs -->
+  <rect x="298" y="124" width="8" height="16" rx="4" fill="#1e2f45"/>
+  <rect x="310" y="124" width="8" height="16" rx="4" fill="#1e2f45"/>
+
+  <!-- Gold stars -->
+  <text x="18" y="178" font-family="serif" font-size="18" fill="#c9a84c" opacity="0.4">★</text>
+  <text x="355" y="95" font-family="serif" font-size="13" fill="#c9a84c" opacity="0.45">★</text>
+</svg>
