@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#253652"/>
+  <!-- Depth circles -->
+  <circle cx="195" cy="105" r="120" fill="#1e2f45" opacity="0.5"/>
+  <circle cx="60" cy="155" r="75" fill="#162032" opacity="0.55"/>
+  <!-- Spotlight from top-left -->
+  <polygon points="30,0 0,200 160,200" fill="#c9a84c" opacity="0.06"/>
+
+  <!-- Large film reel center -->
+  <circle cx="195" cy="95" r="68" fill="#162032" stroke="#c9a84c" stroke-width="2"/>
+  <circle cx="195" cy="95" r="56" fill="#1e2f45"/>
+  <circle cx="195" cy="95" r="20" fill="#0d1b2a" stroke="#c9a84c" stroke-width="1.5"/>
+  <circle cx="195" cy="95" r="8" fill="#c9a84c" opacity="0.8"/>
+  <!-- Reel spokes (6 spokes) -->
+  <line x1="195" y1="39" x2="195" y2="75" stroke="#c9a84c" stroke-width="3" opacity="0.8"/>
+  <line x1="248" y1="68" x2="220" y2="83" stroke="#c9a84c" stroke-width="3" opacity="0.8"/>
+  <line x1="248" y1="122" x2="220" y2="107" stroke="#c9a84c" stroke-width="3" opacity="0.8"/>
+  <line x1="195" y1="151" x2="195" y2="115" stroke="#c9a84c" stroke-width="3" opacity="0.8"/>
+  <line x1="142" y1="122" x2="170" y2="107" stroke="#c9a84c" stroke-width="3" opacity="0.8"/>
+  <line x1="142" y1="68" x2="170" y2="83" stroke="#c9a84c" stroke-width="3" opacity="0.8"/>
+  <!-- Reel perforations ring -->
+  <circle cx="195" cy="39" r="5" fill="#253652" stroke="#c9a84c" stroke-width="1"/>
+  <circle cx="248" cy="68" r="5" fill="#253652" stroke="#c9a84c" stroke-width="1"/>
+  <circle cx="248" cy="122" r="5" fill="#253652" stroke="#c9a84c" stroke-width="1"/>
+  <circle cx="195" cy="151" r="5" fill="#253652" stroke="#c9a84c" stroke-width="1"/>
+  <circle cx="142" cy="122" r="5" fill="#253652" stroke="#c9a84c" stroke-width="1"/>
+  <circle cx="142" cy="68" r="5" fill="#253652" stroke="#c9a84c" stroke-width="1"/>
+  <!-- Radial glow from reel center -->
+  <circle cx="195" cy="95" r="80" fill="#c9a84c" opacity="0.05"/>
+
+  <!-- Clapperboard left, angled -->
+  <g transform="rotate(-15,50,80)">
+    <rect x="22" y="62" width="56" height="42" rx="3" fill="#1e2f45" stroke="#c9a84c" stroke-width="1.2"/>
+    <rect x="22" y="62" width="56" height="14" rx="2" fill="#c9a84c" opacity="0.75"/>
+    <line x1="27" y1="62" x2="24" y2="76" stroke="#0d1b2a" stroke-width="2.5"/>
+    <line x1="35" y1="62" x2="32" y2="76" stroke="#0d1b2a" stroke-width="2.5"/>
+    <line x1="43" y1="62" x2="40" y2="76" stroke="#0d1b2a" stroke-width="2.5"/>
+    <line x1="51" y1="62" x2="48" y2="76" stroke="#0d1b2a" stroke-width="2.5"/>
+    <line x1="59" y1="62" x2="56" y2="76" stroke="#0d1b2a" stroke-width="2.5"/>
+    <line x1="67" y1="62" x2="64" y2="76" stroke="#0d1b2a" stroke-width="2.5"/>
+    <!-- Lines inside board -->
+    <line x1="26" y1="85" x2="74" y2="85" stroke="#3d5166" stroke-width="1" opacity="0.5"/>
+    <line x1="26" y1="93" x2="74" y2="93" stroke="#3d5166" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <!-- Stack of books/scripts bottom-left -->
+  <rect x="16" y="148" width="58" height="10" rx="2" fill="#2c3e50" stroke="#c9a84c" stroke-width="0.8" opacity="0.9"/>
+  <rect x="20" y="138" width="52" height="10" rx="2" fill="#1e2f45" stroke="#c9a84c" stroke-width="0.8" opacity="0.85"/>
+  <rect x="24" y="128" width="46" height="10" rx="2" fill="#2c3e50" stroke="#c9a84c" stroke-width="0.8" opacity="0.8"/>
+  <rect x="28" y="118" width="40" height="10" rx="2" fill="#162032" stroke="#c9a84c" stroke-width="0.8" opacity="0.75"/>
+  <!-- Book spines with thin gold accent lines -->
+  <line x1="16" y1="148" x2="16" y2="158" stroke="#c9a84c" stroke-width="2" opacity="0.5"/>
+  <line x1="20" y1="138" x2="20" y2="148" stroke="#c9a84c" stroke-width="2" opacity="0.5"/>
+  <line x1="24" y1="128" x2="24" y2="138" stroke="#c9a84c" stroke-width="2" opacity="0.5"/>
+  <line x1="28" y1="118" x2="28" y2="128" stroke="#c9a84c" stroke-width="2" opacity="0.5"/>
+
+  <!-- Director's viewfinder top-right -->
+  <circle cx="345" cy="34" r="20" fill="none" stroke="#c9a84c" stroke-width="2"/>
+  <circle cx="345" cy="34" r="13" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.6"/>
+  <line x1="325" y1="34" x2="332" y2="34" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+  <line x1="358" y1="34" x2="365" y2="34" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+  <line x1="345" y1="14" x2="345" y2="21" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+  <line x1="345" y1="47" x2="345" y2="54" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+  <circle cx="345" cy="34" r="4" fill="#c9a84c" opacity="0.4"/>
+
+  <!-- Flat director character right side -->
+  <!-- Head -->
+  <circle cx="330" cy="120" r="12" fill="#d4956a"/>
+  <!-- Hair (beret) -->
+  <path d="M318 117 Q330 103 342 117 Q336 108 330 106 Q324 108 318 117 Z" fill="#253652"/>
+  <ellipse cx="330" cy="107" rx="13" ry="5" fill="#2c3e50"/>
+  <!-- Body (charcoal) -->
+  <rect x="318" y="133" width="24" height="30" rx="12" fill="#2c3e50"/>
+  <!-- Left arm (raised with viewfinder) -->
+  <path d="M318 140 Q306 132 298 128" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Viewfinder in hand -->
+  <circle cx="294" cy="126" r="6" fill="none" stroke="#c9a84c" stroke-width="2"/>
+  <circle cx="294" cy="126" r="2" fill="#c9a84c" opacity="0.6"/>
+  <!-- Right arm down -->
+  <path d="M342 140 Q350 148 352 158" stroke="#d4956a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Legs -->
+  <rect x="320" y="163" width="8" height="18" rx="4" fill="#1e2f45"/>
+  <rect x="332" y="163" width="8" height="18" rx="4" fill="#1e2f45"/>
+
+  <!-- Gold stars -->
+  <text x="92" y="186" font-family="serif" font-size="18" fill="#c9a84c" opacity="0.4">★</text>
+  <text x="270" y="180" font-family="serif" font-size="14" fill="#c9a84c" opacity="0.45">★</text>
+</svg>
