@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Stanley Kubrick Screenplays: How the Master Adapted His Way to Greatness"
-date: 2026-05-26 00:00:00 +0000
+date: 2026-03-15 00:00:00 +0000
 thumb: "/assets/creatives/blog-thumb-stanley-kubrick-screenplays.svg"
 meta: '<meta name="description" content="Stanley Kubrick screenplays examined — how he approached adaptation, what he cut from source novels, and what short filmmakers can learn from his collaborative screenwriting process."><meta name="keywords" content="Stanley Kubrick screenplays, Kubrick adaptation, screenwriting adaptation, film adaptation, Kubrick writing process, screenwriting"><meta name="author" content="Script and Pad"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/stanley-kubrick-screenplays/">'
 og: >

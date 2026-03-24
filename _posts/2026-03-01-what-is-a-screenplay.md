@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "What Is a Screenplay? The Complete Guide for Aspiring Writers"
-date: 2026-05-04 00:00:00 +0000
+date: 2026-03-01 00:00:00 +0000
 thumb: "/assets/creatives/blog-thumb-what-is-a-screenplay.svg"
 meta: '<meta name="description" content="What is a screenplay? Learn the definition, format, key components, and why mastering screenplay writing starts with short films."><meta name="keywords" content="what is a screenplay, screenplay definition, script format, screenwriting basics, what is a script, how to write a screenplay"><meta name="author" content="Script and Pad"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/what-is-a-screenplay/">'
 og: >

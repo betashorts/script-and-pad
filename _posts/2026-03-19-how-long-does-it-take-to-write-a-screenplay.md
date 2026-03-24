@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How Long Does It Take to Write a Screenplay? A Realistic Timeline"
-date: 2026-06-02 00:00:00 +0000
+date: 2026-03-19 00:00:00 +0000
 thumb: "/assets/creatives/blog-thumb-how-long-does-it-take-to-write-a-screenplay.svg"
 meta: '<meta name="description" content="How long does it take to write a screenplay? Realistic timelines for features and short films, daily page targets, the three things that slow writers down, and the 30-day first draft approach."><meta name="keywords" content="how long does it take to write a screenplay, screenplay writing time, screenwriting timeline, how long to write a script, writing a screenplay"><meta name="author" content="Script and Pad"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/how-long-does-it-take-to-write-a-screenplay/">'
 og: >

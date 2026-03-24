@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Screenplay Meaning: What It Is, What It Does, and Why It Matters"
-date: 2026-05-12 00:00:00 +0000
+date: 2026-03-05 00:00:00 +0000
 thumb: "/assets/creatives/blog-thumb-screenplay-meaning.svg"
 meta: '<meta name="description" content="What does screenplay mean? Explore the etymology, formal definition, and key distinctions between screenplay, script, teleplay, and scenario."><meta name="keywords" content="screenplay meaning, what does screenplay mean, screenplay definition, script vs screenplay, teleplay vs screenplay, original screenplay adapted screenplay"><meta name="author" content="Script and Pad"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/screenplay-meaning/">'
 og: >

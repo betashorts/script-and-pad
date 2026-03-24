@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Music Video Screenplay: How to Write a Script for Your Music Video"
-date: 2026-05-21 00:00:00 +0000
+date: 2026-03-11 00:00:00 +0000
 thumb: "/assets/creatives/blog-thumb-music-video-screenplay.svg"
 meta: '<meta name="description" content="How to write a music video screenplay — the difference between a treatment and a shooting script, how to notate lyric cues, and how to structure verse and chorus blocks for any music video style."><meta name="keywords" content="music video screenplay, music video script, how to write a music video script, music video treatment, music video production, screenwriting"><meta name="author" content="Script and Pad"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/music-video-screenplay/">'
 og: >

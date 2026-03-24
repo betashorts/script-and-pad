@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Screenplay Format: The Complete Guide to Formatting Your Script"
-date: 2026-05-16 00:00:00 +0000
+date: 2026-03-08 00:00:00 +0000
 thumb: "/assets/creatives/blog-thumb-screenplay-format-guide.svg"
 meta: '<meta name="description" content="The complete guide to screenplay format — scene headings, action lines, dialogue, margins, Courier 12pt, and what not to include in a spec script. With tool recommendations for formatting automatically."><meta name="keywords" content="screenplay format, script formatting, screenwriting format, spec script format, scene headings, action lines, dialogue format"><meta name="author" content="Script and Pad"><meta name="robots" content="index, follow"><link rel="canonical" href="https://scriptandpad.com/screenplay-format-guide/">'
 og: >
