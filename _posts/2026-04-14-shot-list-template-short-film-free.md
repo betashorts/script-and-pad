@@ -80,7 +80,7 @@ tags:
 
 <h3>Step 5: Reorder as Needed, Then Export</h3>
 
-<p>Drag shots, sequences, and scenes to reorder — the hierarchy renumbers automatically. When you are satisfied with the structure, click Export PDF or Export DOCX. The file downloads directly to your computer. You can also save your progress as a JSON file at any point and reload it in a future session, which means your "template" persists between prep sessions without any account or server involved.</p>
+<p>Drag shots, sequences, and scenes to reorder — the hierarchy renumbers automatically. When you are satisfied with the structure, click Export PDF or Export DOCX. The file downloads directly to your computer.</p>
 
 <h2>The Real Advantage Over a Spreadsheet Template</h2>
 

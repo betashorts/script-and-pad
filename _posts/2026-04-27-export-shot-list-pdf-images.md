@@ -70,7 +70,6 @@ tags:
   <li><strong>Upload or sketch storyboard images</strong> for your priority shots — specifically the must-haves that have complex compositions, VFX requirements, or unusual spatial arrangements. Nice-to-have shots can remain without images.</li>
   <li><strong>Check every Priority field</strong> — every shot should be marked must-have or nice-to-have. If you have not done this during the build phase, do it now. It is the most useful column in a printed shot list under real shoot-day pressure.</li>
   <li><strong>Review sequence order within each scene</strong> — does the sequence order match how you actually intend to shoot? Reorder now, before printing. Drag to reorder in the tool; confirm the shot numbers look correct before exporting.</li>
-  <li><strong>Save a JSON backup before exporting</strong> — the Shot List Generator lets you save your complete shot list as a JSON file and reload it in any future session. Do this before the export so you have a recoverable version if you need to revise after seeing the printed document.</li>
 </ol>
 
 <h2>The Export Flow: Three Steps</h2>
