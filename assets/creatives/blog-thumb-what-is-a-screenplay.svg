@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- Background -->
+  <rect width="380" height="200" fill="#162032"/>
+
+  <!-- Depth circles -->
+  <circle cx="320" cy="40" r="120" fill="#0d1b2a" opacity="0.5"/>
+  <circle cx="60" cy="170" r="90" fill="#0d1b2a" opacity="0.4"/>
+
+  <!-- Radial spotlight from top -->
+  <polygon fill="#c9a84c" opacity="0.06" points="190,0 100,200 280,200"/>
+
+  <!-- Open book / script (two-page spread) -->
+  <!-- Book cover shadow -->
+  <rect x="80" y="38" width="210" height="130" rx="4" fill="#0d1b2a" opacity="0.6"/>
+  <!-- Left page -->
+  <rect x="84" y="42" width="100" height="122" rx="2" fill="#f5f0e8"/>
+  <!-- Right page -->
+  <rect x="186" y="42" width="100" height="122" rx="2" fill="#f5f0e8"/>
+  <!-- Book spine -->
+  <rect x="183" y="42" width="6" height="122" fill="#c9a84c" opacity="0.5"/>
+
+  <!-- Left page content: action/scene lines -->
+  <rect x="92" y="52" width="70" height="5" rx="2" fill="#162032" opacity="0.7"/>
+  <rect x="92" y="62" width="84" height="4" rx="1" fill="#253652" opacity="0.6"/>
+  <rect x="92" y="70" width="78" height="4" rx="1" fill="#253652" opacity="0.6"/>
+  <rect x="92" y="78" width="82" height="4" rx="1" fill="#253652" opacity="0.6"/>
+  <rect x="92" y="88" width="60" height="4" rx="1" fill="#253652" opacity="0.5"/>
+  <!-- Left page: second block -->
+  <rect x="92" y="100" width="74" height="5" rx="2" fill="#162032" opacity="0.7"/>
+  <rect x="92" y="110" width="84" height="4" rx="1" fill="#253652" opacity="0.6"/>
+  <rect x="92" y="118" width="76" height="4" rx="1" fill="#253652" opacity="0.6"/>
+  <rect x="92" y="126" width="80" height="4" rx="1" fill="#253652" opacity="0.6"/>
+  <rect x="92" y="134" width="64" height="4" rx="1" fill="#253652" opacity="0.5"/>
+  <rect x="92" y="144" width="70" height="4" rx="1" fill="#253652" opacity="0.4"/>
+
+  <!-- Right page content: dialogue layout -->
+  <!-- Scene heading -->
+  <rect x="194" y="52" width="74" height="5" rx="2" fill="#c9a84c" opacity="0.8"/>
+  <!-- Action line -->
+  <rect x="194" y="62" width="84" height="4" rx="1" fill="#253652" opacity="0.6"/>
+  <rect x="194" y="70" width="78" height="4" rx="1" fill="#253652" opacity="0.6"/>
+  <!-- Character name (centred) -->
+  <rect x="218" y="82" width="40" height="5" rx="2" fill="#162032" opacity="0.8"/>
+  <!-- Parenthetical -->
+  <rect x="210" y="91" width="52" height="4" rx="1" fill="#253652" opacity="0.5"/>
+  <!-- Dialogue lines -->
+  <rect x="202" y="100" width="72" height="4" rx="1" fill="#253652" opacity="0.7"/>
+  <rect x="202" y="108" width="64" height="4" rx="1" fill="#253652" opacity="0.7"/>
+  <rect x="202" y="116" width="56" height="4" rx="1" fill="#253652" opacity="0.6"/>
+  <!-- Second character -->
+  <rect x="216" y="128" width="44" height="5" rx="2" fill="#162032" opacity="0.8"/>
+  <rect x="202" y="138" width="74" height="4" rx="1" fill="#253652" opacity="0.7"/>
+  <rect x="202" y="146" width="60" height="4" rx="1" fill="#253652" opacity="0.6"/>
+
+  <!-- Gold quill top-right -->
+  <path d="M310,20 Q330,30 318,55 Q312,65 305,68 Q308,58 314,48 Q308,52 302,62 Q298,55 308,38 Q296,45 290,58 Q288,48 300,30 Q304,24 310,20Z" fill="#c9a84c" opacity="0.85"/>
+  <line x1="305" y1="68" x2="302" y2="80" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Flat character left side peeking over book -->
+  <!-- Head -->
+  <circle cx="50" cy="65" r="16" fill="#d4956a"/>
+  <!-- Hair -->
+  <path d="M34,62 Q34,46 50,46 Q66,46 66,62 Q62,52 50,52 Q38,52 34,62Z" fill="#253652"/>
+  <!-- Body (teal) -->
+  <rect x="36" y="80" width="28" height="36" rx="14" fill="#2a7f7f"/>
+  <!-- Arms -->
+  <path d="M36,88 Q22,94 20,106" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <path d="M64,88 Q72,94 78,100" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <!-- Hands on book edge -->
+  <circle cx="78" cy="100" r="6" fill="#d4956a"/>
+  <circle cx="20" cy="106" r="6" fill="#d4956a"/>
+
+  <!-- Gold stars -->
+  <text x="340" y="165" fill="#c9a84c" opacity="0.4" font-size="28">★</text>
+  <text x="26" y="175" fill="#c9a84c" opacity="0.45" font-size="22">★</text>
+</svg>
