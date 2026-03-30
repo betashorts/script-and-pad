@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <defs>
+    <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="380" height="200" fill="#0d1b2a"/>
+
+  <!-- Depth circles -->
+  <circle cx="8" cy="192" r="82" fill="#162032" opacity="0.5"/>
+  <circle cx="372" cy="18" r="52" fill="#162032" opacity="0.4"/>
+
+  <!-- Spotlight from top -->
+  <polygon points="190,0 88,200 292,200" fill="#c9a84c" opacity="0.06"/>
+
+  <!-- Radial glow -->
+  <circle cx="190" cy="100" r="115" fill="url(#glowGrad)"/>
+
+  <!-- ═══════════ MONITOR (left side) ═══════════ -->
+  <!-- Monitor outer frame -->
+  <rect x="5" y="22" width="138" height="110" rx="7" fill="#1e2f45"/>
+  <!-- Monitor inner bezel -->
+  <rect x="11" y="28" width="126" height="92" rx="4" fill="#162032"/>
+  <!-- Screen display area -->
+  <rect x="14" y="31" width="120" height="86" rx="2" fill="#0d1b2a"/>
+  <!-- Monitor stand pole -->
+  <rect x="67" y="132" width="12" height="16" rx="3" fill="#253652"/>
+  <!-- Monitor base -->
+  <rect x="52" y="148" width="42" height="7" rx="3" fill="#253652"/>
+
+  <!-- Screenplay on monitor — dark theme -->
+  <!-- Scene heading bar (gold) -->
+  <rect x="18" y="36" width="72" height="5" rx="1.5" fill="#c9a84c"/>
+  <!-- Action lines -->
+  <rect x="18" y="46" width="110" height="3" rx="1" fill="#3d5166"/>
+  <rect x="18" y="52" width="94" height="3" rx="1" fill="#3d5166"/>
+  <rect x="18" y="58" width="104" height="3" rx="1" fill="#3d5166"/>
+  <!-- Character name (centred indent, gold) -->
+  <rect x="56" y="67" width="44" height="4" rx="1.5" fill="#e8c96a" opacity="0.8"/>
+  <!-- Dialogue lines -->
+  <rect x="32" y="75" width="72" height="3" rx="1" fill="#3d5166"/>
+  <rect x="32" y="81" width="58" height="3" rx="1" fill="#3d5166"/>
+  <!-- Second scene heading (slightly dimmer gold) -->
+  <rect x="18" y="91" width="58" height="5" rx="1.5" fill="#c9a84c" opacity="0.65"/>
+  <!-- More action lines -->
+  <rect x="18" y="101" width="102" height="3" rx="1" fill="#3d5166"/>
+  <rect x="18" y="107" width="82" height="3" rx="1" fill="#3d5166"/>
+
+  <!-- INT. text label inside monitor screen -->
+  <text x="19" y="40" font-family="'Courier New', Courier, monospace" font-size="5" fill="#c9a84c" font-weight="bold">INT. COFFEE SHOP - DAY</text>
+
+  <!-- ═══════════ GOLD ARROW DIVIDER ═══════════ -->
+  <!-- Arrow shaft -->
+  <rect x="143" y="96" width="10" height="8" rx="2" fill="#c9a84c" opacity="0.9"/>
+  <!-- Arrow head (right-pointing triangle) -->
+  <polygon points="152,88 166,100 152,112" fill="#c9a84c" opacity="0.9"/>
+
+  <!-- ═══════════ BROWSER WINDOW (right side) ═══════════ -->
+  <!-- Browser chrome outer -->
+  <rect x="166" y="14" width="210" height="138" rx="9" fill="#2c3e50"/>
+  <!-- Tab bar area (flat bottom edge) -->
+  <rect x="166" y="14" width="210" height="22" rx="9" fill="#253652"/>
+  <rect x="166" y="26" width="210" height="10" fill="#253652"/>
+  <!-- Active browser tab pill -->
+  <rect x="172" y="17" width="90" height="14" rx="4" fill="#3d5166"/>
+  <!-- URL / address bar -->
+  <rect x="172" y="40" width="140" height="8" rx="3" fill="#1e2f45"/>
+  <!-- Content area (Google Docs light background) -->
+  <rect x="166" y="52" width="210" height="94" fill="#f5f0e8"/>
+  <!-- Bottom frame strip to close browser chrome -->
+  <rect x="166" y="146" width="210" height="6" rx="4" fill="#2c3e50"/>
+
+  <!-- Screenplay on browser — light/Docs theme -->
+  <!-- Scene heading (gold text bar) -->
+  <rect x="184" y="60" width="88" height="5" rx="1.5" fill="#c9a84c" opacity="0.85"/>
+  <!-- Action lines (dark on cream) -->
+  <rect x="184" y="70" width="176" height="2.5" rx="1" fill="#2c3e50" opacity="0.22"/>
+  <rect x="184" y="76" width="160" height="2.5" rx="1" fill="#2c3e50" opacity="0.22"/>
+  <rect x="184" y="82" width="168" height="2.5" rx="1" fill="#2c3e50" opacity="0.22"/>
+  <!-- Character name indent (gold tint) -->
+  <rect x="228" y="91" width="64" height="3.5" rx="1.5" fill="#c9a84c" opacity="0.65"/>
+  <!-- Dialogue lines -->
+  <rect x="208" y="99" width="110" height="2.5" rx="1" fill="#2c3e50" opacity="0.22"/>
+  <rect x="208" y="105" width="90" height="2.5" rx="1" fill="#2c3e50" opacity="0.22"/>
+  <!-- Second scene heading -->
+  <rect x="184" y="115" width="96" height="4" rx="1.5" fill="#c9a84c" opacity="0.6"/>
+  <!-- More action -->
+  <rect x="184" y="124" width="172" height="2.5" rx="1" fill="#2c3e50" opacity="0.18"/>
+  <rect x="184" y="130" width="148" height="2.5" rx="1" fill="#2c3e50" opacity="0.18"/>
+
+  <!-- INT. label in browser content -->
+  <text x="185" y="64" font-family="'Courier New', Courier, monospace" font-size="5" fill="#c9a84c" font-weight="bold">INT. COFFEE SHOP - DAY</text>
+
+  <!-- Blinking cursor indicator in browser -->
+  <rect x="248" y="138" width="2" height="8" rx="1" fill="#c9a84c" opacity="0.75"/>
+
+  <!-- Browser window control dots (top right) -->
+  <circle cx="311" cy="23" r="3" fill="#1e2f45" opacity="0.55"/>
+  <circle cx="321" cy="23" r="3" fill="#1e2f45" opacity="0.55"/>
+  <circle cx="331" cy="23" r="3" fill="#1e2f45" opacity="0.55"/>
+
+  <!-- ═══════════ CLOUD ICON (top-right of browser) ═══════════ -->
+  <g opacity="0.75">
+    <circle cx="345" cy="25" r="5" fill="#3d5166"/>
+    <circle cx="353" cy="21" r="6.5" fill="#3d5166"/>
+    <circle cx="362" cy="24" r="5.5" fill="#3d5166"/>
+    <rect x="339" y="25" width="29" height="6" fill="#3d5166"/>
+  </g>
+
+  <!-- ═══════════ WRITER CHARACTER (bottom-left, at desk) ═══════════ -->
+  <!-- Desk surface -->
+  <rect x="0" y="162" width="118" height="8" rx="3" fill="#2c3e50"/>
+  <!-- Laptop base on desk -->
+  <rect x="26" y="150" width="58" height="13" rx="2" fill="#162032"/>
+  <rect x="29" y="152" width="52" height="9" rx="1" fill="#1e2f45"/>
+  <!-- Laptop screen (lid open) -->
+  <rect x="26" y="136" width="58" height="15" rx="2" fill="#1e2f45"/>
+  <rect x="29" y="138" width="52" height="11" rx="1" fill="#253652"/>
+  <!-- Screen glow -->
+  <rect x="31" y="139" width="48" height="8" rx="1" fill="#2a7f7f" opacity="0.28"/>
+
+  <!-- Character legs (below desk) -->
+  <rect x="39" y="170" width="8" height="22" rx="6" fill="#1e2f45"/>
+  <rect x="53" y="170" width="8" height="22" rx="6" fill="#1e2f45"/>
+  <!-- Feet -->
+  <rect x="35" y="189" width="15" height="6" rx="3" fill="#253652"/>
+  <rect x="50" y="189" width="15" height="6" rx="3" fill="#253652"/>
+
+  <!-- Character body -->
+  <rect x="34" y="133" width="32" height="30" rx="14" fill="#2a7f7f"/>
+
+  <!-- Character arms reaching toward keyboard -->
+  <path d="M 36 148 Q 20 160 18 163" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <path d="M 64 148 Q 80 160 84 163" stroke="#d4956a" stroke-width="11" fill="none" stroke-linecap="round"/>
+
+  <!-- Character head -->
+  <circle cx="50" cy="125" r="11" fill="#d4956a"/>
+
+  <!-- Character hair -->
+  <path d="M 39 121 Q 50 112 61 121 L 59 115 Q 50 107 41 115 Z" fill="#253652"/>
+
+  <!-- ═══════════ DECORATIVE ELEMENTS ═══════════ -->
+  <!-- Gold stars -->
+  <text x="352" y="104" font-family="Arial, sans-serif" font-size="19" fill="#c9a84c" opacity="0.45">★</text>
+  <text x="128" y="196" font-family="Arial, sans-serif" font-size="14" fill="#c9a84c" opacity="0.40">★</text>
+
+</svg>
