@@ -468,6 +468,12 @@
   justify-content: center;
 }
 
+.basic-unit-tools button:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 /* ── Shot Details Dropdowns ───────────────────────────────── */
 .shot-details-container {
   display: flex;
