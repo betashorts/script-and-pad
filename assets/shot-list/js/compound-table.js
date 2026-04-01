@@ -839,8 +839,13 @@ function renderBasicUnitCell(
 
   // File upload button
   const uploadBtn = document.createElement("button");
-  uploadBtn.innerHTML = "&#128247;"; // Camera emoji
-  uploadBtn.title = "Upload Image";
+  uploadBtn.innerHTML = `<svg viewBox="0 0 18 18" width="15" height="15" fill="none">
+    <rect x="2" y="2" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+    <rect x="10" y="2" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+    <rect x="2" y="10" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+    <rect x="10" y="10" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+  </svg>`;
+  uploadBtn.title = "Choose storyboard preset or upload image";
   uploadBtn.className = "upload-btn";
 
   const fileInput = document.createElement("input");
@@ -848,7 +853,42 @@ function renderBasicUnitCell(
   fileInput.accept = "image/*";
   fileInput.style.display = "none";
 
-  uploadBtn.onclick = () => fileInput.click();
+  uploadBtn.onclick = () => {
+    if (window.openPresetPanel) {
+      window.openPresetPanel(col, (dataURL, action) => {
+        if (action === 'upload') {
+          fileInput.click();
+          return;
+        }
+        if (action === 'blank') {
+          canvas.style.display = "block";
+          isCanvasVisible = true;
+          drawBtn.classList.add("active");
+          return;
+        }
+        if (dataURL) {
+          col.imageData = dataURL;
+          const img = document.createElement("img");
+          img.src = dataURL;
+          imageContainer.innerHTML = "";
+          imageContainer.appendChild(img);
+          // Show canvas and load preset as background
+          canvas.style.display = "block";
+          isCanvasVisible = true;
+          drawBtn.classList.add("active");
+          const bgImg = new Image();
+          bgImg.onload = () => {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+            col.canvasData = canvas.toDataURL();
+          };
+          bgImg.src = dataURL;
+        }
+      });
+    } else {
+      fileInput.click();
+    }
+  };
 
   fileInput.onchange = (e) => {
     const file = e.target.files[0];
@@ -876,6 +916,45 @@ function renderBasicUnitCell(
   let isDrawing = false;
   let context = canvas.getContext("2d");
 
+  // Shape tool state
+  let activeTool = "freehand";
+  let shapeStart = null;
+  let snapshotData = null;
+  let strokeColor = "#c9a84c";
+  let strokeWidth = 1.5;
+
+  function getScaledPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: (e.clientX - rect.left) * (canvas.width / rect.width),
+      y: (e.clientY - rect.top) * (canvas.height / rect.height),
+    };
+  }
+
+  function applyDrawStyle() {
+    context.strokeStyle = strokeColor;
+    context.lineWidth = strokeWidth;
+    context.lineCap = "round";
+    context.lineJoin = "round";
+  }
+
+  function drawArrow(x1, y1, x2, y2) {
+    const angle = Math.atan2(y2 - y1, x2 - x1);
+    const headLen = 12;
+    context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
+    context.moveTo(x2, y2);
+    context.lineTo(
+      x2 - headLen * Math.cos(angle - Math.PI / 7),
+      y2 - headLen * Math.sin(angle - Math.PI / 7)
+    );
+    context.moveTo(x2, y2);
+    context.lineTo(
+      x2 - headLen * Math.cos(angle + Math.PI / 7),
+      y2 - headLen * Math.sin(angle + Math.PI / 7)
+    );
+  }
+
   // Drawing event listeners
   canvas.addEventListener("mousedown", startDrawing);
   canvas.addEventListener("mousemove", draw);
@@ -885,35 +964,78 @@ function renderBasicUnitCell(
   function startDrawing(e) {
     e.preventDefault();
     isDrawing = true;
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    context.beginPath();
-    context.moveTo(
-      (e.clientX - rect.left) * scaleX,
-      (e.clientY - rect.top) * scaleY
-    );
+    const pos = getScaledPos(e);
+    applyDrawStyle();
+
+    if (activeTool === "eraser") {
+      context.globalCompositeOperation = "destination-out";
+      context.lineWidth = 12;
+      context.beginPath();
+      context.moveTo(pos.x, pos.y);
+    } else if (activeTool === "freehand") {
+      context.globalCompositeOperation = "source-over";
+      context.beginPath();
+      context.moveTo(pos.x, pos.y);
+    } else {
+      // Shape tools — save snapshot for live preview
+      context.globalCompositeOperation = "source-over";
+      shapeStart = { x: pos.x, y: pos.y };
+      snapshotData = context.getImageData(0, 0, canvas.width, canvas.height);
+    }
   }
 
   function draw(e) {
     e.preventDefault();
     if (!isDrawing) return;
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    context.lineTo(
-      (e.clientX - rect.left) * scaleX,
-      (e.clientY - rect.top) * scaleY
-    );
-    context.stroke();
+    const pos = getScaledPos(e);
+    applyDrawStyle();
+
+    if (activeTool === "freehand") {
+      context.lineTo(pos.x, pos.y);
+      context.stroke();
+    } else if (activeTool === "eraser") {
+      context.lineWidth = 12;
+      context.lineTo(pos.x, pos.y);
+      context.stroke();
+    } else if (shapeStart) {
+      // Restore snapshot then draw live preview
+      context.putImageData(snapshotData, 0, 0);
+      applyDrawStyle();
+      const w = pos.x - shapeStart.x;
+      const h = pos.y - shapeStart.y;
+      context.beginPath();
+      if (activeTool === "rect") {
+        context.strokeRect(shapeStart.x, shapeStart.y, w, h);
+      } else if (activeTool === "circle") {
+        context.ellipse(
+          shapeStart.x + w / 2,
+          shapeStart.y + h / 2,
+          Math.abs(w / 2),
+          Math.abs(h / 2),
+          0, 0, 2 * Math.PI
+        );
+        context.stroke();
+      } else if (activeTool === "line") {
+        context.moveTo(shapeStart.x, shapeStart.y);
+        context.lineTo(pos.x, pos.y);
+        context.stroke();
+      } else if (activeTool === "arrow") {
+        drawArrow(shapeStart.x, shapeStart.y, pos.x, pos.y);
+        context.stroke();
+      }
+    }
   }
 
   function stopDrawing(e) {
-    if (e) {
-      e.preventDefault();
-    }
+    if (e) e.preventDefault();
     if (isDrawing) {
       isDrawing = false;
+      shapeStart = null;
+      snapshotData = null;
+      if (activeTool === "eraser") {
+        context.globalCompositeOperation = "source-over";
+        context.lineWidth = strokeWidth;
+      }
       col.canvasData = canvas.toDataURL();
     }
   }
@@ -928,16 +1050,21 @@ function renderBasicUnitCell(
     img.src = col.canvasData;
   }
 
-  // Drawing toggle button
+  // Drawing toggle button (freehand pencil)
   const drawBtn = document.createElement("button");
   drawBtn.innerHTML = "&#9999;&#65039;"; // Pencil emoji
-  drawBtn.title = "Toggle Drawing Mode";
+  drawBtn.title = "Toggle Drawing Mode (freehand)";
   drawBtn.className = "draw-btn";
   let isCanvasVisible = canvas.style.display === "block";
   drawBtn.onclick = () => {
     isCanvasVisible = !isCanvasVisible;
     canvas.style.display = isCanvasVisible ? "block" : "none";
     drawBtn.classList.toggle("active", isCanvasVisible);
+    if (isCanvasVisible) {
+      activeTool = "freehand";
+      toolsContainer.querySelectorAll(".draw-btn").forEach(b => b.classList.remove("active"));
+      drawBtn.classList.add("active");
+    }
   };
 
   // Clear button
@@ -1054,9 +1181,86 @@ function renderBasicUnitCell(
     }
   }
 
-  // Add all tools
+  // ── Shape tool buttons ───────────────────────────────────────────────
+  function makeShapeBtn(svgContent, title, tool) {
+    const btn = document.createElement("button");
+    btn.innerHTML = svgContent;
+    btn.title = title;
+    btn.className = "draw-btn shape-btn";
+    btn.onclick = () => {
+      activeTool = tool;
+      document.querySelectorAll && toolsContainer.querySelectorAll(".draw-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      canvas.style.display = "block";
+      isCanvasVisible = true;
+    };
+    return btn;
+  }
+
+  const rectBtn = makeShapeBtn(
+    `<svg viewBox="0 0 18 18" width="14" height="14" fill="none"><rect x="2" y="4" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/></svg>`,
+    "Draw rectangle", "rect"
+  );
+  const circleBtn = makeShapeBtn(
+    `<svg viewBox="0 0 18 18" width="14" height="14" fill="none"><circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.4"/></svg>`,
+    "Draw circle/ellipse", "circle"
+  );
+  const lineBtn = makeShapeBtn(
+    `<svg viewBox="0 0 18 18" width="14" height="14" fill="none"><line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+    "Draw straight line", "line"
+  );
+  const arrowBtn = makeShapeBtn(
+    `<svg viewBox="0 0 18 18" width="14" height="14" fill="none"><line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><polyline points="9,3 15,3 15,9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    "Draw arrow", "arrow"
+  );
+  const eraserBtn = makeShapeBtn(
+    `<svg viewBox="0 0 18 18" width="14" height="14" fill="none"><path d="M14 4 L8 14 L4 14 L2 12 L9 2 Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="4" y1="14" x2="16" y2="14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`,
+    "Eraser", "eraser"
+  );
+
+  // ── Color picker (cycles through palette) ───────────────────────────
+  const STROKE_COLORS = ["#c9a84c", "#f5f0e8", "#c0533a", "#2a7f7f", "#d4956a"];
+  let colorIdx = 0;
+  const colorDot = document.createElement("button");
+  colorDot.className = "sl-color-dot";
+  colorDot.title = "Cycle stroke color";
+  colorDot.style.cssText =
+    "width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(201,168,76,0.4);" +
+    `background:${STROKE_COLORS[0]};cursor:pointer;flex-shrink:0;transition:transform 0.15s;` +
+    "padding:0;";
+  colorDot.onclick = () => {
+    colorIdx = (colorIdx + 1) % STROKE_COLORS.length;
+    strokeColor = STROKE_COLORS[colorIdx];
+    colorDot.style.background = strokeColor;
+  };
+
+  // ── Stroke width (3 sizes) ───────────────────────────────────────────
+  const STROKE_WIDTHS = [1, 2, 4];
+  const STROKE_SIZES = ["8px", "11px", "15px"];
+  const strokeBtns = STROKE_WIDTHS.map((w, i) => {
+    const sb = document.createElement("button");
+    sb.className = "sl-stroke-btn draw-btn";
+    sb.title = `Stroke width: ${w}px`;
+    sb.innerHTML = `<span style="font-size:${STROKE_SIZES[i]};line-height:1;display:block;">&#9679;</span>`;
+    sb.onclick = () => {
+      strokeWidth = w;
+      toolsContainer.querySelectorAll(".sl-stroke-btn").forEach(b => b.classList.remove("active"));
+      sb.classList.add("active");
+    };
+    if (i === 0) sb.classList.add("active");
+    return sb;
+  });
+
+  // Add all tools in correct order
   toolsContainer.appendChild(uploadBtn);
   toolsContainer.appendChild(drawBtn);
+  toolsContainer.appendChild(rectBtn);
+  toolsContainer.appendChild(circleBtn);
+  toolsContainer.appendChild(lineBtn);
+  toolsContainer.appendChild(arrowBtn);
+  toolsContainer.appendChild(eraserBtn);
+  toolsContainer.appendChild(colorDot);
+  strokeBtns.forEach(sb => toolsContainer.appendChild(sb));
   toolsContainer.appendChild(clearBtn);
   toolsContainer.appendChild(fileInput);
 
