@@ -454,3 +454,434 @@ meta: |
     );
   }
 </script>
+
+<!-- ── Text-selection "Add as Shot" pill + dialog ─────────────────────── -->
+<script>
+(function() {
+
+  // ── Selection listener on scene preview panel ─────────────────────────
+  document.addEventListener('mouseup', function(e) {
+    if ('ontouchstart' in window) return;
+    setTimeout(function() {
+      var sel = window.getSelection();
+      if (!sel || sel.isCollapsed) { hideScriptPill(); return; }
+      var text = sel.toString().trim();
+      if (!text) { hideScriptPill(); return; }
+
+      var panel = document.getElementById('scene-preview-panel');
+      if (!panel) { hideScriptPill(); return; }
+      var range = sel.getRangeAt(0);
+      if (!panel.contains(range.commonAncestorContainer)) {
+        hideScriptPill(); return;
+      }
+
+      var rect = range.getBoundingClientRect();
+      showScriptPill(rect, text);
+    }, 10);
+  });
+
+  document.addEventListener('mousedown', function(e) {
+    if (!e.target.closest('#sl-script-pill') &&
+        !e.target.closest('#sl-add-shot-dialog')) {
+      hideScriptPill();
+    }
+  });
+
+  // ── Pill ──────────────────────────────────────────────────────────────
+  function showScriptPill(rect, selectedText) {
+    var pill = document.getElementById('sl-script-pill');
+    if (!pill) {
+      pill = document.createElement('div');
+      pill.id = 'sl-script-pill';
+      document.body.appendChild(pill);
+    }
+
+    var pillW = 150;
+    var left = rect.left + window.scrollX + (rect.width / 2) - (pillW / 2);
+    var top  = rect.top  + window.scrollY - 48;
+
+    left = Math.max(8, Math.min(left, window.innerWidth - pillW - 8));
+    if (top < window.scrollY + 8) top = rect.bottom + window.scrollY + 8;
+
+    pill.style.cssText = [
+      'position:absolute',
+      'left:' + left + 'px',
+      'top:'  + top  + 'px',
+      'width:' + pillW + 'px',
+      'background:#c9a84c',
+      'color:#0d1b2a',
+      'padding:7px 14px',
+      'border-radius:100px',
+      "font-family:'Lora',Georgia,serif",
+      'font-size:0.78rem',
+      'font-weight:700',
+      'cursor:pointer',
+      'z-index:9999',
+      'box-shadow:0 4px 16px rgba(0,0,0,0.4)',
+      'white-space:nowrap',
+      'text-align:center',
+      'user-select:none',
+      'display:block'
+    ].join(';');
+
+    pill.textContent = '🎬 Add as Shot';
+    pill._selectedText = selectedText;
+
+    pill.onclick = function() {
+      openAddShotDialog(pill._selectedText);
+      hideScriptPill();
+      window.getSelection().removeAllRanges();
+    };
+  }
+
+  function hideScriptPill() {
+    var pill = document.getElementById('sl-script-pill');
+    if (pill) pill.style.display = 'none';
+  }
+
+  // ── Dialog ────────────────────────────────────────────────────────────
+  function openAddShotDialog(selectedText) {
+    var existing = document.getElementById('sl-add-shot-dialog');
+    if (existing) existing.remove();
+
+    var list = window.compoundTableDataList;
+    var hasData = list && list.length > 0 &&
+                  list.some(function(act) {
+                    return act.children && act.children.length > 0;
+                  });
+
+    var overlay = document.createElement('div');
+    overlay.id = 'sl-add-shot-dialog';
+    overlay.style.cssText = [
+      'position:fixed',
+      'inset:0',
+      'z-index:9998',
+      'background:rgba(10,19,30,0.85)',
+      'display:flex',
+      'align-items:center',
+      'justify-content:center',
+      'backdrop-filter:blur(4px)'
+    ].join(';');
+
+    var box = document.createElement('div');
+    box.style.cssText = [
+      'background:#162032',
+      'border:1px solid rgba(201,168,76,0.3)',
+      'border-radius:14px',
+      'width:min(480px,95vw)',
+      'max-height:90vh',
+      'overflow-y:auto',
+      'padding:28px',
+      'box-sizing:border-box',
+      'position:relative'
+    ].join(';');
+
+    var LABEL_STYLE = [
+      'display:block',
+      'font-size:0.65rem',
+      'text-transform:uppercase',
+      'letter-spacing:0.1em',
+      "font-family:'Lora',Georgia,serif",
+      'color:rgba(245,240,232,0.45)',
+      'margin-bottom:5px'
+    ].join(';');
+
+    var INPUT_STYLE = [
+      'width:100%',
+      'background:#0d1b2a',
+      'border:1px solid rgba(201,168,76,0.2)',
+      'border-radius:6px',
+      'color:#f5f0e8',
+      "font-family:'Lora',Georgia,serif",
+      'font-size:0.85rem',
+      'padding:9px 12px',
+      'box-sizing:border-box',
+      'outline:none',
+      'appearance:none',
+      '-webkit-appearance:none'
+    ].join(';');
+
+    var titleEl = document.createElement('div');
+    titleEl.style.cssText = [
+      "font-family:'Playfair Display',Georgia,serif",
+      'font-size:1.15rem',
+      'font-weight:700',
+      'color:#f5f0e8',
+      'margin-bottom:20px'
+    ].join(';');
+    titleEl.textContent = '🎬 Add as Shot';
+
+    var closeBtn = document.createElement('button');
+    closeBtn.textContent = '×';
+    closeBtn.style.cssText = [
+      'position:absolute',
+      'top:16px',
+      'right:16px',
+      'background:transparent',
+      'border:none',
+      'color:#c9a84c',
+      'font-size:1.4rem',
+      'cursor:pointer',
+      'line-height:1',
+      'padding:0'
+    ].join(';');
+    closeBtn.onclick = function() { overlay.remove(); };
+
+    if (!hasData) {
+      var noDataMsg = document.createElement('p');
+      noDataMsg.style.cssText = "font-family:'Lora',serif;color:rgba(245,240,232,0.5);font-size:0.85rem;";
+      noDataMsg.textContent = 'Please generate a shot list first by uploading a script.';
+      box.appendChild(titleEl);
+      box.appendChild(closeBtn);
+      box.appendChild(noDataMsg);
+      overlay.appendChild(box);
+      document.body.appendChild(overlay);
+      overlay.onclick = function(e) { if (e.target === overlay) overlay.remove(); };
+      return;
+    }
+
+    // Build flat list of scenes
+    var sceneOptions = [];
+    list.forEach(function(act, aIdx) {
+      (act.children || []).forEach(function(scene, sIdx) {
+        sceneOptions.push({
+          actIdx:   aIdx,
+          sceneIdx: sIdx,
+          label:    (act.title || ('Act ' + (aIdx+1))) + ' › ' + (scene.title || ('Scene ' + (sIdx+1))),
+          sceneObj: scene
+        });
+      });
+    });
+
+    // Scene dropdown
+    var sceneWrap = document.createElement('div');
+    sceneWrap.style.marginBottom = '14px';
+    var sceneLbl = document.createElement('label');
+    sceneLbl.textContent = 'Scene';
+    sceneLbl.style.cssText = LABEL_STYLE;
+    var sceneSel = document.createElement('select');
+    sceneSel.style.cssText = INPUT_STYLE;
+    sceneOptions.forEach(function(opt, i) {
+      var o = document.createElement('option');
+      o.value = i;
+      o.textContent = opt.label;
+      sceneSel.appendChild(o);
+    });
+    sceneWrap.appendChild(sceneLbl);
+    sceneWrap.appendChild(sceneSel);
+
+    // Sequence dropdown
+    var seqWrap = document.createElement('div');
+    seqWrap.style.marginBottom = '14px';
+    var seqLbl = document.createElement('label');
+    seqLbl.textContent = 'Sequence';
+    seqLbl.style.cssText = LABEL_STYLE;
+    var seqSel = document.createElement('select');
+    seqSel.style.cssText = INPUT_STYLE;
+    seqWrap.appendChild(seqLbl);
+    seqWrap.appendChild(seqSel);
+
+    function populateSequences(sceneOptIdx) {
+      seqSel.innerHTML = '';
+      var sceneObj = sceneOptions[sceneOptIdx].sceneObj;
+      (sceneObj.children || []).forEach(function(seq, i) {
+        var o = document.createElement('option');
+        o.value = i;
+        o.textContent = seq.title || ('Sequence ' + (i+1));
+        seqSel.appendChild(o);
+      });
+      var newOpt = document.createElement('option');
+      newOpt.value = '__new__';
+      newOpt.textContent = '+ New Sequence: From Script';
+      seqSel.appendChild(newOpt);
+    }
+
+    populateSequences(0);
+    sceneSel.onchange = function() {
+      populateSequences(parseInt(sceneSel.value));
+    };
+
+    // Shot Size dropdown
+    var sizeWrap = document.createElement('div');
+    sizeWrap.style.marginBottom = '14px';
+    var sizeLbl = document.createElement('label');
+    sizeLbl.textContent = 'Shot Size (optional)';
+    sizeLbl.style.cssText = LABEL_STYLE;
+    var sizeSel = document.createElement('select');
+    sizeSel.style.cssText = INPUT_STYLE;
+    ['', 'Extreme Close-up (ECU)', 'Medium Close-up', 'Full Close-up',
+     'Close Shot', 'Medium Shot', 'Medium Full Shot', 'Full Shot',
+     'Wide Shot', 'Long Shot', 'Extreme Long Shot'].forEach(function(s) {
+      var o = document.createElement('option');
+      o.value = s;
+      o.textContent = s || 'Select shot size…';
+      sizeSel.appendChild(o);
+    });
+    sizeWrap.appendChild(sizeLbl);
+    sizeWrap.appendChild(sizeSel);
+
+    // Subject field
+    var subjectWrap = document.createElement('div');
+    subjectWrap.style.marginBottom = '14px';
+    var subjectLbl = document.createElement('label');
+    subjectLbl.textContent = 'Subject (optional)';
+    subjectLbl.style.cssText = LABEL_STYLE;
+    var subjectInput = document.createElement('input');
+    subjectInput.type = 'text';
+    subjectInput.style.cssText = INPUT_STYLE;
+    subjectInput.placeholder = 'Character name or object…';
+    subjectWrap.appendChild(subjectLbl);
+    subjectWrap.appendChild(subjectInput);
+
+    // Description textarea
+    var descWrap = document.createElement('div');
+    descWrap.style.marginBottom = '20px';
+    var descLbl = document.createElement('label');
+    descLbl.textContent = 'Description';
+    descLbl.style.cssText = LABEL_STYLE;
+    var descText = document.createElement('textarea');
+    descText.rows = 4;
+    descText.style.cssText = INPUT_STYLE + ';resize:vertical;line-height:1.6;';
+
+    var truncated = selectedText.length > 300 ? selectedText.substring(0, 300) : selectedText;
+    descText.value = truncated;
+    descWrap.appendChild(descLbl);
+    descWrap.appendChild(descText);
+    if (selectedText.length > 300) {
+      var truncNote = document.createElement('p');
+      truncNote.style.cssText = "font-size:0.7rem;color:rgba(245,240,232,0.35);font-family:'Lora',serif;margin-top:4px;";
+      truncNote.textContent = '(truncated to 300 characters)';
+      descWrap.appendChild(truncNote);
+    }
+
+    // Buttons
+    var btnRow = document.createElement('div');
+    btnRow.style.cssText = 'display:flex;gap:12px;align-items:center;';
+
+    var addBtn = document.createElement('button');
+    addBtn.textContent = 'Add Shot';
+    addBtn.style.cssText = [
+      'background:#c9a84c',
+      'color:#0d1b2a',
+      'border:none',
+      'border-radius:7px',
+      'padding:11px 26px',
+      "font-family:'Lora',Georgia,serif",
+      'font-size:0.9rem',
+      'font-weight:700',
+      'cursor:pointer',
+      'transition:background 0.15s'
+    ].join(';');
+    addBtn.onmouseover = function() { addBtn.style.background = '#e8c96a'; };
+    addBtn.onmouseout  = function() { addBtn.style.background = '#c9a84c'; };
+
+    var cancelBtn = document.createElement('button');
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.style.cssText = [
+      'background:transparent',
+      'border:none',
+      'color:rgba(245,240,232,0.35)',
+      "font-family:'Lora',Georgia,serif",
+      'font-size:0.85rem',
+      'cursor:pointer'
+    ].join(';');
+    cancelBtn.onclick = function() { overlay.remove(); };
+
+    addBtn.onclick = function() {
+      var sceneOptIdx = parseInt(sceneSel.value);
+      var sceneObj    = sceneOptions[sceneOptIdx].sceneObj;
+      var seqValue    = seqSel.value;
+      var targetSeq;
+
+      if (seqValue === '__new__') {
+        var newSeq = {
+          type:     'compound',
+          number:   (sceneObj.children || []).length + 1,
+          title:    'From Script',
+          children: []
+        };
+        if (!sceneObj.children) sceneObj.children = [];
+        sceneObj.children.push(newSeq);
+        targetSeq = newSeq;
+      } else {
+        targetSeq = sceneObj.children[parseInt(seqValue)];
+      }
+
+      if (!targetSeq) { overlay.remove(); return; }
+
+      var shotNum = (targetSeq.children || []).length + 1;
+      var newShot = {
+        type:   'basic',
+        number: shotNum,
+        content: {
+          content:    descText.value,
+          imageData:  null,
+          canvasData: null,
+          shotSize:   sizeSel.value || '',
+          subject:    subjectInput.value || ''
+        }
+      };
+
+      if (!targetSeq.children) targetSeq.children = [];
+      targetSeq.children.push(newShot);
+
+      window.renderAllL1Tables();
+      overlay.remove();
+
+      var buildTab = document.getElementById('tab-compound-table');
+      if (buildTab) buildTab.click();
+
+      showAddShotToast(sceneOptions[sceneOptIdx].sceneObj.title || 'scene');
+    };
+
+    btnRow.appendChild(addBtn);
+    btnRow.appendChild(cancelBtn);
+
+    box.appendChild(titleEl);
+    box.appendChild(closeBtn);
+    box.appendChild(sceneWrap);
+    box.appendChild(seqWrap);
+    box.appendChild(sizeWrap);
+    box.appendChild(subjectWrap);
+    box.appendChild(descWrap);
+    box.appendChild(btnRow);
+
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+
+    overlay.onclick = function(e) { if (e.target === overlay) overlay.remove(); };
+    setTimeout(function() { descText.focus(); }, 50);
+  }
+
+  // ── Toast ─────────────────────────────────────────────────────────────
+  function showAddShotToast(sceneName) {
+    var existing = document.getElementById('sl-shot-toast');
+    if (existing) existing.remove();
+
+    var toast = document.createElement('div');
+    toast.id = 'sl-shot-toast';
+    toast.textContent = '✓ Shot added to ' + sceneName;
+    toast.style.cssText = [
+      'position:fixed',
+      'bottom:80px',
+      'right:24px',
+      'background:#c9a84c',
+      'color:#0d1b2a',
+      'padding:10px 20px',
+      'border-radius:8px',
+      "font-family:'Lora',Georgia,serif",
+      'font-size:0.85rem',
+      'font-weight:700',
+      'z-index:10000',
+      'box-shadow:0 4px 16px rgba(0,0,0,0.3)',
+      'transition:opacity 0.4s ease',
+      'opacity:1'
+    ].join(';');
+
+    document.body.appendChild(toast);
+    setTimeout(function() { toast.style.opacity = '0'; }, 2000);
+    setTimeout(function() { toast.remove(); }, 2500);
+  }
+
+})();
+</script>
