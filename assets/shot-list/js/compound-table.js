@@ -342,13 +342,20 @@ function renderUnit(parent, unit, level, rootData, l1Idx, parentArr, unitIdx) {
 
     const previewBtn = document.createElement("button");
     const hasLines = unit.rawLines && unit.rawLines.length > 0;
-    previewBtn.textContent = "📄 Script";
+    previewBtn.innerHTML =
+      '<svg viewBox="0 0 12 14" width="10" height="12" fill="none" style="vertical-align:-1px;margin-right:4px;">' +
+      '<rect x="1" y="1" width="8" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/>' +
+      '<line x1="3" y1="4.5" x2="7" y2="4.5" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>' +
+      '<line x1="3" y1="6.5" x2="7" y2="6.5" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>' +
+      '<line x1="3" y1="8.5" x2="5.5" y2="8.5" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>' +
+      '</svg>Script';
     previewBtn.title = hasLines ? "View scene script" : "No script text available";
     previewBtn.disabled = !hasLines;
     previewBtn.style.cssText =
-      "font-size:0.68rem;padding:2px 8px;border:1px solid rgba(201,168,76,0.35);" +
-      "border-radius:4px;background:transparent;color:#c9a84c;cursor:" +
-      (hasLines ? "pointer" : "default") + ";opacity:" + (hasLines ? "1" : "0.35") + ";";
+      "font-size:0.68rem;padding:2px 8px;border:1px solid rgba(201,168,76,0.3);" +
+      "border-radius:4px;background:transparent;color:#c9a84c;" +
+      "font-family:'Lora',Georgia,serif;letter-spacing:0.05em;cursor:" +
+      (hasLines ? "pointer" : "default") + ";opacity:" + (hasLines ? "1" : "0.3") + ";";
     if (hasLines) {
       previewBtn.onclick = (e) => {
         e.stopPropagation();
@@ -1811,6 +1818,53 @@ function openExpandedCanvas(sourceCanvas, sourceContext, col) {
 let _previewPanel = null;
 let _previewOpenTitle = null;
 
+function classifyScriptLine(line, prevType) {
+  if (!line || !line.trim()) return 'empty';
+
+  const t = line.trim();
+
+  // Scene headings
+  if (/^(INT\.|EXT\.|INT\/EXT\.?)\s/i.test(t) ||
+      /^(INT|EXT|INT\/EXT)\s+/i.test(t)) {
+    return 'heading';
+  }
+
+  // Transitions
+  if (/^(FADE\s+(IN|OUT|TO)|CUT\s+TO:|SMASH\s+CUT|MATCH\s+CUT|DISSOLVE\s+TO)/i.test(t) ||
+      t === 'FADE OUT.' || t === 'THE END') {
+    return 'transition';
+  }
+
+  // Parentheticals
+  if (t.startsWith('(') && t.endsWith(')')) {
+    return 'parenthetical';
+  }
+
+  // Character names: ALL CAPS, short, no sentence-ending punctuation,
+  // only valid after action / heading / transition / empty
+  const isAllCaps = t === t.toUpperCase() && /[A-Z]/.test(t);
+  const isShort   = t.length <= 35;
+  const noEndPunct = !/[.!?]$/.test(t);
+  const validPrev  = !prevType ||
+    ['action', 'heading', 'transition', 'empty'].includes(prevType);
+
+  if (isAllCaps && isShort && noEndPunct && validPrev) {
+    if (/[A-Z]{2,}/.test(t)) {
+      return 'character';
+    }
+  }
+
+  // Dialogue: follows character or parenthetical (or continues)
+  if (prevType === 'character' || prevType === 'parenthetical' ||
+      prevType === 'dialogue') {
+    if (t !== t.toUpperCase() || t.length > 35) {
+      return 'dialogue';
+    }
+  }
+
+  return 'action';
+}
+
 function openScenePreview(rawLines, sceneTitle) {
   // Toggle if same scene clicked again
   if (_previewPanel && _previewOpenTitle === sceneTitle) {
@@ -1825,28 +1879,28 @@ function openScenePreview(rawLines, sceneTitle) {
   if (!_previewPanel) {
     _previewPanel = document.createElement("div");
     _previewPanel.id = "scene-preview-panel";
-    _previewPanel.style.cssText =
-      "position:fixed;right:0;top:64px;bottom:0;width:320px;" +
-      "transform:translateX(100%);transition:transform 0.25s ease;" +
-      "background:#0d1b2a;border-left:1px solid rgba(201,168,76,0.25);" +
-      "z-index:500;display:flex;flex-direction:column;";
 
+    // Header
     const header = document.createElement("div");
-    header.style.cssText =
-      "background:#162032;padding:12px 16px;display:flex;" +
-      "justify-content:space-between;align-items:center;flex-shrink:0;";
+    header.className = "sp-panel-header";
 
-    const titleEl = document.createElement("span");
+    const titleGroup = document.createElement("div");
+    titleGroup.style.cssText = "min-width:0;flex:1;";
+
+    const titleEl = document.createElement("div");
     titleEl.id = "scene-preview-title";
-    titleEl.style.cssText =
-      "color:#c9a84c;font-family:'Lora',serif;font-size:0.82rem;" +
-      "white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px;";
+    titleEl.className = "sp-panel-title";
+
+    const subtitleEl = document.createElement("div");
+    subtitleEl.className = "sp-panel-subtitle";
+    subtitleEl.textContent = "Script Preview";
+
+    titleGroup.appendChild(titleEl);
+    titleGroup.appendChild(subtitleEl);
 
     const closeBtn = document.createElement("button");
     closeBtn.textContent = "×";
-    closeBtn.style.cssText =
-      "background:none;border:none;color:#c9a84c;font-size:1.3rem;" +
-      "cursor:pointer;line-height:1;padding:0 0 0 8px;flex-shrink:0;";
+    closeBtn.className = "sp-close-btn";
     closeBtn.onclick = () => {
       _previewPanel.style.transform = "translateX(100%)";
       _previewOpenTitle = null;
@@ -1854,31 +1908,39 @@ function openScenePreview(rawLines, sceneTitle) {
       if (section) section.style.paddingRight = "";
     };
 
-    header.appendChild(titleEl);
+    header.appendChild(titleGroup);
     header.appendChild(closeBtn);
 
+    // Body
     const body = document.createElement("div");
     body.id = "scene-preview-body";
-    body.style.cssText =
-      "flex:1;overflow-y:auto;padding:16px;";
+    body.className = "sp-body";
 
-    const pre = document.createElement("pre");
-    pre.id = "scene-preview-pre";
-    pre.style.cssText =
-      "white-space:pre-wrap;word-break:break-word;" +
-      "font-family:'Courier New',monospace;font-size:0.75rem;" +
-      "line-height:1.7;color:rgba(245,240,232,0.75);user-select:text;cursor:text;margin:0;";
-
-    body.appendChild(pre);
     _previewPanel.appendChild(header);
     _previewPanel.appendChild(body);
     document.body.appendChild(_previewPanel);
   }
 
-  // Populate and open
+  // Update title
   document.getElementById("scene-preview-title").textContent = sceneTitle;
-  document.getElementById("scene-preview-pre").textContent =
-    rawLines.join("\n");
+
+  // Render formatted screenplay content
+  const body = document.getElementById("scene-preview-body");
+  body.innerHTML = "";
+
+  let prevType = null;
+  (rawLines || []).forEach((line) => {
+    const type = classifyScriptLine(line, prevType);
+    const el = document.createElement("div");
+    if (type === 'empty') {
+      el.className = "sp-spacer";
+    } else {
+      el.className = "sp-" + type;
+      el.textContent = line.trim();
+    }
+    body.appendChild(el);
+    prevType = type;
+  });
 
   _previewOpenTitle = sceneTitle;
   _previewPanel.style.transform = "translateX(0)";
@@ -1886,8 +1948,8 @@ function openScenePreview(rawLines, sceneTitle) {
   // Nudge the table left to make room
   const section = document.getElementById("compound-table-root");
   if (section) {
-    section.style.transition = "padding-right 0.25s ease";
-    section.style.paddingRight = "330px";
+    section.style.transition = "padding-right 0.28s ease";
+    section.style.paddingRight = "350px";
   }
 }
 
