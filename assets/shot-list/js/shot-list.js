@@ -18,7 +18,12 @@ function processText(text) {
 
   for (const line of lines) {
     const trimmedLine = line.trim();
-    if (!trimmedLine) continue;
+    if (!trimmedLine) {
+      if (currentSceneKey !== null) {
+        currentRawLines.push(''); // preserve empty lines so classifier can reset context
+      }
+      continue;
+    }
 
     // Check for ACT headers (ACT I, ACT II, ACT III, ACT IV, ACT V, etc.)
     const actMatch = trimmedLine.match(/^ACT\s+(I{1,3}|IV|V|VI{0,3})$/i);

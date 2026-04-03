@@ -1840,16 +1840,37 @@ function classifyScriptLine(line, prevType) {
     return 'parenthetical';
   }
 
+  // Fast-path: lines starting with common action words are always action
+  // (prevents "We watch AJAI..." from being misclassified)
+  if (/^(We |He |She |They |The |A |An |His |Her |It |As |At |By |From |In |On |With )/i.test(t)) {
+    if (prevType !== 'character' && prevType !== 'parenthetical') {
+      return 'action';
+    }
+  }
+
+  // Strip character name extensions (V.O., O.S., CONT'D, etc.) before ALL CAPS checks
+  const stripped = t.replace(/\s*\(V\.?O\.?\)|\s*\(O\.?S\.?\)|\s*\(CONT'D\)|\s*\(CONT\)|\s*\(PRE-LAP\)/gi, '').trim();
+
+  // Character interrupting dialogue (two characters alternating, no empty line between)
+  if (['character', 'parenthetical', 'dialogue'].includes(prevType)) {
+    if (stripped === stripped.toUpperCase()
+        && /[A-Z]{2,}/.test(stripped)
+        && stripped.length <= 35
+        && !/[.!?,]$/.test(stripped)) {
+      return 'character';
+    }
+  }
+
   // Character names: ALL CAPS, short, no sentence-ending punctuation,
   // only valid after action / heading / transition / empty
-  const isAllCaps = t === t.toUpperCase() && /[A-Z]/.test(t);
-  const isShort   = t.length <= 35;
-  const noEndPunct = !/[.!?]$/.test(t);
+  const isAllCaps  = stripped === stripped.toUpperCase() && /[A-Z]/.test(stripped);
+  const isShort    = stripped.length <= 35;
+  const noEndPunct = !/[.!?]$/.test(stripped);
   const validPrev  = !prevType ||
     ['action', 'heading', 'transition', 'empty'].includes(prevType);
 
   if (isAllCaps && isShort && noEndPunct && validPrev) {
-    if (/[A-Z]{2,}/.test(t)) {
+    if (/[A-Z]{2,}/.test(stripped)) {
       return 'character';
     }
   }
@@ -1875,6 +1896,20 @@ function openScenePreview(rawLines, sceneTitle) {
     return;
   }
 
+  const MOON_SVG =
+    '<svg viewBox="0 0 16 16" width="14" height="14" fill="none">' +
+    '<path d="M14 9.5A6 6 0 0 1 6.5 2a6 6 0 1 0 7.5 7.5z" ' +
+    'stroke="rgba(201,168,76,0.7)" stroke-width="1.3" stroke-linecap="round"/>' +
+    '</svg>';
+  const SUN_SVG =
+    '<svg viewBox="0 0 16 16" width="14" height="14" fill="none">' +
+    '<circle cx="8" cy="8" r="3" stroke="rgba(201,168,76,0.7)" stroke-width="1.3"/>' +
+    '<line x1="8" y1="1" x2="8" y2="3" stroke="rgba(201,168,76,0.7)" stroke-width="1.3" stroke-linecap="round"/>' +
+    '<line x1="8" y1="13" x2="8" y2="15" stroke="rgba(201,168,76,0.7)" stroke-width="1.3" stroke-linecap="round"/>' +
+    '<line x1="1" y1="8" x2="3" y2="8" stroke="rgba(201,168,76,0.7)" stroke-width="1.3" stroke-linecap="round"/>' +
+    '<line x1="13" y1="8" x2="15" y2="8" stroke="rgba(201,168,76,0.7)" stroke-width="1.3" stroke-linecap="round"/>' +
+    '</svg>';
+
   // Create panel once
   if (!_previewPanel) {
     _previewPanel = document.createElement("div");
@@ -1898,6 +1933,21 @@ function openScenePreview(rawLines, sceneTitle) {
     titleGroup.appendChild(titleEl);
     titleGroup.appendChild(subtitleEl);
 
+    const themeBtn = document.createElement("button");
+    themeBtn.className = "sp-theme-btn";
+    themeBtn.title = "Toggle dark/light mode";
+    themeBtn.style.cssText =
+      "background:none;border:none;cursor:pointer;padding:0;flex-shrink:0;" +
+      "opacity:0.7;transition:opacity 0.15s;line-height:1;display:flex;align-items:center;";
+    themeBtn.onmouseover = () => { themeBtn.style.opacity = "1"; };
+    themeBtn.onmouseout  = () => { themeBtn.style.opacity = "0.7"; };
+    themeBtn.onclick = () => {
+      const next = (_previewPanel.dataset.theme || 'light') === 'light' ? 'dark' : 'light';
+      _previewPanel.dataset.theme = next;
+      localStorage.setItem('sp-theme', next);
+      themeBtn.innerHTML = next === 'light' ? MOON_SVG : SUN_SVG;
+    };
+
     const closeBtn = document.createElement("button");
     closeBtn.textContent = "×";
     closeBtn.className = "sp-close-btn";
@@ -1909,6 +1959,7 @@ function openScenePreview(rawLines, sceneTitle) {
     };
 
     header.appendChild(titleGroup);
+    header.appendChild(themeBtn);
     header.appendChild(closeBtn);
 
     // Body
@@ -1920,6 +1971,12 @@ function openScenePreview(rawLines, sceneTitle) {
     _previewPanel.appendChild(body);
     document.body.appendChild(_previewPanel);
   }
+
+  // Apply saved theme on every open
+  const savedTheme = localStorage.getItem('sp-theme') || 'light';
+  _previewPanel.dataset.theme = savedTheme;
+  const themeBtnEl = _previewPanel.querySelector('.sp-theme-btn');
+  if (themeBtnEl) themeBtnEl.innerHTML = savedTheme === 'light' ? MOON_SVG : SUN_SVG;
 
   // Update title
   document.getElementById("scene-preview-title").textContent = sceneTitle;
